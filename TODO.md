@@ -7,16 +7,30 @@ This file outlines the tasks related to the development of the Eco Unit's Arduin
 
 ### 🧱 Architecture & Modularity
 - [x] Modularize directory structure into the following components: core_states, sensor, actuator, comm (client-server), configuration, utils and tests
-- [ ] Migrate code from rainforest sketch
+- [x] Migrate code from rainforest sketch
+
+---
+
+### 💻 Development Environment
+- [x] Redesign folder structure to use PlatformIO (State Pattern Friendly)
+- [x] Add `plataformio.ini`;
+
+---
+
+### 🧱 Architecture & Modularity
 - [ ] Use the State Design Pattern to handle Eco Unit lifecycle
+  - [x] Learn more C++ (too rusty)
+  - [x] Create a working model for State Design
+  - [x] Match the model with actual file structure
+  - [x] Write lifecycle
+- [ ] Design interface for persistent storage (EEPROM/SD/Fake)
 - [ ] Refactor sensor interface for polymorphism and code reuse
 - [ ] Abstract network communication layer
-- [ ] Design interface for persistent storage (EEPROM/SD/Fake)
 
 ---
 
 ### 🧠 Design Patterns
-- [ ] Apply State Pattern for operation modes (Idle, Measuring, Uploading)
+- [ ] Apply State Pattern for operation modes (Diagnosis, Simmulation, Update)
 - [ ] Use Flyweight to minimize memory usage for sensor instances
 - [ ] Strategy Pattern for interchangeable communication protocols
 

@@ -16,6 +16,14 @@ An scalable arduino sketch designed to keep closed and small ecosystems alive.
 - [ ] Handle incoming configuration updates and apply changes
 - [ ] Collect new config file data to update system behavior
 
+##  ♻️ Eco Unit simplified lifecycle
+0. Start
+1. Self Diagnosis
+2. Comm
+4. Simm
+5. Comm
+6. Sleep
+*Update and Error are wildcards to be handled
 
 ## Eco Unit
 This software is designed to run in IoT devices called Eco Units.
@@ -65,3 +73,17 @@ As an embedded software, this application is meant to run as "plug and play".
 2. Set your Eco Unit physical components in place;
 3. Plug your microcontroller to an energy source;
 4. Enjoy your Eco Unit 🌱🍃🌝
+
+## Pin layout
+
+
+## References:
+- State Diagram [https://en.wikipedia.org/wiki/State_diagram#UML_state_machine];
+- Finite State Machines [https://en.wikipedia.org/wiki/Finite-state_machine];
+- Forragem Verde Hidroponica (Pt 1) [https://www.youtube.com/watch?v=ezPb8cQ_ykY]
+- Forragem Verde Hidroponica (Pt 2) [https://www.youtube.com/watch?v=RlDwTFIJP64]
+
+## Inspiration
+- A Importância da Exploração Espacial by CienciaSemFim [https://www.youtube.com/watch?v=6mof9nqcvMY]
+- Space Farming by BBC (5 min) [https://www.youtube.com/watch?v=vv6ATRPUjrI];
+- Space Farming by CNA Insider (47 min) [https://www.youtube.com/watch?v=nXrCtC-KYCc];
