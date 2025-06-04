@@ -2,14 +2,14 @@
 #include "Arduino.h"
 
 void RaiforestSimulationSimm::enter(FiniteStateMachine* unit) {
-    Serial.println("[Start] Entering...");
+    Serial.println("[RaiforestSimulationSimm] Entering...");
 }
 
 void RaiforestSimulationSimm::execute(FiniteStateMachine* unit) {
-    Serial.println("[Start] Running...");
+    Serial.println("[RaiforestSimulationSimm] Running...");
     delay(500);
 }
 
 void RaiforestSimulationSimm::exit(FiniteStateMachine* unit) {
-    Serial.println("[Start] Exiting...");
+    Serial.println("[RaiforestSimulationSimm] Exiting...");
 }

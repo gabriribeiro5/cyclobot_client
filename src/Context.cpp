@@ -9,8 +9,32 @@ void FiniteStateMachine::changeState(BaseState *newState) {
     // log end + execution time
 }
 
-void FiniteStateMachine::execute() {
+void FiniteStateMachine::run_health_check() {
     // get milliseconds + log start
-    currentState->execute(this);
+    currentState->run_health_check(this);
+    // log end + execution time
+}
+
+void FiniteStateMachine::report_self_diagnostics() {
+    // get milliseconds + log start
+    currentState->report_self_diagnostics(this);
+    // log end + execution time
+}
+
+void FiniteStateMachine::run_simmulation() {
+    // get milliseconds + log start
+    currentState->run_simmulation(this);
+    // log end + execution time
+}
+
+void FiniteStateMachine::report_sensor_data_from_simm_state() {
+    // get milliseconds + log start
+    currentState->report_sensor_data_from_simm_state(this);
+    // log end + execution time
+}
+
+void FiniteStateMachine::take_a_nap() {
+    // get milliseconds + log start
+    currentState->take_a_nap(this);
     // log end + execution time
 }

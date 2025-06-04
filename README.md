@@ -41,17 +41,15 @@ This application leverages from Clean Architecture principles and State Design P
 Modules are organized as follows:
 
 - **Core States**: All possible states for the machine being controlled.
-    - State Machine: State management module;
+    - Finite State Machine: State management module;
     - Base State: Interface for all states;
     - Self Diagnosis: ;
     - Error: ;
     - Communication: ;
     - Firmware Update: ;
     - Config Update: ;
-    - Eco Simulation: ;
+    - Simulation: Tailored behaviours for ecosystem simulation. Must be defined at config;
     - Idle: ;
-    
-    **Simm**: Tailored behaviours for Eco Simulation. Must be defined at config.
 
 - **Actuators**: .
 

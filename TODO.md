@@ -18,29 +18,61 @@ This file outlines the tasks related to the development of the Eco Unit's Arduin
 ---
 
 ### 🧱 Architecture & Modularity
-- [ ] Use the State Design Pattern to handle Eco Unit lifecycle
+- [x] feat(State Pattern - incomplete): to handle Eco Unit lifecycle
   - [x] Learn more C++ (too rusty)
   - [x] Create a working model for State Design
   - [x] Match the model with actual file structure
   - [x] Write lifecycle
+  - [x] Create timestamp (simm 24h)
+  - [x] Implement Cyclobot context into the model
+  - [x] Re-write lifecycle (time is validated on each state | stateflow represents the user interface's logic)
+  - [x] Update Concrete States
+  - [ ] Fit RainforestSimm into new design
+    - [x] Split code into .h and .cpp files
+    - [ ] Distribute methods across implemented modules
+
+---
+
+### 🧪 Lifecycle test
+- [ ] Set UNO prototype
+- [ ] Rebuild paludarium with stone wall (only physics no glue)
+- [ ] Test full cycle
+- [ ] 
+
+---
+
+### 🧱 Architecture & Modularity
 - [ ] Design interface for persistent storage (EEPROM/SD/Fake)
 - [ ] Refactor sensor interface for polymorphism and code reuse
 - [ ] Abstract network communication layer
 
 ---
 
-### 🧠 Design Patterns
-- [ ] Apply State Pattern for operation modes (Diagnosis, Simmulation, Update)
+### 🧠 Design Enhancements
 - [ ] Use Flyweight to minimize memory usage for sensor instances
 - [ ] Strategy Pattern for interchangeable communication protocols
 
 ---
 
-### ⚙️ Communication
+### 🔁 Communication State
+- [ ] Implement Wi-Fi scanning and connectivity.
 - [ ] Implement HTTP client abstraction
 - [ ] Support JSON formatting for API payloads
 - [ ] Reflect server response codes for debugging
 - [ ] Add retry strategy and timeout control
+
+---
+
+### ⏫ Update State
+- [ ] Update constants and variables from server configurations.
+
+---
+
+### ⚙️ Simmulation States
+- [ ] Improve rainforest simulation:
+  - [ ] Add methods for enhanced logic and user interaction.
+  - [ ] Integrate communication features.
+- [ ] Collect self-diagnostics.
 
 ---
 
@@ -70,4 +102,3 @@ This file outlines the tasks related to the development of the Eco Unit's Arduin
 - [ ] Add firmware versioning and update logs
 - [ ] Support OTA updates (optional/future)
 - [ ] Track successful and failed transmissions
-

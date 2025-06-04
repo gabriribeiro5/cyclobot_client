@@ -1,7 +1,7 @@
 #pragma once
 #include "BaseState.h"
 
-class WiFiConnState : public BaseState {
+class SimmulationState : public BaseState {
 public:
     // used by context.changeState
     void enter() override;
@@ -22,6 +22,11 @@ public:
     
     // simm
     void run_simmulation();
+    /* 
+    - get Simm module name
+    - instantiate Simm class
+    - run Simm loop
+    */
     
     // comm
     void report_simmulation_data();
@@ -30,5 +35,5 @@ public:
     void take_a_nap();
 
     // constructor
-    void WiFiConnState(FiniteStateMachine *cyclobot);
+    void SimmulationState(FiniteStateMachine *cyclobot);
 };

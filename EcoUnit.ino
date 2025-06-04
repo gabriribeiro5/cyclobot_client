@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <map>
 #include "Context.h"
 #include "BaseState.h"
 #include "StartState.h"
@@ -8,38 +9,37 @@
 #include "SleepState.h"
 
 // Instantiate an state machine
-FiniteStateMachine unit = FiniteStateMachine(StartState);
+BaseState state = InitialState();
+FiniteStateMachine cyclobot = FiniteStateMachine(&state);
 
 void setup() {
     Serial.begin(9600);
-    unit.currentState->enter(&unit);
+    cyclobot.currentState->enter();
 }
 
 void loop() {
-    unit.execute();
-
-    // Simulate lifecycle flow
+    // Simulate 24h cycle
     delay(1000); // To slow down for Serial prints
 
-    switch (unit.stateFlow) {
-        case 0: // run health check
-            unit.changeState(&unit.selfDiagnosisState);
+    switch (cyclobot.clientFlow) {
+        case 0: // Health Check
+            cyclobot.run_health_check();
+            cyclobot.report_health_check();
             break;
-        case 1: // report self diagnostics
-            unit.changeState(&unit.commState);
+        case 1: // Update
+            cyclobot.update_firmware();
+            cyclobot.update_config();
             break;
-        case 2: // run simmulation based on config
-            unit.changeState(&unit.simmState);
+        case 2: // Simmulation
+            cyclobot.run_simmulation();
+            cyclobot.report_simmulation_data();
             break;
-        case 3: // report sensor data from simm state
-            unit.changeState(&unit.commState);
+        case 3: // Iddle
+            cyclobot.take_a_nap();
             break;
-        case 4: // 
-            unit.changeState(&unit.sleepState);
-            break;
-        case 5:
-            // Stay in sleep forever (or restart)
+        default: // Reset
+            cyclobot.clientFlow = -1;
             break;
     }
-    unit.stateFlow++;
+    cyclobot.clientFlow++;
 }
