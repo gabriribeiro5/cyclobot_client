@@ -1,19 +1,18 @@
 #include <Arduino.h>
-#include <map>
+#include "Definitions.h"
+#include "InitialState.h"
 #include "Context.h"
-#include "BaseState.h"
-#include "StartState.h"
-#include "SelfDiagnosisState.h"
-#include "CommState.h"
-#include "SimmState.h"
-#include "SleepState.h"
 
 // Instantiate an state machine
 BaseState state = InitialState();
 FiniteStateMachine cyclobot = FiniteStateMachine(&state);
 
 void setup() {
-    Serial.begin(9600);
+    pinMode(sensorUmidadeSolo, INPUT);              // Sensor de umidade do solo - porta A0 é entrada 
+    pinMode(sensorChuva, INPUT);                    // Sensor de chuva - porta A1 é entrada 
+    pinMode(portaRele, OUTPUT);                     // Porta de controle do Relé - D4 é saída 
+    digitalWrite(portaRele, HIGH);                  // Mantenha relé desligado  
+    Serial.begin(9600);                             // Monitor console 9600 Bps
     cyclobot.currentState->enter();
 }
 

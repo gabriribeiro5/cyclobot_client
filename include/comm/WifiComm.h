@@ -1,7 +1,7 @@
 #pragma once
 #include <Definitions.h>
 
-class TimeSync {
+class WifiComm {
     public:
-        int getCurrentHour();
+        void ConnectWifi();
 }

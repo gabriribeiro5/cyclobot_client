@@ -27,9 +27,11 @@ This file outlines the tasks related to the development of the Eco Unit's Arduin
   - [x] Implement Cyclobot context into the model
   - [x] Re-write lifecycle (time is validated on each state | stateflow represents the user interface's logic)
   - [x] Update Concrete States
-  - [ ] Fit RainforestSimm into new design
-    - [x] Split code into .h and .cpp files
-    - [ ] Distribute methods across implemented modules
+
+### ::play:: Simmulation
+- [ ] feat(RainforestSimm - incomplete): into new design
+  - [x] Distribute single file methods across .h modules
+  - [ ] Write .cpp code based on .h files
 
 ---
 

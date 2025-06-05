@@ -25,7 +25,7 @@ public:
     /* 
     - get Simm module name
     - instantiate Simm class
-    - run Simm loop
+    - RunSimmulation
     */
     
     // comm

@@ -1,7 +1,7 @@
 #pragma once
 #include <Definitions.h>
 
-class TimeSync {
+class SoundComm {
     public:
-        int getCurrentHour();
+        void GetUserResponse();
 }

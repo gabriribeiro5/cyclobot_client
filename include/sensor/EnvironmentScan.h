@@ -2,5 +2,6 @@
 
 class EnvSensor {
     public:
-        void MoistureSensorON()
+        void GetSoilMoisture();
+        void GetTemperature();
 }
