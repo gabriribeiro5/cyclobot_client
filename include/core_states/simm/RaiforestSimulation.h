@@ -10,8 +10,10 @@ class RainforestSimmulation : public BaseSimmulation{
         // --> USER ITERACTION
 
         // --> CUSTOM EVENTS
-        void TimeBuffer();
 
         // --> SIMM LOGIC
         void RunSimmulation() override;
+        
+        // Constructor
+        void RainforestSimmulation(FiniteStateMachine *cyclobot);
 }

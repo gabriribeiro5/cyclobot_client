@@ -7,7 +7,7 @@ class FiniteStateMachine {
     public:
         BaseState *currentState;
         int currentTime = getCurrentHour(); // Track in which step we are
-        int clientFlow = 0; // Flow stablished at the Client module and updated by States to comply client rules
+        int stateFlow = 0; // Flow stablished at the Client module and updated by States to comply client rules
     
         FiniteStateMachine(BaseState *currentState); // Constructor
         void change_state(BaseState *newState);
@@ -23,7 +23,7 @@ class FiniteStateMachine {
         void report_health_check();
 
         // update
-        void update_firmware();
+        void update_simmulation_code();
         void update_config();
         
         // simm

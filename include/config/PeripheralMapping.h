@@ -1,6 +1,6 @@
 #pragma once
 
-class PhisicalComponents {
+class PeripheralMapping {
     public:
         int sensorUmidadeSolo = A0;                       // Sensor de umidade do solo pino A0 conectado no A0 do Arduino 
         int sensorChuva = A1;                             // Sensor de chuva pino A1 conectado no A1 do Arduino 

@@ -15,29 +15,34 @@ public:
     virtual ~BaseState();
     
     // used by context.changeState
-    virtual void enter(FiniteStateMachine *unit);
-    virtual void exit(FiniteStateMachine *unit);
+    virtual void enter();
+    virtual void exit();
+
+    // error
+    virtual void report_error();
     
     // self
-    virtual void run_health_check(FiniteStateMachine *unit);
+    virtual void run_health_check();
 
     // comm
-    virtual void connect_wifi(FiniteStateMachine *unit);
-    virtual void report_self_diagnostics(FiniteStateMachine *unit);
-    
-    // error
-    virtual void report_error(FiniteStateMachine *unit);
+    virtual void report_signature_request();
+    virtual void session_new();
+    virtual void report_config();
+    virtual void report_health_check();
 
     // update
-    virtual void update_config(FiniteStateMachine *unit);
-    virtual void update_firmware(FiniteStateMachine *unit);
-    
-    // simm (24h)
-    virtual void run_simmulation(FiniteStateMachine *unit);
+    virtual void update_config();
+    virtual void update_simmulation_code();
     
     // comm
-    virtual void report_sensor_data_from_simm_state(FiniteStateMachine *unit);
+    virtual void session_stop();
+    
+    // simm
+    virtual void run_simmulation();
+    
+    // comm
+    virtual void report_simmulation_data();
     
     // self
-    virtual void take_a_nap(FiniteStateMachine *unit);
+    virtual void take_a_nap();
 };

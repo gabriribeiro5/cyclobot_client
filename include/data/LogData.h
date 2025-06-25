@@ -1,6 +1,5 @@
 #pragma once
-#include "BaseData.h"
 
-class Logging : public BaseData {
+class LogData {
     public:
 }

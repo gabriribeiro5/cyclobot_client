@@ -1,7 +1,6 @@
 #pragma once
-#include "BaseData.h"
 
-class Environment : public BaseDataClass {
+class Environment {
     public:
         // Rainforest state variables
         int valueMoistureLimit = 500;     // valor da tensão de comparação do sensor / valor máximo = 1024 

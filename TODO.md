@@ -28,10 +28,21 @@ This file outlines the tasks related to the development of the Eco Unit's Arduin
   - [x] Re-write lifecycle (time is validated on each state | stateflow represents the user interface's logic)
   - [x] Update Concrete States
 
-### ::play:: Simmulation
+### ▶️ Simmulation
 - [ ] feat(RainforestSimm - incomplete): into new design
   - [x] Distribute single file methods across .h modules
   - [ ] Write .cpp code based on .h files
+    - [x] Cyclobot's base cycle
+    - [x] Context (Finite State Machine)
+    - [x] Parameter classes
+    - [x] Data classes
+    - [x] Sharable pointers
+    - [x] Self feats (state, config, data)
+    - [ ] Comm feats (state, comm, config)
+    - [ ] Update feats (state, config)
+    - [ ] Simm feats  (state, config, sensor, data, actuator)
+    - [ ] Error feats (state, config, data)
+  - [ ] Write code for memory cleanup on exit functions
 
 ---
 
@@ -39,7 +50,6 @@ This file outlines the tasks related to the development of the Eco Unit's Arduin
 - [ ] Set UNO prototype
 - [ ] Rebuild paludarium with stone wall (only physics no glue)
 - [ ] Test full cycle
-- [ ] 
 
 ---
 

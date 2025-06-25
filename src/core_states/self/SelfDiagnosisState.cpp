@@ -1,15 +1,92 @@
 #include "SelfDiagnosisState.h"
+#include "CheckMyHealth.h"
+#include "StateTransitionException.h"
+#include "WifiComm.h"
+#include "ClientComm.h"
 #include "Arduino.h"
 
-void SelfDiagnosisState::enter(FiniteStateMachine* unit) {
-    Serial.println("[Start] Entering...");
-}
+// used by context.changeState
+void SelfDiagnosisState::enter() {
+    if (!cyclobot) {
+        throw StateException("(enter): cyclobot pointer is null in SelfDiagnosisState");
+    }
+    
+    Serial.println("(SelfDiagnosisState) Running...");
+};
 
-void SelfDiagnosisState::execute(FiniteStateMachine* unit) {
-    Serial.println("[Start] Running...");
-    delay(500);
-}
+void SelfDiagnosisState::exit() {
+    clear_runtime_data();
+    Serial.println("(exit) switching off SelfDiagnosisState");
+};
 
-void SelfDiagnosisState::exit(FiniteStateMachine* unit) {
-    Serial.println("[Start] Exiting...");
-}
+// error
+void SelfDiagnosisState::report_error() {
+    throw StateTransitionException("(report_error): wrong state (SelfDiagnosisState)");
+};
+
+// self
+void SelfDiagnosisState::run_health_check() {
+    Serial.println("(run_health_check) Running...");
+    // Test sensors
+
+    // Test actuators
+
+    // Test wifi and server communication
+    // check for the presence of the shield:
+    if (wifi_shield_is_on()) {
+        check_wifi_firmware_version();
+        connect_wifi();
+        check_client_communication();
+    }
+};
+
+// comm
+void SelfDiagnosisState::report_signature_request() {
+    throw StateTransitionException("(report_signature_request): wrong state (SelfDiagnosisState)");
+};
+
+void SelfDiagnosisState::session_new() {
+    throw StateTransitionException("(report_signature_request): wrong state (SelfDiagnosisState)");
+};
+
+void SelfDiagnosisState::report_config() {
+    throw StateTransitionException("(report_config): wrong state (SelfDiagnosisState)");
+};
+
+void SelfDiagnosisState::report_health_check() {
+    throw StateTransitionException("(report_health_check): wrong state (SelfDiagnosisState)");
+};
+
+// update
+void SelfDiagnosisState::update_config() {
+    throw StateTransitionException("(update_config): wrong state (SelfDiagnosisState)");
+};
+
+void SelfDiagnosisState::update_simmulation_code() {
+    throw StateTransitionException("(update_firmware): wrong state (SelfDiagnosisState)");
+};
+
+// comm
+void SelfDiagnosisState::session_stop() {
+    throw StateTransitionException("(session_stop): wrong state (SelfDiagnosisState)");
+};
+
+// simm
+void SelfDiagnosisState::run_simmulation() {
+    throw StateTransitionException("(RunSimmulation): wrong state (SelfDiagnosisState)");
+};
+
+// comm
+void SelfDiagnosisState::report_simmulation_data() {
+    throw StateTransitionException("(report_simmulation_data): wrong state (SelfDiagnosisState)");
+};
+
+// self
+void SelfDiagnosisState::take_a_nap() {
+    throw StateTransitionException("(take_a_nap): wrong state (SelfDiagnosisState)");
+};
+
+// constructor
+void SelfDiagnosisState::SelfDiagnosisState(FiniteStateMachine *cyclobot) {
+    Serial.println("[SelfDiagnosisState] Instantiated...");
+};

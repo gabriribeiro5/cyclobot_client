@@ -15,9 +15,45 @@ void FiniteStateMachine::run_health_check() {
     // log end + execution time
 }
 
-void FiniteStateMachine::report_self_diagnostics() {
+void FiniteStateMachine::report_signature_request() {
     // get milliseconds + log start
-    currentState->report_self_diagnostics(this);
+    currentState->report_signature_request(this);
+    // log end + execution time
+}
+
+void FiniteStateMachine::session_new() {
+    // get milliseconds + log start
+    currentState->session_new(this);
+    // log end + execution time
+}
+
+void FiniteStateMachine::report_config() {
+    // get milliseconds + log start
+    currentState->report_config(this);
+    // log end + execution time
+}
+
+void FiniteStateMachine::report_health_check() {
+    // get milliseconds + log start
+    currentState->report_health_check(this);
+    // log end + execution time
+}
+
+void FiniteStateMachine::update_config() {
+    // get milliseconds + log start
+    currentState->update_config(this);
+    // log end + execution time
+}
+
+void FiniteStateMachine::update_simmulation_code() {
+    // get milliseconds + log start
+    currentState->update_simmulation_code(this);
+    // log end + execution time
+}
+
+void FiniteStateMachine::session_stop() {
+    // get milliseconds + log start
+    currentState->session_stop(this);
     // log end + execution time
 }
 
@@ -27,9 +63,9 @@ void FiniteStateMachine::run_simmulation() {
     // log end + execution time
 }
 
-void FiniteStateMachine::report_sensor_data_from_simm_state() {
+void FiniteStateMachine::report_simmulation_data() {
     // get milliseconds + log start
-    currentState->report_sensor_data_from_simm_state(this);
+    currentState->report_simmulation_data(this);
     // log end + execution time
 }
 

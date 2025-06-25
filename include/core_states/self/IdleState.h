@@ -1,7 +1,7 @@
 #pragma once
 #include "BaseState.h"
 
-class ErrorHandlingState : public BaseState {
+class IdleState : public BaseState {
 public:
     // used by context.changeState
     void enter() override;
@@ -36,5 +36,5 @@ public:
     void take_a_nap() override;
 
     // constructor
-    void ErrorHandlingState(FiniteStateMachine *cyclobot);
+    void IdleState(FiniteStateMachine *cyclobot);
 };
