@@ -2,6 +2,7 @@
 
 class EcosystemParameter {
     public:
+        // ITERACTION PARAMETERS
         int valorLimiteUmidade = 500;                     // valor da tensão de comparação do sensor / valor máximo = 1024 
         int valorLimiteChuva = 500;                       // valor da tensão de comparação do sensor / valor máximo = 1024  
         int temperaturaAtual = 20;                        // valor de tensão de comparação do sensor / valor máximo = Não sei / média esperada 20 graus

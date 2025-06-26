@@ -65,6 +65,26 @@ void CheckMyHealth::check_client_communication() {
   }
 }
 
+void CheckMyHealth::check_watering_system() {
+  selfDiagnosisDataPtr->wateringSystemOK = 1;
+}
+
+void CheckMyHealth::check_river_system() {
+  selfDiagnosisDataPtr->riverSystemOK = 1;
+}
+
+void CheckMyHealth::check_wind_system() {
+  selfDiagnosisDataPtr->windSystemOK = 1;
+}
+
+void CheckMyHealth::check_lighting_system() {
+  selfDiagnosisDataPtr->lightingSystemOK = 1;
+}
+
+void CheckMyHealth::check_components_list() {
+  selfDiagnosisDataPtr->peripheralComponentsOK = 1;
+}
+
 void CheckMyHealth::clear_runtime_data() {
   Serial.println("(clear_runtime_data): running...");
   // TODO: clear ClientComm instance

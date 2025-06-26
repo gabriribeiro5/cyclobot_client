@@ -29,6 +29,7 @@ void SelfDiagnosisState::run_health_check() {
     Serial.println("(run_health_check) Running...");
     SelfDiagnosisDataPtr->diagnosisDateTime = ""; // TODO: apply current date and time
     // *** SENSORS ***
+    
     // Wifi sensor
     if (wifi_shield_is_on()) { // check for the presence of the shield
         check_wifi_firmware_version();

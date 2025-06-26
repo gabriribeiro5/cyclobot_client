@@ -21,6 +21,7 @@ class SharedInstances {
         DeviceParameters *deviceParametersPtr;
         WifiParameters *wifiParametersPtr;
         ClientParameters *clientParametersPtr;
+        EcosystemParameter *ecosystemParameterPtr;
 
         // -> Data
         SelfDiagnosisData *selfDiagnosisDataPtr;
@@ -37,6 +38,7 @@ class SharedInstances {
         DeviceParameters deviceParameters;
         WifiParameters wifiParameters;
         ClientParameters clientParameters;
+        EcosystemParameter ecosystemParameter;
 
         // -> Data
         SelfDiagnosisData selfDiagnosisData;
