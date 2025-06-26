@@ -31,12 +31,12 @@ void HTTPClientState::run_health_check() {
 // comm
 void HTTPClientState::report_signature_request() {
     Serial.println("(report_signature_request): running...");
-    if (firstAwakeningPtr) {
+    if (deviceParametersPtr->firstAwakening) {
         clientCommPtr->post_signature_request();
-        firstAwakeningPtr = false;
+        deviceParametersPtr->firstAwakening = false;
         Serial.println("(report_signature_request): cyclobot approved");
     } else {
-        Serial.println("(report_signature_request): done...");
+        Serial.println("(report_signature_request): skipped");
     }
 };
 

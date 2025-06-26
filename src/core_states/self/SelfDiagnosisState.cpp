@@ -27,17 +27,17 @@ void SelfDiagnosisState::report_error() {
 // self
 void SelfDiagnosisState::run_health_check() {
     Serial.println("(run_health_check) Running...");
-    // Test sensors
-
-    // Test actuators
-
-    // Test wifi and server communication
-    // check for the presence of the shield:
-    if (wifi_shield_is_on()) {
+    SelfDiagnosisDataPtr->diagnosisDateTime = ""; // TODO: apply current date and time
+    // *** SENSORS ***
+    // Wifi sensor
+    if (wifi_shield_is_on()) { // check for the presence of the shield
         check_wifi_firmware_version();
-        connect_wifi();
+        check_wifi_connection();
         check_client_communication();
+        clear_runtime_data();
     }
+
+    // *** ACTUATORS ***
 };
 
 // comm

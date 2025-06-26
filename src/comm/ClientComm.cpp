@@ -74,8 +74,8 @@ String ClientComm::get_cyclobot_session_token() {
   Serial.println("(get_cyclobot_session_token): running...");
 
   // Construct JSON payload
-  loginParameters_Json["cyclobot_id"] = cyclobot_id;          // TODO: Replace with actual ID
-  loginParameters_Json["cyclobot_token"] = cyclobot_token;   // TODO: Replace with actual token
+  loginParameters_Json["cyclobot_id"] = cyclobot_id;
+  loginParameters_Json["cyclobot_token"] = cyclobot_token;
 
   serializeJson(loginParameters_Json, loginParameters_String);
 
@@ -97,9 +97,9 @@ String ClientComm::get_cyclobot_session_token() {
   }
 
   // Wait for server response
-  unsigned long timout_reference = millis(); // do NOT move this to `.h` file
+  clientParametersPtr->timoutReference = millis();
   while (!client.available()) {
-    if (millis() - timout_reference > response_timeout_limit) {
+    if (millis() - clientParametersPtr->timoutReference > clientParametersPtr->responseTimeoutLimit) {
       Serial.println("(get_cyclobot_session_token): [ERROR] Timeout waiting for response");
       client.stop();
       return "";
@@ -107,38 +107,37 @@ String ClientComm::get_cyclobot_session_token() {
   }
 
   // Read and store entire response
-  String response = "";
+  clientParametersPtr->serverRawResponse = "";
   while (client.available()) {
     char c = client.read();
-    response += c;
+    clientParametersPtr->serverRawResponse += c;
   }
 
   // Debug raw response (optional)
   Serial.println("(get_cyclobot_session_token): Raw response:");
-  Serial.println(response);
+  Serial.println(clientParametersPtr->serverRawResponse);
 
   // Find start of JSON (skip HTTP headers)
-  int jsonStart = response.indexOf('{');
+  jsonStart = clientParametersPtr->serverRawResponse.indexOf('{');
   if (jsonStart == -1) {
     Serial.println("(get_cyclobot_session_token): [ERROR] No JSON found in response");
     return "";
   }
 
-  String jsonPart = response.substring(jsonStart);
+  jsonPart = clientParametersPtr->serverRawResponse.substring(jsonStart);
 
   // Parse JSON
-  StaticJsonDocument<512> responseJson;
-  DeserializationError error = deserializeJson(responseJson, jsonPart);
-  if (error) {
+  clientParametersPtr->deserializationError = deserializeJson(responseJson, jsonPart);
+  if (clientParametersPtr->deserializationError) {
     Serial.print("(get_cyclobot_session_token): [ERROR] Failed to parse JSON: ");
-    Serial.println(error.c_str());
+    Serial.println(clientParametersPtr->deserializationError.c_str());
     return "";
   }
 
   // Extract token
-  if (responseJson.containsKey("session_token")) {
-    session_token = responseJson["session_token"].as<String>();
-    Serial.println("(get_cyclobot_session_token): Token received: " + session_token);
+  if (clientParametersPtr->responseJson.containsKey("session_token")) {
+    clientParametersPtr->session_token = clientParametersPtr->responseJson["session_token"].as<String>();
+    Serial.println("(get_cyclobot_session_token): Token received: " + clientParametersPtr->session_token);
   } else {
     Serial.println("(get_cyclobot_session_token): [ERROR] session_token not found in JSON");
     return "";
@@ -152,7 +151,7 @@ void ClientComm::post_cyclobot_diagnosis() {
   // Build json struct and convert to string
   SelfDiagnosisDataPtr->selfDiagnosis_Json["cyclobot_id"] = cyclobot_id; // uuid
   SelfDiagnosisDataPtr->selfDiagnosis_Json["session_token"] = session_token; // uuid
-  SelfDiagnosisDataPtr->selfDiagnosis_Json["diagnostic_date_time"] = "diagnostic_date_time"; // date and time
+  SelfDiagnosisDataPtr->selfDiagnosis_Json["diagnosis_date_time"] = SelfDiagnosisDataPtr->diagnosisDateTime; // date and time
   SelfDiagnosisDataPtr->selfDiagnosis_Json["wifi_connected"] = SelfDiagnosisDataPtr->wifiIsConnected; // int
   SelfDiagnosisDataPtr->selfDiagnosis_Json["watering_system"] = SelfDiagnosisDataPtr->waterSystemOK; // int
   SelfDiagnosisDataPtr->selfDiagnosis_Json["river_system"] = SelfDiagnosisDataPtr->riverSystemOK; // int

@@ -1,10 +1,11 @@
 // REFERÊNCIAS:
 //  https://docs.arduino.cc/libraries/wifi/#Wifi%20Class
 
-#include "WifiComm.h"
-#include "WifiParameters.h"
 #include "Arduino.h"
 #include <WiFi.h>
+#include "WifiComm.h"
+#include "WifiParameters.h"
+#include "SharedInstances.h"
 
 void WifiComm::print_wifi_status() {
   // print the SSID of the network you're attached to:
@@ -44,50 +45,9 @@ void WifiComm::print_encryption_type(int thisType) {
   }
 }
 
-void WifiComm::connect_wifi() {
-  Serial.println("[GetWifiConnection] Running...");
-  
-  // Initialize the Ethernet client library
-  // with the IP address and port of the server
-  // that you want to connect to (port 80 is default for HTTP):
-  while (wifiStatus != WL_IDLE_STATUS) {
-      Serial.println("[GetWifiConnection] Attempting to connect to SSID: ");
-      Serial.println(ssid);
-
-      // WPA/WPA2 connection
-      status = WiFi.begin(ssid, pass);
-
-      // wait connection
-      delay(waitTimePerConnectionAttempt);
-  }
-  Serial.println("Connected to wifi");
-  print_wifi_status();
-  SelfDiagnosisDataPtr->wifiIsConnected = 1;
-}
-
-void WifiComm::scan_wifi() {
-  Serial.println("[scan_wifi]: Running...");
-  // Print WiFi MAC address:
-  printMacAddress();
-
-  // scan for nearby networks:
-  Serial.println("[scan_wifi]: ** Scan Networks **");
-  while (scanCount < wifiMaxScanAttempt) {
-    networkSsidNum = WiFi.scanNetworks();
-    if (networkSsidNum == -1) {
-        Serial.println("[scan_wifi]: Couldn't get a wifi connection");
-        delay(waitTimePerScanAttempt);
-        scanCount++;
-    }
-    break;
-  }
-
-  // print the list of networks seen:
-  Serial.print("number of available networks:");
-  Serial.println(networkSsidNum);
-
+void WifiComm::print_available_networks() {
   // print the network number and name for each network found:
-  for (int thisNet = 0; thisNet < networkSsidNum; thisNet++) {
+  for (int thisNet = 0; thisNet < networkSsidIndex; thisNet++) {
       Serial.print(thisNet);
       Serial.print(") ");
       Serial.print(WiFi.SSID(thisNet));
@@ -96,5 +56,48 @@ void WifiComm::scan_wifi() {
       Serial.print(" dBm");
       Serial.print("\tEncryption: ");
       print_encryption_type(WiFi.encryptionType(thisNet));
+  }
+}
+
+void WifiComm::scan_wifi() {
+  Serial.println("(scan_wifi): Running...");
+  // Print WiFi MAC address:
+  printMacAddress();
+
+  // scan for nearby networks:
+  Serial.println("(scan_wifi): ** Scan Networks **");
+  while (scanCount < wifiMaxScanAttempt) {
+    networkSsidIndex = WiFi.scanNetworks();
+    if (networkSsidIndex == -1) {
+        Serial.print("(scan_wifi): failed attempt -> ");
+        Serial.print(scanCount);
+        delay(waitTimePerScanAttempt);
+        scanCount++;
+    } else {
+      break;
+    }
+  }
+}
+
+void WifiComm::connect_wifi() {
+  Serial.println("(connect_wifi): Running...");
+  
+  // Initialize the Ethernet client library
+  // with the IP address and port of the server
+  // that you want to connect to (port 80 is default for HTTP):
+  while (wifiStatus != WL_IDLE_STATUS) {
+    Serial.println("(connect_wifi): Attempting to connect to SSID: ");
+    Serial.println(wifiSsid);
+    
+    // WPA/WPA2 connection
+    connAttemptCount++;
+    wifiStatus = WiFi.begin(wifiSsid, wifiSecret);
+
+    // wait connection
+    delay(waitTimePerConnectionAttempt);
+
+    if (connAttemptCount >= maxConnectoinAttempt) {
+      break;
+    }
   }
 }
