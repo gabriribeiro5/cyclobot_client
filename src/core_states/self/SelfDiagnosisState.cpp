@@ -39,6 +39,11 @@ void SelfDiagnosisState::run_health_check() {
     }
 
     // *** ACTUATORS ***
+    check_watering_system();
+    check_river_system();
+    check_wind_system();
+    check_lighting_system();
+    check_components_list();
 };
 
 // comm
