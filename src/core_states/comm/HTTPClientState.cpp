@@ -48,6 +48,7 @@ void HTTPClientState::session_new() {
 
 void HTTPClientState::report_config() {
     Serial.println("(report_config) running...");
+    clientCommPtr->post_cyclobot_config();
     Serial.println("(report_config) done");
 };
 

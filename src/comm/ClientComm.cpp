@@ -47,15 +47,16 @@ void ClientComm::post_signature_request() {
   Serial.println("(post_signature_request): running...");
   
   // Construct JSON payload
-  signatureRequest_Json["cyclobot_id"] = cyclobot_id; // get uuid
-  signatureRequest_Json["cyclobot_token"] = cyclobot_token; // get other uuid
+  signatureRequest_Json["cyclobotId"] = cyclobotId; // get uuid
+  signatureRequest_Json["cyclobotToken"] = cyclobotToken; // get other uuid
   serializeJson(signatureRequest_Json, signatureRequest_String);  // convert JSON to String
 
   // Send HTTP request
   if (client.connected()) {
     // Client action
     client.println("POST /api/cyclobot/signature_request HTTP/1.1");
-    client.println("Host: example.com");
+    client.print("Host: ");
+    client.println(host);
     client.println("Content-Type: application/json");
     client.print("Content-Length: ");
     client.println(signatureRequest_String.length());
@@ -74,8 +75,8 @@ String ClientComm::get_cyclobot_session_token() {
   Serial.println("(get_cyclobot_session_token): running...");
 
   // Construct JSON payload
-  loginParameters_Json["cyclobot_id"] = cyclobot_id;
-  loginParameters_Json["cyclobot_token"] = cyclobot_token;
+  loginParameters_Json["cyclobotId"] = cyclobotId;
+  loginParameters_Json["cyclobotToken"] = cyclobotToken;
 
   serializeJson(loginParameters_Json, loginParameters_String);
 
@@ -135,35 +136,95 @@ String ClientComm::get_cyclobot_session_token() {
   }
 
   // Extract token
-  if (clientParametersPtr->responseJson.containsKey("session_token")) {
-    clientParametersPtr->session_token = clientParametersPtr->responseJson["session_token"].as<String>();
-    Serial.println("(get_cyclobot_session_token): Token received: " + clientParametersPtr->session_token);
+  if (clientParametersPtr->responseJson.containsKey("sessionToken")) {
+    clientParametersPtr->sessionToken = clientParametersPtr->responseJson["sessionToken"].as<String>();
+    Serial.println("(get_cyclobot_session_token): Token received: " + clientParametersPtr->sessionToken);
   } else {
-    Serial.println("(get_cyclobot_session_token): [ERROR] session_token not found in JSON");
+    Serial.println("(get_cyclobot_session_token): [ERROR] sessionToken not found in JSON");
     return "";
   }
 }
 
+void ClientComm::post_cyclobot_config() {
+  Serial.println("(post_cyclobot_config): running...");
+
+  // *** BUILD JSON STRUCT ***
+  // Device config
+  configDataPtr->config_Json["cyclobot_id"] = deviceParametersPtr->cyclobotId; // uuid
+  configDataPtr->config_Json["session_token"] = deviceParametersPtr->sessionToken; // uuid
+  configDataPtr->config_Json["device_sleep_lenght"] = deviceParametersPtr->sleepLenght;
+  
+  // Wifi config
+  configDataPtr->config_Json["wifi_status"] = wifiParametersPtr->wifiStatus;
+  configDataPtr->config_Json["wifi_firmware_latest_version"] = wifiParametersPtr->wifiFirmwareLatestVersion;
+  configDataPtr->config_Json["network_ssid_index"] = wifiParametersPtr->networkSsidIndex;
+  configDataPtr->config_Json["wait_time_per_connection_attempt"] = wifiParametersPtr->waitTimePerConnectionAttempt;
+  configDataPtr->config_Json["max_connectoin_attempt"] = wifiParametersPtr->maxConnectoinAttempt;
+  configDataPtr->config_Json["conn_attempt_count"] = wifiParametersPtr->connAttemptCount;
+  configDataPtr->config_Json["wait_time_per_scan_attempt"] = wifiParametersPtr->waitTimePerScanAttempt;
+  configDataPtr->config_Json["wifi_max_scan_attempt"] = wifiParametersPtr->wifiMaxScanAttempt;
+  configDataPtr->config_Json["scan_count"] = wifiParametersPtr->scanCount;
+  
+  // Client config
+  configDataPtr->config_Json["wait_time_per_connection_attempt"] = clientParametersPtr->waitTimePerConnectionAttempt;
+  configDataPtr->config_Json["response_timeout_limit"] = clientParametersPtr->responseTimeoutLimit;
+
+  // Ecosystem config
+  configDataPtr->config_Json["soil_moisture_limit"] = ecosystemParametersPtr->soilMoistureLimit;
+  configDataPtr->config_Json["current_temperature"] = ecosystemParametersPtr->currentTemperature;
+  configDataPtr->config_Json["max_temperature_expected"] = ecosystemParametersPtr->maxTemperatureExpected;
+  configDataPtr->config_Json["initial_watering_time_limit"] = ecosystemParametersPtr->initialWateringTimeLimit;
+  configDataPtr->config_Json["growth_rate"] = ecosystemParametersPtr->growthRate;
+  configDataPtr->config_Json["decrease_rate"] = ecosystemParametersPtr->decreaseRate;
+  configDataPtr->config_Json["watering_time_limit"] = ecosystemParametersPtr->wateringTimeLimit;
+  configDataPtr->config_Json["climate"] = ecosystemParametersPtr->climate;
+  configDataPtr->config_Json["soil_is_wet"] = ecosystemParametersPtr->soilIsWet;
+  configDataPtr->config_Json["sun_light_available"] = ecosystemParametersPtr->sunLightAvailable;
+  configDataPtr->config_Json["standBy"] = ecosystemParametersPtr->standBy;
+
+  // *** CONVERT JSON TO STRING ***
+  serializeJson(configDataPtr->config_Json, configDataPtr->config_String);
+
+  // Send HTTP request
+  if (client.connected()) {
+    // Client action
+    client.println("POST /api/cyclobot/signature_request HTTP/1.1");
+    client.print("Host: ");
+    client.println(host);
+    client.println("Content-Type: application/json");
+    client.print("Content-Length: ");
+    client.println(config_String.length());
+    client.println(); // Empty line to end headers
+    client.print(config_String);  // ✅ Send JSON body
+
+    // Method response
+    Serial.println("(post_cyclobot_config): Config sent");
+  }
+  else {
+    Serial.println("(post_cyclobot_config): [ATENTION] server NOT responding");
+  }
+}
 
 void ClientComm::post_cyclobot_diagnosis() {
   Serial.println("(post_cyclobot_diagnosis): running...");
   
   // Build json struct and convert to string
-  SelfDiagnosisDataPtr->selfDiagnosis_Json["cyclobot_id"] = cyclobot_id; // uuid
-  SelfDiagnosisDataPtr->selfDiagnosis_Json["session_token"] = session_token; // uuid
-  SelfDiagnosisDataPtr->selfDiagnosis_Json["diagnosis_date_time"] = SelfDiagnosisDataPtr->diagnosisDateTime; // date and time
-  SelfDiagnosisDataPtr->selfDiagnosis_Json["wifi_connected"] = SelfDiagnosisDataPtr->wifiIsConnected; // int
-  SelfDiagnosisDataPtr->selfDiagnosis_Json["watering_system"] = SelfDiagnosisDataPtr->waterSystemOK; // int
-  SelfDiagnosisDataPtr->selfDiagnosis_Json["river_system"] = SelfDiagnosisDataPtr->riverSystemOK; // int
-  SelfDiagnosisDataPtr->selfDiagnosis_Json["wind_system"] = SelfDiagnosisDataPtr->windSystemOK; // int
-  SelfDiagnosisDataPtr->selfDiagnosis_Json["lighting_system"] = SelfDiagnosisDataPtr->lightingSystemOK; // int
+  selfDiagnosisDataPtr->selfDiagnosis_Json["cyclobot_id"] = cyclobotId; // uuid
+  selfDiagnosisDataPtr->selfDiagnosis_Json["session_token"] = sessionToken; // uuid
+  selfDiagnosisDataPtr->selfDiagnosis_Json["diagnosis_date_time"] = SelfDiagnosisDataPtr->diagnosisDateTime; // date and time
+  selfDiagnosisDataPtr->selfDiagnosis_Json["wifi_connected"] = SelfDiagnosisDataPtr->wifiIsConnected; // int
+  selfDiagnosisDataPtr->selfDiagnosis_Json["watering_system"] = SelfDiagnosisDataPtr->waterSystemOK; // int
+  selfDiagnosisDataPtr->selfDiagnosis_Json["river_system"] = SelfDiagnosisDataPtr->riverSystemOK; // int
+  selfDiagnosisDataPtr->selfDiagnosis_Json["wind_system"] = SelfDiagnosisDataPtr->windSystemOK; // int
+  selfDiagnosisDataPtr->selfDiagnosis_Json["lighting_system"] = SelfDiagnosisDataPtr->lightingSystemOK; // int
   serializeJson(SelfDiagnosisDataPtr->selfDiagnosis_Json, SelfDiagnosisDataPtr->selfDiagnosis_String);  // convert JSON to String
 
   // Send HTTP request
   if (client.connected()) {
     // Client action
     client.println("POST /api/cyclobot/signature_request HTTP/1.1");
-    client.println("Host: example.com");
+    client.print("Host: ");
+    client.println(host);
     client.println("Content-Type: application/json");
     client.print("Content-Length: ");
     client.println(signatureRequest_String.length());
@@ -176,10 +237,6 @@ void ClientComm::post_cyclobot_diagnosis() {
   else {
     Serial.println("(post_cyclobot_diagnostic): [ATENTION] server NOT responding");
   }
-}
-
-void ClientComm::post_cyclobot_config() {
-  Serial.println("(post_cyclobot_config): running...");
 }
 
 void ClientComm::post_cyclobot_environment_state() {

@@ -74,7 +74,7 @@ void IdleState::report_simmulation_data() {
 void IdleState::take_a_nap() {
     Serial.println("(take_a_nap) running...");
     WifiParametersPtr->scanCount = 0;
-    delay(sleep_lenght)
+    delay(sleepLenght)
     Serial.println("(take_a_nap) done");
 };
 

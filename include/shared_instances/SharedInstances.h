@@ -5,7 +5,9 @@
 #inculde "SoundComm.h"
 #inculde "VisualComm.h"
 #inculde "SelfDiagnosisData.h"
+#inculde "ConfigData.h"
 #inculde "DeviceParameters.h"
+#inculde "EcosystemParameter.h"
 
 class SharedInstances {
     public:
@@ -25,6 +27,7 @@ class SharedInstances {
 
         // -> Data
         SelfDiagnosisData *selfDiagnosisDataPtr;
+        ConfigData *configDataPtr;
         
         // ********** INSTANCES **********
         // -> Communication
@@ -42,4 +45,5 @@ class SharedInstances {
 
         // -> Data
         SelfDiagnosisData selfDiagnosisData;
+        ConfigData *configDataPtr;
 }
