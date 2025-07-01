@@ -1,9 +1,7 @@
 #include "Arduino.h"
 #include "HTTPClientState.h"
 #include "StateTransitionException.h"
-#include "SimmulationState.h"
 #include "SharedInstances.h"
-#include "ClientComm.h"
 
 // used by context.changeState
 void HTTPClientState::enter() {
@@ -53,27 +51,9 @@ void HTTPClientState::report_config() {
 };
 
 void HTTPClientState::report_health_check() {
-    Serial.println("(report_health_check) Running...");
-    // if there are incoming bytes available
-    // from the server, read them and print them:
-    while (client.available()) {
-        char c = client.read();
-        Serial.write(c);
-    }
-
-    // if the server's disconnected, stop the client:
-    if (!client.connected()) {
-        Serial.println();
-        Serial.println("disconnecting from server.");
-        client.stop();
-
-        // do nothing forevermore:
-        while (true);
-
-    // change state
-    BaseState codeUpdate = CodeUpdateState();
-    cyclobot.changestate(&codeUpdate);
-    }
+    Serial.println("(report_health_check) running...");
+    clientCommPtr->post_cyclobot_diagnosis();
+    Serial.println("(report_health_check) done");
 };
 
 // update
@@ -88,6 +68,8 @@ void HTTPClientState::update_simmulation_code() {
 // comm
 void HTTPClientState::session_stop() {
     Serial.println("(session_stop) running...");
+    clientCommPtr->put_invalid_cyclobot_session_token();
+    wifiCommPtr->disconnect_wifi();
     Serial.println("(session_stop) done");
 };
 
@@ -100,6 +82,10 @@ void HTTPClientState::run_simmulation() {
 void HTTPClientState::report_simmulation_data() {
     // This method must start (and stop) both Client and Session
     Serial.println("(report_simmulation_data) running...");
+    wifiCommPtr->connect_wifi();
+    clientCommPtr->get_cyclobot_session_token();
+    clientCommPtr->post_cyclobot_environment_state();
+    session_stop()
     Serial.println("(report_simmulation_data) done");
 };
 

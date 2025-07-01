@@ -47,15 +47,15 @@ void CodeUpdateState::report_health_check() {
 void CodeUpdateState::update_config() {
     Serial.println("(update_config) running...");
     Serial.println("(update_config) done");
-    // change state or not
 };
 
 void CodeUpdateState::update_simmulation_code() {
     Serial.println("(update_simmulation_code) running...");
+    // Ask server if update is required
+    // Run paralel code
+    // Get code hash
+    // Update code
     Serial.println("(update_simmulation_code) done");
-    // change state
-    BaseState codeUpdate = HTTPClientState();
-    cyclobot.changestate(&codeUpdate);
 };
 
 // comm

@@ -1,6 +1,7 @@
+#include "Arduino.h"
 #include "ConfigUpdateState.h"
 #include "StateTransitionException.h"
-#include "Arduino.h"
+#include "SharedInstances.h"
 
 // used by context.changeState
 void ConfigUpdateState::enter() {
@@ -44,15 +45,19 @@ void ConfigUpdateState::report_health_check() {
 
 // update
 void ConfigUpdateState::update_config() {
-    Serial.println("(run_simmulation) running...");
-    Serial.println("(run_simmulation) done");
-    // change state or not
+    Serial.println("(update_config): running...");
+    // Ask server if update is required
+    // Get new config data
+    // Validate data types and size
+    // if `new key` exists, update value
+    // if `new key` does NOT exist, add `key & value`
+    // Keys MUST NOT be excluded in this method
+    Serial.println("(update_config): done");
 };
 
 void ConfigUpdateState::update_simmulation_code() {
-    Serial.println("(run_simmulation) running...");
-    Serial.println("(run_simmulation) done");
-    // change state or not
+    Serial.println("(update_simmulation_code): running...");
+    Serial.println("(update_simmulation_code): done");
 };
 
 // comm

@@ -145,6 +145,12 @@ String ClientComm::get_cyclobot_session_token() {
   }
 }
 
+void ClientComm::put_invalid_cyclobot_session_token() {
+  Serial.println("(put_invalid_cyclobot_session_token): running...");
+  // close server connection and clear session token
+  Serial.println("(put_invalid_cyclobot_session_token): done");
+}
+
 void ClientComm::post_cyclobot_config() {
   Serial.println("(post_cyclobot_config): running...");
 

@@ -60,10 +60,6 @@ void SimmulationState::session_stop() {
 void SimmulationState::run_simmulation() {
     Serial.println("(run_simmulation) running...");
     Serial.println("(run_simmulation) done");
-    
-    // change state
-    BaseState clientState = HTTPClientState();
-    cyclobot.changestate(&clientState);
 };
 
 // comm
@@ -78,5 +74,5 @@ void SimmulationState::take_a_nap() {
 
 // constructor
 void SimmulationState::SimmulationState(FiniteStateMachine *cyclobot) {
-    Serial.println("[SimmulationState] Instantiated...");
+    Serial.println("(SimmulationState): Instantiated...");
 };

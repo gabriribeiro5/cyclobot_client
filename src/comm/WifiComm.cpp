@@ -101,3 +101,9 @@ void WifiComm::connect_wifi() {
     }
   }
 }
+
+void WifiComm::disconnect_wifi() {
+  Serial.println("(disconnect_wifi): Running...");
+  WiFi.disconnect();
+  Serial.println("(disconnect_wifi): done");
+}
