@@ -1,4 +1,4 @@
-# eco_unit
+# Cyclobot Oluṣọgba
 An scalable arduino sketch designed to keep closed and small ecosystems alive.
 
 ---
@@ -16,19 +16,20 @@ An scalable arduino sketch designed to keep closed and small ecosystems alive.
 - [ ] Handle incoming configuration updates and apply changes
 - [ ] Collect new config file data to update system behavior
 
-##  ♻️ Eco Unit simplified lifecycle
+##  ♻️ Cyclobot simplified lifecycle
 0. Start
-1. Self Diagnosis
-2. Comm
-4. Simm
-5. Comm
-6. Sleep
-*Update and Error are wildcards to be handled
+1. Health Check
+3. Send diagnostics
+4. Verify and run updates
+5. Simmulation
+6. Send sensors data
+7. Sleep
+*Error state may be raised by any other state
 
-## Eco Unit
-This software is designed to run in IoT devices called Eco Units.
+## Cyclobot
+This software is designed to run in IoT devices called Cyclobots.
 
-Eco Units are meant to:
+Cyclobots are meant to:
 1. Keep track of a given ecosystem's health leveraging from multiple sensors;
 2. Send healthcheck data to a given server;
 3. Manipulate the ecosystem through actuators (such as watering and fan systems).
@@ -68,9 +69,9 @@ Modules are organized as follows:
 As an embedded software, this application is meant to run as "plug and play".
 
 1. Attach the src directory to your microcontroller;
-2. Set your Eco Unit physical components in place;
+2. Set your Cyclobot physical components in place;
 3. Plug your microcontroller to an energy source;
-4. Enjoy your Eco Unit 🌱🍃🌝
+4. Enjoy your Cyclobot 🌱🍃🌝
 
 ## Pin layout
 

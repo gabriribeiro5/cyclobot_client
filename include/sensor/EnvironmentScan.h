@@ -1,7 +1,7 @@
 #pragma once
 
-class EnvSensor {
+class EnvironmentScan {
     public:
-        void GetSoilMoisture();
-        void GetTemperature();
+        void moisture_sensor_on();
+        void moisture_sensor_off();
 }

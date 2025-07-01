@@ -4,8 +4,8 @@
 class VisualComm {
     public:
         // Led Screen
-        void ShowSentence(char sentence);
+        void show_sentence(char sentence);
 
         // Uno Board
-        void SingleLed(int duration);
+        void single_led(int duration);
 }

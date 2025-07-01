@@ -1,7 +1,7 @@
 #pragma once
 #include <Definitions.h>
 
-class SoundComm {
+class ButtonComm {
     public:
-        void GetUserResponse();
+        void get_user_button_input();
 }

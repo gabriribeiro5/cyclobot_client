@@ -1,8 +1,8 @@
 #pragma once
 #include <Definitions.h>
+#include "SharedInstances.h"
+#include "SoundComm.h"
 
-class SoundComm {
-    public:
-        void SoundBipOnce();
-        void SoundSentence();
+void SoundComm::sound_get_user_response() {
+    return;
 }

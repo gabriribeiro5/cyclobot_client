@@ -1,7 +1,7 @@
 # TODO_ARDUINO.md
 
-## 📡 Eco Unit Firmware - Task Backlog
-This file outlines the tasks related to the development of the Eco Unit's Arduino codebase. Tasks are grouped by priority and domain. The goal is to modularize the firmware, improve communication, and ensure reliable, maintainable, and scalable code.
+## 📡 Cyclobot Firmware - Task Backlog
+This file outlines the tasks related to the development of the Cyclobot's Arduino codebase. Tasks are grouped by priority and domain. The goal is to modularize the firmware, improve communication, and ensure reliable, maintainable, and scalable code.
 
 ---
 
@@ -18,7 +18,7 @@ This file outlines the tasks related to the development of the Eco Unit's Arduin
 ---
 
 ### 🧱 Architecture & Modularity
-- [x] feat(State Pattern - incomplete): to handle Eco Unit lifecycle
+- [x] feat(State Pattern - incomplete): to handle Cyclobot lifecycle
   - [x] Learn more C++ (too rusty)
   - [x] Create a working model for State Design
   - [x] Match the model with actual file structure
@@ -27,6 +27,8 @@ This file outlines the tasks related to the development of the Eco Unit's Arduin
   - [x] Implement Cyclobot context into the model
   - [x] Re-write lifecycle (time is validated on each state | stateflow represents the user interface's logic)
   - [x] Update Concrete States
+
+---
 
 ### ▶️ Simmulation
 - [ ] feat(RainforestSimm - incomplete): into new design
@@ -38,13 +40,17 @@ This file outlines the tasks related to the development of the Eco Unit's Arduin
     - [x] Data classes
     - [x] Sharable pointers
     - [x] Self feats (state, config, data)
-    - [ ] Comm feats (state, comm, config)
-    - [ ] Update feats (state, config)
+    - [x] Comm feats (state, comm, config)
+    - [x] Update feats (state, config)
     - [ ] Simm feats  (state, config, sensor, data, actuator)
     - [ ] Error feats (state, config, data)
   - [ ] Write code for memory cleanup on exit functions
 
 ---
+
+### 📄 Rename project
+- [x] refactor(project name): `Cyclobot` replaces `Eco Units`
+- [x] fix(multiple files): apply method_name_pattern
 
 ### 🧪 Lifecycle test
 - [ ] Set UNO prototype

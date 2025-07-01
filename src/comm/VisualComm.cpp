@@ -1,11 +1,12 @@
 #pragma once
 #include <Definitions.h>
+#include "SharedInstances.h"
+#include "VisualComm.h"
 
-class VisualComm {
-    public:
-        // Led Screen
-        void ShowSentence(char sentence);
+void VisualComm::show_sentence(sentence) {
+    return;
+}
 
-        // Uno Board
-        void SingleLed(int duration);
+void VisualComm::single_led(duration) {
+    return;
 }
