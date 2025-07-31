@@ -1,84 +1,86 @@
-#include "CodeUpdateState.h"
-#include "StateTransitionException.h"
-#include "HTTPClientState.h"
+
 #include "Arduino.h"
+#include "../../../include/core_states/update/CodeUpdateState.h"
+#include "../../../include/util/StateTransitionException.h"
+#include "../../../include/Context.h"
 
 // used by context.changeState
-void CodeUpdateState::enter() {
+void CodeUpdateState::enter(FiniteStateMachine *cyclobot) {
     if (!cyclobot) {
-        throw StateException("(enter): cyclobot pointer is null in CodeUpdateState");
+        Serial.println(F("(enter): cyclobot pointer is null in CodeUpdateState"));
+        return; // ou transição para um estado de erro seguro
     }
     
-    Serial.println("(CodeUpdateState) Running...");
+    Serial.println(F("(CodeUpdateState) Running..."));
 };
 
-void CodeUpdateState::exit() {
-    Serial.println("(exit) switching off CodeUpdateState");
+void CodeUpdateState::exit(FiniteStateMachine *cyclobot) {
+    Serial.println(F("(exit) switching off CodeUpdateState"));
 };
 
 // error
-void CodeUpdateState::report_error() {
-    throw StateTransitionException("(report_error): wrong state (CodeUpdateState)");
+void CodeUpdateState::handle_error(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "CodeUpdateState", "handle_error", 0, "wrong state");
 };
 
 // self
-void CodeUpdateState::run_health_check() {
-    throw StateTransitionException("(run_health_check): wrong state (CodeUpdateState)");
+void CodeUpdateState::run_health_check(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "CodeUpdateState", "run_health_check", 0, "wrong state");
 };
 
 // comm
-void CodeUpdateState::report_signature_request() {
-    throw StateTransitionException("(report_signature_request): wrong state (CodeUpdateState)");
+void CodeUpdateState::report_signature_request(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "CodeUpdateState", "report_signature_request", 0, "wrong state");
 };
 
-void CodeUpdateState::session_new() {
-    throw StateTransitionException("(report_signature_request): wrong state (CodeUpdateState)");
+void CodeUpdateState::session_new(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "CodeUpdateState", "session_new", 0, "wrong state");
 };
 
-void CodeUpdateState::report_config() {
-    throw StateTransitionException("(report_config): wrong state (CodeUpdateState)");
+void CodeUpdateState::report_config(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "CodeUpdateState", "report_config", 0, "wrong state");
 };
 
-void CodeUpdateState::report_health_check() {
-    throw StateTransitionException("(report_health_check): wrong state (CodeUpdateState)");
+void CodeUpdateState::report_health_check(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "CodeUpdateState", "report_health_check", 0, "wrong state");
 };
 
 // update
-void CodeUpdateState::update_config() {
-    Serial.println("(update_config) running...");
-    Serial.println("(update_config) done");
+void CodeUpdateState::update_config(FiniteStateMachine *cyclobot) {
+    Serial.println(F("(update_config) running..."));
+    Serial.println(F("(update_config) done"));
 };
 
-void CodeUpdateState::update_simmulation_code() {
-    Serial.println("(update_simmulation_code) running...");
+void CodeUpdateState::update_simmulation_code(FiniteStateMachine *cyclobot) {
+    Serial.println(F("(update_simmulation_code) running..."));
     // Ask server if update is required
     // Run paralel code
     // Get code hash
     // Update code
-    Serial.println("(update_simmulation_code) done");
+    Serial.println(F("(update_simmulation_code) done"));
 };
 
 // comm
-void CodeUpdateState::session_stop() {
-    throw StateTransitionException("(session_stop): wrong state (CodeUpdateState)");
+void CodeUpdateState::session_stop(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "CodeUpdateState", "session_stop", 0, "wrong state");
 };
 
 // simm
-void CodeUpdateState::run_simmulation() {
-    throw StateTransitionException("(RunSimmulation): wrong state (CodeUpdateState)");
+void CodeUpdateState::run_simmulation(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "CodeUpdateState", "run_simmulation", 0, "wrong state");
 };
 
 // comm
-void CodeUpdateState::report_simmulation_data() {
-    throw StateTransitionException("(report_simmulation_data): wrong state (CodeUpdateState)");
+void CodeUpdateState::report_simmulation_data(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "CodeUpdateState", "report_simmulation_data", 0, "wrong state");
 };
 
 // self
-void CodeUpdateState::take_a_nap() {
-    throw StateTransitionException("(take_a_nap): wrong state (CodeUpdateState)");
+void CodeUpdateState::take_a_nap(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "CodeUpdateState", "take_a_nap", 0, "wrong state");
 };
 
 // constructor
-void CodeUpdateState::CodeUpdateState(FiniteStateMachine *cyclobot) {
-    Serial.println("[CodeUpdateState] Instantiated...");
+CodeUpdateState::CodeUpdateState() {
+    Serial.println(F("[CodeUpdateState] Instantiated..."));
 };

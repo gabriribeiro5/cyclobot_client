@@ -16,4 +16,4 @@ class Environment {
         bool wetSoil = 1;                 // condição de solo úmido; 1 = solo umido
         bool dayLight = 1;                // condição de iluminação; 1 = dia; 0 = noite
         bool standBy = 0;                 // desativa os controladores; 1 = desativar (manutenção || eliminar ruídos)
-}
+};

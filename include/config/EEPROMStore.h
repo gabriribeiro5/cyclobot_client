@@ -2,5 +2,5 @@
 
 class EEPROMStore {
     public:
-        some_storage_method();
-}
+        void some_storage_method();
+};

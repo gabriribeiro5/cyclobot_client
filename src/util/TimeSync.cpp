@@ -1,9 +1,9 @@
-#include "TimeSync.h"
-#include <ctime>
+#include <Arduino.h>
+#include <Wire.h>
+#include <RTClib.h>
+#include "../../include/util/TimeSync.h"
 
-// Get current hour in 24-hour format (0-23)
-int getCurrentHour() {
-    time_t now = time(0);
-    tm* localTime = localtime(&now);
-    return localTime->tm_hour;
+int TimeSync::get_current_hour(RTC_DS3231 rtc) {
+    DateTime now = rtc.now();
+    return now.hour(); // hora real em 24h
 }

@@ -1,63 +1,65 @@
-#include "CheckMyHealth.h"
-#include "ClientComm.h"
-#include "WifiComm.h"
-#include "SharedInstances.h"
-#include <WiFi.h>
+#include <Arduino.h>
+#include <WiFiEsp.h>
+#include <SPI.h>
+#include "../../include/self/CheckMyHealth.h"
+#include "../../include/comm/ClientComm.h"
+#include "../../include/comm/WifiComm.h"
+#include "../../include/config/WifiParameters.h"
+#include "../../include/data/SelfDiagnosisData.h"
 
-bool CheckMyHealth::wifi_shield_is_on() {
+
+bool CheckMyHealth::wifi_shield_is_on(WifiParameters *wifiParametersPtr) {
     // check for the presence of the shield:
     if (WiFi.status() == WL_NO_SHIELD) {
-        Serial.println("WiFi shield not present");
-        SelfDiagnosisDataPtr->wifiShieldIsOn = 0;
+        Serial.println(F("WiFi shield not present"));
+        wifiParametersPtr->wifiShieldIsOn = 0;
         return false;
       }
-      SelfDiagnosisDataPtr->wifiShieldIsOn = 1;
+      wifiParametersPtr->wifiShieldIsOn = 1;
       return true;
 }
 
-void CheckMyHealth::check_wifi_firmware_version() {
-  String fv = WiFi.firmwareVersion();
+void CheckMyHealth::check_wifi_firmware_version(WifiParameters *wifiParametersPtr, SelfDiagnosisData *selfDiagnosisDataPtr) {
+  char *fv = WiFi.firmwareVersion();
   if (fv != wifiParametersPtr->wifiFirmwareLatestVersion) {
-      Serial.println("(check_wifi_firmware_version): Please upgrade the firmware");
-      SelfDiagnosisDataPtr->wifiFirmwareRequireUpdate = 1;
+      Serial.println(F("(check_wifi_firmware_version): Please upgrade the firmware"));
+      selfDiagnosisDataPtr->wifiFirmwareRequireUpdate = 1;
   }
 }
 
-void CheckMyHealth::check_wifi_networks() {
-  wifiComm = WifiComm();
-  wifiCommPtr = &wifiComm;
-  wifiCommPtr->scan_wifi();
+void CheckMyHealth::check_wifi_networks(WifiComm *wifiCommPtr, WifiParameters *wifiParametersPtr, SelfDiagnosisData *selfDiagnosisDataPtr) {
+  wifiCommPtr->scan_wifi(wifiParametersPtr);
 
   // update selfDiagnosisData
   if (wifiParametersPtr->networkSsidIndex > -1) {
     selfDiagnosisDataPtr->wifiNetworkAvailable = 1; // 1 = true
     Serial.print("(check_wifi_networks): number of available networks: ");
-    Serial.print(networkSsidIndex);
-    Serial.println("(check_wifi_networks): *** AVAILABLE NETWORKS ***");
-    WifiCommPtr->print_available_networks();
+    Serial.print(wifiParametersPtr->networkSsidIndex);
+    Serial.println(F("(check_wifi_networks): *** AVAILABLE NETWORKS ***"));
+    wifiCommPtr->scan_wifi(wifiParametersPtr);
   } else {
-    Serial.println("(check_wifi_networks): Couldn't find network");
+    Serial.println(F("(check_wifi_networks): Couldn't find network"));
     selfDiagnosisDataPtr->wifiNetworkAvailable = 0; // 1 = true
   }
 }
 
-void CheckMyHealth::check_wifi_connection() {
-  wifiCommPtr = &wifiComm;
-  wifiCommPtr->connect_wifi();
+void CheckMyHealth::check_wifi_connection(WifiComm *wifiCommPtr, WifiParameters *wifiParametersPtr, SelfDiagnosisData *selfDiagnosisDataPtr) {
+  wifiCommPtr->connect_wifi(wifiParametersPtr);
 
   // update selfDiagnosisData
-  if (wifiStatus == WL_IDLE_STATUS) {
+  if (wifiParametersPtr->wifiStatus == WL_IDLE_STATUS) {
       selfDiagnosisDataPtr->wifiIsConnected = 0;
   }
-  if (wifiStatus == WL_CONNECTED) {
+  if (wifiParametersPtr->wifiStatus == WL_CONNECTED) {
       selfDiagnosisDataPtr->wifiIsConnected = 1;
   }
 }
 
-void CheckMyHealth::check_client_communication() {
-  clientComm = ClientComm();
-  clientCommPtr = &clientComm;
-  clientCommPtr->trace_server();
+void CheckMyHealth::check_client_communication(ClientComm *clientCommPtr,
+                                               WifiParameters *wifiParametersPtr,
+                                               ClientParameters *clientParametersPtr,
+                                               SelfDiagnosisData *selfDiagnosisDataPtr) {
+  clientCommPtr->trace_server(clientParametersPtr, wifiParametersPtr);
 
   // update selfDiagnosisData
   if (clientParametersPtr->serverIsUp) {
@@ -65,27 +67,27 @@ void CheckMyHealth::check_client_communication() {
   }
 }
 
-void CheckMyHealth::check_watering_system() {
+void CheckMyHealth::check_watering_system(SelfDiagnosisData *selfDiagnosisDataPtr) {
   selfDiagnosisDataPtr->wateringSystemOK = 1;
 }
 
-void CheckMyHealth::check_river_system() {
+void CheckMyHealth::check_river_system(SelfDiagnosisData *selfDiagnosisDataPtr) {
   selfDiagnosisDataPtr->riverSystemOK = 1;
 }
 
-void CheckMyHealth::check_wind_system() {
+void CheckMyHealth::check_wind_system(SelfDiagnosisData *selfDiagnosisDataPtr) {
   selfDiagnosisDataPtr->windSystemOK = 1;
 }
 
-void CheckMyHealth::check_lighting_system() {
+void CheckMyHealth::check_lighting_system(SelfDiagnosisData *selfDiagnosisDataPtr) {
   selfDiagnosisDataPtr->lightingSystemOK = 1;
 }
 
-void CheckMyHealth::check_components_list() {
+void CheckMyHealth::check_components_list(SelfDiagnosisData *selfDiagnosisDataPtr) {
   selfDiagnosisDataPtr->peripheralComponentsOK = 1;
 }
 
 void CheckMyHealth::clear_runtime_data() {
-  Serial.println("(clear_runtime_data): running...");
+  Serial.println(F("(clear_runtime_data): running..."));
   // TODO: clear ClientComm instance
 }

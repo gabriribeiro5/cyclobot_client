@@ -1,7 +1,8 @@
-#include "RaiforestSimulation.h"
+#include "../../../include/core_states/simm/RainforestSimulation.h"
+#include "../../../include/Context.h"
 #include "Arduino.h"
 
-void RainforestSimmulation::RunSimmulation() {
+void RainforestSimulation::RunSimulation() {
     /*
     INDICES CLIMÁTICOS EM FLORESTAS
     - Temperatura média de 20 graus Célcius
@@ -9,10 +10,10 @@ void RainforestSimmulation::RunSimmulation() {
     - Menos chuva no inverno
     - Mais chuva no verão
     */
-    Serial.println("[RaiforestSimulation] Running...");
+    Serial.println(F("[RaiforestSimulation] Running..."));
     
 }
 
-void RainforestSimmulation::RainforestSimmulation(FiniteStateMachine *cyclobot) {
-    Serial.println("[RaiforestSimulation] Instantiated...");
+RainforestSimulation::RainforestSimulation(FiniteStateMachine *cyclobot) {
+    Serial.println(F("[RaiforestSimulation] Instantiated..."));
 }

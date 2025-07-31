@@ -1,5 +1,4 @@
 #pragma once
-#include <Definitions.h>
 
 class VisualComm {
     public:
@@ -8,4 +7,4 @@ class VisualComm {
 
         // Uno Board
         void single_led(int duration);
-}
+};

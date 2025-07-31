@@ -42,6 +42,19 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
     - [x] Self feats (state, config, data)
     - [x] Comm feats (state, comm, config)
     - [x] Update feats (state, config)
+
+---
+
+### Bug fixes
+- [x] fix(multiple files): String becomes char*
+- [ ] fix(memory): reduce memory usage
+  - [x] Remove string literals and use F() macro
+  - [ ] Store constant data in storage instead of memory with PROGMEM
+
+---
+
+### ▶️ Simmulation
+  - [ ] Write .cpp code based on .h files
     - [ ] Simm feats  (state, config, sensor, data, actuator)
     - [ ] Error feats (state, config, data)
   - [ ] Write code for memory cleanup on exit functions

@@ -1,5 +1,4 @@
 #pragma once
-#include "Context.h"
 /*
     This interface should be implemented in every state
     It contains no .cpp pair file
@@ -9,40 +8,42 @@
     the context object associated with the state. States can use
     the backreference to transition the context to another state.
 */
+class FiniteStateMachine; // Forward declaration
 
 class BaseState {
 public:
-    virtual ~BaseState();
-    
-    // used by context.changeState
-    virtual void enter();
-    virtual void exit();
+    // constructor
+    virtual ~BaseState() {}
 
+    // used by context.changeState
+    virtual void enter(FiniteStateMachine *cyclobot);
+    virtual void exit(FiniteStateMachine *cyclobot);
+    
     // error
-    virtual void report_error();
+    virtual void handle_error(FiniteStateMachine *cyclobot);
     
     // self
-    virtual void run_health_check();
-
-    // comm
-    virtual void report_signature_request();
-    virtual void session_new();
-    virtual void report_config();
-    virtual void report_health_check();
-
-    // update
-    virtual void update_config();
-    virtual void update_simmulation_code();
+    virtual void run_health_check(FiniteStateMachine *cyclobot);
     
     // comm
-    virtual void session_stop();
+    virtual void report_signature_request(FiniteStateMachine *cyclobot);
+    virtual void session_new(FiniteStateMachine *cyclobot);
+    virtual void report_config(FiniteStateMachine *cyclobot);
+    virtual void report_health_check(FiniteStateMachine *cyclobot);
+    
+    // update
+    virtual void update_config(FiniteStateMachine *cyclobot);
+    virtual void update_simmulation_code(FiniteStateMachine *cyclobot);
+    
+    // comm
+    virtual void session_stop(FiniteStateMachine *cyclobot);
     
     // simm
-    virtual void run_simmulation();
+    virtual void run_simmulation(FiniteStateMachine *cyclobot);
     
     // comm
-    virtual void report_simmulation_data();
+    virtual void report_simmulation_data(FiniteStateMachine *cyclobot);
     
     // self
-    virtual void take_a_nap();
+    virtual void take_a_nap(FiniteStateMachine *cyclobot);
 };

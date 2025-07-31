@@ -1,134 +1,146 @@
 // REFERÊNCIAS:
 //  https://docs.arduino.cc/libraries/wifi/#Wifi%20Class
-
 #include "Arduino.h"
 #include <ArduinoJson.h>
-#include <WiFi.h>
-#include "ClientComm.h"
-#include "ClientParameters.h"
-#include "SelfDiagnosisData.h"
-#include "SharedInstances.h"
+#include <WiFiEsp.h>
+#include <SPI.h>
+#include "../../include/comm/ClientComm.h"
+#include "../../include/config/ClientParameters.h"
+#include "../../include/config/WifiParameters.h"
+#include "../../include/config/DeviceParameters.h"
+#include "../../include/config/EcosystemParameters.h"
+#include "../../include/data/SelfDiagnosisData.h"
+#include "../../include/data/ConfigData.h"
+#include "../../include/Context.h"
 
-void ClientComm::trace_server() {
-  Serial.println("(trace_server): running...");
+void ClientComm::trace_server(ClientParameters *clientParametersPtr, WifiParameters *wifiParametersPtr) {
+  Serial.println(F("(trace_server): running..."));
 
   // if you get a connection, report back via serial:
-  if (client.connect(apiServer, clientPort)) {
-    Serial.println("(trace_server): connected to server");
+  if (wifiParametersPtr->client.connect(clientParametersPtr->apiServer, clientParametersPtr->clientPort)) {
+    Serial.println(F("(trace_server): connected to server"));
 
     // Send HTTP trace request
-    client.println("TRACE /api HTTP/1.1");
-    client.println("Host: " + String(apiServer));
-    client.println("Content-Type: text/plain");
-    client.println(msgTrace);
-    client.println();  // Empty line to end headers
+    wifiParametersPtr->client.println("TRACE /api HTTP/1.1");
+    wifiParametersPtr->client.println("Host: ");
+    wifiParametersPtr->client.println(clientParametersPtr->apiServer);
+    wifiParametersPtr->client.println("Content-Type: text/plain");
+    wifiParametersPtr->client.println();  // Empty server_response_line to end headers
+    wifiParametersPtr->client.println(clientParametersPtr->msgTrace);
 
-    Serial.println("(trace_server): Request sent");
+    Serial.println(F("(trace_server): Request sent"));
 
-    // Check response
-    while (client.connected() && readingLines) {
-      while (client.available() && readingLines) {
-        String line = client.readStringUntil('\n');
-        if (line == String(msgTrace)) {
-          Serial.println("(trace_server): Response approved");
-          clientParametersPtr->serverIsUp = true;
-          clientParametersPtr->readingLines = false;
+    // Get response
+    while (wifiParametersPtr->client.connected() && clientParametersPtr->readingLines) {
+      while (wifiParametersPtr->client.available() && clientParametersPtr->readingLines) {
+        // get response
+        clientParametersPtr->server_response_chars = wifiParametersPtr->client.read();
+        if (clientParametersPtr->server_response_chars =! "\n") {
+          clientParametersPtr->server_response = clientParametersPtr->server_response + clientParametersPtr->server_response_chars;
         }
       }
     }
   }
   else {
-    Serial.println("(trace_server): ! CLIENT CONNECTION FAILED !");
+    Serial.println(F("(trace_server): ! CLIENT CONNECTION FAILED !"));
     clientParametersPtr->serverIsUp = false;
   }
+
+  // Search trace msg
+  for (int i = 0; i < sizeof(clientParametersPtr->msgTrace); i--) {
+    clientParametersPtr->server_response_line = clientParametersPtr->server_response_line + clientParametersPtr->server_response[sizeof(clientParametersPtr->msgTrace) * -1];
+  }
+  
+  if (clientParametersPtr->server_response_line == clientParametersPtr->msgTrace) {
+    Serial.println(F("(trace_server): Response approved"));
+    clientParametersPtr->serverIsUp = true;
+    clientParametersPtr->readingLines = false;
+  }
 }
 
-void ClientComm::post_signature_request() {
-  Serial.println("(post_signature_request): running...");
+void ClientComm::post_signature_request(ClientParameters *clientParametersPtr, WifiParameters *wifiParametersPtr, DeviceParameters *deviceParametersPtr) {
+  Serial.println(F("(post_signature_request): running..."));
   
   // Construct JSON payload
-  signatureRequest_Json["cyclobotId"] = cyclobotId; // get uuid
-  signatureRequest_Json["cyclobotToken"] = cyclobotToken; // get other uuid
-  serializeJson(signatureRequest_Json, signatureRequest_String);  // convert JSON to String
+  clientParametersPtr->signatureRequest_Json["cyclobotId"] = deviceParametersPtr->cyclobotId; // get uuid
+  clientParametersPtr->signatureRequest_Json["cyclobotToken"] = deviceParametersPtr->cyclobotToken; // get other uuid
+  serializeJson(clientParametersPtr->signatureRequest_Json, clientParametersPtr->signatureRequest_Char);  // convert JSON to Char
 
   // Send HTTP request
-  if (client.connected()) {
+  if (wifiParametersPtr->client.connected()) {
     // Client action
-    client.println("POST /api/cyclobot/signature_request HTTP/1.1");
-    client.print("Host: ");
-    client.println(host);
-    client.println("Content-Type: application/json");
-    client.print("Content-Length: ");
-    client.println(signatureRequest_String.length());
-    client.println();  // Empty line to end headers
-    client.print(signatureRequest_String);  // ✅ Send JSON body
+    wifiParametersPtr->client.println("POST /api/cyclobot/signature_request HTTP/1.1");
+    wifiParametersPtr->client.print("Host: ");
+    wifiParametersPtr->client.println(clientParametersPtr->apiServer);
+    wifiParametersPtr->client.println("Content-Type: application/json");
+    wifiParametersPtr->client.print("Content-Length: ");
+    wifiParametersPtr->client.println(strlen(clientParametersPtr->signatureRequest_Char));
+    wifiParametersPtr->client.println();  // Empty server_response_line to end headers
+    wifiParametersPtr->client.print(clientParametersPtr->signatureRequest_Char);  // ✅ Send JSON body
 
     // Method response
-    Serial.println("(post_signature_request): Request sent");
+    Serial.println(F("(post_signature_request): Request sent"));
   }
   else {
-    Serial.println("(post_signature_request): [ATENTION] server NOT responding");
+    Serial.println(F("(post_signature_request): [ATENTION] server NOT responding"));
   }
 }
 
-String ClientComm::get_cyclobot_session_token() {
-  Serial.println("(get_cyclobot_session_token): running...");
+const char *ClientComm::get_cyclobot_session_token(ClientParameters *clientParametersPtr, WifiParameters *wifiParametersPtr, DeviceParameters *deviceParametersPtr) {
+  Serial.println(F("(get_cyclobot_session_token): running..."));
 
   // Construct JSON payload
-  loginParameters_Json["cyclobotId"] = cyclobotId;
-  loginParameters_Json["cyclobotToken"] = cyclobotToken;
+  clientParametersPtr->loginParameters_Json["cyclobotId"] = deviceParametersPtr->cyclobotId;
+  clientParametersPtr->loginParameters_Json["cyclobotToken"] = deviceParametersPtr->cyclobotToken;
 
-  serializeJson(loginParameters_Json, loginParameters_String);
+  serializeJson(clientParametersPtr->loginParameters_Json, clientParametersPtr->loginParameters_Char);
 
-  if (client.connected()) { 
+  if (wifiParametersPtr->client.connected()) { 
     // Send HTTP GET request
-    client.println("GET /api/cyclobot/login HTTP/1.1");
-    client.print("Host: ");
-    client.println(host);
-    client.println("Content-Type: application/json");
-    client.print("Content-Length: ");
-    client.println(loginParameters_String.length());
-    client.println("Connection: close");
-    client.println();  // End of headers
-    client.print(loginParameters_String);  // JSON body
-    Serial.println("(get_cyclobot_session_token): Request sent");
+    wifiParametersPtr->client.println("GET /api/cyclobot/login HTTP/1.1");
+    wifiParametersPtr->client.print("Host: ");
+    wifiParametersPtr->client.println(clientParametersPtr->apiServer);
+    wifiParametersPtr->client.println("Content-Type: application/json");
+    wifiParametersPtr->client.print("Content-Length: ");
+    wifiParametersPtr->client.println(strlen(clientParametersPtr->loginParameters_Char));
+    wifiParametersPtr->client.println("Connection: close");
+    wifiParametersPtr->client.println();  // End of headers
+    wifiParametersPtr->client.print(clientParametersPtr->loginParameters_Char);  // JSON body
+    Serial.println(F("(get_cyclobot_session_token): Request sent"));
   } else {
-    Serial.println("(get_cyclobot_session_token): [ERROR] Client not connected");
+    Serial.println(F("(get_cyclobot_session_token): [ERROR] Client not connected"));
     return "";
   }
 
   // Wait for server response
   clientParametersPtr->timoutReference = millis();
-  while (!client.available()) {
+  while (!wifiParametersPtr->client.available()) {
     if (millis() - clientParametersPtr->timoutReference > clientParametersPtr->responseTimeoutLimit) {
-      Serial.println("(get_cyclobot_session_token): [ERROR] Timeout waiting for response");
-      client.stop();
+      Serial.println(F("(get_cyclobot_session_token): [ERROR] Timeout waiting for response"));
+      wifiParametersPtr->client.stop();
       return "";
     }
   }
 
   // Read and store entire response
   clientParametersPtr->serverRawResponse = "";
-  while (client.available()) {
-    char c = client.read();
-    clientParametersPtr->serverRawResponse += c;
+  while (wifiParametersPtr->client.available()) {
+    clientParametersPtr->serverRawResponse += wifiParametersPtr->client.read();
   }
 
   // Debug raw response (optional)
-  Serial.println("(get_cyclobot_session_token): Raw response:");
+  Serial.println(F("(get_cyclobot_session_token): Raw response:"));
   Serial.println(clientParametersPtr->serverRawResponse);
 
   // Find start of JSON (skip HTTP headers)
-  jsonStart = clientParametersPtr->serverRawResponse.indexOf('{');
-  if (jsonStart == -1) {
-    Serial.println("(get_cyclobot_session_token): [ERROR] No JSON found in response");
+  clientParametersPtr->jsonPart = strchr(clientParametersPtr->serverRawResponse, '{');
+  if (clientParametersPtr->jsonPart == NULL) {
+    Serial.println(F("(get_cyclobot_session_token): [ERROR] No JSON found in response (char '{' not found)"));
     return "";
   }
 
-  jsonPart = clientParametersPtr->serverRawResponse.substring(jsonStart);
-
   // Parse JSON
-  clientParametersPtr->deserializationError = deserializeJson(responseJson, jsonPart);
+  clientParametersPtr->deserializationError = deserializeJson(clientParametersPtr->responseJson, clientParametersPtr->jsonPart);
   if (clientParametersPtr->deserializationError) {
     Serial.print("(get_cyclobot_session_token): [ERROR] Failed to parse JSON: ");
     Serial.println(clientParametersPtr->deserializationError.c_str());
@@ -137,28 +149,29 @@ String ClientComm::get_cyclobot_session_token() {
 
   // Extract token
   if (clientParametersPtr->responseJson.containsKey("sessionToken")) {
-    clientParametersPtr->sessionToken = clientParametersPtr->responseJson["sessionToken"].as<String>();
-    Serial.println("(get_cyclobot_session_token): Token received: " + clientParametersPtr->sessionToken);
+    clientParametersPtr->sessionToken = clientParametersPtr->responseJson["sessionToken"].as<char>();
+    Serial.print("(get_cyclobot_session_token): Token received: ");
+    Serial.println(clientParametersPtr->sessionToken);
   } else {
-    Serial.println("(get_cyclobot_session_token): [ERROR] sessionToken not found in JSON");
+    Serial.println(F("(get_cyclobot_session_token): [ERROR] sessionToken not found in JSON"));
     return "";
   }
 }
 
 void ClientComm::put_invalid_cyclobot_session_token() {
-  Serial.println("(put_invalid_cyclobot_session_token): running...");
+  Serial.println(F("(put_invalid_cyclobot_session_token): running..."));
   // close server connection and clear session token
-  Serial.println("(put_invalid_cyclobot_session_token): done");
+  Serial.println(F("(put_invalid_cyclobot_session_token): done"));
 }
 
-void ClientComm::post_cyclobot_config() {
-  Serial.println("(post_cyclobot_config): running...");
+void ClientComm::post_cyclobot_config(ClientParameters *clientParametersPtr, WifiParameters *wifiParametersPtr, DeviceParameters *deviceParametersPtr, ConfigData *configDataPtr, EcosystemParameters *ecosystemParametersPtr) {
+  Serial.println(F("(post_cyclobot_config): running..."));
 
   // *** BUILD JSON STRUCT ***
   // Device config
   configDataPtr->config_Json["cyclobot_id"] = deviceParametersPtr->cyclobotId; // uuid
-  configDataPtr->config_Json["session_token"] = deviceParametersPtr->sessionToken; // uuid
-  configDataPtr->config_Json["device_sleep_lenght"] = deviceParametersPtr->sleepLenght;
+  configDataPtr->config_Json["session_token"] = clientParametersPtr->sessionToken; // uuid
+  configDataPtr->config_Json["device_sleep_lenght"] = deviceParametersPtr->sleepLength;
   
   // Wifi config
   configDataPtr->config_Json["wifi_status"] = wifiParametersPtr->wifiStatus;
@@ -189,74 +202,70 @@ void ClientComm::post_cyclobot_config() {
   configDataPtr->config_Json["standBy"] = ecosystemParametersPtr->standBy;
 
   // *** CONVERT JSON TO STRING ***
-  serializeJson(configDataPtr->config_Json, configDataPtr->config_String);
+  serializeJson(configDataPtr->config_Json, configDataPtr->config_Char);
 
   // Send HTTP request
-  if (client.connected()) {
+  if (wifiParametersPtr->client.connected()) {
     // Client action
-    client.println("POST /api/cyclobot/signature_request HTTP/1.1");
-    client.print("Host: ");
-    client.println(host);
-    client.println("Content-Type: application/json");
-    client.print("Content-Length: ");
-    client.println(config_String.length());
-    client.println(); // Empty line to end headers
-    client.print(config_String);  // ✅ Send JSON body
+    wifiParametersPtr->client.println("POST /api/cyclobot/signature_request HTTP/1.1");
+    wifiParametersPtr->client.print("Host: ");
+    wifiParametersPtr->client.println(clientParametersPtr->apiServer);
+    wifiParametersPtr->client.println("Content-Type: application/json");
+    wifiParametersPtr->client.print("Content-Length: ");
+    wifiParametersPtr->client.println(strlen(configDataPtr->config_Char));
+    wifiParametersPtr->client.println(); // Empty server_response_line to end headers
+    wifiParametersPtr->client.print(configDataPtr->config_Char);  // ✅ Send JSON body
 
     // Method response
-    Serial.println("(post_cyclobot_config): Config sent");
+    Serial.println(F("(post_cyclobot_config): Config sent"));
   }
   else {
-    Serial.println("(post_cyclobot_config): [ATENTION] server NOT responding");
+    Serial.println(F("(post_cyclobot_config): [ATENTION] server NOT responding"));
   }
 }
 
-void ClientComm::post_cyclobot_diagnosis() {
-  Serial.println("(post_cyclobot_diagnosis): running...");
+void ClientComm::post_cyclobot_diagnosis(ClientParameters *clientParametersPtr, WifiParameters *wifiParametersPtr, DeviceParameters *deviceParametersPtr, SelfDiagnosisData *selfDiagnosisDataPtr) {
+  Serial.println(F("(post_cyclobot_diagnosis): running..."));
   
   // Build json struct and convert to string
-  selfDiagnosisDataPtr->selfDiagnosis_Json["cyclobot_id"] = cyclobotId; // uuid
-  selfDiagnosisDataPtr->selfDiagnosis_Json["session_token"] = sessionToken; // uuid
-  selfDiagnosisDataPtr->selfDiagnosis_Json["diagnosis_date_time"] = SelfDiagnosisDataPtr->diagnosisDateTime; // date and time
-  selfDiagnosisDataPtr->selfDiagnosis_Json["wifi_connected"] = SelfDiagnosisDataPtr->wifiIsConnected; // int
-  selfDiagnosisDataPtr->selfDiagnosis_Json["watering_system"] = SelfDiagnosisDataPtr->waterSystemOK; // int
-  selfDiagnosisDataPtr->selfDiagnosis_Json["river_system"] = SelfDiagnosisDataPtr->riverSystemOK; // int
-  selfDiagnosisDataPtr->selfDiagnosis_Json["wind_system"] = SelfDiagnosisDataPtr->windSystemOK; // int
-  selfDiagnosisDataPtr->selfDiagnosis_Json["lighting_system"] = SelfDiagnosisDataPtr->lightingSystemOK; // int
-  serializeJson(SelfDiagnosisDataPtr->selfDiagnosis_Json, SelfDiagnosisDataPtr->selfDiagnosis_String);  // convert JSON to String
+  selfDiagnosisDataPtr->selfDiagnosis_Json["cyclobot_id"] = deviceParametersPtr->cyclobotId; // uuid
+  selfDiagnosisDataPtr->selfDiagnosis_Json["session_token"] = clientParametersPtr->sessionToken; // uuid
+  selfDiagnosisDataPtr->selfDiagnosis_Json["diagnosis_date_time"] = selfDiagnosisDataPtr->diagnosisDateTime; // date and time
+  selfDiagnosisDataPtr->selfDiagnosis_Json["wifi_connected"] = selfDiagnosisDataPtr->wifiIsConnected; // int
+  selfDiagnosisDataPtr->selfDiagnosis_Json["watering_system"] = selfDiagnosisDataPtr->wateringSystemOK; // int
+  selfDiagnosisDataPtr->selfDiagnosis_Json["river_system"] = selfDiagnosisDataPtr->riverSystemOK; // int
+  selfDiagnosisDataPtr->selfDiagnosis_Json["wind_system"] = selfDiagnosisDataPtr->windSystemOK; // int
+  selfDiagnosisDataPtr->selfDiagnosis_Json["lighting_system"] = selfDiagnosisDataPtr->lightingSystemOK; // int
+  serializeJson(selfDiagnosisDataPtr->selfDiagnosis_Json, selfDiagnosisDataPtr->selfDiagnosis_Char);  // convert JSON to Char
 
   // Send HTTP request
-  if (client.connected()) {
+  if (wifiParametersPtr->client.connected()) {
     // Client action
-    client.println("POST /api/cyclobot/signature_request HTTP/1.1");
-    client.print("Host: ");
-    client.println(host);
-    client.println("Content-Type: application/json");
-    client.print("Content-Length: ");
-    client.println(signatureRequest_String.length());
-    client.println(); // Empty line to end headers
-    client.print(signatureRequest_String);  // ✅ Send JSON body
+    wifiParametersPtr->client.println("POST /api/cyclobot/self_diagnosis HTTP/1.1");
+    wifiParametersPtr->client.print("Host: ");
+    wifiParametersPtr->client.println(clientParametersPtr->apiServer);
+    wifiParametersPtr->client.println("Content-Type: application/json");
+    wifiParametersPtr->client.print("Content-Length: ");
+    wifiParametersPtr->client.println(strlen(selfDiagnosisDataPtr->selfDiagnosis_Char));
+    wifiParametersPtr->client.println(); // Empty server_response_line to end headers
+    wifiParametersPtr->client.print(selfDiagnosisDataPtr->selfDiagnosis_Char);  // ✅ Send JSON body
 
     // Method response
-    Serial.println("(post_cyclobot_diagnostic): Request sent");
+    Serial.println(F("(post_cyclobot_diagnostic): Request sent"));
   }
   else {
-    Serial.println("(post_cyclobot_diagnostic): [ATENTION] server NOT responding");
+    Serial.println(F("(post_cyclobot_diagnostic): [ATENTION] server NOT responding"));
   }
 }
 
 void ClientComm::post_cyclobot_environment_state() {
-  Serial.println("(post_cyclobot_environment_state): running...");
+  Serial.println(F("(post_cyclobot_environment_state): running..."));
 }
 
 void ClientComm::get_cyclobot_config_update() {
-  Serial.println("(post_cyclobot_environment_state): running...");
+  Serial.println(F("(post_cyclobot_environment_state): running..."));
 }
 
 void ClientComm::get_cyclobot_config_rollback() {
-  Serial.println("(post_cyclobot_environment_state): running...");
-}
-
-void ClientComm::ClientComm() {
-  WiFiClient client;
+  Serial.println(F("(post_cyclobot_environment_state): running..."));
 }

@@ -1,9 +1,13 @@
 #pragma once
-#include <stdexcept>
-#include <string>
 
-class StateTransitionException : public std::runtime_error {
-public:
-    explicit StateTransitionException(const std::string& msg)
-        : std::runtime_error("StateTransitionException: " + msg) {}
+class StateTransitionException {
+  public:
+    const char* message;
+
+    explicit StateTransitionException(const char* msg)
+      : message(msg) {}
+
+    const char* what() const {
+      return message;
+    }
 };

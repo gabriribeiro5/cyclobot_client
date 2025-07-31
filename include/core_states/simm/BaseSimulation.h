@@ -7,8 +7,8 @@
     This interface contains no .cpp pair file
 */
 
-class BaseSimmulation {
+class BaseSimulation {
     public:
-        virtual ~BaseSimmulation();
-        virtual void RunSimmulation();
-}
+        virtual ~BaseSimulation();
+        virtual void RunSimulation();
+};

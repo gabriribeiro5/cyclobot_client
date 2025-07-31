@@ -1,86 +1,89 @@
+
 #include "Arduino.h"
-#include "ConfigUpdateState.h"
-#include "StateTransitionException.h"
-#include "SharedInstances.h"
+#include "../../../include/core_states/update/ConfigUpdateState.h"
+#include "../../../include/self/ErrorHandler.h"
+#include "../../../include/Context.h"
 
 // used by context.changeState
-void ConfigUpdateState::enter() {
+void ConfigUpdateState::enter(FiniteStateMachine *cyclobot) {
     if (!cyclobot) {
-        throw StateException("(enter): cyclobot pointer is null in ConfigUpdateState");
+        Serial.println(F("(enter): cyclobot pointer is null in ConfigUpdateState"));
+        return;
     }
     
-    Serial.println("(ConfigUpdateState) Running...");
+    Serial.println(F("(ConfigUpdateState) Running..."));
 };
 
-void ConfigUpdateState::exit() {
-    Serial.println("(exit) switching off ConfigUpdateState");
+void ConfigUpdateState::exit(FiniteStateMachine *cyclobot) {
+    Serial.println(F("(exit) switching off ConfigUpdateState"));
 };
 
 // error
-void ConfigUpdateState::report_error() {
-    throw StateTransitionException("(report_error): wrong state (ConfigUpdateState)");
+void ConfigUpdateState::handle_error(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "ConfigUpdateState", "handle_error", 0, "wrong state");
 };
 
 // self
-void ConfigUpdateState::run_health_check() {
-    throw StateTransitionException("(run_health_check): wrong state (ConfigUpdateState)");
+void ConfigUpdateState::run_health_check(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "ConfigUpdateState", "run_health_check", 0, "wrong state");
 };
 
 // comm
-void ConfigUpdateState::report_signature_request() {
-    throw StateTransitionException("(report_signature_request): wrong state (ConfigUpdateState)");
+void ConfigUpdateState::report_signature_request(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "ConfigUpdateState", "report_signature_request", 0, "wrong state");
 };
 
-void ConfigUpdateState::session_new() {
-    throw StateTransitionException("(report_signature_request): wrong state (ConfigUpdateState)");
+void ConfigUpdateState::session_new(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "ConfigUpdateState", "session_new", 0, "wrong state");
 };
 
-void ConfigUpdateState::report_config() {
-    throw StateTransitionException("(report_config): wrong state (ConfigUpdateState)");
+void ConfigUpdateState::report_config(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "ConfigUpdateState", "report_config", 0, "wrong state");
 };
 
-void ConfigUpdateState::report_health_check() {
-    throw StateTransitionException("(report_health_check): wrong state (ConfigUpdateState)");
+void ConfigUpdateState::report_health_check(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "ConfigUpdateState", "report_health_check", 0, "wrong state");
 };
 
 // update
-void ConfigUpdateState::update_config() {
-    Serial.println("(update_config): running...");
+void ConfigUpdateState::update_config(FiniteStateMachine *cyclobot) {
+    Serial.println(F("(update_config): running..."));
     // Ask server if update is required
     // Get new config data
     // Validate data types and size
     // if `new key` exists, update value
     // if `new key` does NOT exist, add `key & value`
     // Keys MUST NOT be excluded in this method
-    Serial.println("(update_config): done");
+    Serial.println(F("(update_config): done"));
 };
 
-void ConfigUpdateState::update_simmulation_code() {
-    Serial.println("(update_simmulation_code): running...");
-    Serial.println("(update_simmulation_code): done");
+void ConfigUpdateState::update_simmulation_code(FiniteStateMachine *cyclobot) {
+    Serial.println(F("(update_simmulation_code): running..."));
+    Serial.println(F("(update_simmulation_code): done"));
 };
 
 // comm
-void ConfigUpdateState::session_stop() {
-    throw StateTransitionException("(session_stop): wrong state (ConfigUpdateState)");
+void ConfigUpdateState::session_stop(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "ConfigUpdateState", "session_stop", 0, "wrong state");
 };
 
 // simm
-void ConfigUpdateState::run_simmulation() {
-    throw StateTransitionException("(RunSimmulation): wrong state (ConfigUpdateState)");
+void ConfigUpdateState::run_simmulation(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "ConfigUpdateState", "run_simmulation", 0, "wrong state");
 };
 
 // comm
-void ConfigUpdateState::report_simmulation_data() {
-    throw StateTransitionException("(report_simmulation_data): wrong state (ConfigUpdateState)");
+void ConfigUpdateState::report_simmulation_data(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "ConfigUpdateState", "report_simmulation_data", 0, "wrong state");
 };
 
 // self
-void ConfigUpdateState::take_a_nap() {
-    throw StateTransitionException("(take_a_nap): wrong state (ConfigUpdateState)");
+void ConfigUpdateState::take_a_nap(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "ConfigUpdateState", "take_a_nap", 0, "wrong state");
 };
 
 // constructor
-void ConfigUpdateState::ConfigUpdateState(FiniteStateMachine *cyclobot) {
-    Serial.println("[ConfigUpdateState] Instantiated...");
+ConfigUpdateState::ConfigUpdateState() {
+    Serial.println(F("[ConfigUpdateState] Instantiated..."));
+    return; // ou transição para um estado de erro seguro
 };

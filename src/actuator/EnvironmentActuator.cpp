@@ -1,6 +1,4 @@
-#pragma once
-#include <Definitions.h>
-#include <EnvironmentActuator.h>
+#include "../../include/actuator/EnvironmentActuator.h"
 
 void EnvironmentActuator::water_system_on() {
     return;
@@ -30,7 +28,7 @@ void EnvironmentActuator::heat_system_on() {
     return;
 };
 
-void EnvironmentActuator::heat_system_on() {
+void EnvironmentActuator::heat_system_off() {
     return;
 };
 

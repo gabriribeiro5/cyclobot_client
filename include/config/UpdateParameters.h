@@ -3,4 +3,4 @@
 class UpdateParameters {
     public:
         // some parameter
-}
+};

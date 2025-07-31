@@ -2,4 +2,4 @@
 
 class LogData {
     public:
-}
+};

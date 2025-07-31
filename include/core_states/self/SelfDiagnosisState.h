@@ -1,40 +1,42 @@
 #pragma once
-#include "BaseState.h"
+#include "..\BaseState.h"
+#include "..\..\Context.h"
+class FiniteStateMachine; // Forward declaration
 
 class SelfDiagnosisState : public BaseState {
 public:
     // used by context.changeState
-    void enter() override;
-    void exit() override;
+    void enter(FiniteStateMachine *cyclobot) override;
+    void exit(FiniteStateMachine *cyclobot) override;
 
     // error
-    void report_error() override;
+    void handle_error(FiniteStateMachine *cyclobot) override;
     
     // self
-    void run_health_check() override;
+    void run_health_check(FiniteStateMachine *cyclobot) override;
 
     // comm
-    void report_signature_request() override;
-    void session_new() override;
-    void report_config() override;
-    void report_health_check() override;
+    void report_signature_request(FiniteStateMachine *cyclobot) override;
+    void session_new(FiniteStateMachine *cyclobot) override;
+    void report_config(FiniteStateMachine *cyclobot) override;
+    void report_health_check(FiniteStateMachine *cyclobot) override;
 
     // update
-    void update_config() override;
-    void update_simmulation_code() override;
+    void update_config(FiniteStateMachine *cyclobot) override;
+    void update_simmulation_code(FiniteStateMachine *cyclobot) override;
     
     // comm
-    void session_stop() override;
+    void session_stop(FiniteStateMachine *cyclobot) override;
     
     // simm
-    void run_simmulation() override;
+    void run_simmulation(FiniteStateMachine *cyclobot) override;
     
     // comm
-    void report_simmulation_data() override;
+    void report_simmulation_data(FiniteStateMachine *cyclobot) override;
     
     // self
-    void take_a_nap() override;
+    void take_a_nap(FiniteStateMachine *cyclobot) override;
 
     // constructor
-    void SelfDiagnosisState(FiniteStateMachine *cyclobot);
+    SelfDiagnosisState();
 };

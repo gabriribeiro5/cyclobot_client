@@ -18,4 +18,4 @@ class EcosystemParameters {
         unsigned long eventStart = micros();             // valor em microsegundos
         unsigned long eventEnd = micros();               // valor em microsegundos
         unsigned long timeBufferMicroSec = 1800000000;   // 1800000000 microsegundos = 30 minutos
-}
+};

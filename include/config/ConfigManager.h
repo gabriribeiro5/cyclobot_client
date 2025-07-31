@@ -2,5 +2,5 @@
 
 class ConfigManager {
     public:
-        some_storage_method();
-}
+        void some_config_method();
+};

@@ -1,100 +1,114 @@
 #include "Arduino.h"
-#include "HTTPClientState.h"
-#include "StateTransitionException.h"
-#include "SharedInstances.h"
-
+#include "../../../include/core_states/comm/HTTPClientState.h"
+#include "../../../include/Context.h"
+#include "../../../include/shared/SharedInstances.h"
 // used by context.changeState
-void HTTPClientState::enter() {
+void HTTPClientState::enter(FiniteStateMachine *cyclobot) {
     if (!cyclobot) {
-        throw StateException("(enter): cyclobot pointer is null in HTTPClientState");
-    }
-    
-    Serial.println("(HTTPClientState) Running...");
+        Serial.println(F("(enter): cyclobot pointer is null in HTTPClientState"));
+        return;
+    }    
+    Serial.println(F("(HTTPClientState) Running..."));
 };
 
-void HTTPClientState::exit() {
-    Serial.println("(exit) switching off HTTPClientState");
+void HTTPClientState::exit(FiniteStateMachine *cyclobot) {
+    Serial.println(F("(exit) switching off HTTPClientState"));
 };
 
 // error
-void HTTPClientState::report_error() {
-    throw StateTransitionException("(report_error): wrong state (HTTPClientState)");
+void HTTPClientState::handle_error(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "HTTPClientState", "handle_error", 0, "wrong state");
+    
+    // start error protocol
+    cyclobot->stateFlow = 98;
+    return;
 };
 
 // self
-void HTTPClientState::run_health_check() {
-    throw StateTransitionException("(run_health_check): wrong state (HTTPClientState)");
+void HTTPClientState::run_health_check(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "HTTPClientState", "run_health_check", 0, "wrong state");
 };
 
 // comm
-void HTTPClientState::report_signature_request() {
-    Serial.println("(report_signature_request): running...");
-    if (deviceParametersPtr->firstAwakening) {
-        clientCommPtr->post_signature_request();
-        deviceParametersPtr->firstAwakening = false;
-        Serial.println("(report_signature_request): cyclobot approved");
+void HTTPClientState::report_signature_request(FiniteStateMachine *cyclobot) {
+    Serial.println(F("(report_signature_request): running..."));
+    if (cyclobot->toolsPtr->deviceParametersPtr->firstAwakening) {
+        cyclobot->toolsPtr->clientCommPtr->post_signature_request(cyclobot->toolsPtr->clientParametersPtr,
+                                                                  cyclobot->toolsPtr->wifiParametersPtr,
+                                                                  cyclobot->toolsPtr->deviceParametersPtr);
+        cyclobot->toolsPtr->deviceParametersPtr->firstAwakening = false;
+        Serial.println(F("(report_signature_request): cyclobot approved"));
     } else {
-        Serial.println("(report_signature_request): skipped");
+        Serial.println(F("(report_signature_request): skipped"));
     }
 };
 
-void HTTPClientState::session_new() {
-    Serial.println("(session_new) running...");
-    clientCommPtr->get_cyclobot_session_token();
-    Serial.println("(session_new) done");
+void HTTPClientState::session_new(FiniteStateMachine *cyclobot) {
+    Serial.println(F("(session_new) running..."));
+    cyclobot->toolsPtr->clientCommPtr->get_cyclobot_session_token(cyclobot->toolsPtr->clientParametersPtr,
+                                                                  cyclobot->toolsPtr->wifiParametersPtr,
+                                                                  cyclobot->toolsPtr->deviceParametersPtr);
+    Serial.println(F("(session_new) done"));
 };
 
-void HTTPClientState::report_config() {
-    Serial.println("(report_config) running...");
-    clientCommPtr->post_cyclobot_config();
-    Serial.println("(report_config) done");
+void HTTPClientState::report_config(FiniteStateMachine *cyclobot) {
+    Serial.println(F("(report_config) running..."));
+    cyclobot->toolsPtr->clientCommPtr->post_cyclobot_config(cyclobot->toolsPtr->clientParametersPtr,
+                                                            cyclobot->toolsPtr->wifiParametersPtr,
+                                                            cyclobot->toolsPtr->deviceParametersPtr,
+                                                            cyclobot->toolsPtr->configDataPtr,
+                                                            cyclobot->toolsPtr->ecosystemParametersPtr);
+    Serial.println(F("(report_config) done"));
 };
 
-void HTTPClientState::report_health_check() {
-    Serial.println("(report_health_check) running...");
-    clientCommPtr->post_cyclobot_diagnosis();
-    Serial.println("(report_health_check) done");
+void HTTPClientState::report_health_check(FiniteStateMachine *cyclobot) {
+    Serial.println(F("(report_health_check) running..."));
+    cyclobot->toolsPtr->clientCommPtr->post_cyclobot_diagnosis(cyclobot->toolsPtr->clientParametersPtr,
+                                                               cyclobot->toolsPtr->wifiParametersPtr,
+                                                               cyclobot->toolsPtr->deviceParametersPtr,
+                                                               cyclobot->toolsPtr->selfDiagnosisDataPtr);
+    Serial.println(F("(report_health_check) done"));
 };
 
 // update
-void HTTPClientState::update_config() {
-    throw StateTransitionException("(update_config): wrong state (HTTPClientState)");
+void HTTPClientState::update_config(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "HTTPClientState", "update_config", 0, "wrong state");
 };
 
-void HTTPClientState::update_simmulation_code() {
-    throw StateTransitionException("(update_firmware): wrong state (HTTPClientState)");
+void HTTPClientState::update_simmulation_code(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "HTTPClientState", "update_simmulation_code", 0, "wrong state");
 };
 
 // comm
-void HTTPClientState::session_stop() {
-    Serial.println("(session_stop) running...");
-    clientCommPtr->put_invalid_cyclobot_session_token();
-    wifiCommPtr->disconnect_wifi();
-    Serial.println("(session_stop) done");
+void HTTPClientState::session_stop(FiniteStateMachine *cyclobot) {
+    Serial.println(F("(session_stop) running..."));
+    cyclobot->toolsPtr->clientCommPtr->put_invalid_cyclobot_session_token();
+    cyclobot->toolsPtr->wifiCommPtr->disconnect_wifi();
+    Serial.println(F("(session_stop) done"));
 };
 
 // simm
-void HTTPClientState::run_simmulation() {
-    throw StateTransitionException("(RunSimmulation): wrong state (HTTPClientState)");
+void HTTPClientState::run_simmulation(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "HTTPClientState", "run_simmulation", 0, "wrong state");
 };
 
 // comm
-void HTTPClientState::report_simmulation_data() {
+void HTTPClientState::report_simmulation_data(FiniteStateMachine *cyclobot) {
     // This method must start (and stop) both Client and Session
-    Serial.println("(report_simmulation_data) running...");
-    wifiCommPtr->connect_wifi();
-    clientCommPtr->get_cyclobot_session_token();
-    clientCommPtr->post_cyclobot_environment_state();
-    session_stop()
-    Serial.println("(report_simmulation_data) done");
+    Serial.println(F("(report_simmulation_data) running..."));
+    cyclobot->toolsPtr->wifiCommPtr->connect_wifi(cyclobot->toolsPtr->wifiParametersPtr);
+    cyclobot->toolsPtr->clientCommPtr->get_cyclobot_session_token(cyclobot->toolsPtr->clientParametersPtr, cyclobot->toolsPtr->wifiParametersPtr, cyclobot->toolsPtr->deviceParametersPtr);
+    cyclobot->toolsPtr->clientCommPtr->post_cyclobot_environment_state();
+    session_stop(cyclobot);
+    Serial.println(F("(report_simmulation_data) done"));
 };
 
 // self
-void HTTPClientState::take_a_nap() {
-    throw StateTransitionException("(take_a_nap): wrong state (HTTPClientState)");
+void HTTPClientState::take_a_nap(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "HTTPClientState", "take_a_nap", 0, "wrong state");
 };
 
 // constructor
-void HTTPClientState::HTTPClientState(FiniteStateMachine *cyclobot) {
-    Serial.println("[HTTPClientState] Instantiated...");
+HTTPClientState::HTTPClientState() {
+    Serial.println(F("[HTTPClientState] Instantiated..."));
 };

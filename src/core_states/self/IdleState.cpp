@@ -1,84 +1,83 @@
-#include "IdleState.h"
-#include "StateTransitionException.h"
-#include "SelfDiagnosisState.h"
-#include "SelfParameters.h"
-#include "ClientComm.h"
 #include "Arduino.h"
-
+#include "../../../include/core_states/self/IdleState.h"
+#include "../../../include/Context.h"
 // used by context.changeState
-void IdleState::enter() {
+void IdleState::enter(FiniteStateMachine *cyclobot) {
     if (!cyclobot) {
-        throw StateException("(enter): cyclobot pointer is null in IdleState");
+        Serial.println(F("(enter): cyclobot pointer is null in IdleState"));
+        return; // ou transição para um estado de erro seguro
     }
     
-    Serial.println("(IdleState) Running...");
+    Serial.println(F("(IdleState) Running..."));
     // TODO: clear memory
 };
 
-void IdleState::exit() {
-    Serial.println("(exit) switching off IdleState");
+void IdleState::exit(FiniteStateMachine *cyclobot) {
+    Serial.println(F("(exit) switching off IdleState"));
 };
 
 // error
-void IdleState::report_error() {
-    throw StateTransitionException("(report_error): wrong state (IdleState)");
+void IdleState::handle_error(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "IdleState", "handle_error", 0, "wrong state");
 };
 
 // self
-void IdleState::run_health_check() {
-    throw StateTransitionException("(run_health_check): wrong state (IdleState)");
+void IdleState::run_health_check(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "IdleState", "run_health_check", 0, "wrong state");
 };
 
 // comm
-void IdleState::report_signature_request() {
-    throw StateTransitionException("(report_signature_request): wrong state (IdleState)");
+void IdleState::report_signature_request(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "IdleState", "report_signature_request", 0, "wrong state");
 };
 
-void IdleState::session_new() {
-    throw StateTransitionException("(report_signature_request): wrong state (IdleState)");
+void IdleState::session_new(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "IdleState", "session_new", 0, "wrong state");
 };
 
-void IdleState::report_config() {
-    throw StateTransitionException("(report_config): wrong state (IdleState)");
+void IdleState::report_config(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "IdleState", "report_config", 0, "wrong state");
 };
 
-void IdleState::report_health_check() {
-    throw StateTransitionException("(report_health_check): wrong state (IdleState)");
+void IdleState::report_health_check(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "IdleState", "report_health_check", 0, "wrong state");
 };
 
 // update
-void IdleState::update_config() {
-    throw StateTransitionException("(update_config): wrong state (IdleState)");
+void IdleState::update_config(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "IdleState", "update_config", 0, "wrong state");
 };
 
-void IdleState::update_simmulation_code() {
-    throw StateTransitionException("(update_firmware): wrong state (IdleState)");
+void IdleState::update_simmulation_code(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "IdleState", "update_simmulation_code", 0, "wrong state");
 };
 
 // comm
-void IdleState::session_stop() {
-    throw StateTransitionException("(session_stop): wrong state (IdleState)");
+void IdleState::session_stop(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "IdleState", "session_stop", 0, "wrong state");
 };
 
 // simm
-void IdleState::run_simmulation() {
-    throw StateTransitionException("(RunSimmulation): wrong state (IdleState)");
+void IdleState::run_simmulation(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "IdleState", "run_simmulation", 0, "wrong state");
 };
 
 // comm
-void IdleState::report_simmulation_data() {
-    throw StateTransitionException("(report_simmulation_data): wrong state (IdleState)");
+void IdleState::report_simmulation_data(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "IdleState", "report_simmulation_data", 0, "wrong state");
 };
 
 // self
-void IdleState::take_a_nap() {
-    Serial.println("(take_a_nap) running...");
-    WifiParametersPtr->scanCount = 0;
-    delay(sleepLenght)
-    Serial.println("(take_a_nap) done");
+void IdleState::take_a_nap(FiniteStateMachine *cyclobot) {
+    Serial.println(F("(take_a_nap) running..."));
+    // reset parameters
+    cyclobot->toolsPtr->wifiParametersPtr->scanCount = 0;
+    // sleep
+    delay(cyclobot->toolsPtr->deviceParametersPtr->sleepLength);
+    Serial.println(F("(take_a_nap) done"));
 };
 
 // constructor
-void IdleState::IdleState(FiniteStateMachine *cyclobot) {
-    Serial.println("[IdleState] Instantiated...");
+IdleState::IdleState() {
+    Serial.println(F("[IdleState] Instantiated"));
 };

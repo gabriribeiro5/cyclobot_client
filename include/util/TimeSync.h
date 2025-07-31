@@ -1,7 +1,7 @@
 #pragma once
-#include <Definitions.h>
+#include <RTClib.h>  // ou qual for a biblioteca usada
 
 class TimeSync {
     public:
-        int getCurrentHour();
-}
+        int get_current_hour(RTC_DS3231 rtc);
+};

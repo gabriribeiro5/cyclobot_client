@@ -1,8 +1,7 @@
 #pragma once
-#include <Definitions.h>
 
 class SoundComm {
     public:
-        void SoundBipOnce();
-        void SoundSentence();
-}
+        void sound_bip_once();
+        void sound_sentence();
+};

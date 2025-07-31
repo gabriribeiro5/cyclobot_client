@@ -1,0 +1,73 @@
+//
+// !!! WARNING !!! AUTO-GENERATED FILE!
+// PLEASE DO NOT MODIFY IT AND USE "platformio.ini":
+// https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags
+//
+{
+    "configurations": [
+        {
+            "name": "PlatformIO",
+            "includePath": [
+                "C:/Users/gabri/codes/1_Products/cyclobot/include",
+                "C:/Users/gabri/codes/1_Products/cyclobot/src",
+                "C:/Users/gabri/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
+                "C:/Users/gabri/codes/1_Products/cyclobot/.pio/libdeps/uno/ArduinoUniqueID/src",
+                "C:/Users/gabri/codes/1_Products/cyclobot/.pio/libdeps/uno/RTClib/src",
+                "C:/Users/gabri/codes/1_Products/cyclobot/.pio/libdeps/uno/Adafruit BusIO",
+                "C:/Users/gabri/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
+                "C:/Users/gabri/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
+                "C:/Users/gabri/codes/1_Products/cyclobot/.pio/libdeps/uno/WiFiEsp/src",
+                "C:/Users/gabri/codes/1_Products/cyclobot/.pio/libdeps/uno/ArduinoJson/src",
+                "C:/Users/gabri/codes/1_Products/cyclobot/.pio/libdeps/uno/Adafruit Unified Sensor",
+                "C:/Users/gabri/codes/1_Products/cyclobot/.pio/libdeps/uno/ArduinoHttpClient/src",
+                "C:/Users/gabri/.platformio/packages/framework-arduino-avr/cores/arduino",
+                "C:/Users/gabri/.platformio/packages/framework-arduino-avr/variants/standard",
+                "C:/Users/gabri/codes/1_Products/cyclobot/lib/wifi_manager",
+                "C:/Users/gabri/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
+                "C:/Users/gabri/.platformio/packages/framework-arduino-avr/libraries/HID/src",
+                ""
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "C:/Users/gabri/codes/1_Products/cyclobot/include",
+                    "C:/Users/gabri/codes/1_Products/cyclobot/src",
+                    "C:/Users/gabri/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
+                    "C:/Users/gabri/codes/1_Products/cyclobot/.pio/libdeps/uno/ArduinoUniqueID/src",
+                    "C:/Users/gabri/codes/1_Products/cyclobot/.pio/libdeps/uno/RTClib/src",
+                    "C:/Users/gabri/codes/1_Products/cyclobot/.pio/libdeps/uno/Adafruit BusIO",
+                    "C:/Users/gabri/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
+                    "C:/Users/gabri/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
+                    "C:/Users/gabri/codes/1_Products/cyclobot/.pio/libdeps/uno/WiFiEsp/src",
+                    "C:/Users/gabri/codes/1_Products/cyclobot/.pio/libdeps/uno/ArduinoJson/src",
+                    "C:/Users/gabri/codes/1_Products/cyclobot/.pio/libdeps/uno/Adafruit Unified Sensor",
+                    "C:/Users/gabri/codes/1_Products/cyclobot/.pio/libdeps/uno/ArduinoHttpClient/src",
+                    "C:/Users/gabri/.platformio/packages/framework-arduino-avr/cores/arduino",
+                    "C:/Users/gabri/.platformio/packages/framework-arduino-avr/variants/standard",
+                    "C:/Users/gabri/codes/1_Products/cyclobot/lib/wifi_manager",
+                    "C:/Users/gabri/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
+                    "C:/Users/gabri/.platformio/packages/framework-arduino-avr/libraries/HID/src",
+                    ""
+                ]
+            },
+            "defines": [
+                "PLATFORMIO=60118",
+                "ARDUINO_AVR_UNO",
+                "DEBUG",
+                "F_CPU=16000000L",
+                "ARDUINO_ARCH_AVR",
+                "ARDUINO=10808",
+                "__AVR_ATmega328P__",
+                ""
+            ],
+            "cStandard": "gnu11",
+            "cppStandard": "gnu++11",
+            "compilerPath": "C:/Users/gabri/.platformio/packages/toolchain-atmelavr/bin/avr-gcc.exe",
+            "compilerArgs": [
+                "-mmcu=atmega328p",
+                ""
+            ]
+        }
+    ],
+    "version": 4
+}

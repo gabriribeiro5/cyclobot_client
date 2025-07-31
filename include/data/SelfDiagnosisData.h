@@ -1,4 +1,6 @@
 #pragma once
+#include <ArduinoJson.h>
+#include <SPI.h>
 
 class SelfDiagnosisData {
     public:
@@ -14,8 +16,8 @@ class SelfDiagnosisData {
         bool windSystemOK = 0;                       // condição do ventilador; 1 = está funcionando
         bool lightingSystemOK = 0;                  // condição do LED; 1 = está funcionando
         bool peripheralComponentsOK = 0;               // condição geral dos componentes; 1 = componentes funcionando
-        String diagnosisDateTime = "";
+        char *diagnosisDateTime = "";
 
         StaticJsonDocument<384> selfDiagnosis_Json;
-        String selfDiagnosis_String;
-}
+        char selfDiagnosis_Char[384];
+};

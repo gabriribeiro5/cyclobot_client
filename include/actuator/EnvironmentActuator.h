@@ -16,4 +16,4 @@ class EnvironmentActuator {
 
         void trim_system_on();
         void trim_system_off();
-}
+};
