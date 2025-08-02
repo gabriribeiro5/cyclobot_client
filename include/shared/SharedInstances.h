@@ -14,10 +14,15 @@
 #include "..\config\ClientParameters.h"
 #include "..\config\EcosystemParameters.h"
 #include "..\config\PeripheralMapping.h"
+#include "..\sensor\EnvironmentScan.h"
+#include "..\actuator\EnvironmentActuator.h"
 
 class SharedInstances {
     public:
-        SharedInstances();
+    SharedInstances();
+        // -> Board Pins
+        PeripheralMapping *peripheralMappingPtr;
+
         // -> Self
         ErrorHandler *errorHandlerPtr;
         CheckMyHealth *checkMyHealthPtr;
@@ -35,8 +40,7 @@ class SharedInstances {
         WifiParameters *wifiParametersPtr;
         ClientParameters *clientParametersPtr;
         EcosystemParameters *ecosystemParametersPtr;
-        PeripheralMapping *peripheralMappingPtr;
-        
+
         // -> Data
         SelfDiagnosisData *selfDiagnosisDataPtr;
         ConfigData *configDataPtr;

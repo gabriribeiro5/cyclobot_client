@@ -25,20 +25,19 @@ BaseState *simmulationStatePtr = new SimmulationState();
 BaseState *idleStatePtr = new IdleState();
 
 // Create state machine
-SharedInstances *sharedInstancesPtr = new SharedInstances();
 FiniteStateMachine cyclobot(idleStatePtr);
 
 // Create device resources
-PeripheralMapping pins;
-RTC_DS3231 rtc;                                         // time tracking software
-SoftwareSerial esp8266(pins.wifiEspRX, pins.wifiEspTX); // software-based serial port to communicate with wifi module
+RTC_DS3231 rtc; // time tracking software
+SoftwareSerial esp8266(cyclobot.toolsPtr->peripheralMappingPtr->wifiEspRX,
+                       cyclobot.toolsPtr->peripheralMappingPtr->wifiEspTX); // software-based serial port to communicate with wifi module
 
 void setup() {
-    pinMode(pins.soilMoistureSensor, INPUT);                // Sensor de umidade do solo - porta A0 é entrada 
-    pinMode(pins.wateringSystem, INPUT);                    // Sensor de chuva - porta A1 é entrada 
-    pinMode(pins.relePort, OUTPUT);                         // Porta de controle do Relé - D4 é saída 
-    digitalWrite(pins.relePort, HIGH);                      // Mantém relé desligado  
-    Serial.begin(9600);                                     // Enable communication over the USB serial port console 9600 Bps
+    pinMode(cyclobot.toolsPtr->peripheralMappingPtr->soilMoistureSensor, INPUT);          // Sensor de umidade do solo - porta A0 é entrada 
+    pinMode(cyclobot.toolsPtr->peripheralMappingPtr->wateringSystem, INPUT);              // Sensor de chuva - porta A1 é entrada 
+    pinMode(cyclobot.toolsPtr->peripheralMappingPtr->relePort, OUTPUT);                   // Porta de controle do Relé - D4 é saída 
+    digitalWrite(cyclobot.toolsPtr->peripheralMappingPtr->relePort, HIGH);                // Mantém relé desligado  
+    Serial.begin(9600);                                                                   // Enable communication over the USB serial port console 9600 Bps
     rtc.begin();
     WiFi.init(&esp8266);
 };
