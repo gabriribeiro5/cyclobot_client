@@ -53,6 +53,19 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
   - [x] Use PROGMEM to store constant data in Flash instead of SRAM
   - [x] Compile code using UNO WiFi Rev2 - ATmega4809 (48kb)
 
+
+---
+
+### ▶️ Mega 2560 Rev3 full version (256kb)
+- [x] style(modules): remove unused files
+- [ ] Write more .cpp code based on .h files
+  - [ ] Simm feats  (state, config, sensor, data, actuator)
+  - [ ] Error feats (state, config, data)
+- [ ] Write code for memory cleanup on exit functions
+- [ ] Run code online with Mega 2560 Rev3 - ATmega2560 (256kb)
+
+---
+
 ### ▶️ UNO R3 limited version (32kb) - stateless design  
 - [ ] Code reduction to less than 32kb (yes, it hurts...)
   - [ ] Reduce states quantity
@@ -61,22 +74,13 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
   - [ ] Remove update feats
   - [ ] Remove run_health_check
   
-### ▶️ Full version (256kb)
-- [ ] Run code online with Mega 2560 Rev3 - ATmega2560 (256kb)
-
----
-
-### ▶️ Simmulation
-  - [ ] Write more .cpp code based on .h files
-    - [ ] Simm feats  (state, config, sensor, data, actuator)
-    - [ ] Error feats (state, config, data)
-  - [ ] Write code for memory cleanup on exit functions
-
 ---
 
 ### 📄 Rename project
 - [x] refactor(project name): `Cyclobot` replaces `Eco Units`
 - [x] fix(multiple files): apply method_name_pattern
+
+---
 
 ### 🧪 Lifecycle test
 - [ ] Set UNO prototype
