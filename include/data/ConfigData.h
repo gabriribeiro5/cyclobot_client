@@ -1,6 +1,5 @@
 #pragma once
 #include <ArduinoJson.h>
-#include <SPI.h>
 
 class ConfigData {
     public:

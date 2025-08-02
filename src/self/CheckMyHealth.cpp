@@ -1,6 +1,5 @@
 #include <Arduino.h>
 #include <WiFiEsp.h>
-#include <SPI.h>
 #include "../../include/self/CheckMyHealth.h"
 #include "../../include/comm/ClientComm.h"
 #include "../../include/comm/WifiComm.h"

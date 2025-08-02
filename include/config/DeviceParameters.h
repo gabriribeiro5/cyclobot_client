@@ -7,7 +7,7 @@ public:
     String cyclobotId;
     String cyclobotToken;
     bool firstAwakening = true;
-    int sleepLength = 60000 * 60; // 1h
+    const PROGMEM int sleepLength = 60000 * 60; // 1h
 
     DeviceParameters() {
         cyclobotId = getUniqueId();

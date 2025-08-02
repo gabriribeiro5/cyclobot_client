@@ -5,22 +5,22 @@ class ClientParameters {
     public:
     // use the numeric IP instead of the name for the server:
     // IP Address server(74,125,232,128);  // numeric IP for Google (no DNS)
-    IPAddress apiServer = 1234567890;    // name address for Google (using DNS)
-    uint16_t clientPort = 80;
+    const PROGMEM IPAddress apiServer = 1234567890;    // name address for Google (using DNS)
+    const PROGMEM uint16_t clientPort = 80;
     
-    int waitTimePerConnectionAttempt = 5000; // 5 segundos
+    const PROGMEM int waitTimePerConnectionAttempt = 5000; // 5 segundos
     
-    const char* msgTrace = "Hello server";
+    const PROGMEM  char* msgTrace = "Hello server";
     bool readingLines = true;
     unsigned long timoutReference; // defined at runtime
-    unsigned long responseTimeoutLimit = 3000;
+    const PROGMEM unsigned long responseTimeoutLimit = 3000;
     bool serverIsUp = false;
     char server_response_chars;
     char *server_response;
     char *server_response_line;
 
     // sizes
-    size_t signatureRequestSize = 200;
+    const PROGMEM size_t signatureRequestSize = 200;
 
     // post_signature_request
     StaticJsonDocument<200> signatureRequest_Json;

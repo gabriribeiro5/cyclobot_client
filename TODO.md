@@ -30,7 +30,7 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 
 ---
 
-### ▶️ Simmulation
+### ▶️ Code features and data
 - [ ] feat(RainforestSimm - incomplete): into new design
   - [x] Distribute single file methods across .h modules
   - [ ] Write .cpp code based on .h files
@@ -45,16 +45,29 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 
 ---
 
-### Bug fixes
+### 🔧 Bug fixes
 - [x] fix(multiple files): String becomes char*
-- [ ] fix(memory): reduce memory usage
+- [x] fix(memory): reduce memory usage
+  - [x] Remove unused libraries
   - [x] Remove string literals and use F() macro
-  - [ ] Store constant data in storage instead of memory with PROGMEM
+  - [x] Use PROGMEM to store constant data in Flash instead of SRAM
+  - [x] Compile code using UNO WiFi Rev2 - ATmega4809 (48kb)
+
+### ▶️ UNO R3 limited version (32kb) - stateless design  
+- [ ] Code reduction to less than 32kb (yes, it hurts...)
+  - [ ] Reduce states quantity
+  - [ ] Remove all states
+  - [ ] Remove errorHandling feats
+  - [ ] Remove update feats
+  - [ ] Remove run_health_check
+  
+### ▶️ Full version (256kb)
+- [ ] Run code online with Mega 2560 Rev3 - ATmega2560 (256kb)
 
 ---
 
 ### ▶️ Simmulation
-  - [ ] Write .cpp code based on .h files
+  - [ ] Write more .cpp code based on .h files
     - [ ] Simm feats  (state, config, sensor, data, actuator)
     - [ ] Error feats (state, config, data)
   - [ ] Write code for memory cleanup on exit functions
@@ -116,8 +129,8 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 ---
 
 ### 🔋 Power & Resource Management
-- [ ] Add sleep mode between readings (if battery-powered)
-- [ ] Optimize RAM usage using `PROGMEM` for constant data
+- [x] Add sleep mode between readings (if battery-powered)
+- [x] Optimize RAM usage using `PROGMEM` for constant data
 - [ ] Monitor voltage or battery levels (if applicable)
 
 ---

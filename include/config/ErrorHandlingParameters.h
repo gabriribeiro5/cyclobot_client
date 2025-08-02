@@ -1,6 +1,5 @@
 #pragma once
 #include <SoftwareSerial.h>
-#include <SPI.h>
 
 class ErrorHandlingParameters {
     public:

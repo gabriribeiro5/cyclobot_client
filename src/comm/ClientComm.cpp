@@ -3,7 +3,6 @@
 #include "Arduino.h"
 #include <ArduinoJson.h>
 #include <WiFiEsp.h>
-#include <SPI.h>
 #include "../../include/comm/ClientComm.h"
 #include "../../include/config/ClientParameters.h"
 #include "../../include/config/WifiParameters.h"
