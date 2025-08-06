@@ -11,12 +11,14 @@
 #include "../../../sensor/EnvironmentScan.h"
 #include "../../../actuator/EnvironmentActuator.h"
 
+class SimStrategy;
+
 class BaseStrategy {
     public:
         virtual ~BaseStrategy();
         virtual void pin_map();
-        virtual void read_environment_data(EcosystemParameters *param);
-        virtual void simulate_environment(EcosystemParameters *param);
+        virtual void read_environment_data(EcosystemParameters *ecosystemParametersPtr, EnvironmentScan *environmentScanPtr, EnvironmentActuator *environmentActuatorPtr);
+        virtual void simulate_environment(EcosystemParameters *ecosystemParametersPtr, EnvironmentScan *environmentScanPtr, EnvironmentActuator *environmentActuatorPtr);
         
         // used by strategyContext.changeStrategy
         virtual void enter(SimStrategy *strategy);

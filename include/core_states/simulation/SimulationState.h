@@ -1,6 +1,6 @@
 #pragma once
-#include "..\BaseState.h"
-#include "..\..\Context.h"
+#include "../BaseState.h"
+#include "../../Context.h"
 class FiniteStateMachine; // Forward declaration
 
 class SimulationState : public BaseState {

@@ -1,7 +1,5 @@
 #include "Arduino.h"
 #include "../../../include/core_states/simulation/SimulationState.h"
-#include "../../../include/util/StateTransitionException.h"
-#include "../../../include/shared/SharedInstances.h"
 #include "../../../include/Context.h"
 
 // used by context.changeState
@@ -61,10 +59,7 @@ void SimulationState::session_stop(FiniteStateMachine *cyclobot) {
 
 // sim
 void SimulationState::run_simulation(FiniteStateMachine *cyclobot) {
-    Serial.println(F("(run_simulation) running..."));
-    /* ********* READ ENVIRONMENT (SAVE PARAMS) ********* */
-    cyclobot->toolsPtr->environmentScanPtr->read_all_inputs(cyclobot->toolsPtr->ecosystemParametersPtr, cyclobot->toolsPtr->peripheralMappingPtr);
-    
+    Serial.println(F("(run_simulation) running..."));    
     /* ********* START ACTUATORS (USE TIMEOUTS) ********* */
     // LATCHING RELAY COMMAND OUTPUTS WITH DRIVERS
     // --> Fan system

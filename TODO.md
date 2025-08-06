@@ -60,13 +60,14 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 
 ### ▶️ Mega 2560 Rev3 full version (256kb)
 - [x] style(modules): remove unused files
-- [ ] feat (Simulation): finally! (incomplete)
+- [ ] feat (Simulation): finally!
   - [x] State
   - [x] Config params
   - [x] Data
   - [x] Sensor (macro scope)
   - [x] Actuator (macro scope)
-  - [x] Simulation strategies (macro scope) (incomplete)
+  - [xxx] Simulation strategies (macro scope)
+  - [ ] Change 'EcosystemParameters' to 'SimulationStrategyParameters'
   - [ ] Simulation strategy (one detailed)
 - [ ] feat(failure handler):
   - [ ] State
