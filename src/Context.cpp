@@ -8,10 +8,10 @@ FiniteStateMachine::FiniteStateMachine(BaseState *initialStatePtr) {
     currentStatePtr = initialStatePtr;
 }
 
-void FiniteStateMachine::change_state(BaseState *newState) {
+void FiniteStateMachine::change_state(BaseState *newStatePtr) {
     // get milliseconds + log start
     currentStatePtr->exit(this);
-    currentStatePtr = newState;
+    currentStatePtr = newStatePtr;
     currentStatePtr->enter(this); // complete this line
     // log end + execution time
 }
@@ -58,9 +58,9 @@ void FiniteStateMachine::update_config() {
     // log end + execution time
 }
 
-void FiniteStateMachine::update_simmulation_code() {
+void FiniteStateMachine::update_simulation_code() {
     // get milliseconds + log start
-    currentStatePtr->update_simmulation_code(this);
+    currentStatePtr->update_simulation_code(this);
     // log end + execution time
 }
 
@@ -70,15 +70,15 @@ void FiniteStateMachine::session_stop() {
     // log end + execution time
 }
 
-void FiniteStateMachine::run_simmulation() {
+void FiniteStateMachine::run_simulation() {
     // get milliseconds + log start
-    currentStatePtr->run_simmulation(this);
+    currentStatePtr->run_simulation(this);
     // log end + execution time
 }
 
-void FiniteStateMachine::report_simmulation_data() {
+void FiniteStateMachine::report_simulation_data() {
     // get milliseconds + log start
-    currentStatePtr->report_simmulation_data(this);
+    currentStatePtr->report_simulation_data(this);
     // log end + execution time
 }
 

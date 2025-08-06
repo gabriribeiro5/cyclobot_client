@@ -1,6 +1,5 @@
 #pragma once
-// For ATmega4809
-#if defined(__AVR_ATmega4809__)
+#if defined(__AVR_ATmega4809__) // Arduino WiFi Rev2
   #include <stdint.h>
   #include <string.h>
   #define USE_MEGAAVR_ID

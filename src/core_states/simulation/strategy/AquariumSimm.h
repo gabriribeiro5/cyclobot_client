@@ -1,6 +1,6 @@
 #pragma once
-#include "../../../include/core_states/simm/BaseSimulation.h"
-#include "../../../include/Context.h"
+#include "../../../../include/core_states/simulation/BaseSimulation.h"
+#include "../../../../include/Context.h"
 
 class RainforestSimulation : public BaseSimulation{
     public:

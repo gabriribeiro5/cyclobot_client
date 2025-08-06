@@ -14,6 +14,8 @@
 #include "..\..\include\config\ClientParameters.h"
 #include "..\..\include\config\EcosystemParameters.h"
 #include "..\..\include\config\PeripheralMapping.h"
+#include "..\..\include\sensor\EnvironmentScan.h"
+#include "..\..\include\actuator\EnvironmentActuator.h"
 
 SharedInstances::SharedInstances() {
     // -> Self
@@ -26,6 +28,12 @@ SharedInstances::SharedInstances() {
     buttonCommPtr = new ButtonComm();
     soundCommPtr = new SoundComm();
     visualCommPtr = new VisualComm();
+
+    // -> Sensors
+    environmentScanPtr = new EnvironmentScan();
+
+    // -> Actuators
+    environmentActuatorPtr = new EnvironmentActuator();
 
     // -> Parameters
     deviceParametersPtr = new DeviceParameters();

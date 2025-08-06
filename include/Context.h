@@ -14,7 +14,7 @@ class FiniteStateMachine {
         int stateFlow = 0; // Flow stablished at the Client module and updated by States to comply client rules
     
         FiniteStateMachine(BaseState *initialStatePtr); // Constructor
-        void change_state(BaseState *newState);
+        void change_state(BaseState *newStatePtr);
         void update_current_time();
         
         // error
@@ -30,17 +30,17 @@ class FiniteStateMachine {
         void report_health_check();
         
         // update
-        void update_simmulation_code();
+        void update_simulation_code();
         void update_config();
         
         // comm
         void session_stop();
 
-        // simm
-        void run_simmulation();
+        // sim
+        void run_simulation();
         
         // comm
-        void report_simmulation_data();
+        void report_simulation_data();
         
         // self
         void take_a_nap();

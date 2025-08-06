@@ -9,7 +9,7 @@
 #include "include\core_states\comm\HTTPClientState.h"
 #include "include\core_states\update\ConfigUpdateState.h"
 #include "include\core_states\update\CodeUpdateState.h"
-#include "include\core_states\simm\SimmulationState.h"
+#include "include\core_states\simulation\SimulationState.h"
 #include "include\config\PeripheralMapping.h"
 #include "include\shared\SharedInstances.h"
 #include "include\Context.h"
@@ -21,7 +21,7 @@ BaseState *selfDiagnosisStatePtr = new SelfDiagnosisState();
 BaseState *communicationStatePtr = new HTTPClientState();
 BaseState *configUpdateStatePtr = new ConfigUpdateState();
 BaseState *codeUpdateStatePtr = new CodeUpdateState();
-BaseState *simmulationStatePtr = new SimmulationState();
+BaseState *simulationStatePtr = new SimulationState();
 BaseState *idleStatePtr = new IdleState();
 
 // Create state machine
@@ -61,18 +61,18 @@ void loop() {
             break;
         case 3: // Code update
             cyclobot.change_state(codeUpdateStatePtr);
-            cyclobot.update_simmulation_code();
+            cyclobot.update_simulation_code();
             break;
         case 4: // Comm
             cyclobot.change_state(communicationStatePtr);
             cyclobot.session_stop(); // stop session and client
             break;
-        case 5: // Simmulation
-            cyclobot.change_state(simmulationStatePtr);
-            cyclobot.run_simmulation();
+        case 5: // Simulation
+            cyclobot.change_state(simulationStatePtr);
+            cyclobot.run_simulation();
         case 6: // Comm
             cyclobot.change_state(communicationStatePtr);
-            cyclobot.report_simmulation_data();
+            cyclobot.report_simulation_data();
             break;
         case 7: // Self
             cyclobot.change_state(idleStatePtr);

@@ -33,16 +33,16 @@ public:
     
     // update
     virtual void update_config(FiniteStateMachine *cyclobot);
-    virtual void update_simmulation_code(FiniteStateMachine *cyclobot);
+    virtual void update_simulation_code(FiniteStateMachine *cyclobot);
     
     // comm
     virtual void session_stop(FiniteStateMachine *cyclobot);
     
-    // simm
-    virtual void run_simmulation(FiniteStateMachine *cyclobot);
+    // sim
+    virtual void run_simulation(FiniteStateMachine *cyclobot);
     
     // comm
-    virtual void report_simmulation_data(FiniteStateMachine *cyclobot);
+    virtual void report_simulation_data(FiniteStateMachine *cyclobot);
     
     // self
     virtual void take_a_nap(FiniteStateMachine *cyclobot);

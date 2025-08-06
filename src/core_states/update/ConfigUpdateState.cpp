@@ -57,9 +57,9 @@ void ConfigUpdateState::update_config(FiniteStateMachine *cyclobot) {
     Serial.println(F("(update_config): done"));
 };
 
-void ConfigUpdateState::update_simmulation_code(FiniteStateMachine *cyclobot) {
-    Serial.println(F("(update_simmulation_code): running..."));
-    Serial.println(F("(update_simmulation_code): done"));
+void ConfigUpdateState::update_simulation_code(FiniteStateMachine *cyclobot) {
+    Serial.println(F("(update_simulation_code): running..."));
+    Serial.println(F("(update_simulation_code): done"));
 };
 
 // comm
@@ -67,14 +67,14 @@ void ConfigUpdateState::session_stop(FiniteStateMachine *cyclobot) {
     cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "ConfigUpdateState", "session_stop", 0, "wrong state");
 };
 
-// simm
-void ConfigUpdateState::run_simmulation(FiniteStateMachine *cyclobot) {
-    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "ConfigUpdateState", "run_simmulation", 0, "wrong state");
+// sim
+void ConfigUpdateState::run_simulation(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "ConfigUpdateState", "run_simulation", 0, "wrong state");
 };
 
 // comm
-void ConfigUpdateState::report_simmulation_data(FiniteStateMachine *cyclobot) {
-    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "ConfigUpdateState", "report_simmulation_data", 0, "wrong state");
+void ConfigUpdateState::report_simulation_data(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "ConfigUpdateState", "report_simulation_data", 0, "wrong state");
 };
 
 // self

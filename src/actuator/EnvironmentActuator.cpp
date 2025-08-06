@@ -1,41 +1,31 @@
-#include "../../include/actuator/EnvironmentActuator.h"
+#include "..\..\include\actuator\EnvironmentActuator.h"
+#include "..\..\include\config\EcosystemParameters.h"
+#include "..\..\include\config\PeripheralMapping.h"
 
-void EnvironmentActuator::water_system_on() {
+void EnvironmentActuator::increase_water_nutrients(EcosystemParameters *ecosystemParametersPtr, PeripheralMapping *peripheralMappingPtr) {
     return;
-};
+}
 
-void EnvironmentActuator::water_system_off() {
+void EnvironmentActuator::dilute_water_nutrients(EcosystemParameters *ecosystemParametersPtr, PeripheralMapping *peripheralMappingPtr) {
     return;
-};
+}
 
-void EnvironmentActuator::light_system_on() {
+void EnvironmentActuator::fan_system_on(EcosystemParameters *ecosystemParametersPtr, PeripheralMapping *peripheralMappingPtr) {
     return;
-};
+}
 
-void EnvironmentActuator::light_system_off() {
+void EnvironmentActuator::fan_system_off(EcosystemParameters *ecosystemParametersPtr, PeripheralMapping *peripheralMappingPtr) {
     return;
-};
+}
 
-void EnvironmentActuator::fan_system_on() {
+void EnvironmentActuator::irrigation_system_on(EcosystemParameters *ecosystemParametersPtr, PeripheralMapping *peripheralMappingPtr) {
     return;
-};
+}
 
-void EnvironmentActuator::fan_system_off() {
+void EnvironmentActuator::irrigation_system_off(EcosystemParameters *ecosystemParametersPtr, PeripheralMapping *peripheralMappingPtr) {
     return;
-};
+}
 
-void EnvironmentActuator::heat_system_on() {
+void EnvironmentActuator::trim_system_on(EcosystemParameters *ecosystemParametersPtr, PeripheralMapping *peripheralMappingPtr) {
     return;
-};
-
-void EnvironmentActuator::heat_system_off() {
-    return;
-};
-
-void EnvironmentActuator::trim_system_on() {
-    return;
-};
-
-void EnvironmentActuator::trim_system_off() {
-    return;
-};
+}

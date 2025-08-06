@@ -34,6 +34,12 @@ class SharedInstances {
         SoundComm *soundCommPtr;
         VisualComm *visualCommPtr;
 
+        // -> Sensors
+        EnvironmentScan *environmentScanPtr;
+
+        // -> Actuators
+        EnvironmentActuator *environmentActuatorPtr;
+
         // -> Parameters
         DeviceParameters *deviceParametersPtr;
         ErrorHandlingParameters *errorHandlingParametersPtr;

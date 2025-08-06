@@ -48,8 +48,8 @@ void ErrorHandlingState::update_config(FiniteStateMachine *cyclobot) {
     cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "ErrorHandlingState", "update_config", 0, "wrong state");
 };
 
-void ErrorHandlingState::update_simmulation_code(FiniteStateMachine *cyclobot) {
-    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "ErrorHandlingState", "update_simmulation_code", 0, "wrong state");
+void ErrorHandlingState::update_simulation_code(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "ErrorHandlingState", "update_simulation_code", 0, "wrong state");
 };
 
 // comm
@@ -57,14 +57,14 @@ void ErrorHandlingState::session_stop(FiniteStateMachine *cyclobot) {
     cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "ErrorHandlingState", "session_stop", 0, "wrong state");
 };
 
-// simm
-void ErrorHandlingState::run_simmulation(FiniteStateMachine *cyclobot) {
-    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "ErrorHandlingState", "run_simmulation", 0, "wrong state");
+// sim
+void ErrorHandlingState::run_simulation(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "ErrorHandlingState", "run_simulation", 0, "wrong state");
 };
 
 // comm
-void ErrorHandlingState::report_simmulation_data(FiniteStateMachine *cyclobot) {
-    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "ErrorHandlingState", "report_simmulation_data", 0, "wrong state");
+void ErrorHandlingState::report_simulation_data(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "ErrorHandlingState", "report_simulation_data", 0, "wrong state");
 };
 
 // self

@@ -75,8 +75,8 @@ void HTTPClientState::update_config(FiniteStateMachine *cyclobot) {
     cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "HTTPClientState", "update_config", 0, "wrong state");
 };
 
-void HTTPClientState::update_simmulation_code(FiniteStateMachine *cyclobot) {
-    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "HTTPClientState", "update_simmulation_code", 0, "wrong state");
+void HTTPClientState::update_simulation_code(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "HTTPClientState", "update_simulation_code", 0, "wrong state");
 };
 
 // comm
@@ -87,20 +87,20 @@ void HTTPClientState::session_stop(FiniteStateMachine *cyclobot) {
     Serial.println(F("(session_stop) done"));
 };
 
-// simm
-void HTTPClientState::run_simmulation(FiniteStateMachine *cyclobot) {
-    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "HTTPClientState", "run_simmulation", 0, "wrong state");
+// sim
+void HTTPClientState::run_simulation(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "HTTPClientState", "run_simulation", 0, "wrong state");
 };
 
 // comm
-void HTTPClientState::report_simmulation_data(FiniteStateMachine *cyclobot) {
+void HTTPClientState::report_simulation_data(FiniteStateMachine *cyclobot) {
     // This method must start (and stop) both Client and Session
-    Serial.println(F("(report_simmulation_data) running..."));
+    Serial.println(F("(report_simulation_data) running..."));
     cyclobot->toolsPtr->wifiCommPtr->connect_wifi(cyclobot->toolsPtr->wifiParametersPtr);
     cyclobot->toolsPtr->clientCommPtr->get_cyclobot_session_token(cyclobot->toolsPtr->clientParametersPtr, cyclobot->toolsPtr->wifiParametersPtr, cyclobot->toolsPtr->deviceParametersPtr);
     cyclobot->toolsPtr->clientCommPtr->post_cyclobot_environment_state();
     session_stop(cyclobot);
-    Serial.println(F("(report_simmulation_data) done"));
+    Serial.println(F("(report_simulation_data) done"));
 };
 
 // self

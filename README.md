@@ -21,7 +21,7 @@ An scalable arduino sketch designed to keep closed and small ecosystems alive.
 1. Health Check
 3. Send diagnostics
 4. Verify and run updates
-5. Simmulation
+5. Simulation
 6. Send sensors data
 7. Sleep
 *Error state may be raised by any other state

@@ -48,8 +48,8 @@ void IdleState::update_config(FiniteStateMachine *cyclobot) {
     cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "IdleState", "update_config", 0, "wrong state");
 };
 
-void IdleState::update_simmulation_code(FiniteStateMachine *cyclobot) {
-    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "IdleState", "update_simmulation_code", 0, "wrong state");
+void IdleState::update_simulation_code(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "IdleState", "update_simulation_code", 0, "wrong state");
 };
 
 // comm
@@ -57,14 +57,14 @@ void IdleState::session_stop(FiniteStateMachine *cyclobot) {
     cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "IdleState", "session_stop", 0, "wrong state");
 };
 
-// simm
-void IdleState::run_simmulation(FiniteStateMachine *cyclobot) {
-    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "IdleState", "run_simmulation", 0, "wrong state");
+// sim
+void IdleState::run_simulation(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "IdleState", "run_simulation", 0, "wrong state");
 };
 
 // comm
-void IdleState::report_simmulation_data(FiniteStateMachine *cyclobot) {
-    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "IdleState", "report_simmulation_data", 0, "wrong state");
+void IdleState::report_simulation_data(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "IdleState", "report_simulation_data", 0, "wrong state");
 };
 
 // self

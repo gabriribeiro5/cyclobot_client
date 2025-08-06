@@ -51,13 +51,13 @@ void CodeUpdateState::update_config(FiniteStateMachine *cyclobot) {
     Serial.println(F("(update_config) done"));
 };
 
-void CodeUpdateState::update_simmulation_code(FiniteStateMachine *cyclobot) {
-    Serial.println(F("(update_simmulation_code) running..."));
+void CodeUpdateState::update_simulation_code(FiniteStateMachine *cyclobot) {
+    Serial.println(F("(update_simulation_code) running..."));
     // Ask server if update is required
     // Run paralel code
     // Get code hash
     // Update code
-    Serial.println(F("(update_simmulation_code) done"));
+    Serial.println(F("(update_simulation_code) done"));
 };
 
 // comm
@@ -65,14 +65,14 @@ void CodeUpdateState::session_stop(FiniteStateMachine *cyclobot) {
     cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "CodeUpdateState", "session_stop", 0, "wrong state");
 };
 
-// simm
-void CodeUpdateState::run_simmulation(FiniteStateMachine *cyclobot) {
-    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "CodeUpdateState", "run_simmulation", 0, "wrong state");
+// sim
+void CodeUpdateState::run_simulation(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "CodeUpdateState", "run_simulation", 0, "wrong state");
 };
 
 // comm
-void CodeUpdateState::report_simmulation_data(FiniteStateMachine *cyclobot) {
-    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "CodeUpdateState", "report_simmulation_data", 0, "wrong state");
+void CodeUpdateState::report_simulation_data(FiniteStateMachine *cyclobot) {
+    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "CodeUpdateState", "report_simulation_data", 0, "wrong state");
 };
 
 // self

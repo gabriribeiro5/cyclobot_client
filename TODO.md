@@ -23,7 +23,7 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
   - [x] Create a working model for State Design
   - [x] Match the model with actual file structure
   - [x] Write lifecycle
-  - [x] Create timestamp (simm 24h)
+  - [x] Create timestamp (sim 24h)
   - [x] Implement Cyclobot context into the model
   - [x] Re-write lifecycle (time is validated on each state | stateflow represents the user interface's logic)
   - [x] Update Concrete States
@@ -31,7 +31,7 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 ---
 
 ### ▶️ Code features and data
-- [ ] feat(RainforestSimm - incomplete): into new design
+- [ ] feat(RainforestSimulation - incomplete): into new design
   - [x] Distribute single file methods across .h modules
   - [ ] Write .cpp code based on .h files
     - [x] Cyclobot's base cycle
@@ -52,15 +52,28 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
   - [x] Remove string literals and use F() macro
   - [x] Use PROGMEM to store constant data in Flash instead of SRAM
   - [x] Compile code using UNO WiFi Rev2 - ATmega4809 (48kb)
+- [x] fix(warning): library ArduinoUniqueID may be incompatible with your current board which runs on megaavr architecture(s).
+  - [x] Add support for both ArduinoUniqueID and megaavr with conditional compilation using architecture macros
 
 
 ---
 
 ### ▶️ Mega 2560 Rev3 full version (256kb)
 - [x] style(modules): remove unused files
-- [ ] Write more .cpp code based on .h files
-  - [ ] Simm feats  (state, config, sensor, data, actuator)
-  - [ ] Error feats (state, config, data)
+- [ ] feat (Simulation): finally! (incomplete)
+  - [x] State
+  - [x] Config params
+  - [x] Data
+  - [x] Sensor (macro scope)
+  - [x] Actuator (macro scope)
+  - [x] Simulation strategies (macro scope) (incomplete)
+  - [ ] Simulation strategy (one detailed)
+- [ ] feat(failure handler):
+  - [ ] State
+  - [ ] Config
+  - [ ] Data
+  - [ ] Failure handler strategies (macro scope)
+  - [ ] Failure handler strategies (one detailed)
 - [ ] Write code for memory cleanup on exit functions
 - [ ] Run code online with Mega 2560 Rev3 - ATmega2560 (256kb)
 
@@ -75,6 +88,13 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
   - [ ] Remove run_health_check
   
 ---
+
+### 🧠 Design Enhancements
+- [ ] style(sharedInstances): categorize pointers
+  - [ ] Create shared/group
+  - [ ] Create category classes (Self, Comm, Simulation, Actuator...) inside shared/group
+  - [ ] Move pointers from SharedInstances to their categry classes
+  - [ ] Inside the empty SharedInstances create pointers to category classes
 
 ### 📄 Rename project
 - [x] refactor(project name): `Cyclobot` replaces `Eco Units`
@@ -116,7 +136,7 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 
 ---
 
-### ⚙️ Simmulation States
+### ⚙️ Simulation States
 - [ ] Improve rainforest simulation:
   - [ ] Add methods for enhanced logic and user interaction.
   - [ ] Integrate communication features.

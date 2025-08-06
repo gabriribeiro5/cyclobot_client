@@ -3,7 +3,7 @@
 #include "..\..\Context.h"
 class FiniteStateMachine; // Forward declaration
 
-class SimmulationState : public BaseState {
+class SimulationState : public BaseState {
 public:
     // used by context.changeState
     void enter(FiniteStateMachine *cyclobot) override;
@@ -23,20 +23,20 @@ public:
 
     // update
     void update_config(FiniteStateMachine *cyclobot) override;
-    void update_simmulation_code(FiniteStateMachine *cyclobot) override;
+    void update_simulation_code(FiniteStateMachine *cyclobot) override;
     
     // comm
     void session_stop(FiniteStateMachine *cyclobot) override;
     
-    // simm
-    void run_simmulation(FiniteStateMachine *cyclobot) override;
+    // sim
+    void run_simulation(FiniteStateMachine *cyclobot) override;
     
     // comm
-    void report_simmulation_data(FiniteStateMachine *cyclobot) override;
+    void report_simulation_data(FiniteStateMachine *cyclobot) override;
     
     // self
     void take_a_nap(FiniteStateMachine *cyclobot) override;
 
     // constructor
-    SimmulationState();
+    SimulationState();
 };
