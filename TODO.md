@@ -67,8 +67,8 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
   - [x] Sensor (macro scope)
   - [x] Actuator (macro scope)
   - [xxx] Simulation strategies (macro scope)
-  - [ ] Change 'EcosystemParameters' to 'SimulationStrategyParameters'
-  - [ ] Simulation strategy (one detailed)
+  - [x] feat(shared strategies): Detail shared instances (tools and strategies)
+  - [ ] feat(Simulation strategy): TraditionalGarden_Water (detailed)
 - [ ] feat(failure handler):
   - [ ] State
   - [ ] Config
@@ -94,8 +94,8 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 - [ ] style(sharedInstances): categorize pointers
   - [ ] Create shared/group
   - [ ] Create category classes (Self, Comm, Simulation, Actuator...) inside shared/group
-  - [ ] Move pointers from SharedInstances to their categry classes
-  - [ ] Inside the empty SharedInstances create pointers to category classes
+  - [ ] Move pointers from CyclobotInstances to their categry classes
+  - [ ] Inside the empty CyclobotInstances create pointers to category classes
 
 ### 📄 Rename project
 - [x] refactor(project name): `Cyclobot` replaces `Eco Units`

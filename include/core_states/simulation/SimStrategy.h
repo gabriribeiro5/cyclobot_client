@@ -14,6 +14,8 @@ class SimStrategy {
     public:
         SimStrategy(BaseStrategy *initialStrategyPtr);
         void change_strategy(BaseStrategy *newStrategyPtr);
+        void pin_map();
+        void read_environment_data(EcosystemParameters *ecosystemParametersPtr, EnvironmentScan *environmentScanPtr, EnvironmentActuator *environmentActuatorPtr);
         void simulate_environment(EcosystemParameters *ecosystemParametersPtr, EnvironmentScan *environmentScanPtr, EnvironmentActuator *environmentActuatorPtr);
     private:
         BaseStrategy *currentStrategyPtr;

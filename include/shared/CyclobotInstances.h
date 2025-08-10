@@ -17,9 +17,9 @@
 #include "..\sensor\EnvironmentScan.h"
 #include "..\actuator\EnvironmentActuator.h"
 
-class SharedInstances {
+class CyclobotInstances {
     public:
-    SharedInstances();
+        CyclobotInstances();
         // -> Board Pins
         PeripheralMapping *peripheralMappingPtr;
 

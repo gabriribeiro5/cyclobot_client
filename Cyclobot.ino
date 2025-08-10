@@ -11,7 +11,7 @@
 #include "include\core_states\update\CodeUpdateState.h"
 #include "include\core_states\simulation\SimulationState.h"
 #include "include\config\PeripheralMapping.h"
-#include "include\shared\SharedInstances.h"
+#include "include\shared\CyclobotInstances.h"
 #include "include\Context.h"
 
 
@@ -29,14 +29,14 @@ FiniteStateMachine cyclobot(idleStatePtr);
 
 // Create device resources
 RTC_DS3231 rtc; // time tracking software
-SoftwareSerial esp8266(cyclobot.toolsPtr->peripheralMappingPtr->wifiEspRX,
-                       cyclobot.toolsPtr->peripheralMappingPtr->wifiEspTX); // software-based serial port to communicate with wifi module
+SoftwareSerial esp8266(cyclobot.paramPtr->peripheralMappingPtr->wifiEspRX,
+                       cyclobot.paramPtr->peripheralMappingPtr->wifiEspTX); // software-based serial port to communicate with wifi module
 
 void setup() {
-    pinMode(cyclobot.toolsPtr->peripheralMappingPtr->soilMoistureSensor, INPUT);          // Sensor de umidade do solo - porta A0 é entrada 
-    pinMode(cyclobot.toolsPtr->peripheralMappingPtr->wateringSystem, INPUT);              // Sensor de chuva - porta A1 é entrada 
-    pinMode(cyclobot.toolsPtr->peripheralMappingPtr->relePort, OUTPUT);                   // Porta de controle do Relé - D4 é saída 
-    digitalWrite(cyclobot.toolsPtr->peripheralMappingPtr->relePort, HIGH);                // Mantém relé desligado  
+    pinMode(cyclobot.paramPtr->peripheralMappingPtr->soilMoistureSensor, INPUT);          // Sensor de umidade do solo - porta A0 é entrada 
+    pinMode(cyclobot.paramPtr->peripheralMappingPtr->wateringSystem, INPUT);              // Sensor de chuva - porta A1 é entrada 
+    pinMode(cyclobot.paramPtr->peripheralMappingPtr->relePort, OUTPUT);                   // Porta de controle do Relé - D4 é saída 
+    digitalWrite(cyclobot.paramPtr->peripheralMappingPtr->relePort, HIGH);                // Mantém relé desligado  
     Serial.begin(9600);                                                                   // Enable communication over the USB serial port console 9600 Bps
     rtc.begin();
     WiFi.init(&esp8266);

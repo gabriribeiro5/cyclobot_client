@@ -1,7 +1,6 @@
 #pragma once
 #include "..\BaseState.h"
 #include "..\..\Context.h"
-#include "..\..\shared\SharedInstances.h"
 class FiniteStateMachine; // Forward declaration
 
 class CodeUpdateState : public BaseState {

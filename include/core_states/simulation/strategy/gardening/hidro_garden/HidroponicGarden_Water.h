@@ -8,7 +8,7 @@
 class HidroponicGarden_Water : public BaseStrategy {
     public:
         HidroponicGarden_Water();
-        void pin_map();
+        void pin_map() override;
         void read_environment_data(EcosystemParameters *ecosystemParametersPtr, EnvironmentScan *environmentScanPtr, EnvironmentActuator *environmentActuatorPtr) override;
         void simulate_environment(EcosystemParameters *ecosystemParametersPtr, EnvironmentScan *environmentScanPtr, EnvironmentActuator *environmentActuatorPtr) override;
         

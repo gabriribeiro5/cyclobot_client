@@ -4,12 +4,12 @@
 
 class EnvironmentActuator {
     public:
-        void increase_water_nutrients(EcosystemParameters *ecosystemParametersPtr, PeripheralMapping *peripheralMappingPtr);
-        void dilute_water_nutrients(EcosystemParameters *ecosystemParametersPtr, PeripheralMapping *peripheralMappingPtr);
-        void fan_system_on(EcosystemParameters *ecosystemParametersPtr, PeripheralMapping *peripheralMappingPtr);
-        void fan_system_off(EcosystemParameters *ecosystemParametersPtr, PeripheralMapping *peripheralMappingPtr);
-        void irrigation_system_on(EcosystemParameters *ecosystemParametersPtr, PeripheralMapping *peripheralMappingPtr);
-        void irrigation_system_off(EcosystemParameters *ecosystemParametersPtr, PeripheralMapping *peripheralMappingPtr);
-        void trim_system_on(EcosystemParameters *ecosystemParametersPtr, PeripheralMapping *peripheralMappingPtr);
-        void trim_system_off(EcosystemParameters *ecosystemParametersPtr, PeripheralMapping *peripheralMappingPtr);
+        void increase_water_nutrients(EcosystemParameters *ecosystemParametersPtr);
+        void dilute_water_nutrients(EcosystemParameters *ecosystemParametersPtr);
+        void fan_system_on(EcosystemParameters *ecosystemParametersPtr);
+        void fan_system_off(EcosystemParameters *ecosystemParametersPtr);
+        void irrigation_system_on(EcosystemParameters *ecosystemParametersPtr);
+        void irrigation_system_off(EcosystemParameters *ecosystemParametersPtr);
+        void trim_system_on(EcosystemParameters *ecosystemParametersPtr);
+        void trim_system_off(EcosystemParameters *ecosystemParametersPtr);
 };

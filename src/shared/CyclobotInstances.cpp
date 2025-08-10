@@ -1,4 +1,4 @@
-#include "..\..\include\shared\SharedInstances.h"
+#include "..\..\include\shared\CyclobotInstances.h"
 #include "..\..\include\self\ErrorHandler.h"
 #include "..\..\include\self\CheckMyHealth.h"
 #include "..\..\include\comm\WifiComm.h"
@@ -17,7 +17,7 @@
 #include "..\..\include\sensor\EnvironmentScan.h"
 #include "..\..\include\actuator\EnvironmentActuator.h"
 
-SharedInstances::SharedInstances() {
+CyclobotInstances::CyclobotInstances() {
     // -> Self
     checkMyHealthPtr = new CheckMyHealth();
     errorHandlerPtr = new ErrorHandler();

@@ -1,4 +1,4 @@
-#include "../../include/shared/SharedInstances.h"
+#include "../../include/shared/CyclobotInstances.h"
 #include "../../include/comm/VisualComm.h"
 
 void VisualComm::show_sentence(char sentence) {

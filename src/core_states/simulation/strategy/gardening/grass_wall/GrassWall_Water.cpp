@@ -6,7 +6,7 @@
 class GrassWall_Water : public BaseStrategy {
     public:
         GrassWall_Water();
-        void pin_map();
+        void pin_map() override;
         void read_environment_data(EcosystemParameters *ecosystemParametersPtr, EnvironmentScan *environmentScanPtr, EnvironmentActuator *environmentActuatorPtr) override;
         void simulate_environment(EcosystemParameters *ecosystemParametersPtr, EnvironmentScan *environmentScanPtr, EnvironmentActuator *environmentActuatorPtr) override;
         

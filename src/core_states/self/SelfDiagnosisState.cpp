@@ -18,84 +18,84 @@ void SelfDiagnosisState::enter(FiniteStateMachine *cyclobot) {
 };
 
 void SelfDiagnosisState::exit(FiniteStateMachine *cyclobot) {
-    cyclobot->toolsPtr->checkMyHealthPtr->clear_runtime_data();
+    cyclobot->selfPtr->checkMyHealthPtr->clear_runtime_data();
     Serial.println(F("(exit) switching off SelfDiagnosisState"));
 };
 
 // error
 void SelfDiagnosisState::handle_error(FiniteStateMachine *cyclobot) {
-    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "SelfDiagnosisState", "handle_error", 0, "wrong state");
+    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, "SelfDiagnosisState", "handle_error", 0, "wrong state");
 };
 
 // self
 void SelfDiagnosisState::run_health_check(FiniteStateMachine *cyclobot) {
     Serial.println(F("(run_health_check) Running..."));
-    cyclobot->toolsPtr->selfDiagnosisDataPtr->diagnosisDateTime = ""; // TODO: apply current date and time
+    cyclobot->dataPtr->selfDiagnosisDataPtr->diagnosisDateTime = ""; // TODO: apply current date and time
     // *** SENSORS ***
     
     // Wifi sensor
-    if (cyclobot->toolsPtr->checkMyHealthPtr->wifi_shield_is_on(cyclobot->toolsPtr->wifiParametersPtr)) { // check for the presence of the shield
-        cyclobot->toolsPtr->checkMyHealthPtr->check_wifi_firmware_version(cyclobot->toolsPtr->wifiParametersPtr, cyclobot->toolsPtr->selfDiagnosisDataPtr);
-        cyclobot->toolsPtr->checkMyHealthPtr->check_wifi_connection(cyclobot->toolsPtr->wifiCommPtr, cyclobot->toolsPtr->wifiParametersPtr, cyclobot->toolsPtr->selfDiagnosisDataPtr);
-        cyclobot->toolsPtr->checkMyHealthPtr->check_client_communication(cyclobot->toolsPtr->clientCommPtr,
-                                                                         cyclobot->toolsPtr->wifiParametersPtr,
-                                                                         cyclobot->toolsPtr->clientParametersPtr,
-                                                                         cyclobot->toolsPtr->selfDiagnosisDataPtr);
-        cyclobot->toolsPtr->checkMyHealthPtr->clear_runtime_data();
+    if (cyclobot->selfPtr->checkMyHealthPtr->wifi_shield_is_on(cyclobot->paramPtr->wifiParametersPtr)) { // check for the presence of the shield
+        cyclobot->selfPtr->checkMyHealthPtr->check_wifi_firmware_version(cyclobot->paramPtr->wifiParametersPtr, cyclobot->dataPtr->selfDiagnosisDataPtr);
+        cyclobot->selfPtr->checkMyHealthPtr->check_wifi_connection(cyclobot->commPtr->wifiCommPtr, cyclobot->paramPtr->wifiParametersPtr, cyclobot->dataPtr->selfDiagnosisDataPtr);
+        cyclobot->selfPtr->checkMyHealthPtr->check_client_communication(cyclobot->commPtr->clientCommPtr,
+                                                                         cyclobot->paramPtr->wifiParametersPtr,
+                                                                         cyclobot->paramPtr->clientParametersPtr,
+                                                                         cyclobot->dataPtr->selfDiagnosisDataPtr);
+        cyclobot->selfPtr->checkMyHealthPtr->clear_runtime_data();
     }
 
     // *** ACTUATORS ***
-    cyclobot->toolsPtr->checkMyHealthPtr->check_watering_system(cyclobot->toolsPtr->selfDiagnosisDataPtr);
-    cyclobot->toolsPtr->checkMyHealthPtr->check_river_system(cyclobot->toolsPtr->selfDiagnosisDataPtr);
-    cyclobot->toolsPtr->checkMyHealthPtr->check_wind_system(cyclobot->toolsPtr->selfDiagnosisDataPtr);
-    cyclobot->toolsPtr->checkMyHealthPtr->check_lighting_system(cyclobot->toolsPtr->selfDiagnosisDataPtr);
-    cyclobot->toolsPtr->checkMyHealthPtr->check_components_list(cyclobot->toolsPtr->selfDiagnosisDataPtr);
+    cyclobot->selfPtr->checkMyHealthPtr->check_watering_system(cyclobot->dataPtr->selfDiagnosisDataPtr);
+    cyclobot->selfPtr->checkMyHealthPtr->check_river_system(cyclobot->dataPtr->selfDiagnosisDataPtr);
+    cyclobot->selfPtr->checkMyHealthPtr->check_wind_system(cyclobot->dataPtr->selfDiagnosisDataPtr);
+    cyclobot->selfPtr->checkMyHealthPtr->check_lighting_system(cyclobot->dataPtr->selfDiagnosisDataPtr);
+    cyclobot->selfPtr->checkMyHealthPtr->check_components_list(cyclobot->dataPtr->selfDiagnosisDataPtr);
 };
 
 // comm
 void SelfDiagnosisState::report_signature_request(FiniteStateMachine *cyclobot) {
-    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "SelfDiagnosisState", "report_signature_request", 0, "wrong state");
+    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, "SelfDiagnosisState", "report_signature_request", 0, "wrong state");
 };
 
 void SelfDiagnosisState::session_new(FiniteStateMachine *cyclobot) {
-    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "SelfDiagnosisState", "session_new", 0, "wrong state");
+    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, "SelfDiagnosisState", "session_new", 0, "wrong state");
 };
 
 void SelfDiagnosisState::report_config(FiniteStateMachine *cyclobot) {
-    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "SelfDiagnosisState", "report_config", 0, "wrong state");
+    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, "SelfDiagnosisState", "report_config", 0, "wrong state");
 };
 
 void SelfDiagnosisState::report_health_check(FiniteStateMachine *cyclobot) {
-    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "SelfDiagnosisState", "report_health_check", 0, "wrong state");
+    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, "SelfDiagnosisState", "report_health_check", 0, "wrong state");
 };
 
 // update
 void SelfDiagnosisState::update_config(FiniteStateMachine *cyclobot) {
-    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "SelfDiagnosisState", "update_config", 0, "wrong state");
+    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, "SelfDiagnosisState", "update_config", 0, "wrong state");
 };
 
 void SelfDiagnosisState::update_simulation_code(FiniteStateMachine *cyclobot) {
-    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "SelfDiagnosisState", "update_simulation_code", 0, "wrong state");
+    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, "SelfDiagnosisState", "update_simulation_code", 0, "wrong state");
 };
 
 // comm
 void SelfDiagnosisState::session_stop(FiniteStateMachine *cyclobot) {
-    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "SelfDiagnosisState", "session_stop", 0, "wrong state");
+    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, "SelfDiagnosisState", "session_stop", 0, "wrong state");
 };
 
 // sim
 void SelfDiagnosisState::run_simulation(FiniteStateMachine *cyclobot) {
-    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "SelfDiagnosisState", "run_simulation", 0, "wrong state");
+    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, "SelfDiagnosisState", "run_simulation", 0, "wrong state");
 };
 
 // comm
 void SelfDiagnosisState::report_simulation_data(FiniteStateMachine *cyclobot) {
-    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "SelfDiagnosisState", "report_simulation_data", 0, "wrong state");
+    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, "SelfDiagnosisState", "report_simulation_data", 0, "wrong state");
 };
 
 // self
 void SelfDiagnosisState::take_a_nap(FiniteStateMachine *cyclobot) {
-    cyclobot->toolsPtr->errorHandlerPtr->log_error_msg(cyclobot->toolsPtr->errorHandlingParametersPtr, "SelfDiagnosisState", "take_a_nap", 0, "wrong state");
+    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, "SelfDiagnosisState", "take_a_nap", 0, "wrong state");
 };
 
 // constructor

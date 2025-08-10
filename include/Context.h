@@ -1,15 +1,30 @@
 #pragma once
-#include "core_states\BaseState.h"
-#include "shared\SharedInstances.h"
-#include "util\TimeSync.h"
+#include "core_states/BaseState.h"
+#include "core_states/simulation/strategy/BaseStrategy.h"
+#include "shared/cyclobot_tools/CommunicationInstances.h"
+#include "shared/cyclobot_tools/DataInstances.h"
+#include "shared/cyclobot_tools/ParameterInstances.h"
+#include "shared/cyclobot_tools/SelfManagementInstances.h"
+#include "sensor/EnvironmentScan.h"
+#include "actuator/EnvironmentActuator.h"
+#include "util/TimeSync.h"
 
-class SharedInstances;
+class CyclobotInstances;
 
 // CycloBot Finite State Machine
 class FiniteStateMachine {
     public:
-        SharedInstances *toolsPtr;
+        // Instance groups
+        SelfManagementInstances *selfPtr;
+        CommunicationInstances *commPtr;
+        ParameterInstances *paramPtr;
+        DataInstances *dataPtr;
         
+        // Single instance
+        BaseStrategy *simulationStrategyPtr;
+        EnvironmentScan *envScanPtr;
+        EnvironmentActuator *envActuatorPtr;
+
         int currentTime;    // Track in which step we are
         int stateFlow = 0; // Flow stablished at the Client module and updated by States to comply client rules
     

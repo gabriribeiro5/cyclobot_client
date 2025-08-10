@@ -2,7 +2,6 @@
 #include "..\BaseState.h"
 #include "..\..\Context.h"
 #include "..\..\self\ErrorHandler.h"
-#include "..\..\shared\SharedInstances.h"
 class FiniteStateMachine; // Forward declaration
 
 class ConfigUpdateState : public BaseState {

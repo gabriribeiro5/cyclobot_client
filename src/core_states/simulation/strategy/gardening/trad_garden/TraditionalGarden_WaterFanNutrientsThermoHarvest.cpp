@@ -6,11 +6,24 @@
 class TraditionalGarden_WaterFanNutrientsThermoHarvest : public BaseStrategy {
     public:
         TraditionalGarden_WaterFanNutrientsThermoHarvest();
-        void pin_map();
-        void read_environment_data(EcosystemParameters *ecosystemParametersPtr, EnvironmentScan *environmentScanPtr, EnvironmentActuator *environmentActuatorPtr) override;
-        void simulate_environment(EcosystemParameters *ecosystemParametersPtr, EnvironmentScan *environmentScanPtr, EnvironmentActuator *environmentActuatorPtr) override;
+
+        void pin_map() {
+            return;
+        }
+
+        void read_environment_data(EcosystemParameters *ecosystemParametersPtr, EnvironmentScan *environmentScanPtr, EnvironmentActuator *environmentActuatorPtr){
+            return;
+        }
+
+        void simulate_environment(EcosystemParameters *ecosystemParametersPtr, EnvironmentScan *environmentScanPtr, EnvironmentActuator *environmentActuatorPtr) {
+            return;
+        }
         
         // used by strategyContext.changeStrategy
-        void enter(SimStrategy *strategy) override;
-        void exit(SimStrategy *strategy) override;
+        void enter(SimStrategy *strategy) {
+            return;
+        }
+        void exit(SimStrategy *strategy) {
+            return;
+        }
 };
