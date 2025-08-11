@@ -67,11 +67,13 @@ void SimulationState::run_simulation(FiniteStateMachine *cyclobot) {
         simStrategy.setup();
         cyclobot->paramPtr->deviceParametersPtr->firstAwakening = false;
     }
-
+    
+    cyclobot->paramPtr->ecosystemParametersPtr->eventStart = cyclobot->rtc.now();
     simStrategy.simulate_environment(cyclobot->paramPtr->ecosystemParametersPtr,
-                                     cyclobot->scannerPtr,
-                                     cyclobot->actuatorPtr);
-
+        cyclobot->scannerPtr,
+        cyclobot->actuatorPtr);   
+    cyclobot->paramPtr->ecosystemParametersPtr->eventEnd = cyclobot->rtc.now();
+    
     Serial.println(F("(run_simulation) done"));
 };
 

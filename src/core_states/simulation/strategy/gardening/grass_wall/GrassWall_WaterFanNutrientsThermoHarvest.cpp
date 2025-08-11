@@ -1,46 +1,42 @@
+#include <Arduino.h>
+#include "../../../../../../include/core_states/simulation/strategy/gardening/grass_wall/GrassWall_WaterFanNutrientsThermoHarvest.h"
 #include "../../../../../../include/core_states/simulation/strategy/BaseStrategy.h"
 #include "../../../../../../include/config/EcosystemParameters.h"
-#include "../../../../../../include/sensor/EnvironmentScan.h"
-#include "../../../../../../include/actuator/EnvironmentActuator.h"
+#include "../../../../../../include/config/DeviceParameters.h"
+#include "../../../../../../include/sensor/EcosystemScanner.h"
+#include "../../../../../../include/actuator/EcosystemActuator.h"
 
-class GrassWall_WaterFanNutrientsThermoHarvest : public BaseStrategy {
-    public:
-        GrassWall_WaterFanNutrientsThermoHarvest();
-        
-        void pin_map() {
-            return;
-        }
+void GrassWall_WaterFanNutrientsThermoHarvest::enter() {
+    soilMoistureSensor = A0;                // Sensor de umidade do solo pino A0 conectado no A0 do Arduino
+    irrigationSystem = A1;                  // Sensor de chuva pino A1 conectado no A1 do Arduino
+    relePort = 4;                       // porta de controle do relé conectada no D4 do Arduino
+}
 
-        void read_environment_data(EcosystemParameters *ecosystemParametersPtr, EcosystemScanner *environmentScanPtr, EcosystemActuator *environmentActuatorPtr) {
-            return;
-        }
-        
-        void simulate_environment(EcosystemParameters *ecosystemParametersPtr, EcosystemScanner *environmentScanPtr, EcosystemActuator *environmentActuatorPtr) {
-            /* ********* START ACTUATORS (USE TIMEOUTS) ********* */
-            // LATCHING RELAY COMMAND OUTPUTS WITH DRIVERS
-            // --> Fan system
-            environmentActuatorPtr->fan_system_on(ecosystemParametersPtr);
-            // --> Irrigation system
-            environmentActuatorPtr->irrigation_system_on(ecosystemParametersPtr);
-            
-            /* ********* STOP ACTUATORS (USE TIMEOUTS) ********* */
-            // --> Fan system
-            environmentActuatorPtr->fan_system_off(ecosystemParametersPtr);
-            // --> Irrigation system
-            environmentActuatorPtr->irrigation_system_off(ecosystemParametersPtr);
-            
+void GrassWall_WaterFanNutrientsThermoHarvest::setup() {
+    pinMode(soilMoistureSensor, INPUT);     // Sensor de umidade do solo - porta A0 é entrada 
+    pinMode(irrigationSystem, INPUT);       // Sensor de chuva - porta A1 é entrada 
+    pinMode(relePort, OUTPUT);              // Porta de controle do Relé - D4 é saída 
+    digitalWrite(relePort, HIGH);           // Mantém relé desligado  
+}
 
-            /* ********* REMOTE PROCEDURE CALLS ********* */
-            // BLUETOOTH || MKR NB 1500 (LTE Cat-M1 / NB-IoT) || WAN 1310 (LoRa / LoRaWAN)
-            // --> Trimming system
-            environmentActuatorPtr->trim_system_on(ecosystemParametersPtr);
+void GrassWall_WaterFanNutrientsThermoHarvest::simulate_environment(EcosystemParameters *parametersPtr,
+                                                   EcosystemScanner *scannerPtr,
+                                                   EcosystemActuator *actuatorPtr)
+{
+    // ********* Primary scann *********
+    scannerPtr->read_soil_moisture(parametersPtr, soilMoistureSensor);
+
+    // ********* Irrigation strategy *********
+    if (!parametersPtr->soilIsWet) {
+        actuatorPtr->irrigation_system_on(parametersPtr, irrigationSystem);
+        while (!parametersPtr->soilIsWet)
+        {
+            scannerPtr->read_soil_moisture(parametersPtr, soilMoistureSensor);
         }
-        
-        // used by SimStrategy.changeStrategy
-        void enter(SimStrategy *strategy) {
-            return;
-        }
-        void exit(SimStrategy *strategy) {
-            return;
-        }
-};
+        actuatorPtr->irrigation_system_off(parametersPtr, irrigationSystem);
+    }
+}
+
+void GrassWall_WaterFanNutrientsThermoHarvest::exit() {
+    return;
+}
