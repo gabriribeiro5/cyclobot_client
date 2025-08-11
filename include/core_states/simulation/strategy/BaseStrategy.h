@@ -8,19 +8,16 @@
 */
 #include "../SimStrategy.h"
 #include "../../../config/EcosystemParameters.h"
-#include "../../../sensor/EnvironmentScan.h"
-#include "../../../actuator/EnvironmentActuator.h"
-
-class SimStrategy;
+#include "../../../config/DeviceParameters.h"
+#include "../../../sensor/EcosystemScanner.h"
+#include "../../../actuator/EcosystemActuator.h"
 
 class BaseStrategy {
     public:
         virtual ~BaseStrategy();
-        virtual void pin_map();
-        virtual void read_environment_data(EcosystemParameters *ecosystemParametersPtr, EnvironmentScan *environmentScanPtr, EnvironmentActuator *environmentActuatorPtr);
-        virtual void simulate_environment(EcosystemParameters *ecosystemParametersPtr, EnvironmentScan *environmentScanPtr, EnvironmentActuator *environmentActuatorPtr);
         
-        // used by strategyContext.changeStrategy
-        virtual void enter(SimStrategy *strategy);
-        virtual void exit(SimStrategy *strategy);
+        virtual void enter();
+        virtual void setup();
+        virtual void simulate_environment(EcosystemParameters *ecosystemParamPtr, EcosystemScanner *scannerPtr, EcosystemActuator *actuatorPtr);
+        virtual void exit();
 };

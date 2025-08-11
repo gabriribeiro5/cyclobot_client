@@ -67,8 +67,8 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
   - [x] Sensor (macro scope)
   - [x] Actuator (macro scope)
   - [xxx] Simulation strategies (macro scope)
-  - [x] feat(shared strategies): Detail shared instances (tools and strategies)
-  - [ ] feat(Simulation strategy): TraditionalGarden_Water (detailed)
+- [x] feat(shared strategies): Detail shared instances (tools and strategies)
+- [x] feat(TraditionalGarden_Water): First detailed simulation strategy
 - [ ] feat(failure handler):
   - [ ] State
   - [ ] Config

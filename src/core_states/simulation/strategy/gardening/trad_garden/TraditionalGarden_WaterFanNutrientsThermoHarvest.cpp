@@ -11,15 +11,15 @@ class TraditionalGarden_WaterFanNutrientsThermoHarvest : public BaseStrategy {
             return;
         }
 
-        void read_environment_data(EcosystemParameters *ecosystemParametersPtr, EnvironmentScan *environmentScanPtr, EnvironmentActuator *environmentActuatorPtr){
+        void read_environment_data(EcosystemParameters *ecosystemParametersPtr, EcosystemScanner *environmentScanPtr, EcosystemActuator *environmentActuatorPtr){
             return;
         }
 
-        void simulate_environment(EcosystemParameters *ecosystemParametersPtr, EnvironmentScan *environmentScanPtr, EnvironmentActuator *environmentActuatorPtr) {
+        void simulate_environment(EcosystemParameters *ecosystemParametersPtr, EcosystemScanner *environmentScanPtr, EcosystemActuator *environmentActuatorPtr) {
             return;
         }
         
-        // used by strategyContext.changeStrategy
+        // used by SimStrategy.changeStrategy
         void enter(SimStrategy *strategy) {
             return;
         }

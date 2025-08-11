@@ -11,11 +11,11 @@ class GrassWall_WaterFanNutrientsThermoHarvest : public BaseStrategy {
             return;
         }
 
-        void read_environment_data(EcosystemParameters *ecosystemParametersPtr, EnvironmentScan *environmentScanPtr, EnvironmentActuator *environmentActuatorPtr) {
+        void read_environment_data(EcosystemParameters *ecosystemParametersPtr, EcosystemScanner *environmentScanPtr, EcosystemActuator *environmentActuatorPtr) {
             return;
         }
         
-        void simulate_environment(EcosystemParameters *ecosystemParametersPtr, EnvironmentScan *environmentScanPtr, EnvironmentActuator *environmentActuatorPtr) {
+        void simulate_environment(EcosystemParameters *ecosystemParametersPtr, EcosystemScanner *environmentScanPtr, EcosystemActuator *environmentActuatorPtr) {
             /* ********* START ACTUATORS (USE TIMEOUTS) ********* */
             // LATCHING RELAY COMMAND OUTPUTS WITH DRIVERS
             // --> Fan system
@@ -36,7 +36,7 @@ class GrassWall_WaterFanNutrientsThermoHarvest : public BaseStrategy {
             environmentActuatorPtr->trim_system_on(ecosystemParametersPtr);
         }
         
-        // used by strategyContext.changeStrategy
+        // used by SimStrategy.changeStrategy
         void enter(SimStrategy *strategy) {
             return;
         }

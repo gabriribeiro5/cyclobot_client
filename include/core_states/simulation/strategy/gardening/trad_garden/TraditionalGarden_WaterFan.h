@@ -8,9 +8,9 @@
 class TraditionalGarden_WaterFan : public BaseStrategy {
     public:
         TraditionalGarden_WaterFan();
-        void pin_map() override;
-        void read_environment_data(EcosystemParameters *ecosystemParametersPtr, EnvironmentScan *environmentScanPtr, EnvironmentActuator *environmentActuatorPtr) override;
-        void simulate_environment(EcosystemParameters *ecosystemParametersPtr, EnvironmentScan *environmentScanPtr, EnvironmentActuator *environmentActuatorPtr) override;
+        void pin_map();
+        void read_environment_data(EcosystemParameters *ecosystemParametersPtr, EcosystemScanner *environmentScanPtr, EcosystemActuator *environmentActuatorPtr) override;
+        void simulate_environment(EcosystemParameters *ecosystemParametersPtr, EcosystemScanner *environmentScanPtr, EcosystemActuator *environmentActuatorPtr) override;
         
         // used by strategyContext.changeStrategy
         void enter(SimStrategy *strategy) override;

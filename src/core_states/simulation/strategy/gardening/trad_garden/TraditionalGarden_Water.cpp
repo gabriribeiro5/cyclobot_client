@@ -1,46 +1,42 @@
+#include <Arduino.h>
+#include "../../../../../../include/core_states/simulation/strategy/gardening/trad_garden/TraditionalGarden_Water.h"
 #include "../../../../../../include/core_states/simulation/strategy/BaseStrategy.h"
 #include "../../../../../../include/config/EcosystemParameters.h"
-#include "../../../../../../include/sensor/EnvironmentScan.h"
-#include "../../../../../../include/actuator/EnvironmentActuator.h"
+#include "../../../../../../include/config/DeviceParameters.h"
+#include "../../../../../../include/sensor/EcosystemScanner.h"
+#include "../../../../../../include/actuator/EcosystemActuator.h"
 
-class TraditionalGarden_Water : public BaseStrategy {
-    public:
-        TraditionalGarden_Water();
+void TraditionalGarden_Water::enter() {
+    soilMoistureSensor = A0;                // Sensor de umidade do solo pino A0 conectado no A0 do Arduino
+    irrigationSystem = A1;                  // Sensor de chuva pino A1 conectado no A1 do Arduino
+    relePort = 4;                       // porta de controle do relé conectada no D4 do Arduino
+}
 
-        void pin_map() {
-            return;
-        }
+void TraditionalGarden_Water::setup() {
+    pinMode(soilMoistureSensor, INPUT);     // Sensor de umidade do solo - porta A0 é entrada 
+    pinMode(irrigationSystem, INPUT);       // Sensor de chuva - porta A1 é entrada 
+    pinMode(relePort, OUTPUT);              // Porta de controle do Relé - D4 é saída 
+    digitalWrite(relePort, HIGH);           // Mantém relé desligado  
+}
 
-        void read_environment_data(EcosystemParameters *ecosystemParametersPtr, EnvironmentScan *environmentScanPtr, EnvironmentActuator *environmentActuatorPtr) {
-            return;
-        }
+void TraditionalGarden_Water::simulate_environment(EcosystemParameters *parametersPtr,
+                                                   EcosystemScanner *scannerPtr,
+                                                   EcosystemActuator *actuatorPtr)
+{
+    // ********* Primary scann *********
+    scannerPtr->read_soil_moisture(parametersPtr, soilMoistureSensor);
 
-        void simulate_environment(EcosystemParameters *ecosystemParametersPtr, EnvironmentScan *environmentScanPtr, EnvironmentActuator *environmentActuatorPtr) {
-            /* ********* START ACTUATORS (USE TIMEOUTS) ********* */
-            // LATCHING RELAY COMMAND OUTPUTS WITH DRIVERS
-            // --> Fan system
-            environmentActuatorPtr->fan_system_on(ecosystemParametersPtr);
-            // --> Irrigation system
-            environmentActuatorPtr->irrigation_system_on(ecosystemParametersPtr);
-            
-            /* ********* STOP ACTUATORS (USE TIMEOUTS) ********* */
-            // --> Fan system
-            environmentActuatorPtr->fan_system_off(ecosystemParametersPtr);
-            // --> Irrigation system
-            environmentActuatorPtr->irrigation_system_off(ecosystemParametersPtr);
-            
+    // ********* Irrigation strategy *********
+    if (!parametersPtr->soilIsWet) {
+        actuatorPtr->irrigation_system_on(parametersPtr, irrigationSystem);
+        while (!parametersPtr->soilIsWet)
+        {
+            scannerPtr->read_soil_moisture(parametersPtr, soilMoistureSensor);
+        }
+        actuatorPtr->irrigation_system_off(parametersPtr, irrigationSystem);
+    }
+}
 
-            /* ********* REMOTE PROCEDURE CALLS ********* */
-            // BLUETOOTH || MKR NB 1500 (LTE Cat-M1 / NB-IoT) || WAN 1310 (LoRa / LoRaWAN)
-            // --> Trimming system
-            environmentActuatorPtr->trim_system_on(ecosystemParametersPtr);
-        }
-        
-        // used by strategyContext.changeStrategy
-        void enter(SimStrategy *strategy) {
-            return;
-        }
-        void exit(SimStrategy *strategy) {
-            return;
-        }
-};
+void TraditionalGarden_Water::exit() {
+    return;
+}

@@ -13,9 +13,9 @@
 #include "..\config\WifiParameters.h"
 #include "..\config\ClientParameters.h"
 #include "..\config\EcosystemParameters.h"
+#include "..\sensor\EcosystemScanner.h"
+#include "..\actuator\EcosystemActuator.h"
 #include "..\config\PeripheralMapping.h"
-#include "..\sensor\EnvironmentScan.h"
-#include "..\actuator\EnvironmentActuator.h"
 
 class CyclobotInstances {
     public:
@@ -35,10 +35,10 @@ class CyclobotInstances {
         VisualComm *visualCommPtr;
 
         // -> Sensors
-        EnvironmentScan *environmentScanPtr;
+        EcosystemScanner *environmentScanPtr;
 
         // -> Actuators
-        EnvironmentActuator *environmentActuatorPtr;
+        EcosystemActuator *environmentActuatorPtr;
 
         // -> Parameters
         DeviceParameters *deviceParametersPtr;

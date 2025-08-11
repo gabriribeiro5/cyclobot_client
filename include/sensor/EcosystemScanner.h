@@ -2,14 +2,11 @@
 #include "..\config\EcosystemParameters.h"
 #include "..\config\PeripheralMapping.h"
 
-class EnvironmentScan {
+class EcosystemScanner {
     public:
-        void read_aeroponic_garden_inputs(EcosystemParameters *ecosystemParametersPtr, PeripheralMapping *peripheralMappingPtr);
-    
-    private:
-        void read_soil_moisture(EcosystemParameters *ecosystemParametersPtr, int soilMoistureSensor);
+        void read_soil_moisture(EcosystemParameters *ecosystemParametersPtr, uint8_t soilMoistureSensor);
         void read_water_pressure(EcosystemParameters *ecosystemParametersPtr);
-        void read_temperature(EcosystemParameters *ecosystemParametersPtr, int temperatureSensor);
+        void read_temperature(EcosystemParameters *ecosystemParametersPtr, uint8_t temperatureSensor);
         void read_brightness(EcosystemParameters *ecosystemParametersPtr);
         void read_water_ph(EcosystemParameters *ecosystemParametersPtr);
         void read_water_nutrients(EcosystemParameters *ecosystemParametersPtr);

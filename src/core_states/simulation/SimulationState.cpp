@@ -62,18 +62,15 @@ void SimulationState::session_stop(FiniteStateMachine *cyclobot) {
 void SimulationState::run_simulation(FiniteStateMachine *cyclobot) {
     Serial.println(F("(run_simulation) running..."));
     simStrategy = SimStrategy(cyclobot->simulationStrategyPtr);
-
-    if (cyclobot->paramPtr->deviceParametersPtr->firstAwakening) {
-        simStrategy.pin_map();
-    }
     
-    simStrategy.read_environment_data(cyclobot->paramPtr->ecosystemParametersPtr,
-                                      cyclobot->envScanPtr,
-                                      cyclobot->envActuatorPtr);
+    if (cyclobot->paramPtr->deviceParametersPtr->firstAwakening) {
+        simStrategy.setup();
+        cyclobot->paramPtr->deviceParametersPtr->firstAwakening = false;
+    }
 
     simStrategy.simulate_environment(cyclobot->paramPtr->ecosystemParametersPtr,
-                                     cyclobot->envScanPtr,
-                                     cyclobot->envActuatorPtr);
+                                     cyclobot->scannerPtr,
+                                     cyclobot->actuatorPtr);
 
     Serial.println(F("(run_simulation) done"));
 };

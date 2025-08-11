@@ -30,10 +30,10 @@ CyclobotInstances::CyclobotInstances() {
     visualCommPtr = new VisualComm();
 
     // -> Sensors
-    environmentScanPtr = new EnvironmentScan();
+    environmentScanPtr = new EcosystemScanner();
 
     // -> Actuators
-    environmentActuatorPtr = new EnvironmentActuator();
+    environmentActuatorPtr = new EcosystemActuator();
 
     // -> Parameters
     deviceParametersPtr = new DeviceParameters();

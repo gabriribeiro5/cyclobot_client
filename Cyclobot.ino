@@ -1,5 +1,4 @@
 #include <Arduino.h>
-#include <RTClib.h>
 #include <SoftwareSerial.h>
 #include <WiFiEsp.h>
 #include "include\core_states\BaseState.h"
@@ -27,18 +26,13 @@ BaseState *idleStatePtr = new IdleState();
 // Create state machine
 FiniteStateMachine cyclobot(idleStatePtr);
 
-// Create device resources
-RTC_DS3231 rtc; // time tracking software
+// Extra serial port for wifi
 SoftwareSerial esp8266(cyclobot.paramPtr->peripheralMappingPtr->wifiEspRX,
-                       cyclobot.paramPtr->peripheralMappingPtr->wifiEspTX); // software-based serial port to communicate with wifi module
+                    cyclobot.paramPtr->peripheralMappingPtr->wifiEspTX); // software-based serial port to communicate with wifi module
 
 void setup() {
-    pinMode(cyclobot.paramPtr->peripheralMappingPtr->soilMoistureSensor, INPUT);          // Sensor de umidade do solo - porta A0 é entrada 
-    pinMode(cyclobot.paramPtr->peripheralMappingPtr->wateringSystem, INPUT);              // Sensor de chuva - porta A1 é entrada 
-    pinMode(cyclobot.paramPtr->peripheralMappingPtr->relePort, OUTPUT);                   // Porta de controle do Relé - D4 é saída 
-    digitalWrite(cyclobot.paramPtr->peripheralMappingPtr->relePort, HIGH);                // Mantém relé desligado  
     Serial.begin(9600);                                                                   // Enable communication over the USB serial port console 9600 Bps
-    rtc.begin();
+    cyclobot.rtc.begin();
     WiFi.init(&esp8266);
 };
 
