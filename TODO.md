@@ -92,11 +92,11 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 ---
 
 ### 🧠 Design Enhancements
-- [ ] style(sharedInstances): categorize pointers
-  - [ ] Create shared/group
-  - [ ] Create category classes (Self, Comm, Simulation, Actuator...) inside shared/group
-  - [ ] Move pointers from CyclobotInstances to their categry classes
-  - [ ] Inside the empty CyclobotInstances create pointers to category classes
+- [x] style(sharedInstances): categorize pointers
+  - [x] Create shared/group
+  - [x] Create category classes (Self, Comm, Simulation, Actuator...) inside shared/group
+  - [x] Move pointers from CyclobotInstances to their categry classes
+  - [x] Inside the empty CyclobotInstances create pointers to category classes
 
 ### 📄 Rename project
 - [x] refactor(project name): `Cyclobot` replaces `Eco Units`

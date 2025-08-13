@@ -40,7 +40,10 @@ public:
 
     // constructor
     SimulationState();
+    
+    // destructor
+    ~SimulationState();
 
 private:
-    SimStrategy simStrategy;
+    SimStrategy *simStrategyPtr;
 };

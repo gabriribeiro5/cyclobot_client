@@ -18,6 +18,6 @@ class BaseStrategy {
         
         virtual void enter();
         virtual void setup();
-        virtual void simulate_environment(EcosystemParameters *ecosystemParamPtr, EcosystemScanner *scannerPtr, EcosystemActuator *actuatorPtr);
+        virtual void simulate_ecosystem(EcosystemParameters *ecosystemParamPtr, EcosystemScanner *scannerPtr, EcosystemActuator *actuatorPtr);
         virtual void exit();
 };

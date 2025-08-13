@@ -14,8 +14,8 @@
 #include "..\..\include\config\ClientParameters.h"
 #include "..\..\include\config\EcosystemParameters.h"
 #include "..\..\include\config\PeripheralMapping.h"
-#include "..\..\include\sensor\EnvironmentScan.h"
-#include "..\..\include\actuator\EnvironmentActuator.h"
+#include "..\..\include\sensor\EcosystemScanner.h"
+#include "..\..\include\actuator\EcosystemActuator.h"
 
 CyclobotInstances::CyclobotInstances() {
     // -> Self

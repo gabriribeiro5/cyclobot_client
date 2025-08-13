@@ -1,19 +1,17 @@
 #pragma once
-#include "../../core_states/simulation/strategy/gardening/trad_garden/TraditionalGarden_Water.h"
-#include "../../core_states/simulation/strategy/gardening/trad_garden/TraditionalGarden_WaterFan.h"
-#include "../../core_states/simulation/strategy/gardening/trad_garden/TraditionalGarden_WaterFanNutrients.h"
-#include "../../core_states/simulation/strategy/gardening/trad_garden/TraditionalGarden_WaterFanNutrientsThermo.h"
-#include "../../core_states/simulation/strategy/gardening/trad_garden/TraditionalGarden_WaterFanNutrientsThermoHarvest.h"
-#include "../../core_states/simulation/strategy/gardening/trad_garden/TraditionalGarden_WaterFanNutrientsThermoSeedHarvest.h"
+#include "../../../core_states/simulation/strategy/gardening/trad_garden/Water.h"
+#include "../../../core_states/simulation/strategy/gardening/trad_garden/WaterFan.h"
+#include "../../../core_states/simulation/strategy/gardening/trad_garden/WaterFanLight.h"
+#include "../../../core_states/simulation/strategy/gardening/trad_garden/WaterFanLightNutrient.h"
+#include "../../../core_states/simulation/strategy/gardening/trad_garden/WaterFanLightNutrientThermo.h"
 
 class TraditionalGardeningStrategies {
     public:
         TraditionalGardeningStrategies();
         
-        TraditionalGarden_Water *traditionalGarden_WaterPtr;
-        TraditionalGarden_WaterFan *TraditionalGarden_WaterFanPtr;
-        TraditionalGarden_WaterFanNutrients *TraditionalGarden_WaterFanNutrientsPtr;
-        TraditionalGarden_WaterFanNutrientsThermo *TraditionalGarden_WaterFanNutrientsThermoPtr;
-        TraditionalGarden_WaterFanNutrientsThermoHarvest *TraditionalGarden_WaterFanNutrientsThermoHarvestPtr;
-        TraditionalGarden_WaterFanNutrientsThermoSeedHarvest *TraditionalGarden_WaterFanNutrientsThermoSeedHarvestPtr;
+        Water *waterPtr;
+        WaterFan *waterFanPtr;
+        WaterFanLight *waterFanLightPtr;
+        WaterFanLightNutrient *waterFanLightNutrientPtr;
+        WaterFanLightNutrientThermo *waterFanLightNutrientThermoPtr;
 };

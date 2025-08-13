@@ -14,8 +14,8 @@ void SimStrategy::setup() {
     currentStrategyPtr->setup();
 }
 
-void SimStrategy::simulate_environment(EcosystemParameters *ecosystemParametersPtr, EcosystemScanner *environmentScanPtr, EcosystemActuator *environmentActuatorPtr) {
-    currentStrategyPtr->simulate_environment(ecosystemParametersPtr, environmentScanPtr, environmentActuatorPtr);
+void SimStrategy::simulate_ecosystem(EcosystemParameters *ecosystemParametersPtr, EcosystemScanner *environmentScanPtr, EcosystemActuator *environmentActuatorPtr) {
+    currentStrategyPtr->simulate_ecosystem(ecosystemParametersPtr, environmentScanPtr, environmentActuatorPtr);
 }
 
 void SimStrategy::change_strategy(BaseStrategy *newStrategyPtr) {

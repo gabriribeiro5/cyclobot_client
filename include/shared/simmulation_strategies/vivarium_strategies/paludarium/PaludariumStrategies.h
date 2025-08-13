@@ -1,19 +1,17 @@
 #pragma once
-#include "../../../core_states/simulation/strategy/gardening/grass_wall/GrassWall_Water.h"
-#include "../../../core_states/simulation/strategy/gardening/grass_wall/GrassWall_WaterFan.h"
-#include "../../../core_states/simulation/strategy/gardening/grass_wall/GrassWall_WaterFanNutrients.h"
-#include "../../../core_states/simulation/strategy/gardening/grass_wall/GrassWall_WaterFanNutrientsThermo.h"
-#include "../../../core_states/simulation/strategy/gardening/grass_wall/GrassWall_WaterFanNutrientsThermoHarvest.h"
-#include "../../../core_states/simulation/strategy/gardening/grass_wall/GrassWall_WaterFanNutrientsThermoSeedHarvest.h"
+#include "../../../../core_states/simulation/strategy/vivarium/paludarium/River.h"
+#include "../../../../core_states/simulation/strategy/vivarium/paludarium/RiverLight.h"
+#include "../../../../core_states/simulation/strategy/vivarium/paludarium/RiverLightFan.h"
+#include "../../../../core_states/simulation/strategy/vivarium/paludarium/RiverLightFanRain.h"
+#include "../../../../core_states/simulation/strategy/vivarium/paludarium/RiverLightFanRainThermo.h"
 
-class GrassWallStrategies {
+class PaludariumStrategies {
     public:
-        GrassWallStrategies();
+        PaludariumStrategies();
         
-        GrassWall_Water *grassWall_WaterPtr;
-        GrassWall_WaterFan *grassWall_WaterFanPtr;
-        GrassWall_WaterFanNutrients *grassWall_WaterFanNutrientsPtr;
-        GrassWall_WaterFanNutrientsThermo *grassWall_WaterFanNutrientsThermoPtr;
-        GrassWall_WaterFanNutrientsThermoHarvest *grassWall_WaterFanNutrientsThermoHarvestPtr;
-        GrassWall_WaterFanNutrientsThermoSeedHarvest *grassWall_WaterFanNutrientsThermoSeedHarvestPtr;
+        River *riverPtr;
+        RiverLight *riverLightPtr;
+        RiverLightFan *riverLightFanPtr;
+        RiverLightFanRain *riverLightFanRainPtr;
+        RiverLightFanRainThermo *riverLightFanRainThermoPtr;
 };

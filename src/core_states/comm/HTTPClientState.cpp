@@ -1,7 +1,7 @@
 #include "Arduino.h"
 #include "../../../include/core_states/comm/HTTPClientState.h"
 #include "../../../include/Context.h"
-#include "../../../include/shared/CyclobotInstances.h"
+
 // used by context.changeState
 void HTTPClientState::enter(FiniteStateMachine *cyclobot) {
     if (!cyclobot) {

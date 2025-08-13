@@ -1,5 +1,6 @@
 #pragma once
 #include <Arduino.h>
+#include <RTClib.h>
 
 class EcosystemParameters {
     public:

@@ -61,17 +61,21 @@ void SimulationState::session_stop(FiniteStateMachine *cyclobot) {
 // sim
 void SimulationState::run_simulation(FiniteStateMachine *cyclobot) {
     Serial.println(F("(run_simulation) running..."));
-    simStrategy = SimStrategy(cyclobot->simulationStrategyPtr);
+    
+    if (simStrategyPtr) {
+        delete simStrategyPtr;
+    }
+    simStrategyPtr = new SimStrategy(cyclobot->simulationStrategyPtr);
     
     if (cyclobot->paramPtr->deviceParametersPtr->firstAwakening) {
-        simStrategy.setup();
+        simStrategyPtr->setup();
         cyclobot->paramPtr->deviceParametersPtr->firstAwakening = false;
     }
     
     cyclobot->paramPtr->ecosystemParametersPtr->eventStart = cyclobot->rtc.now();
-    simStrategy.simulate_environment(cyclobot->paramPtr->ecosystemParametersPtr,
-        cyclobot->scannerPtr,
-        cyclobot->actuatorPtr);   
+    simStrategyPtr->simulate_ecosystem(cyclobot->paramPtr->ecosystemParametersPtr,
+                                       cyclobot->scannerPtr,
+                                       cyclobot->actuatorPtr);   
     cyclobot->paramPtr->ecosystemParametersPtr->eventEnd = cyclobot->rtc.now();
     
     Serial.println(F("(run_simulation) done"));
@@ -90,4 +94,13 @@ void SimulationState::take_a_nap(FiniteStateMachine *cyclobot) {
 // constructor
 SimulationState::SimulationState() {
     Serial.println(F("(SimulationState): Instantiated..."));
+    simStrategyPtr = nullptr;
+};
+
+// destructor
+SimulationState::~SimulationState() {
+    if (simStrategyPtr) {
+        delete simStrategyPtr;
+        simStrategyPtr = nullptr;
+    }
 };

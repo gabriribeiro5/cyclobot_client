@@ -1,17 +1,17 @@
 #include <Arduino.h>
 #include <SoftwareSerial.h>
 #include <WiFiEsp.h>
-#include "include\core_states\BaseState.h"
-#include "include\core_states\error\ErrorHandlingState.h"
-#include "include\core_states\self\IdleState.h"
-#include "include\core_states\self\SelfDiagnosisState.h"
-#include "include\core_states\comm\HTTPClientState.h"
-#include "include\core_states\update\ConfigUpdateState.h"
-#include "include\core_states\update\CodeUpdateState.h"
-#include "include\core_states\simulation\SimulationState.h"
-#include "include\config\PeripheralMapping.h"
-#include "include\shared\CyclobotInstances.h"
-#include "include\Context.h"
+#include "include/core_states/BaseState.h"
+#include "include/core_states/error/ErrorHandlingState.h"
+#include "include/core_states/self/IdleState.h"
+#include "include/core_states/self/SelfDiagnosisState.h"
+#include "include/core_states/comm/HTTPClientState.h"
+#include "include/core_states/update/ConfigUpdateState.h"
+#include "include/core_states/update/CodeUpdateState.h"
+#include "include/core_states/simulation/SimulationState.h"
+#include "include/core_states/simulation/strategy/gardening/trad_garden/Water.h"
+#include "include/config/PeripheralMapping.h"
+#include "include/Context.h"
 
 
 // Set state classes
@@ -31,8 +31,9 @@ SoftwareSerial esp8266(cyclobot.paramPtr->peripheralMappingPtr->wifiEspRX,
                     cyclobot.paramPtr->peripheralMappingPtr->wifiEspTX); // software-based serial port to communicate with wifi module
 
 void setup() {
-    Serial.begin(9600);                                                                   // Enable communication over the USB serial port console 9600 Bps
+    Serial.begin(9600);                             // Enable communication over the USB serial port console 9600 Bps
     cyclobot.rtc.begin();
+    cyclobot.simulationStrategyPtr = new Water();
     WiFi.init(&esp8266);
 };
 

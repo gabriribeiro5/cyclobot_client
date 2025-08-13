@@ -2,7 +2,7 @@
 #include "strategy/BaseStrategy.h"
 #include "../../config/EcosystemParameters.h"
 #include "../../sensor/EcosystemScanner.h"
-#include "../../actuator/EcosystemActuator.h""
+#include "../../actuator/EcosystemActuator.h"
 
 // Forward declarations
 class BaseStrategy;
@@ -15,7 +15,7 @@ class SimStrategy {
         SimStrategy(BaseStrategy *initialStrategyPtr);
         void change_strategy(BaseStrategy *newStrategyPtr);
         void setup();
-        void simulate_environment(EcosystemParameters *ecosystemParametersPtr, EcosystemScanner *scannerPtr, EcosystemActuator *actuatorPtr);
+        void simulate_ecosystem(EcosystemParameters *ecosystemParametersPtr, EcosystemScanner *scannerPtr, EcosystemActuator *actuatorPtr);
     private:
         BaseStrategy *currentStrategyPtr;
 };
