@@ -7,6 +7,7 @@
 class PetRoomStrategies {
     public:
         PetRoomStrategies();
+        ~PetRoomStrategies();
 
         PR_Door *doorPtr;
         PR_DoorThermo *doorThermoPtr;

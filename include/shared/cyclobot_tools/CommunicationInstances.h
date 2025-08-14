@@ -8,6 +8,7 @@
 class CommunicationInstances {
     public:
         CommunicationInstances();
+        ~CommunicationInstances();
         
         WifiComm *wifiCommPtr;
         ClientComm *clientCommPtr;

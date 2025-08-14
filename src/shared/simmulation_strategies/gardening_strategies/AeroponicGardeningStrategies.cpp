@@ -7,3 +7,11 @@ AeroponicGardeningStrategies::AeroponicGardeningStrategies() {
     waterFanLightNutrientPtr = new AG_WaterFanLightNutrient();
     waterFanLightNutrientThermoPtr = new AG_WaterFanLightNutrientThermo();
 };
+
+AeroponicGardeningStrategies::~AeroponicGardeningStrategies() {
+    delete waterPtr;
+    delete waterFanPtr;
+    delete waterFanLightPtr;
+    delete waterFanLightNutrientPtr;
+    delete waterFanLightNutrientThermoPtr;
+};

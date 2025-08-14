@@ -31,7 +31,7 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 ---
 
 ### ▶️ Code features and data
-- [ ] feat(RainforestSimulation - incomplete): into new design
+- [x] feat(RainforestSimulation - incomplete): into new design
   - [x] Distribute single file methods across .h modules
   - [ ] Write .cpp code based on .h files
     - [x] Cyclobot's base cycle
@@ -75,21 +75,16 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 - [x] fix(multiple definitions): add prefix to strategies (TG_, AG_, AQ_, etc)
 
 ### ▶️ Mega 2560 Rev3 full version (256kb)
+- [x] feat(destructors): memory cleanup for strategy classes
 - [ ] feat(TG_WaterFanLightNutrientThermo): Detailed simulation strategy
-- [ ] feat(PL_RiverLightFan): Detailed simulation strategy
-- [ ] feat(TG_WaterFanLightNutrientThermo): Detailed simulation strategy
-- [ ] feat(failure handler):
-  - [ ] State
-  - [ ] Config
-  - [ ] Data
-  - [ ] Failure handler strategies (macro scope)
-  - [ ] Failure handler strategies (one detailed)
-- [ ] Write code for memory cleanup on exit functions
 - [ ] Run code online with Mega 2560 Rev3 - ATmega2560 (256kb)
+- [ ] feat(comm): implement server
+- [ ] refactor(api addresses): review and update
 
 ---
 
 ### ▶️ UNO R3 limited version (32kb) - stateless design  
+- [ ] feat(PL_RiverLightFan): Detailed simulation strategy
 - [ ] Code reduction to less than 32kb (yes, it hurts...)
   - [ ] Reduce states quantity
   - [ ] Remove all states
@@ -99,12 +94,30 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
   
 ---
 
+### ▶️ Mega 2560 Rev3 full version (256kb)
+- [ ] feat(update strategies)
+  - [ ] State
+  - [ ] Config
+  - [ ] Data
+  - [ ] Failure handler strategies (macro scope)
+  - [ ] Failure handler strategies (one detailed)
+- [ ] feat(failure handler)
+  - [ ] Serial print
+  - [ ] Send error code to the server
+    - [ ] 601 - health_check: Code err
+    - [ ] 602 - health_check: Comm err
+    - [ ] 603 - health_check: Pin setup err
+    - [ ] 604 - sim strategy: Simulation err
+  - [ ] Reboot 3x
+  - [ ] Standby for a day
+- [ ] feat(sound alarm): activated by the server
+---
+
 ### 🧠 Design Enhancements
 - [x] style(sharedInstances): categorize pointers
   - [x] Create shared/group
   - [x] Create category classes (Self, Comm, Simulation, Actuator...) inside shared/group
   - [x] Move pointers from CyclobotInstances to their categry classes
-  - [x] Inside the empty CyclobotInstances create pointers to category classes
 
 ### 📄 Rename project
 - [x] refactor(project name): `Cyclobot` replaces `Eco Units`

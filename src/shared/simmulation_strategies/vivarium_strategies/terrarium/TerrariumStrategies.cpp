@@ -6,3 +6,10 @@ TerrariumStrategies::TerrariumStrategies() {
     lightFanRainPtr = new TR_LightFanRain();
     lightFanRainThermoPtr = new TR_LightFanRainThermo();
 };
+
+TerrariumStrategies::~TerrariumStrategies() {
+    delete lightPtr;
+    delete lightFanPtr;
+    delete lightFanRainPtr;
+    delete lightFanRainThermoPtr;
+};

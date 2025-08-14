@@ -6,3 +6,8 @@ SelfManagementInstances::SelfManagementInstances() {
     errorHandlerPtr = new ErrorHandler();
     checkMyHealthPtr = new CheckMyHealth();
 };
+
+SelfManagementInstances::~SelfManagementInstances() {
+    delete errorHandlerPtr;
+    delete checkMyHealthPtr;
+};

@@ -12,3 +12,11 @@ CommunicationInstances::CommunicationInstances() {
     soundCommPtr = new SoundComm();
     visualCommPtr = new VisualComm();
 };
+
+CommunicationInstances::~CommunicationInstances() {
+    delete wifiCommPtr;
+    delete clientCommPtr;
+    delete buttonCommPtr;
+    delete soundCommPtr;
+    delete visualCommPtr;
+};

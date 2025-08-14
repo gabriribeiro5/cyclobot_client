@@ -8,6 +8,7 @@
 class PaludariumStrategies {
     public:
         PaludariumStrategies();
+        ~PaludariumStrategies();
         
         PL_River *riverPtr;
         PL_RiverLight *riverLightPtr;

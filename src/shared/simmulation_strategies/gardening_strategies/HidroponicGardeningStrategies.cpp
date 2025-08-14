@@ -7,3 +7,11 @@ HidroponicGardeningStrategies::HidroponicGardeningStrategies() {
     waterFanLightNutrientPtr = new HG_WaterFanLightNutrient();
     waterFanLightNutrientThermoPtr = new HG_WaterFanLightNutrientThermo();
 };
+
+HidroponicGardeningStrategies::~HidroponicGardeningStrategies() {
+    delete waterPtr;
+    delete waterFanPtr;
+    delete waterFanLightPtr;
+    delete waterFanLightNutrientPtr;
+    delete waterFanLightNutrientThermoPtr;
+};

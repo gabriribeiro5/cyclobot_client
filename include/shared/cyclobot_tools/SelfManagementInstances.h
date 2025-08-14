@@ -5,6 +5,7 @@
 class SelfManagementInstances {
     public:
         SelfManagementInstances();
+        ~SelfManagementInstances();
 
         ErrorHandler *errorHandlerPtr;
         CheckMyHealth *checkMyHealthPtr;

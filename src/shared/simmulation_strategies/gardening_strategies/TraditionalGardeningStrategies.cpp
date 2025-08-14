@@ -7,3 +7,11 @@ TraditionalGardeningStrategies::TraditionalGardeningStrategies() {
     waterFanLightNutrientPtr = new TG_WaterFanLightNutrient();
     waterFanLightNutrientThermoPtr = new TG_WaterFanLightNutrientThermo();
 };
+
+TraditionalGardeningStrategies::~TraditionalGardeningStrategies() {
+    delete waterPtr;
+    delete waterFanPtr;
+    delete waterFanLightPtr;
+    delete waterFanLightNutrientPtr;
+    delete waterFanLightNutrientThermoPtr;
+};

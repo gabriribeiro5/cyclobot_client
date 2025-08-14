@@ -9,6 +9,7 @@
 class ParameterInstances {
     public:
         ParameterInstances();
+        ~ParameterInstances();
         
         // -> Board Pins
         PeripheralMapping *peripheralMappingPtr;

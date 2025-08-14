@@ -10,8 +10,6 @@
 #include "actuator/EcosystemActuator.h"
 #include "util/TimeSync.h"
 
-class CyclobotInstances;
-
 // CycloBot Finite State Machine
 class FiniteStateMachine {
     public:

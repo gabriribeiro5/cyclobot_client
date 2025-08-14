@@ -8,6 +8,7 @@
 class AeroponicGardeningStrategies {
     public:
         AeroponicGardeningStrategies();
+        ~AeroponicGardeningStrategies();
         
         AG_Water *waterPtr;
         AG_WaterFan *waterFanPtr;

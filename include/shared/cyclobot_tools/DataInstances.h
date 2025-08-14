@@ -5,6 +5,7 @@
 class DataInstances {
     public:
         DataInstances();
+        ~DataInstances();
         
         SelfDiagnosisData *selfDiagnosisDataPtr;
         ConfigData *configDataPtr;

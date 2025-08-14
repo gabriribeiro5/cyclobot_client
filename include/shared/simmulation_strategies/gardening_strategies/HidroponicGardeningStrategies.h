@@ -8,6 +8,7 @@
 class HidroponicGardeningStrategies {
     public:
         HidroponicGardeningStrategies();
+        ~HidroponicGardeningStrategies();
         
         HG_Water *waterPtr;
         HG_WaterFan *waterFanPtr;

@@ -7,3 +7,11 @@ HomeRoomStrategies::HomeRoomStrategies() {
     lightFanThermoHumidifierPtr = new HR_LightFanThermoHumidifier();
     lightFanThermoHumidifierPlayerPtr = new HR_LightFanThermoHumidifierPlayer();
 };
+
+HomeRoomStrategies::~HomeRoomStrategies() {
+    delete lightPtr;
+    delete lightFanPtr;
+    delete lightFanThermoPtr;
+    delete lightFanThermoHumidifierPtr;
+    delete lightFanThermoHumidifierPlayerPtr;
+};

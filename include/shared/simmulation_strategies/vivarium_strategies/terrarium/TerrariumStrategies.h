@@ -7,6 +7,7 @@
 class TerrariumStrategies {
     public:
         TerrariumStrategies();
+        ~TerrariumStrategies();
         
         TR_Light *lightPtr;
         TR_LightFan *lightFanPtr;

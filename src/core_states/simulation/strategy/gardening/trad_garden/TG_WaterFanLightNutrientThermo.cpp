@@ -9,6 +9,8 @@
 /* TRADITIONAL GARDEN */
 void TG_WaterFanLightNutrientThermo::enter() {
 	soilMoistureSensor = A0;                // Sensor de umidade do solo pino A0 conectado no A0 do Arduino
+	brightnessSensor = A0;                // Sensor de umidade do solo pino A0 conectado no A0 do Arduino
+	
 	irrigationSystem = A1;                  // Sensor de chuva pino A1 conectado no A1 do Arduino
 	relePort = 4;                           // porta de controle do relé conectada no D4 do Arduino
 }

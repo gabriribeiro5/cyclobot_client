@@ -5,3 +5,9 @@ AquariumStrategies::AquariumStrategies() {
     lightFanPtr = new AQ_LightNutrient();
     lightFanRainPtr = new AQ_LightNutrientThermo();
 };
+
+AquariumStrategies::~AquariumStrategies() {
+    delete lightPtr;
+    delete lightFanPtr;
+    delete lightFanRainPtr;
+};

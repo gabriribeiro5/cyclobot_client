@@ -6,3 +6,10 @@ PetRoomStrategies::PetRoomStrategies() {
     doorThermoPlayerPtr = new PR_DoorThermoPlayer();
     doorThermoPlayerToyPtr = new PR_DoorThermoPlayerToy();
 };
+
+PetRoomStrategies::~PetRoomStrategies() {
+    delete doorPtr;
+    delete doorThermoPtr;
+    delete doorThermoPlayerPtr;
+    delete doorThermoPlayerToyPtr;
+};

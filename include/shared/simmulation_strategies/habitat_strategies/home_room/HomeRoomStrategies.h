@@ -8,6 +8,7 @@
 class HomeRoomStrategies {
     public:
         HomeRoomStrategies();
+        ~HomeRoomStrategies();
         
         HR_Light *lightPtr;
         HR_LightFan *lightFanPtr;

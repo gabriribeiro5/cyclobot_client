@@ -7,3 +7,11 @@ GrassWallStrategies::GrassWallStrategies() {
     waterFanLightNutrientPtr = new GW_WaterFanLightNutrient();
     waterFanLightNutrientThermoPtr = new GW_WaterFanLightNutrientThermo();
 };
+
+GrassWallStrategies::~GrassWallStrategies() {
+    delete waterPtr;
+    delete waterFanPtr;
+    delete waterFanLightPtr;
+    delete waterFanLightNutrientPtr;
+    delete waterFanLightNutrientThermoPtr;
+};

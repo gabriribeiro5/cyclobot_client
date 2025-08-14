@@ -6,3 +6,8 @@ DataInstances::DataInstances() {
     selfDiagnosisDataPtr = new SelfDiagnosisData();
     configDataPtr = new ConfigData();
 };
+
+DataInstances::~DataInstances() {
+    delete selfDiagnosisDataPtr;
+    delete configDataPtr;
+};

@@ -8,6 +8,7 @@
 class TraditionalGardeningStrategies {
     public:
         TraditionalGardeningStrategies();
+        ~TraditionalGardeningStrategies();
         
         TG_Water *waterPtr;
         TG_WaterFan *waterFanPtr;

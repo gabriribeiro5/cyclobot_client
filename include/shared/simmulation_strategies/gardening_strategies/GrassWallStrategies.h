@@ -8,6 +8,7 @@
 class GrassWallStrategies {
     public:
         GrassWallStrategies();
+        ~GrassWallStrategies();
         
         GW_Water *waterPtr;
         GW_WaterFan *waterFanPtr;

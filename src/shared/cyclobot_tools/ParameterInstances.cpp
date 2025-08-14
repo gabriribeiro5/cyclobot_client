@@ -17,3 +17,15 @@ ParameterInstances::ParameterInstances() {
     clientParametersPtr = new ClientParameters();
     ecosystemParametersPtr = new EcosystemParameters();
 };
+
+ParameterInstances::~ParameterInstances() {
+    // -> Board Pins
+    delete peripheralMappingPtr;
+
+    // -> Parameters
+    delete deviceParametersPtr;
+    delete errorHandlingParametersPtr;
+    delete wifiParametersPtr;
+    delete clientParametersPtr;
+    delete ecosystemParametersPtr;
+};

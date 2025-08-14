@@ -7,3 +7,11 @@ PaludariumStrategies::PaludariumStrategies() {
     riverLightFanRainPtr = new PL_RiverLightFanRain();
     riverLightFanRainThermoPtr = new PL_RiverLightFanRainThermo();
 };
+
+PaludariumStrategies::~PaludariumStrategies() {
+    delete riverPtr;
+    delete riverLightPtr;
+    delete riverLightFanPtr;
+    delete riverLightFanRainPtr;
+    delete riverLightFanRainThermoPtr;
+};

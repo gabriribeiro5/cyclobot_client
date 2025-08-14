@@ -6,6 +6,7 @@
 class AquariumStrategies {
     public:
         AquariumStrategies();
+        ~AquariumStrategies();
         
         AQ_Light *lightPtr;
         AQ_LightNutrient *lightFanPtr;
