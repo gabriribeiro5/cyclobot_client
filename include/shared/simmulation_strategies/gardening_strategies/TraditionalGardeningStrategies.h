@@ -1,17 +1,17 @@
 #pragma once
-#include "../../../core_states/simulation/strategy/gardening/trad_garden/Water.h"
-#include "../../../core_states/simulation/strategy/gardening/trad_garden/WaterFan.h"
-#include "../../../core_states/simulation/strategy/gardening/trad_garden/WaterFanLight.h"
-#include "../../../core_states/simulation/strategy/gardening/trad_garden/WaterFanLightNutrient.h"
-#include "../../../core_states/simulation/strategy/gardening/trad_garden/WaterFanLightNutrientThermo.h"
+#include "../../../core_states/simulation/strategy/gardening/trad_garden/TG_Water.h"
+#include "../../../core_states/simulation/strategy/gardening/trad_garden/TG_WaterFan.h"
+#include "../../../core_states/simulation/strategy/gardening/trad_garden/TG_WaterFanLight.h"
+#include "../../../core_states/simulation/strategy/gardening/trad_garden/TG_WaterFanLightNutrient.h"
+#include "../../../core_states/simulation/strategy/gardening/trad_garden/TG_WaterFanLightNutrientThermo.h"
 
 class TraditionalGardeningStrategies {
     public:
         TraditionalGardeningStrategies();
         
-        Water *waterPtr;
-        WaterFan *waterFanPtr;
-        WaterFanLight *waterFanLightPtr;
-        WaterFanLightNutrient *waterFanLightNutrientPtr;
-        WaterFanLightNutrientThermo *waterFanLightNutrientThermoPtr;
+        TG_Water *waterPtr;
+        TG_WaterFan *waterFanPtr;
+        TG_WaterFanLight *waterFanLightPtr;
+        TG_WaterFanLightNutrient *waterFanLightNutrientPtr;
+        TG_WaterFanLightNutrientThermo *waterFanLightNutrientThermoPtr;
 };

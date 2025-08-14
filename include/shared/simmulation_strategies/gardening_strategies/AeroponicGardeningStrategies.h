@@ -1,17 +1,17 @@
 #pragma once
-#include "../../../core_states/simulation/strategy/gardening/aero_garden/Water.h"
-#include "../../../core_states/simulation/strategy/gardening/aero_garden/WaterFan.h"
-#include "../../../core_states/simulation/strategy/gardening/aero_garden/WaterFanLight.h"
-#include "../../../core_states/simulation/strategy/gardening/aero_garden/WaterFanLightNutrient.h"
-#include "../../../core_states/simulation/strategy/gardening/aero_garden/WaterFanLightNutrientThermo.h"
+#include "../../../core_states/simulation/strategy/gardening/aero_garden/AG_Water.h"
+#include "../../../core_states/simulation/strategy/gardening/aero_garden/AG_WaterFan.h"
+#include "../../../core_states/simulation/strategy/gardening/aero_garden/AG_WaterFanLight.h"
+#include "../../../core_states/simulation/strategy/gardening/aero_garden/AG_WaterFanLightNutrient.h"
+#include "../../../core_states/simulation/strategy/gardening/aero_garden/AG_WaterFanLightNutrientThermo.h"
 
 class AeroponicGardeningStrategies {
     public:
         AeroponicGardeningStrategies();
         
-        Water *waterPtr;
-        WaterFan *waterFanPtr;
-        WaterFanLight *waterFanLightPtr;
-        WaterFanLightNutrient *waterFanLightNutrientPtr;
-        WaterFanLightNutrientThermo *waterFanLightNutrientThermoPtr;
+        AG_Water *waterPtr;
+        AG_WaterFan *waterFanPtr;
+        AG_WaterFanLight *waterFanLightPtr;
+        AG_WaterFanLightNutrient *waterFanLightNutrientPtr;
+        AG_WaterFanLightNutrientThermo *waterFanLightNutrientThermoPtr;
 };

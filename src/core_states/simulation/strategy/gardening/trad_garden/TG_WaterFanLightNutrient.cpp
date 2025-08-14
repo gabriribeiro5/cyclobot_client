@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include "../../../../../../include/core_states/simulation/strategy/gardening/trad_garden/TG_Water.h"
+#include "../../../../../../include/core_states/simulation/strategy/gardening/trad_garden/TG_WaterFanLightNutrient.h"
 #include "../../../../../../include/core_states/simulation/strategy/BaseStrategy.h"
 #include "../../../../../../include/config/EcosystemParameters.h"
 #include "../../../../../../include/config/DeviceParameters.h"
@@ -7,14 +7,14 @@
 #include "../../../../../../include/actuator/EcosystemActuator.h"
 
 /* TRADITIONAL GARDEN */
-void TG_Water::enter() {
+void TG_WaterFanLightNutrient::enter() {
     soilMoistureSensor = A0;                // Sensor de umidade do solo pino A0 conectado no A0 do Arduino
     irrigationSystem = A1;                  // Sensor de chuva pino A1 conectado no A1 do Arduino
     relePort = 4;                           // porta de controle do relé conectada no D4 do Arduino
 }
 
 /* TRADITIONAL GARDEN */
-void TG_Water::setup() {
+void TG_WaterFanLightNutrient::setup() {
     pinMode(soilMoistureSensor, INPUT);     // Sensor de umidade do solo - porta A0 é entrada 
     pinMode(irrigationSystem, INPUT);       // Sensor de chuva - porta A1 é entrada 
     pinMode(relePort, OUTPUT);              // Porta de controle do Relé - D4 é saída 
@@ -22,7 +22,7 @@ void TG_Water::setup() {
 }
 
 /* TRADITIONAL GARDEN */
-void TG_Water::simulate_ecosystem(EcosystemParameters *parametersPtr,
+void TG_WaterFanLightNutrient::simulate_ecosystem(EcosystemParameters *parametersPtr,
                                                    EcosystemScanner *scannerPtr,
                                                    EcosystemActuator *actuatorPtr)
 {
@@ -41,6 +41,6 @@ void TG_Water::simulate_ecosystem(EcosystemParameters *parametersPtr,
 }
 
 /* TRADITIONAL GARDEN */
-void TG_Water::exit() {
+void TG_WaterFanLightNutrient::exit() {
     return;
 }

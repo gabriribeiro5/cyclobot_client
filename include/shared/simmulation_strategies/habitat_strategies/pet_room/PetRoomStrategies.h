@@ -1,15 +1,15 @@
 #pragma once
-#include "../../../../core_states/simulation/strategy/habitat/pet_room/Door.h"
-#include "../../../../core_states/simulation/strategy/habitat/pet_room/DoorThermo.h"
-#include "../../../../core_states/simulation/strategy/habitat/pet_room/DoorThermoPlayer.h"
-#include "../../../../core_states/simulation/strategy/habitat/pet_room/DoorThermoPlayerToy.h"
+#include "../../../../core_states/simulation/strategy/habitat/pet_room/PR_Door.h"
+#include "../../../../core_states/simulation/strategy/habitat/pet_room/PR_DoorThermo.h"
+#include "../../../../core_states/simulation/strategy/habitat/pet_room/PR_DoorThermoPlayer.h"
+#include "../../../../core_states/simulation/strategy/habitat/pet_room/PR_DoorThermoPlayerToy.h"
 
 class PetRoomStrategies {
     public:
         PetRoomStrategies();
 
-        Door *doorPtr;
-        DoorThermo *doorThermoPtr;
-        DoorThermoPlayer *doorThermoPlayerPtr;
-        DoorThermoPlayerToy *doorThermoPlayerToyPtr;
+        PR_Door *doorPtr;
+        PR_DoorThermo *doorThermoPtr;
+        PR_DoorThermoPlayer *doorThermoPlayerPtr;
+        PR_DoorThermoPlayerToy *doorThermoPlayerToyPtr;
 };

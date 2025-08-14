@@ -14,7 +14,7 @@
 
 class BaseStrategy {
     public:
-        virtual ~BaseStrategy();
+        virtual ~BaseStrategy() {}
         
         virtual void enter();
         virtual void setup();

@@ -69,7 +69,15 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
   - [xxx] Simulation strategies (macro scope)
 - [x] feat(shared strategies): Detail shared instances (tools and strategies)
 - [x] feat(TraditionalGarden_Water): First detailed simulation strategy
+
+### 🔧 Bug fixes
 - [x] fix(strategies): names and #includes
+- [x] fix(multiple definitions): add prefix to strategies (TG_, AG_, AQ_, etc)
+
+### ▶️ Mega 2560 Rev3 full version (256kb)
+- [ ] feat(TG_WaterFanLightNutrientThermo): Detailed simulation strategy
+- [ ] feat(PL_RiverLightFan): Detailed simulation strategy
+- [ ] feat(TG_WaterFanLightNutrientThermo): Detailed simulation strategy
 - [ ] feat(failure handler):
   - [ ] State
   - [ ] Config

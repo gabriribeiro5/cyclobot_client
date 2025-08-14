@@ -1,9 +1,9 @@
 #include "../../../../include/shared/simmulation_strategies/gardening_strategies/HidroponicGardeningStrategies.h"
 
 HidroponicGardeningStrategies::HidroponicGardeningStrategies() {
-    waterPtr = new Water();
-    waterFanPtr = new WaterFan();
-    waterFanLightPtr = new WaterFanLight();
-    waterFanLightNutrientPtr = new WaterFanLightNutrient();
-    waterFanLightNutrientThermoPtr = new WaterFanLightNutrientThermo();
+    waterPtr = new HG_Water();
+    waterFanPtr = new HG_WaterFan();
+    waterFanLightPtr = new HG_WaterFanLight();
+    waterFanLightNutrientPtr = new HG_WaterFanLightNutrient();
+    waterFanLightNutrientThermoPtr = new HG_WaterFanLightNutrientThermo();
 };

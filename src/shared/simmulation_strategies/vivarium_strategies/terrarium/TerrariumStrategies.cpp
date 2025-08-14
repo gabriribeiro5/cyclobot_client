@@ -1,8 +1,8 @@
 #include "../../../../../include/shared/simmulation_strategies/vivarium_strategies/terrarium/TerrariumStrategies.h"
 
 TerrariumStrategies::TerrariumStrategies() {
-    lightPtr = new Light();
-    lightFanPtr = new LightFan();
-    lightFanRainPtr = new LightFanRain();
-    lightFanRainThermoPtr = new LightFanRainThermo();
+    lightPtr = new TR_Light();
+    lightFanPtr = new TR_LightFan();
+    lightFanRainPtr = new TR_LightFanRain();
+    lightFanRainThermoPtr = new TR_LightFanRainThermo();
 };

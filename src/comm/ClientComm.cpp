@@ -206,7 +206,7 @@ void ClientComm::post_cyclobot_config(ClientParameters *clientParametersPtr, Wif
   // Send HTTP request
   if (wifiParametersPtr->client.connected()) {
     // Client action
-    wifiParametersPtr->client.println("POST /api/cyclobot/signature_request HTTP/1.1");
+    wifiParametersPtr->client.println("POST /api/cyclobot/post_config HTTP/1.1");
     wifiParametersPtr->client.print("Host: ");
     wifiParametersPtr->client.println(clientParametersPtr->apiServer);
     wifiParametersPtr->client.println("Content-Type: application/json");

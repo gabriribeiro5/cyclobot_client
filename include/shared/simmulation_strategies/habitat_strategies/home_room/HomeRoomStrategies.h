@@ -1,17 +1,17 @@
 #pragma once
-#include "../../../../core_states/simulation/strategy/habitat/home_room/Light.h"
-#include "../../../../core_states/simulation/strategy/habitat/home_room/LightFan.h"
-#include "../../../../core_states/simulation/strategy/habitat/home_room/LightFanThermo.h"
-#include "../../../../core_states/simulation/strategy/habitat/home_room/LightFanThermoHumidifier.h"
-#include "../../../../core_states/simulation/strategy/habitat/home_room/LightFanThermoHumidifierPlayer.h"
+#include "../../../../core_states/simulation/strategy/habitat/home_room/HR_Light.h"
+#include "../../../../core_states/simulation/strategy/habitat/home_room/HR_LightFan.h"
+#include "../../../../core_states/simulation/strategy/habitat/home_room/HR_LightFanThermo.h"
+#include "../../../../core_states/simulation/strategy/habitat/home_room/HR_LightFanThermoHumidifier.h"
+#include "../../../../core_states/simulation/strategy/habitat/home_room/HR_LightFanThermoHumidifierPlayer.h"
 
 class HomeRoomStrategies {
     public:
         HomeRoomStrategies();
         
-        Light *lightPtr;
-        LightFan *lightFanPtr;
-        LightFanThermo *lightFanThermoPtr;
-        LightFanThermoHumidifier *lightFanThermoHumidifierPtr;
-        LightFanThermoHumidifierPlayer *lightFanThermoHumidifierPlayerPtr;
+        HR_Light *lightPtr;
+        HR_LightFan *lightFanPtr;
+        HR_LightFanThermo *lightFanThermoPtr;
+        HR_LightFanThermoHumidifier *lightFanThermoHumidifierPtr;
+        HR_LightFanThermoHumidifierPlayer *lightFanThermoHumidifierPlayerPtr;
 };

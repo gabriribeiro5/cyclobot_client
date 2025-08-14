@@ -9,7 +9,7 @@
 #include "include/core_states/update/ConfigUpdateState.h"
 #include "include/core_states/update/CodeUpdateState.h"
 #include "include/core_states/simulation/SimulationState.h"
-#include "include/core_states/simulation/strategy/gardening/trad_garden/Water.h"
+#include "include/core_states/simulation/strategy/gardening/trad_garden/TG_Water.h"
 #include "include/config/PeripheralMapping.h"
 #include "include/Context.h"
 
@@ -33,7 +33,7 @@ SoftwareSerial esp8266(cyclobot.paramPtr->peripheralMappingPtr->wifiEspRX,
 void setup() {
     Serial.begin(9600);                             // Enable communication over the USB serial port console 9600 Bps
     cyclobot.rtc.begin();
-    cyclobot.simulationStrategyPtr = new Water();
+    cyclobot.simulationStrategyPtr = new TG_Water();
     WiFi.init(&esp8266);
 };
 
