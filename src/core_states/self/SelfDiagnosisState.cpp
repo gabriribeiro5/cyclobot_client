@@ -100,5 +100,5 @@ void SelfDiagnosisState::take_a_nap(FiniteStateMachine *cyclobot) {
 
 // constructor
 SelfDiagnosisState::SelfDiagnosisState() {
-    Serial.println(F("[SelfDiagnosisState] Instantiated..."));
+    return;
 };

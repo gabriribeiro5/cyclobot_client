@@ -8,22 +8,22 @@
 
 void WifiComm::print_wifi_status() {
   if (WiFi.status() != WL_CONNECTED) {
-    Serial.println(F("WiFi not connected."));
+    Serial.println(F("[WifiComm::print_wifi_status] WiFi not connected."));
     return;
   }
   
   // print the SSID of the network you're attached to:
-  Serial.print("SSID: ");
+  Serial.print("[WifiComm::print_wifi_status] SSID: ");
   Serial.println(WiFi.SSID());
 
   // print your WiFi shield's IP address:
   IPAddress ip = WiFi.localIP();
-  Serial.print("IP Address: ");
+  Serial.print("[WifiComm::print_wifi_status] IP Address: ");
   Serial.println(ip);
 
   // print the received signal strength:
   long rssi = WiFi.RSSI();
-  Serial.print("signal strength (RSSI):");
+  Serial.print("[WifiComm::print_wifi_status] Signal strength (RSSI):");
   Serial.print(rssi);
   Serial.println(F(" dBm"));
 }
@@ -32,34 +32,36 @@ void WifiComm::print_encryption_type(int thisType) {
   // read the encryption type and print out the name:
   switch (thisType) {
   case ENC_TYPE_NONE:
-    Serial.println(F("None"));
+    Serial.println(F("[WifiComm::print_encryption_type] None"));
     break;
   case ENC_TYPE_WEP:
-    Serial.println(F("WEP"));
+    Serial.println(F("[WifiComm::print_encryption_type] WEP"));
     break;
   // case ENC_TYPE_TKIP:
-  //   Serial.println(F("WPA"));
+  //   Serial.println(F("[WifiComm::print_encryption_type] WPA"));
   //   break;
   // case ENC_TYPE_CCMP:
-  //   Serial.println(F("WPA2"));
+  //   Serial.println(F("[WifiComm::print_encryption_type] WPA2"));
   //   break;
   // case ENC_TYPE_AUTO:
-  //   Serial.println(F("Auto"));
+  //   Serial.println(F("[WifiComm::print_encryption_type] Auto"));
   //   break;
   default:
-    Serial.println(F("Unknown"));
+    Serial.println(F("[WifiComm::print_encryption_type] Unknown"));
     break;
   }
 }
 
 void WifiComm::print_available_networks(WifiParameters *wifiParametersPtr) {
   for (int i = 0; i < wifiParametersPtr->networkSsidIndex; i++) {
+    Serial.print("[WifiComm::print_available_networks] (");
     Serial.print(i);
     Serial.print(") ");
-    Serial.print(WiFi.SSID(i));
+    Serial.println(WiFi.SSID(i));
+    Serial.print("[WifiComm::print_available_networks] ");
     Serial.print("\tSignal: ");
-    Serial.print(WiFi.RSSI(i));
-    Serial.print(" dBm\tEncryption: ");
+    Serial.println(WiFi.RSSI(i));
+    Serial.print("[WifiComm::print_available_networks] dBm\tEncryption: ");
     print_encryption_type(WiFi.encryptionType(i));
   }
 }

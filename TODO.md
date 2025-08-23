@@ -1,5 +1,4 @@
 # TODO_ARDUINO.md
-
 ## 📡 Cyclobot Firmware - Task Backlog
 This file outlines the tasks related to the development of the Cyclobot's Arduino codebase. Tasks are grouped by priority and domain. The goal is to modularize the firmware, improve communication, and ensure reliable, maintainable, and scalable code.
 
@@ -76,8 +75,26 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 
 ### ▶️ Mega 2560 Rev3 full version (256kb)
 - [x] feat(destructors): memory cleanup for strategy classes
+- [x] feat(wokwi) complete:
+  - [x] add files (wokwi.toml and diagram.json)
+  - [x] map TG_Water pins using online simulator (wokwi)
+    - [x] sensors
+    - [x] wifi (https://embarcados.com.br/esp8266-com-arduino) - 
+    - [x] irrigation
+  - [x] copy diagram.json from online tool
+  - [x] Simulate TG_Water in ATmega2560 (256kb)
+
+- [ ] style(Serial.println): define pattern (incomplete)
+
+- [ ] Validate TG_Water simulation
 - [ ] feat(TG_WaterFanLightNutrientThermo): Detailed simulation strategy
-- [ ] Run code online with Mega 2560 Rev3 - ATmega2560 (256kb)
+  - [ ] map remaning pins using online simulator (wokwi)
+    - [ ] fan
+    - [ ] light
+    - [ ] nutrient
+    - [ ] thermo
+- [ ] Simulate TG_WaterFanLightNutrientThermo in ATmega2560 (256kb)
+- [ ] Draw circuits
 - [ ] feat(comm): implement server
 - [ ] refactor(api addresses): review and update
 
@@ -87,6 +104,7 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 - [ ] feat(PL_RiverLightFan): Detailed simulation strategy
 - [ ] Code reduction to less than 32kb (yes, it hurts...)
   - [ ] Reduce states quantity
+  - [ ] Reduce peripheral mapping if possible
   - [ ] Remove all states
   - [ ] Remove errorHandling feats
   - [ ] Remove update feats

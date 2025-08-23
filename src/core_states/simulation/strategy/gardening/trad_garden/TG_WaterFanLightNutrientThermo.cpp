@@ -8,19 +8,43 @@
 
 /* TRADITIONAL GARDEN */
 void TG_WaterFanLightNutrientThermo::enter() {
-	soilMoistureSensor = A0;                // Sensor de umidade do solo pino A0 conectado no A0 do Arduino
-	brightnessSensor = A0;                // Sensor de umidade do solo pino A0 conectado no A0 do Arduino
+	// ANALOG
+	soilMoistureSensor = A0;
+	brightnessSensor = A1;       // Photoresistor
+	nutrientSensor = A2;
+	thermoSensor = A3;
 	
-	irrigationSystem = A1;                  // Sensor de chuva pino A1 conectado no A1 do Arduino
-	relePort = 4;                           // porta de controle do relé conectada no D4 do Arduino
+	// DIGITAL (PWM ~)
+	fanSystem = 3;
+	lightSystem = 5;
+	thermoSystem = 6;
+	
+	// DIGITAL (high/low only)
+	irrigationSystem = 7;
+	nutrientSystem = 8;
 }
 
 /* TRADITIONAL GARDEN */
 void TG_WaterFanLightNutrientThermo::setup() {
-	pinMode(soilMoistureSensor, INPUT);     // Sensor de umidade do solo - porta A0 é entrada 
-	pinMode(irrigationSystem, INPUT);       // Sensor de chuva - porta A1 é entrada 
-	pinMode(relePort, OUTPUT);              // Porta de controle do Relé - D4 é saída 
-	digitalWrite(relePort, HIGH);           // Mantém relé desligado  
+	pinMode(soilMoistureSensor, INPUT);
+	pinMode(brightnessSensor, INPUT);
+	pinMode(nutrientSensor, INPUT);
+	pinMode(thermoSensor, INPUT);
+
+	pinMode(irrigationSystem, OUTPUT);
+	digitalWrite(irrigationSystem, HIGH); // keep system off
+
+	pinMode(fanSystem, OUTPUT);
+	digitalWrite(fanSystem, HIGH);        // keep system off
+
+	pinMode(lightSystem, OUTPUT);
+	digitalWrite(lightSystem, HIGH);      // keep system off
+
+	pinMode(nutrientSystem, OUTPUT);
+	digitalWrite(nutrientSystem, HIGH);   // keep system off
+
+	pinMode(nutrientSystem, OUTPUT);
+	digitalWrite(nutrientSystem, HIGH);   // keep system off
 }
 
 /* TRADITIONAL GARDEN */

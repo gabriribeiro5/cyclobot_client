@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include "../../../include/core_states/simulation/SimStrategy.h"
+#include "../../../include/core_states/simulation/strategy/BaseStrategy.h"
 #include "../../../include/config/EcosystemParameters.h"
 #include "../../../include/config/DeviceParameters.h"
 #include "../../../include/actuator/EcosystemActuator.h"

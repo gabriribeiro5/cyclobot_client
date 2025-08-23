@@ -5,7 +5,7 @@ class ErrorHandlingParameters {
     public:
         // 0 = Wrong state
         int errorType;
-        char *errorClass;
-        char *errorMethod;
-        char *errorMsg;
+        const char *errorClass;
+        const char *errorMethod;
+        const char *errorMsg;
 };

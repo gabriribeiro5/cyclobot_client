@@ -10,7 +10,7 @@
 bool CheckMyHealth::wifi_shield_is_on(WifiParameters *wifiParametersPtr) {
     // check for the presence of the shield:
     if (WiFi.status() == WL_NO_SHIELD) {
-        Serial.println(F("WiFi shield not present"));
+        Serial.println(F("[CheckMyHealth::wifi_shield_is_on] WiFi shield not present"));
         wifiParametersPtr->wifiShieldIsOn = 0;
         return false;
       }
@@ -21,7 +21,7 @@ bool CheckMyHealth::wifi_shield_is_on(WifiParameters *wifiParametersPtr) {
 void CheckMyHealth::check_wifi_firmware_version(WifiParameters *wifiParametersPtr, SelfDiagnosisData *selfDiagnosisDataPtr) {
   char *fv = WiFi.firmwareVersion();
   if (fv != wifiParametersPtr->wifiFirmwareLatestVersion) {
-      Serial.println(F("(check_wifi_firmware_version): Please upgrade the firmware"));
+      Serial.println(F("[CheckMyHealth::check_wifi_firmware_version] Please upgrade the firmware"));
       selfDiagnosisDataPtr->wifiFirmwareRequireUpdate = 1;
   }
 }
@@ -32,12 +32,12 @@ void CheckMyHealth::check_wifi_networks(WifiComm *wifiCommPtr, WifiParameters *w
   // update selfDiagnosisData
   if (wifiParametersPtr->networkSsidIndex > -1) {
     selfDiagnosisDataPtr->wifiNetworkAvailable = 1; // 1 = true
-    Serial.print("(check_wifi_networks): number of available networks: ");
+    Serial.print("[CheckMyHealth::check_wifi_networks] number of available networks: ");
     Serial.print(wifiParametersPtr->networkSsidIndex);
-    Serial.println(F("(check_wifi_networks): *** AVAILABLE NETWORKS ***"));
+    Serial.println(F("[CheckMyHealth::check_wifi_networks] *** AVAILABLE NETWORKS ***"));
     wifiCommPtr->scan_wifi(wifiParametersPtr);
   } else {
-    Serial.println(F("(check_wifi_networks): Couldn't find network"));
+    Serial.println(F("[[CheckMyHealth::check_wifi_networks] Couldn't find network"));
     selfDiagnosisDataPtr->wifiNetworkAvailable = 0; // 1 = true
   }
 }
@@ -87,6 +87,6 @@ void CheckMyHealth::check_components_list(SelfDiagnosisData *selfDiagnosisDataPt
 }
 
 void CheckMyHealth::clear_runtime_data() {
-  Serial.println(F("(clear_runtime_data): running..."));
+  Serial.println(F("[CheckMyHealth::clear_runtime_data] running..."));
   // TODO: clear ClientComm instance
 }

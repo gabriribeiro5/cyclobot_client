@@ -1,17 +1,17 @@
 #include <Arduino.h>
 #include <SoftwareSerial.h>
 #include <WiFiEsp.h>
-#include "include/core_states/BaseState.h"
-#include "include/core_states/error/ErrorHandlingState.h"
-#include "include/core_states/self/IdleState.h"
-#include "include/core_states/self/SelfDiagnosisState.h"
-#include "include/core_states/comm/HTTPClientState.h"
-#include "include/core_states/update/ConfigUpdateState.h"
-#include "include/core_states/update/CodeUpdateState.h"
-#include "include/core_states/simulation/SimulationState.h"
-#include "include/core_states/simulation/strategy/gardening/trad_garden/TG_Water.h"
-#include "include/config/PeripheralMapping.h"
-#include "include/Context.h"
+#include "../include/core_states/BaseState.h"
+#include "../include/core_states/error/ErrorHandlingState.h"
+#include "../include/core_states/self/IdleState.h"
+#include "../include/core_states/self/SelfDiagnosisState.h"
+#include "../include/core_states/comm/HTTPClientState.h"
+#include "../include/core_states/update/ConfigUpdateState.h"
+#include "../include/core_states/update/CodeUpdateState.h"
+#include "../include/core_states/simulation/SimulationState.h"
+#include "../include/core_states/simulation/strategy/gardening/trad_garden/TG_Water.h"
+#include "../include/config/PeripheralMapping.h"
+#include "../include/Context.h"
 
 
 // Set state classes
@@ -28,7 +28,7 @@ FiniteStateMachine cyclobot(idleStatePtr);
 
 // Extra serial port for wifi
 SoftwareSerial esp8266(cyclobot.paramPtr->peripheralMappingPtr->wifiEspRX,
-                    cyclobot.paramPtr->peripheralMappingPtr->wifiEspTX); // software-based serial port to communicate with wifi module
+                       cyclobot.paramPtr->peripheralMappingPtr->wifiEspTX); // software-based serial port to communicate with wifi module
 
 void setup() {
     Serial.begin(9600);                             // Enable communication over the USB serial port console 9600 Bps
@@ -50,22 +50,22 @@ void loop() {
             cyclobot.report_config();
             cyclobot.report_health_check();
             break;
-        case 2: // Config update
+            case 2: // Config update
             cyclobot.change_state(configUpdateStatePtr);
             cyclobot.update_config();
             break;
-        case 3: // Code update
+            case 3: // Code update
             cyclobot.change_state(codeUpdateStatePtr);
             cyclobot.update_simulation_code();
             break;
-        case 4: // Comm
+            case 4: // Comm
             cyclobot.change_state(communicationStatePtr);
             cyclobot.session_stop(); // stop session and client
             break;
-        case 5: // Simulation
+            case 5: // Simulation
             cyclobot.change_state(simulationStatePtr);
             cyclobot.run_simulation();
-        case 6: // Comm
+            case 6: // Comm
             cyclobot.change_state(communicationStatePtr);
             cyclobot.report_simulation_data();
             break;

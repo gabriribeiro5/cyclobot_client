@@ -9,11 +9,21 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Wokwi GDB",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "C:/Users/gabri/codes/1_Products/cyclobot/cyclobot.elf",
+            "cwd": "C:/Users/gabri/codes/1_Products/cyclobot",
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/local/bin/xtensa-esp32-elf-gdb",
+            "miDebuggerServerAddress": "localhost:3333"
+        },
+        {
             "type": "platformio-debug",
             "request": "launch",
             "name": "PIO Debug",
-            "executable": "C:/Users/gabri/codes/1_Products/cyclobot/.pio/build/uno/firmware.elf",
-            "projectEnvName": "uno",
+            "executable": "C:/Users/gabri/codes/1_Products/cyclobot/.pio/build/megaatmega2560/firmware.elf",
+            "projectEnvName": "megaatmega2560",
             "toolchainBinDir": "C:/Users/gabri/.platformio/packages/toolchain-atmelavr/bin",
             "internalConsoleOptions": "openOnSessionStart",
             "preLaunchTask": {
@@ -25,8 +35,8 @@
             "type": "platformio-debug",
             "request": "launch",
             "name": "PIO Debug (skip Pre-Debug)",
-            "executable": "C:/Users/gabri/codes/1_Products/cyclobot/.pio/build/uno/firmware.elf",
-            "projectEnvName": "uno",
+            "executable": "C:/Users/gabri/codes/1_Products/cyclobot/.pio/build/megaatmega2560/firmware.elf",
+            "projectEnvName": "megaatmega2560",
             "toolchainBinDir": "C:/Users/gabri/.platformio/packages/toolchain-atmelavr/bin",
             "internalConsoleOptions": "openOnSessionStart"
         },
@@ -34,8 +44,8 @@
             "type": "platformio-debug",
             "request": "launch",
             "name": "PIO Debug (without uploading)",
-            "executable": "C:/Users/gabri/codes/1_Products/cyclobot/.pio/build/uno/firmware.elf",
-            "projectEnvName": "uno",
+            "executable": "C:/Users/gabri/codes/1_Products/cyclobot/.pio/build/megaatmega2560/firmware.elf",
+            "projectEnvName": "megaatmega2560",
             "toolchainBinDir": "C:/Users/gabri/.platformio/packages/toolchain-atmelavr/bin",
             "internalConsoleOptions": "openOnSessionStart",
             "loadMode": "manual"

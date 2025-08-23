@@ -82,5 +82,5 @@ void CodeUpdateState::take_a_nap(FiniteStateMachine *cyclobot) {
 
 // constructor
 CodeUpdateState::CodeUpdateState() {
-    Serial.println(F("[CodeUpdateState] Instantiated..."));
+    return;
 };

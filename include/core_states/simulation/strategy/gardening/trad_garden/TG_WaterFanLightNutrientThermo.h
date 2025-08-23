@@ -15,8 +15,14 @@ class TG_WaterFanLightNutrientThermo : public BaseStrategy {
         void simulate_ecosystem(EcosystemParameters *ecosystemParamPtr, EcosystemScanner *scannerPtr, EcosystemActuator *actuatorPtr) override;
         void exit() override;    
     private:
-        uint8_t soilMoistureSensor;       // Sensor de umidade do solo pino A0 conectado no A0 do Arduino
-        uint8_t brightnessSensor;       // Sensor de umidade do solo pino A0 conectado no A0 do Arduino
-        uint8_t irrigationSystem;         // Sensor de chuva pino A1 conectado no A1 do Arduino
-        int relePort;                     // porta de controle do relé conectada no D4 do Arduino
+        uint8_t soilMoistureSensor;
+        uint8_t brightnessSensor;
+        uint8_t nutrientSensor;
+        uint8_t thermoSensor;
+
+        int irrigationSystem;
+        int fanSystem;
+        int lightSystem;
+        int nutrientSystem;
+        int thermoSystem;
 };

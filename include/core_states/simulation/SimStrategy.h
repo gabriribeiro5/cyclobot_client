@@ -1,5 +1,4 @@
 #pragma once
-#include "strategy/BaseStrategy.h"
 #include "../../config/EcosystemParameters.h"
 #include "../../sensor/EcosystemScanner.h"
 #include "../../actuator/EcosystemActuator.h"

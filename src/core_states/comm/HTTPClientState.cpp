@@ -110,5 +110,5 @@ void HTTPClientState::take_a_nap(FiniteStateMachine *cyclobot) {
 
 // constructor
 HTTPClientState::HTTPClientState() {
-    Serial.println(F("[HTTPClientState] Instantiated..."));
+    return;
 };

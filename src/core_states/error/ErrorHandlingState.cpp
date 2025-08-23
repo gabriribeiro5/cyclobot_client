@@ -74,5 +74,5 @@ void ErrorHandlingState::take_a_nap(FiniteStateMachine *cyclobot) {
 
 // constructor
 ErrorHandlingState::ErrorHandlingState() {
-    Serial.println(F("[ErrorHandlingState] Instantiated..."));
+    return;
 };

@@ -13,7 +13,7 @@ void IdleState::enter(FiniteStateMachine *cyclobot) {
 };
 
 void IdleState::exit(FiniteStateMachine *cyclobot) {
-    Serial.println(F("(exit) switching off IdleState"));
+    Serial.println(F("[IdleState::exit] switching off IdleState"));
 };
 
 // error
@@ -69,15 +69,15 @@ void IdleState::report_simulation_data(FiniteStateMachine *cyclobot) {
 
 // self
 void IdleState::take_a_nap(FiniteStateMachine *cyclobot) {
-    Serial.println(F("(take_a_nap) running..."));
+    Serial.println(F("[IdleState::take_a_nap] running..."));
     // reset parameters
     cyclobot->paramPtr->wifiParametersPtr->scanCount = 0;
     // sleep
     delay(cyclobot->paramPtr->deviceParametersPtr->sleepLength);
-    Serial.println(F("(take_a_nap) done"));
+    Serial.println(F("[IdleState::take_a_nap] done"));
 };
 
 // constructor
 IdleState::IdleState() {
-    Serial.println(F("[IdleState] Instantiated"));
+    return;
 };

@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "author": "Gabriel Ribeiro",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-breadboard",
+      "id": "bb1",
+      "top": 25.8,
+      "left": 329.2,
+      "attrs": { "color": "#33771b" }
+    },
+    { "type": "wokwi-arduino-mega", "id": "mega", "top": 39, "left": -61.2, "attrs": {} },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": 44.4,
+      "left": 349.4,
+      "attrs": { "color": "limegreen" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": 90.35,
+      "left": 364.8,
+      "attrs": { "value": "1000" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led2",
+      "top": 44.4,
+      "left": 368.6,
+      "attrs": { "color": "limegreen" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led3",
+      "top": 44.4,
+      "left": 387.8,
+      "attrs": { "color": "limegreen" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 99.95,
+      "left": 384,
+      "attrs": { "value": "1000" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r3",
+      "top": 109.55,
+      "left": 403.2,
+      "attrs": { "value": "1000" }
+    },
+    {
+      "type": "wokwi-relay-module",
+      "id": "relay1",
+      "top": -237,
+      "left": 483.6,
+      "rotate": 270,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-pir-motion-sensor",
+      "id": "pir1",
+      "top": 268.8,
+      "left": 828.38,
+      "rotate": 180,
+      "attrs": {}
+    }
+  ],
+  "connections": [
+    [ "bb1:tp.50", "mega:GND.1", "gray", [ "v-153.3", "h-0.8" ] ],
+    [ "mega:0", "bb1:1t.a", "gold", [ "v-38.4", "h158.9" ] ],
+    [ "mega:1", "bb1:2t.a", "green", [ "v-48", "h5.7" ] ],
+    [ "bb1:tp.1", "bb1:3t.a", "gray", [ "v0" ] ],
+    [ "mega:2", "bb1:4t.a", "green", [ "v-57.6", "h5.6" ] ],
+    [ "bb1:6t.a", "mega:4", "green", [ "v-96", "h-9.6" ] ],
+    [ "bb1:tp.3", "bb1:5t.a", "gray", [ "v0" ] ],
+    [ "bb1:tp.5", "bb1:7t.a", "gray", [ "v0" ] ],
+    [ "relay1:IN", "mega:7", "cyan", [ "v86.4", "h-245.8" ] ],
+    [ "bb1:tp.12", "relay1:GND", "gray", [ "v-18.9", "h37.6" ] ],
+    [ "bb1:tn.11", "relay1:VCC", "red", [ "v-38.5", "h47.2" ] ],
+    [ "mega:5V", "bb1:bn.50", "red", [ "v150.9", "h827.9" ] ],
+    [ "bb1:tp.49", "bb1:bp.48", "gray", [ "v86.7", "h-9.6" ] ],
+    [ "bb1:bn.49", "bb1:tn.50", "red", [ "v-87.7", "h9.6" ] ],
+    [ "led3:A", "bb1:7t.b", "", [ "$bb" ] ],
+    [ "led3:C", "bb1:6t.b", "", [ "$bb" ] ],
+    [ "r2:1", "bb1:2t.c", "", [ "$bb" ] ],
+    [ "r2:2", "bb1:8t.c", "", [ "$bb" ] ],
+    [ "led2:A", "bb1:5t.b", "", [ "$bb" ] ],
+    [ "led2:C", "bb1:4t.b", "", [ "$bb" ] ],
+    [ "r1:1", "bb1:4t.d", "", [ "$bb" ] ],
+    [ "r1:2", "bb1:10t.d", "", [ "$bb" ] ],
+    [ "r3:1", "bb1:6t.e", "", [ "$bb" ] ],
+    [ "r3:2", "bb1:12t.e", "", [ "$bb" ] ],
+    [ "led1:A", "bb1:3t.b", "", [ "$bb" ] ],
+    [ "led1:C", "bb1:2t.b", "", [ "$bb" ] ],
+    [ "pir1:GND", "bb1:bn.43", "gray", [ "v-28.8", "h-9.34" ] ],
+    [ "bb1:bp.45", "pir1:VCC", "red", [ "v27.9", "h8.8" ] ],
+    [ "mega:A0", "pir1:OUT", "cyan", [ "v26.1", "h726.3" ] ]
+  ],
+  "dependencies": {}
+}

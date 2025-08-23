@@ -84,6 +84,5 @@ void ConfigUpdateState::take_a_nap(FiniteStateMachine *cyclobot) {
 
 // constructor
 ConfigUpdateState::ConfigUpdateState() {
-    Serial.println(F("[ConfigUpdateState] Instantiated..."));
-    return; // ou transição para um estado de erro seguro
+    return;
 };
