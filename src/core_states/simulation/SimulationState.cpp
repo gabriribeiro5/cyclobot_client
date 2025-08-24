@@ -6,15 +6,15 @@
 // used by context.changeState
 void SimulationState::enter(FiniteStateMachine *cyclobot) {
     if (!cyclobot) {
-        Serial.println(F("(enter): cyclobot pointer is null in SimulationState"));
+        Serial.println(F("[SimulationState::enter] cyclobot pointer is null in SimulationState"));
         return; // ou transição para um estado de erro seguro
     }
     
-    Serial.println(F("(SimulationState) Running..."));
+    Serial.println(F(" *************************  ******[SimulationState::enter]******  ************************* "));
 };
 
 void SimulationState::exit(FiniteStateMachine *cyclobot) {
-    Serial.println(F("(exit) switching off SimulationState"));
+    Serial.println(F(" *************************  ******[SimulationState::exit]*******  ************************* "));
 };
 
 // error
@@ -60,7 +60,7 @@ void SimulationState::session_stop(FiniteStateMachine *cyclobot) {
 
 // sim
 void SimulationState::run_simulation(FiniteStateMachine *cyclobot) {
-    Serial.println(F("(run_simulation) running..."));
+    Serial.println(F("[SimulationState::run_simulation] running..."));
     
     if (simStrategyPtr) {
         delete simStrategyPtr;
@@ -78,7 +78,7 @@ void SimulationState::run_simulation(FiniteStateMachine *cyclobot) {
                                        cyclobot->actuatorPtr);   
     cyclobot->paramPtr->ecosystemParametersPtr->eventEnd = cyclobot->rtc.now();
     
-    Serial.println(F("(run_simulation) done"));
+    Serial.println(F("[SimulationState::run_simulation] done"));
 };
 
 // comm
@@ -93,7 +93,6 @@ void SimulationState::take_a_nap(FiniteStateMachine *cyclobot) {
 
 // constructor
 SimulationState::SimulationState() {
-    Serial.println(F("(SimulationState): Instantiated..."));
     simStrategyPtr = nullptr;
 };
 

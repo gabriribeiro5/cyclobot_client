@@ -10,16 +10,16 @@
 // used by context.changeState
 void SelfDiagnosisState::enter(FiniteStateMachine *cyclobot) {
     if (!cyclobot) {
-        Serial.println(F("(enter): cyclobot pointer is null in SelfDiagnosisState"));
+        Serial.println(F("SelfDiagnosisState::enter cyclobot pointer is null in SelfDiagnosisState"));
         return; // ou transição para um estado de erro seguro
     }
     
-    Serial.println(F("(SelfDiagnosisState) Running..."));
+    Serial.println(F(" *************************  *****[SelfDiagnosisState::enter]****  ************************* "));
 };
 
 void SelfDiagnosisState::exit(FiniteStateMachine *cyclobot) {
     cyclobot->selfPtr->checkMyHealthPtr->clear_runtime_data();
-    Serial.println(F("(exit) switching off SelfDiagnosisState"));
+    Serial.println(F(" *************************  *****[SelfDiagnosisState::exit]*****  ************************* "));
 };
 
 // error
@@ -29,7 +29,7 @@ void SelfDiagnosisState::handle_error(FiniteStateMachine *cyclobot) {
 
 // self
 void SelfDiagnosisState::run_health_check(FiniteStateMachine *cyclobot) {
-    Serial.println(F("(run_health_check) Running..."));
+    Serial.println(F("[SelfDiagnosisState::run_health_check] Running..."));
     cyclobot->dataPtr->selfDiagnosisDataPtr->diagnosisDateTime = ""; // TODO: apply current date and time
     // *** SENSORS ***
     

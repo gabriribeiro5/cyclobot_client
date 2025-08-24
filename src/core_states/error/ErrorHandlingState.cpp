@@ -4,21 +4,21 @@
 // used by context.changeState
 void ErrorHandlingState::enter(FiniteStateMachine *cyclobot) {
     if (!cyclobot) {
-        Serial.println(F("(enter): cyclobot pointer is null in ErrorHandlingState"));
+        Serial.println(F("[ErrorHandlingState::enter] cyclobot pointer is null in ErrorHandlingState"));
         return; // ou transição para um estado de erro seguro
     }
     
-    Serial.println(F("(ErrorHandlingState) Running..."));
+    Serial.println(F(" *************************  ****[ErrorHandlingState::enter]*****  ************************* "));
 };
 
 void ErrorHandlingState::exit(FiniteStateMachine *cyclobot) {
-    Serial.println(F("(exit) switching off ErrorHandlingState"));
+    Serial.println(F(" *************************  *****[ErrorHandlingState::exit]*****  ************************* "));
 };
 
 // error
 void ErrorHandlingState::handle_error(FiniteStateMachine *cyclobot) {
-    Serial.println(F("(handle_error) running..."));
-    Serial.println(F("(handle_error) done"));
+    Serial.println(F("[ErrorHandlingState::handle_error] running..."));
+    Serial.println(F("[ErrorHandlingState::handle_error] done"));
 };
 
 // self

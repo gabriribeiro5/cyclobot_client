@@ -67,16 +67,16 @@ void WifiComm::print_available_networks(WifiParameters *wifiParametersPtr) {
 }
 
 void WifiComm::scan_wifi(WifiParameters *wifiParametersPtr) {
-  Serial.println(F("(scan_wifi): Running..."));
+  Serial.println(F("[WifiComm::scan_wifi] Running..."));
   // Print WiFi MAC address:
   // printMacAddress();
 
   // scan for nearby networks:
-  Serial.println(F("(scan_wifi): ** Scan Networks **"));
+  Serial.println(F("[WifiComm::scan_wifi] ** Scan Networks **"));
   while (wifiParametersPtr->scanCount < wifiParametersPtr->wifiMaxScanAttempt) {
     wifiParametersPtr->networkSsidIndex = WiFi.scanNetworks();
     if (wifiParametersPtr->networkSsidIndex == -1) {
-        Serial.print("(scan_wifi): failed attempt -> ");
+        Serial.print("[WifiComm::scan_wifi] failed attempt -> ");
         Serial.print(wifiParametersPtr->scanCount);
         delay(wifiParametersPtr->waitTimePerScanAttempt);
         wifiParametersPtr->scanCount++;
@@ -89,13 +89,13 @@ void WifiComm::scan_wifi(WifiParameters *wifiParametersPtr) {
 }
 
 void WifiComm::connect_wifi(WifiParameters *wifiParametersPtr) {
-  Serial.println(F("(connect_wifi): Running..."));
+Serial.println(F("[WifiComm::connect_wifi] Running..."));
   
   // Initialize the Ethernet client library
   // with the IP address and port of the server
   // that you want to connect to (port 80 is default for HTTP):
   while (wifiParametersPtr->wifiStatus != WL_IDLE_STATUS) {
-    Serial.println(F("(connect_wifi): Attempting to connect to SSID: "));
+    Serial.println(F("[WifiComm::connect_wifi] Attempting to connect to SSID: "));
     Serial.println(wifiParametersPtr->wifiSsid);
     
     // WPA/WPA2 connection
@@ -112,7 +112,7 @@ void WifiComm::connect_wifi(WifiParameters *wifiParametersPtr) {
 }
 
 void WifiComm::disconnect_wifi() {
-  Serial.println(F("(disconnect_wifi): Running..."));
+  Serial.println(F("[WifiComm::disconnect_wifi] Running..."));
   WiFi.disconnect();
-  Serial.println(F("(disconnect_wifi): done"));
+  Serial.println(F("[WifiComm::disconnect_wifi] done"));
 }

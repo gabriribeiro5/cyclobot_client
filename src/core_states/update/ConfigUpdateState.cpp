@@ -11,11 +11,11 @@ void ConfigUpdateState::enter(FiniteStateMachine *cyclobot) {
         return;
     }
     
-    Serial.println(F("(ConfigUpdateState) Running..."));
+    Serial.println(F(" *************************  *****[ConfigUpdateState::enter]*****  ************************* "));
 };
 
 void ConfigUpdateState::exit(FiniteStateMachine *cyclobot) {
-    Serial.println(F("(exit) switching off ConfigUpdateState"));
+    Serial.println(F(" *************************  *****[ConfigUpdateState::exit]******  ************************* "));
 };
 
 // error

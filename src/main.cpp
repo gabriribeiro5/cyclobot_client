@@ -31,9 +31,53 @@ SoftwareSerial esp8266(cyclobot.paramPtr->peripheralMappingPtr->wifiEspRX,
                        cyclobot.paramPtr->peripheralMappingPtr->wifiEspTX); // software-based serial port to communicate with wifi module
 
 void setup() {
-    Serial.begin(9600);                             // Enable communication over the USB serial port console 9600 Bps
+    Serial.begin(9600); // Enable communication over the USB serial port console 9600 Bps
+    
+    // Serial.println(F(" *************************  **                                **  ************************* "));
+    // Serial.println(F(" *************************  **     **********************     **  ************************* "));
+    // Serial.println(F(" ***********************  **     **************************     **  *********************** "));
+    // Serial.println(F(" *********************  **     ******************************    **  ********************** "));
+    // Serial.println(F(" *******************  **     **********************************    **  ******************** "));
+    // Serial.println(F(" *****************  **     **************************************    **  ****************** "));
+    // Serial.println(F(" ***************  **     ******************************************     **  *************** "));
+    // Serial.println(F("                 **    **********************************************     **                "));
+    // Serial.println(F(" ************** **     **********************************************     ** ************** "));
+    // Serial.println(F(" ************** **     **********************************************     ** ************** "));
+    // Serial.println(F(" ************** **     ****  C Y C L O B O T   O L U S O G B A  *****     ** ************** "));
+    // Serial.println(F(" ************** **     **********************************************     ** ************** "));
+    // Serial.println(F(" ************** **     **********************************************     ** ************** "));
+    // Serial.println(F("                **     **********************************************     **                "));
+    // Serial.println(F(" ***************  **     ******************************************     **  *************** "));
+    // Serial.println(F(" *****************  **     **************************************     **  ***************** "));
+    // Serial.println(F(" *******************  **     **********************************     **  ******************* "));
+    // Serial.println(F(" *********************  **     ******************************     **  ********************* "));
+    // Serial.println(F(" ***********************  **     **************************     **  *********************** "));
+    // Serial.println(F(" *************************  **     **********************     **  ************************* "));
+    // Serial.println(F(" *************************  **                                **  ************************* "));
+    
+
+    Serial.println(F("[setup] starting clock (rtc)"));
     cyclobot.rtc.begin();
+    cyclobot.now = cyclobot.rtc.now();
+    
+    Serial.print(F("[setup] date: "));
+    Serial.print(cyclobot.now.day());
+    Serial.print(F("/"));
+    Serial.print(cyclobot.now.month());
+    Serial.print(F("/"));
+    Serial.println(cyclobot.now.year());
+    
+    Serial.print(F("[setup] time: "));
+    Serial.print(cyclobot.now.hour());
+    Serial.print(F(":"));
+    Serial.print(cyclobot.now.minute());
+    Serial.print(F(":"));
+    Serial.println(cyclobot.now.second());
+    
+    Serial.println(F("[setup] setting simulation strategy"));
     cyclobot.simulationStrategyPtr = new TG_Water();
+    
+    Serial.println(F("[setup] initializing WiFi module"));
     WiFi.init(&esp8266);
 };
 

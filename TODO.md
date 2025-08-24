@@ -79,14 +79,21 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
   - [x] add files (wokwi.toml and diagram.json)
   - [x] map TG_Water pins using online simulator (wokwi)
     - [x] sensors
-    - [x] wifi (https://embarcados.com.br/esp8266-com-arduino) - 
+    - [x] wifi (https://embarcados.com.br/esp8266-com-arduino)
     - [x] irrigation
   - [x] copy diagram.json from online tool
   - [x] Simulate TG_Water in ATmega2560 (256kb)
 
-- [ ] style(Serial.println): define pattern (incomplete)
+- [x] style(Serial.println): define pattern
+- [x] feat(Startup logo): apply to logs
+- [ ] fix(Serial.println): board simulation stops printing at SimulationState::enter
 
 - [ ] Validate TG_Water simulation
+- [ ] feat(Real Time Clock): apply to logs
+  - [ ] create comm.time_update
+  - [ ] call comm.time_update
+  - [ ] set rtc to zero
+  - [ ] insert timers in specific logs such as HTTPClientState's and SimulationState's
 - [ ] feat(TG_WaterFanLightNutrientThermo): Detailed simulation strategy
   - [ ] map remaning pins using online simulator (wokwi)
     - [ ] fan

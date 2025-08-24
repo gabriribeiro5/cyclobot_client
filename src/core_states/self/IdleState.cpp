@@ -4,16 +4,16 @@
 // used by context.changeState
 void IdleState::enter(FiniteStateMachine *cyclobot) {
     if (!cyclobot) {
-        Serial.println(F("(enter): cyclobot pointer is null in IdleState"));
+        Serial.println(F("[IdleState::enter] cyclobot pointer is null in IdleState"));
         return; // ou transição para um estado de erro seguro
     }
     
-    Serial.println(F("(IdleState) Running..."));
+    Serial.println(F(" *************************  *********[IdleState::enter]*********  ************************* "));
     // TODO: clear memory
 };
 
 void IdleState::exit(FiniteStateMachine *cyclobot) {
-    Serial.println(F("[IdleState::exit] switching off IdleState"));
+    Serial.println(F(" *************************  *********[IdleState::exit]**********  ************************* "));
 };
 
 // error

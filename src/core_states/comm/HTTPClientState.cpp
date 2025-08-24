@@ -5,14 +5,14 @@
 // used by context.changeState
 void HTTPClientState::enter(FiniteStateMachine *cyclobot) {
     if (!cyclobot) {
-        Serial.println(F("(enter): cyclobot pointer is null in HTTPClientState"));
+        Serial.println(F("[HTTPClientState::enter] cyclobot pointer is null in HTTPClientState"));
         return;
-    }    
-    Serial.println(F("(HTTPClientState) Running..."));
+    }
+    Serial.println(F(" *************************  ******[HTTPClientState::enter]******  ************************* "));
 };
 
 void HTTPClientState::exit(FiniteStateMachine *cyclobot) {
-    Serial.println(F("(exit) switching off HTTPClientState"));
+    Serial.println(F(" *************************  ******[HTTPClientState::exit]*******  ************************* "));
 };
 
 // error
@@ -31,43 +31,43 @@ void HTTPClientState::run_health_check(FiniteStateMachine *cyclobot) {
 
 // comm
 void HTTPClientState::report_signature_request(FiniteStateMachine *cyclobot) {
-    Serial.println(F("(report_signature_request): running..."));
+    Serial.println(F("[HTTPClientState::report_signature_request] running..."));
     if (cyclobot->paramPtr->deviceParametersPtr->firstAwakening) {
         cyclobot->commPtr->clientCommPtr->post_signature_request(cyclobot->paramPtr->clientParametersPtr,
                                                                   cyclobot->paramPtr->wifiParametersPtr,
                                                                   cyclobot->paramPtr->deviceParametersPtr);
         cyclobot->paramPtr->deviceParametersPtr->firstAwakening = false;
-        Serial.println(F("(report_signature_request): cyclobot approved"));
+        Serial.println(F("[HTTPClientState::report_signature_request] cyclobot approved"));
     } else {
-        Serial.println(F("(report_signature_request): skipped"));
+        Serial.println(F("[HTTPClientState::report_signature_request] skipped"));
     }
 };
 
 void HTTPClientState::session_new(FiniteStateMachine *cyclobot) {
-    Serial.println(F("(session_new) running..."));
+    Serial.println(F("[HTTPClientState::session_new] running..."));
     cyclobot->commPtr->clientCommPtr->get_cyclobot_session_token(cyclobot->paramPtr->clientParametersPtr,
                                                                   cyclobot->paramPtr->wifiParametersPtr,
                                                                   cyclobot->paramPtr->deviceParametersPtr);
-    Serial.println(F("(session_new) done"));
+    Serial.println(F("[HTTPClientState::session_new] done"));
 };
 
 void HTTPClientState::report_config(FiniteStateMachine *cyclobot) {
-    Serial.println(F("(report_config) running..."));
+    Serial.println(F("[HTTPClientState::report_config] running..."));
     cyclobot->commPtr->clientCommPtr->post_cyclobot_config(cyclobot->paramPtr->clientParametersPtr,
                                                             cyclobot->paramPtr->wifiParametersPtr,
                                                             cyclobot->paramPtr->deviceParametersPtr,
                                                             cyclobot->dataPtr->configDataPtr,
                                                             cyclobot->paramPtr->ecosystemParametersPtr);
-    Serial.println(F("(report_config) done"));
+    Serial.println(F("[HTTPClientState::report_config] done"));
 };
 
 void HTTPClientState::report_health_check(FiniteStateMachine *cyclobot) {
-    Serial.println(F("(report_health_check) running..."));
+    Serial.println(F("[HTTPClientState::report_health_check] running..."));
     cyclobot->commPtr->clientCommPtr->post_cyclobot_diagnosis(cyclobot->paramPtr->clientParametersPtr,
                                                                cyclobot->paramPtr->wifiParametersPtr,
                                                                cyclobot->paramPtr->deviceParametersPtr,
                                                                cyclobot->dataPtr->selfDiagnosisDataPtr);
-    Serial.println(F("(report_health_check) done"));
+    Serial.println(F("[HTTPClientState::report_health_check] done"));
 };
 
 // update
@@ -81,10 +81,10 @@ void HTTPClientState::update_simulation_code(FiniteStateMachine *cyclobot) {
 
 // comm
 void HTTPClientState::session_stop(FiniteStateMachine *cyclobot) {
-    Serial.println(F("(session_stop) running..."));
+    Serial.println(F("[HTTPClientState::session_stop] running..."));
     cyclobot->commPtr->clientCommPtr->put_invalid_cyclobot_session_token();
     cyclobot->commPtr->wifiCommPtr->disconnect_wifi();
-    Serial.println(F("(session_stop) done"));
+    Serial.println(F("[HTTPClientState::session_stop] done"));
 };
 
 // sim
@@ -95,12 +95,12 @@ void HTTPClientState::run_simulation(FiniteStateMachine *cyclobot) {
 // comm
 void HTTPClientState::report_simulation_data(FiniteStateMachine *cyclobot) {
     // This method must start (and stop) both Client and Session
-    Serial.println(F("(report_simulation_data) running..."));
+    Serial.println(F("[HTTPClientState::report_simulation_data] running..."));
     cyclobot->commPtr->wifiCommPtr->connect_wifi(cyclobot->paramPtr->wifiParametersPtr);
     cyclobot->commPtr->clientCommPtr->get_cyclobot_session_token(cyclobot->paramPtr->clientParametersPtr, cyclobot->paramPtr->wifiParametersPtr, cyclobot->paramPtr->deviceParametersPtr);
     cyclobot->commPtr->clientCommPtr->post_cyclobot_environment_state();
     session_stop(cyclobot);
-    Serial.println(F("(report_simulation_data) done"));
+    Serial.println(F("[HTTPClientState::report_simulation_data] done"));
 };
 
 // self

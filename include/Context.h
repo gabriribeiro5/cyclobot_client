@@ -27,7 +27,7 @@ class FiniteStateMachine {
         // time tracking software
         RTC_DS3231 rtc;
 
-        int currentTime;    // Track in which step we are
+        DateTime now;    // Track in which step we are
         int stateFlow = 0; // Flow stablished at the Client module and updated by States to comply client rules
     
         FiniteStateMachine(BaseState *initialStatePtr); // Constructor

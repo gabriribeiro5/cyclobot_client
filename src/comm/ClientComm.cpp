@@ -86,7 +86,7 @@ void ClientComm::post_signature_request(ClientParameters *clientParametersPtr, W
 }
 
 const char *ClientComm::get_cyclobot_session_token(ClientParameters *clientParametersPtr, WifiParameters *wifiParametersPtr, DeviceParameters *deviceParametersPtr) {
-  Serial.println(F("ClientComm::get_cyclobot_session_token running..."));
+  Serial.println(F("[ClientComm::get_cyclobot_session_token] running..."));
 
   // Construct JSON payload
   clientParametersPtr->loginParameters_Json["cyclobotId"] = deviceParametersPtr->cyclobotId;

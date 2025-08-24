@@ -11,11 +11,11 @@ void CodeUpdateState::enter(FiniteStateMachine *cyclobot) {
         return; // ou transição para um estado de erro seguro
     }
     
-    Serial.println(F("(CodeUpdateState) Running..."));
+    Serial.println(F(" *************************  ******[CodeUpdateState::enter]******  ************************* "));
 };
 
 void CodeUpdateState::exit(FiniteStateMachine *cyclobot) {
-    Serial.println(F("(exit) switching off CodeUpdateState"));
+    Serial.println(F(" *************************  ******[CodeUpdateState::exit]*******  ************************* "));
 };
 
 // error
