@@ -6,7 +6,6 @@
 #include "../../include/config/WifiParameters.h"
 #include "../../include/data/SelfDiagnosisData.h"
 
-
 bool CheckMyHealth::wifi_shield_is_on(WifiParameters *wifiParametersPtr) {
     // check for the presence of the shield:
     if (WiFi.status() == WL_NO_SHIELD) {
@@ -67,22 +66,32 @@ void CheckMyHealth::check_client_communication(ClientComm *clientCommPtr,
 }
 
 void CheckMyHealth::check_watering_system(SelfDiagnosisData *selfDiagnosisDataPtr) {
+  Serial.println(F("[CheckMyHealth::check_watering_system] Running..."));
+  Serial.flush();
   selfDiagnosisDataPtr->wateringSystemOK = 1;
 }
 
 void CheckMyHealth::check_river_system(SelfDiagnosisData *selfDiagnosisDataPtr) {
+  Serial.println(F("[CheckMyHealth::check_river_system] Running..."));
+  Serial.flush();
   selfDiagnosisDataPtr->riverSystemOK = 1;
 }
 
 void CheckMyHealth::check_wind_system(SelfDiagnosisData *selfDiagnosisDataPtr) {
+  Serial.println(F("[CheckMyHealth::check_wind_system] Running..."));
+  Serial.flush();
   selfDiagnosisDataPtr->windSystemOK = 1;
 }
 
 void CheckMyHealth::check_lighting_system(SelfDiagnosisData *selfDiagnosisDataPtr) {
+  Serial.println(F("[CheckMyHealth::check_lighting_system] Running..."));
+  Serial.flush();
   selfDiagnosisDataPtr->lightingSystemOK = 1;
 }
 
 void CheckMyHealth::check_components_list(SelfDiagnosisData *selfDiagnosisDataPtr) {
+  Serial.println(F("[CheckMyHealth::check_components_list] Running..."));
+  Serial.flush();
   selfDiagnosisDataPtr->peripheralComponentsOK = 1;
 }
 

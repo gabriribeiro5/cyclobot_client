@@ -31,6 +31,7 @@ class FiniteStateMachine {
         int stateFlow = 0; // Flow stablished at the Client module and updated by States to comply client rules
     
         FiniteStateMachine(BaseState *initialStatePtr); // Constructor
+        void printFreeMemory(char *currentMethodPtr);
         void change_state(BaseState *newStatePtr);
         void update_current_time();
         

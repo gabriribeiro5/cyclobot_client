@@ -60,14 +60,15 @@ void SimulationState::session_stop(FiniteStateMachine *cyclobot) {
 
 // sim
 void SimulationState::run_simulation(FiniteStateMachine *cyclobot) {
-    Serial.println(F("[SimulationState::run_simulation] running..."));
-    
+    Serial.println(F("[SimulationState::run_simulation] running..."));    
     if (simStrategyPtr) {
         delete simStrategyPtr;
     }
+    
     simStrategyPtr = new SimStrategy(cyclobot->simulationStrategyPtr);
     
     if (cyclobot->paramPtr->deviceParametersPtr->firstAwakening) {
+        Serial.println(F("[SimulationState::run_simulation] calling pin setup method"));
         simStrategyPtr->setup();
         cyclobot->paramPtr->deviceParametersPtr->firstAwakening = false;
     }

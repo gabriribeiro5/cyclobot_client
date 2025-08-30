@@ -12,6 +12,7 @@ SimStrategy::SimStrategy(BaseStrategy *initialStrategyPtr) {
 }
 
 void SimStrategy::setup() {
+    Serial.println(F("[SimStrategy::setup] running..."));
     currentStrategyPtr->setup();
 }
 

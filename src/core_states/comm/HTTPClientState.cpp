@@ -45,6 +45,7 @@ void HTTPClientState::report_signature_request(FiniteStateMachine *cyclobot) {
 
 void HTTPClientState::session_new(FiniteStateMachine *cyclobot) {
     Serial.println(F("[HTTPClientState::session_new] running..."));
+    cyclobot->printFreeMemory("[HTTPClientState::session_new]");
     cyclobot->commPtr->clientCommPtr->get_cyclobot_session_token(cyclobot->paramPtr->clientParametersPtr,
                                                                   cyclobot->paramPtr->wifiParametersPtr,
                                                                   cyclobot->paramPtr->deviceParametersPtr);
@@ -81,6 +82,7 @@ void HTTPClientState::update_simulation_code(FiniteStateMachine *cyclobot) {
 
 // comm
 void HTTPClientState::session_stop(FiniteStateMachine *cyclobot) {
+    // stop session and client
     Serial.println(F("[HTTPClientState::session_stop] running..."));
     cyclobot->commPtr->clientCommPtr->put_invalid_cyclobot_session_token();
     cyclobot->commPtr->wifiCommPtr->disconnect_wifi();

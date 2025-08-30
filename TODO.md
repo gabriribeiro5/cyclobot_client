@@ -86,7 +86,11 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 
 - [x] style(Serial.println): define pattern
 - [x] feat(Startup logo): apply to logs
-- [ ] fix(Serial.println): board simulation stops printing at SimulationState::enter
+- [ ] fix(Serial.println): board simulation stops printing at some point
+  - [x] pattern serach: take note of switchCaseNum, last2LogLines -> lastMemorySize
+  - [x] Open topic at Arduino Docs (https://forum.arduino.cc/t/mega2560-stops-printing-suddenly-in-the-middle-of-a-string/1404437/9)
+  - [ ] fork: Isolate error traceback snippets into a coherent and sharable representation of the code
+  - [ ] Share the fork on your Arduino docs topic
 
 - [ ] Validate TG_Water simulation
 - [ ] feat(Real Time Clock): apply to logs
