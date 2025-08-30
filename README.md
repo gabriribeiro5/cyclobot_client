@@ -1,17 +1,18 @@
 # Cyclobot Oluṣọgba
-An scalable arduino firmware designed to keep closed and small ecosystems alive.
+Cyclobot is an scalable arduino firmware designed to keep closed and small ecosystems alive.
+Oluṣọgba means "the gardner" in Yoruba.
 
 ---
 ## ✅ Features
-- [ x ] Check soil moisture level
-- [ x ] Activate/deactivate rain system accordingly with soil moisture level
+- [ ] Check soil moisture level
+- [ ] Activate/deactivate rain system accordingly with soil moisture level
 - [ ] Mimics sunlight daily cicle by gradually switching On/Off individual LED lights
 - [ ] Activate/Deactivate fan system to simulate wind (activation time and duration are both random)
 - [ ] Store collected data in EEPROM or SD (if available)
 - [ ] Scan and connect to known Wi-Fi networks
 - [ ] Build web client to communicate with API (GET/POST)
 - [ ] Send stored data to webserver
-- [ x ] Collects current date and time on sturtup
+- [ ] Collects current date and time on sturtup
 - [ ] Implement local time synchronization via NTP or API
 - [ ] Handle incoming configuration updates and apply changes
 - [ ] Collect new config file data to update system behavior
@@ -38,7 +39,7 @@ Cyclobots are meant to:
 Foreseeable versions of this software will support human inputs, so they can interact with the device.
 
 ## Design
-This application leverages from Clean Architecture principles and State Design Pattern.
+This application leverages from Clean Architecture principles, State and Strategy Design Pattern.
 Modules are organized as follows:
 
 - **Core States**: All possible states for the machine being controlled.
