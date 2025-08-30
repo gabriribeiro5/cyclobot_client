@@ -89,8 +89,12 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 - [ ] fix(Serial.println): board simulation stops printing at some point
   - [x] pattern serach: take note of switchCaseNum, last2LogLines -> lastMemorySize
   - [x] Open topic at Arduino Docs (https://forum.arduino.cc/t/mega2560-stops-printing-suddenly-in-the-middle-of-a-string/1404437/9)
-  - [ ] fork: Isolate error traceback snippets into a coherent and sharable representation of the code
-  - [ ] Share the fork on your Arduino docs topic
+  - [ ] branch: Isolate error traceback snippets into a coherent and sharable representation of the code
+    - [x] Create branch
+    - [ ] Tramontina moment
+    - [ ] Run
+    - [ ] Hopefully get the same Serial.println error
+  - [ ] Share the branch on your Arduino docs topic
 
 - [ ] Validate TG_Water simulation
 - [ ] feat(Real Time Clock): apply to logs
