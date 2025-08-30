@@ -1,5 +1,5 @@
 # Cyclobot Oluṣọgba
-An scalable arduino sketch designed to keep closed and small ecosystems alive.
+An scalable arduino firmware designed to keep closed and small ecosystems alive.
 
 ---
 ## ✅ Features
