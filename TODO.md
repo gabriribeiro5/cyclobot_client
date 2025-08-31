@@ -94,6 +94,6 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
     - [x] Tramontina moment
     - [x] Run
     - [x] Hopefully get the same Serial.println error
-  - [ ] feat(flush): add flush() after println()
-  - [ ] Share the branch on your Arduino docs topic
+  - [x] feat(flush): add flush() after println()
+  - [x] Share the branch on your Arduino docs topic
 
