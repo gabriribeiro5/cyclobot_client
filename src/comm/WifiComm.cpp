@@ -90,14 +90,14 @@ void WifiComm::scan_wifi(WifiParameters *wifiParametersPtr) {
 
 void WifiComm::connect_wifi(WifiParameters *wifiParametersPtr) {
   Serial.println(F("[WifiComm::connect_wifi] Running..."));
-  Serial.flush(); // Wait until all outgoing serial data has been transmitted
+  Serial.flush();
   
   // Initialize the Ethernet client library
   // with the IP address and port of the server
   // that you want to connect to (port 80 is default for HTTP):
   while (wifiParametersPtr->wifiStatus != WL_IDLE_STATUS) {
     Serial.println(F("[WifiComm::connect_wifi] Attempting to connect to SSID: "));
-    Serial.flush(); // Wait until all outgoing serial data has been transmitted
+    Serial.flush();
     Serial.println(wifiParametersPtr->wifiSsid);
     
     // WPA/WPA2 connection

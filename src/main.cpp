@@ -48,7 +48,7 @@ void loop() {
     Serial.print(F(" ************************  ************[main::loop"));
     Serial.print(fsm_context.stateFlow);
     Serial.println(F("]************  ************************ "));
-    Serial.flush(); // Wait until all outgoing serial data has been transmitted
+    Serial.flush();
     fsm_context.printFreeMemory("[main::loop]");
     switch (fsm_context.stateFlow) {
         case 0:

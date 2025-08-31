@@ -18,14 +18,17 @@ void HTTPClientState::exit(FiniteStateMachine *fsm_context) {
 // comm
 void HTTPClientState::report_signature_request(FiniteStateMachine *fsm_context) {
     Serial.println(F("[HTTPClientState::report_signature_request] running..."));
+    Serial.flush();
     if (fsm_context->paramPtr->deviceParametersPtr->firstAwakening) {
         fsm_context->commPtr->clientCommPtr->post_signature_request(fsm_context->paramPtr->clientParametersPtr,
                                                                   fsm_context->paramPtr->wifiParametersPtr,
                                                                   fsm_context->paramPtr->deviceParametersPtr);
         fsm_context->paramPtr->deviceParametersPtr->firstAwakening = false;
         Serial.println(F("[HTTPClientState::report_signature_request] fsm_context approved"));
+        Serial.flush();
     } else {
         Serial.println(F("[HTTPClientState::report_signature_request] skipped"));
+        Serial.flush();
     }
 };
 
