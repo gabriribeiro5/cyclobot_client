@@ -91,10 +91,10 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
   - [x] Open topic at Arduino Docs (https://forum.arduino.cc/t/mega2560-stops-printing-suddenly-in-the-middle-of-a-string/1404437/9)
   - [ ] branch: Isolate error traceback snippets into a coherent and sharable representation of the code
     - [x] Create branch
-    - [ ] Tramontina moment
-    - [ ] Run
-    - [ ] Hopefully get the same Serial.println error
-  - [ ] Share the branch on your Arduino docs topic
+    - [x] Tramontina moment
+    - [x] Run
+    - [x] Hopefully get the same Serial.println error
+  - [x] Share the branch on your Arduino docs topic
 
 - [ ] Validate TG_Water simulation
 - [ ] feat(Real Time Clock): apply to logs
