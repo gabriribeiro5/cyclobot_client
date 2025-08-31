@@ -19,30 +19,13 @@ public:
     virtual void enter(FiniteStateMachine *cyclobot);
     virtual void exit(FiniteStateMachine *cyclobot);
     
-    // error
-    virtual void handle_error(FiniteStateMachine *cyclobot);
-    
-    // self
-    virtual void run_health_check(FiniteStateMachine *cyclobot);
-    
     // comm
     virtual void report_signature_request(FiniteStateMachine *cyclobot);
     virtual void session_new(FiniteStateMachine *cyclobot);
     virtual void report_config(FiniteStateMachine *cyclobot);
     virtual void report_health_check(FiniteStateMachine *cyclobot);
     
-    // update
-    virtual void update_config(FiniteStateMachine *cyclobot);
-    virtual void update_simulation_code(FiniteStateMachine *cyclobot);
-    
-    // comm
     virtual void session_stop(FiniteStateMachine *cyclobot);
-    
-    // sim
-    virtual void run_simulation(FiniteStateMachine *cyclobot);
-    
-    // comm
-    virtual void report_simulation_data(FiniteStateMachine *cyclobot);
     
     // self
     virtual void take_a_nap(FiniteStateMachine *cyclobot);

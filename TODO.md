@@ -32,7 +32,7 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 ### ▶️ Code features and data
 - [x] feat(RainforestSimulation - incomplete): into new design
   - [x] Distribute single file methods across .h modules
-  - [ ] Write .cpp code based on .h files
+  - [x] Write .cpp code based on .h files
     - [x] Cyclobot's base cycle
     - [x] Context (Finite State Machine)
     - [x] Parameter classes
@@ -59,7 +59,7 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 
 ### ▶️ Mega 2560 Rev3 full version (256kb)
 - [x] style(modules): remove unused files
-- [ ] feat (Simulation): finally!
+- [x] feat (Simulation): finally!
   - [x] State
   - [x] Config params
   - [x] Data
@@ -89,8 +89,12 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 - [ ] fix(Serial.println): board simulation stops printing at some point
   - [x] pattern serach: take note of switchCaseNum, last2LogLines -> lastMemorySize
   - [x] Open topic at Arduino Docs (https://forum.arduino.cc/t/mega2560-stops-printing-suddenly-in-the-middle-of-a-string/1404437/9)
-  - [ ] fork: Isolate error traceback snippets into a coherent and sharable representation of the code
-  - [ ] Share the fork on your Arduino docs topic
+  - [x] branch: Isolate error traceback snippets into a coherent and sharable representation of the code
+    - [x] Create branch
+    - [x] Tramontina moment
+    - [x] Run
+    - [x] Hopefully get the same Serial.println error
+  - [ ] Share the branch on your Arduino docs topic
 
 - [ ] Validate TG_Water simulation
 - [ ] feat(Real Time Clock): apply to logs

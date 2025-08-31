@@ -2,82 +2,43 @@
 #include <SoftwareSerial.h>
 #include <WiFiEsp.h>
 #include "../include/core_states/BaseState.h"
-#include "../include/core_states/error/ErrorHandlingState.h"
 #include "../include/core_states/self/IdleState.h"
-#include "../include/core_states/self/SelfDiagnosisState.h"
 #include "../include/core_states/comm/HTTPClientState.h"
-#include "../include/core_states/update/ConfigUpdateState.h"
-#include "../include/core_states/update/CodeUpdateState.h"
-#include "../include/core_states/simulation/SimulationState.h"
-#include "../include/core_states/simulation/strategy/gardening/trad_garden/TG_Water.h"
-#include "../include/config/PeripheralMapping.h"
 #include "../include/Context.h"
 
 // Set state classes
-BaseState *errorHandlingStatePtr = new ErrorHandlingState();
-BaseState *selfDiagnosisStatePtr = new SelfDiagnosisState();
 BaseState *communicationStatePtr = new HTTPClientState();
-BaseState *configUpdateStatePtr = new ConfigUpdateState();
-BaseState *codeUpdateStatePtr = new CodeUpdateState();
-BaseState *simulationStatePtr = new SimulationState();
 BaseState *idleStatePtr = new IdleState();
 
 // Create state machine
-FiniteStateMachine cyclobot(idleStatePtr);
+FiniteStateMachine fsm_context(idleStatePtr);
 
 // Extra serial port for wifi
-SoftwareSerial esp8266(cyclobot.paramPtr->peripheralMappingPtr->wifiEspRX,
-                       cyclobot.paramPtr->peripheralMappingPtr->wifiEspTX); // software-based serial port to communicate with wifi module
+SoftwareSerial esp8266(fsm_context.paramPtr->peripheralMappingPtr->wifiEspRX,
+                       fsm_context.paramPtr->peripheralMappingPtr->wifiEspTX); // software-based serial port to communicate with wifi module
                        
 void setup() {
     Serial.begin(9600); // Enable communication over the USB serial port console 9600 Bps
-    
-    Serial.println(F(" *************************  **                                **  ************************* "));
-    Serial.println(F(" *************************  **     **********************     **  ************************* "));
-    Serial.println(F(" ***********************  **     **************************     **  *********************** "));
-    Serial.println(F(" *********************  **     ******************************    **  ********************** "));
-    Serial.println(F(" *******************  **     **********************************    **  ******************** "));
-    Serial.println(F(" *****************  **     **************************************    **  ****************** "));
-    Serial.println(F(" ***************  **     ******************************************     **  *************** "));
-    Serial.println(F("                 **    **********************************************     **                "));
-    Serial.println(F(" ************** **     **********************************************     ** ************** "));
-    Serial.println(F(" ************** **     **********************************************     ** ************** "));
-    Serial.println(F(" ************** **     ****  C Y C L O B O T   O L U S O G B A  *****     ** ************** "));
-    Serial.println(F(" ************** **     **********************************************     ** ************** "));
-    Serial.println(F(" ************** **     **********************************************     ** ************** "));
-    Serial.println(F("                **     **********************************************     **                "));
-    Serial.println(F(" ***************  **     ******************************************     **  *************** "));
-    Serial.println(F(" *****************  **     **************************************     **  ***************** "));
-    Serial.println(F(" *******************  **     **********************************     **  ******************* "));
-    Serial.println(F(" *********************  **     ******************************     **  ********************* "));
-    Serial.println(F(" ***********************  **     **************************     **  *********************** "));
-    Serial.println(F(" *************************  **     **********************     **  ************************* "));
-    Serial.println(F(" *************************  **                                **  ************************* "));
-    Serial.println(F(" *************************  *********[IdleState::enter]*********  ************************* "));
-    Serial.flush(); // Wait until all outgoing serial data has been transmitted
 
-    cyclobot.printFreeMemory("[main::setup]");
+    fsm_context.printFreeMemory("[main::setup]");
 
     Serial.println(F("[main::setup] starting clock (rtc)"));
-    cyclobot.rtc.begin();
-    cyclobot.now = cyclobot.rtc.now();
+    fsm_context.rtc.begin();
+    fsm_context.now = fsm_context.rtc.now();
     
     Serial.print(F("[main::setup] date: "));
-    Serial.print(cyclobot.now.day());
+    Serial.print(fsm_context.now.day());
     Serial.print(F("/"));
-    Serial.print(cyclobot.now.month());
+    Serial.print(fsm_context.now.month());
     Serial.print(F("/"));
-    Serial.println(cyclobot.now.year());
+    Serial.println(fsm_context.now.year());
     
     Serial.print(F("[main::setup] time: "));
-    Serial.print(cyclobot.now.hour());
+    Serial.print(fsm_context.now.hour());
     Serial.print(F(":"));
-    Serial.print(cyclobot.now.minute());
+    Serial.print(fsm_context.now.minute());
     Serial.print(F(":"));
-    Serial.println(cyclobot.now.second());
-    
-    Serial.println(F("[main::setup] setting simulation strategy"));
-    cyclobot.simulationStrategyPtr = new TG_Water();
+    Serial.println(fsm_context.now.second());
     
     // Serial.println(F("[main::setup] initializing WiFi module"));
     // WiFi.init(&esp8266);
@@ -85,56 +46,27 @@ void setup() {
 
 void loop() {
     Serial.print(F(" ************************  ************[main::loop"));
-    Serial.print(cyclobot.stateFlow);
+    Serial.print(fsm_context.stateFlow);
     Serial.println(F("]************  ************************ "));
     Serial.flush(); // Wait until all outgoing serial data has been transmitted
-    cyclobot.printFreeMemory("[main::loop]");
-    switch (cyclobot.stateFlow) {
-        case 0: // Self
-        cyclobot.change_state(selfDiagnosisStatePtr);
-        cyclobot.printFreeMemory("[main::loop1]");
-        cyclobot.run_health_check();                  // !! [FiniteStateMachine::run_health_check] �
+    fsm_context.printFreeMemory("[main::loop]");
+    switch (fsm_context.stateFlow) {
+        case 0:
+        // this block is commented
         break;
-        case 1: // Comm
-        cyclobot.change_state(communicationStatePtr);
-        cyclobot.report_signature_request();
-        cyclobot.session_new();                      // !! [HTTPClientState::session_new] Free Memory: 55�
-        // cyclobot.report_config();                 // !! [HTTPClientState::report_conf�
-        // cyclobot.report_health_check();           // !! [HTTPClientState::report_health_check]�
+        case 1:
+        fsm_context.change_state(communicationStatePtr);
+        fsm_context.report_signature_request();
+        fsm_context.session_new();                      // !! [HTTPClientState::session_new] Free Memory: 55�
+        // fsm_context.report_config();                 // !! [HTTPClientState::report_conf�
+        // fsm_context.report_health_check();           // !! [HTTPClientState::report_health_check]�
         break;
-        case 2: // Config update
-        cyclobot.change_state(configUpdateStatePtr);
-        cyclobot.update_config();
-        break;
-        case 3: // Code update
-        cyclobot.change_state(codeUpdateStatePtr);
-        cyclobot.update_simulation_code();
-        break;
-        case 4: // Comm
-        cyclobot.change_state(communicationStatePtr);
-        // cyclobot.session_stop();                  // !! [ClientComm::put_invalid_cyclobo�
-        break;
-        case 5: // Simulation
-        cyclobot.change_state(simulationStatePtr);
-        // cyclobot.run_simulation();                // !! [SimulationState::enter]******  ***********�
-        break;
-        case 6: // Comm
-        cyclobot.change_state(communicationStatePtr);
-        // cyclobot.report_simulation_data();           // !! [WifiComm::connect_wifi] Ru�
-        break;
-        case 7: // Self
-        cyclobot.change_state(idleStatePtr);
-        cyclobot.take_a_nap();
-        cyclobot.stateFlow = -1; // Reset
-        break;
-        case 99: // Error
-        cyclobot.change_state(errorHandlingStatePtr);
-        cyclobot.handle_error();
-        cyclobot.stateFlow = -1; // Reset
+        case 2:
+        // this block is commented
         break;
         default: // Reset
-        cyclobot.stateFlow = -1; // Reset
+        fsm_context.stateFlow = -1; // Reset
         break;
     }
-    cyclobot.stateFlow++;
+    fsm_context.stateFlow++;
 };
