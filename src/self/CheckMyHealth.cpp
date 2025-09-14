@@ -8,22 +8,24 @@
 
 bool CheckMyHealth::wifi_shield_is_on(WifiParameters *wifiParametersPtr) {
     // check for the presence of the shield:
+    Serial.println(F("[CheckMyHealth::wifi_shield_is_on]..."));
     if (WiFi.status() == WL_NO_SHIELD) {
-        Serial.println(F("[CheckMyHealth::wifi_shield_is_on] WiFi shield not present"));
-        wifiParametersPtr->wifiShieldIsOn = 0;
-        return false;
-      }
-      wifiParametersPtr->wifiShieldIsOn = 1;
-      return true;
-}
-
-void CheckMyHealth::check_wifi_firmware_version(WifiParameters *wifiParametersPtr, SelfDiagnosisData *selfDiagnosisDataPtr) {
-  char *fv = WiFi.firmwareVersion();
-  if (fv != wifiParametersPtr->wifiFirmwareLatestVersion) {
+      Serial.println(F("[CheckMyHealth::wifi_shield_is_on] WiFi shield not present"));
+      wifiParametersPtr->wifiShieldIsOn = 0;
+      return false;
+    }
+    wifiParametersPtr->wifiShieldIsOn = 1;
+    Serial.println(F("[CheckMyHealth::wifi_shield_is_on] WiFi shield is ON"));
+    return true;
+  }
+  
+  void CheckMyHealth::check_wifi_firmware_version(WifiParameters *wifiParametersPtr, SelfDiagnosisData *selfDiagnosisDataPtr) {
+    char *fv = WiFi.firmwareVersion();
+    if (fv != wifiParametersPtr->wifiFirmwareLatestVersion) {
       Serial.println(F("[CheckMyHealth::check_wifi_firmware_version] Please upgrade the firmware"));
       selfDiagnosisDataPtr->wifiFirmwareRequireUpdate = 1;
+    }
   }
-}
 
 void CheckMyHealth::check_wifi_networks(WifiComm *wifiCommPtr, WifiParameters *wifiParametersPtr, SelfDiagnosisData *selfDiagnosisDataPtr) {
   wifiCommPtr->scan_wifi(wifiParametersPtr);

@@ -47,7 +47,7 @@ void FiniteStateMachine::handle_error() {
 void FiniteStateMachine::run_health_check() {
     // get milliseconds + log start
     Serial.println(F("[FiniteStateMachine::run_health_check] running..."));
-    Serial.flush(); // Wait until all outgoing serial data has been transmitted
+    Serial.flush();
     currentStatePtr->run_health_check(this);
     // log end + execution time
 }

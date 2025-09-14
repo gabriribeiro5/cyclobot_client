@@ -89,7 +89,7 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 - [ ] fix(Serial.println): board simulation stops printing at some point
   - [x] pattern serach: take note of switchCaseNum, last2LogLines -> lastMemorySize
   - [x] Open topic at Arduino Docs (https://forum.arduino.cc/t/mega2560-stops-printing-suddenly-in-the-middle-of-a-string/1404437/9)
-  - [ ] branch: Isolate error traceback snippets into a coherent and sharable representation of the code
+  - [x] branch: Isolate error traceback snippets into a coherent and sharable representation of the code
     - [x] Create branch
     - [x] Tramontina moment
     - [x] Run
@@ -131,7 +131,7 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 - [ ] feat(update strategies)
   - [ ] State
   - [ ] Config
-  - [ ] Data
+  - [ ] Update
   - [ ] Failure handler strategies (macro scope)
   - [ ] Failure handler strategies (one detailed)
 - [ ] feat(failure handler)
