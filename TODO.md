@@ -95,6 +95,9 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
     - [x] Run
     - [x] Hopefully get the same Serial.println error
   - [x] Share the branch on your Arduino docs topic
+  - [ ] perf(main): state instances initialization
+    - [x] use switch/case to manage initializations
+    - [x] add more lines of Serial.flush()
 
 - [ ] Validate TG_Water simulation
 - [ ] feat(Real Time Clock): apply to logs
