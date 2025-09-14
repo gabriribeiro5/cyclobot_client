@@ -29,9 +29,12 @@ class FiniteStateMachine {
 
         DateTime now;    // Track in which step we are
         int stateFlow = 0; // Flow stablished at the Client module and updated by States to comply client rules
-    
+
+        
         FiniteStateMachine(BaseState *initialStatePtr); // Constructor
         void printFreeMemory(char *currentMethodPtr);
+        template<typename T>
+        void say(T p);
         void change_state(BaseState *newStatePtr);
         void update_current_time();
         
@@ -66,3 +69,9 @@ class FiniteStateMachine {
     private:
         BaseState *currentStatePtr;
 };
+
+template<typename T>
+void FiniteStateMachine::say(T p) {
+    Serial.println(p);
+    Serial.flush();
+}

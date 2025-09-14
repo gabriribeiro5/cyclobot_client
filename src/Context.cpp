@@ -24,10 +24,14 @@ void FiniteStateMachine::printFreeMemory(char *currentMethodPtr) {
     free_memory = ((int)&free_memory) - ((int)__brkval);
   }
 
-  Serial.print(currentMethodPtr);
+  Serial.print(currentMethodPtr);  
+  Serial.flush();
   Serial.print(" Free Memory: ");
+  Serial.flush();
   Serial.print(free_memory);
+  Serial.flush();
   Serial.println(" bytes");
+  Serial.flush();
 }
 
 void FiniteStateMachine::change_state(BaseState *newStatePtr) {

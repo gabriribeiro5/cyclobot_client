@@ -95,9 +95,15 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
     - [x] Run
     - [x] Hopefully get the same Serial.println error
   - [x] Share the branch on your Arduino docs topic
-  - [ ] perf(main): state instances initialization
+  - [x] perf(main): state instances initialization
     - [x] use switch/case to manage initializations
     - [x] add more lines of Serial.flush()
+  - [ ] perf(flush): every Serial.print() gets a Serial.flush()
+    - [x] Implement cyclobot.say()
+    - [ ] Replace cyclobot.say() with cyclobot.Log.print_line
+    - [ ] Attach Log class to cyclobot
+    - [ ] Replace Serial.println with cyclobot.Log.print_line()
+    - [ ] Replace Serial.print with cyclobot.Log.print()
 
 - [ ] Validate TG_Water simulation
 - [ ] feat(Real Time Clock): apply to logs
