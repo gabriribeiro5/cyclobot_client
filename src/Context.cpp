@@ -67,7 +67,11 @@ void FiniteStateMachine::printFreeMemory(char *currentMethodPtr) {
   }
 
   Serial.print(currentMethodPtr);
+  Serial.flush();
   Serial.print(" Free Memory: ");
+  Serial.flush();
   Serial.print(free_memory);
+  Serial.flush();
   Serial.println(" bytes");
+  Serial.flush();
 }

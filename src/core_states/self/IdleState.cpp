@@ -5,15 +5,18 @@
 void IdleState::enter(FiniteStateMachine *fsm_context) {
     if (!fsm_context) {
         Serial.println(F("[IdleState::enter] fsm_context pointer is null in IdleState"));
+        Serial.flush();
         return; // ou transição para um estado de erro seguro
     }
     
     Serial.println(F(" *************************  *********[IdleState::enter]*********  ************************* "));
+    Serial.flush();
     // TODO: clear memory
 };
 
 void IdleState::exit(FiniteStateMachine *fsm_context) {
     Serial.println(F(" *************************  *********[IdleState::exit]**********  ************************* "));
+    Serial.flush();
 };
 
 // comm
@@ -45,11 +48,13 @@ void IdleState::session_stop(FiniteStateMachine *fsm_context) {
 
 void IdleState::take_a_nap(FiniteStateMachine *fsm_context) {
     Serial.println(F("[IdleState::take_a_nap] running..."));
+    Serial.flush();
     // reset parameters
     fsm_context->paramPtr->wifiParametersPtr->scanCount = 0;
     // sleep
     delay(fsm_context->paramPtr->deviceParametersPtr->sleepLength);
     Serial.println(F("[IdleState::take_a_nap] done"));
+    Serial.flush();
 };
 
 // constructor

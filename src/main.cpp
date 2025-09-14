@@ -23,22 +23,35 @@ void setup() {
     fsm_context.printFreeMemory("[main::setup]");
 
     Serial.println(F("[main::setup] starting clock (rtc)"));
+    Serial.flush();
     fsm_context.rtc.begin();
     fsm_context.now = fsm_context.rtc.now();
     
     Serial.print(F("[main::setup] date: "));
+    Serial.flush();
     Serial.print(fsm_context.now.day());
+    Serial.flush();
     Serial.print(F("/"));
+    Serial.flush();
     Serial.print(fsm_context.now.month());
+    Serial.flush();
     Serial.print(F("/"));
+    Serial.flush();
     Serial.println(fsm_context.now.year());
+    Serial.flush();
     
     Serial.print(F("[main::setup] time: "));
+    Serial.flush();
     Serial.print(fsm_context.now.hour());
+    Serial.flush();
     Serial.print(F(":"));
+    Serial.flush();
     Serial.print(fsm_context.now.minute());
+    Serial.flush();
     Serial.print(F(":"));
+    Serial.flush();
     Serial.println(fsm_context.now.second());
+    Serial.flush();
     
     // Serial.println(F("[main::setup] initializing WiFi module"));
     // WiFi.init(&esp8266);
@@ -46,7 +59,9 @@ void setup() {
 
 void loop() {
     Serial.print(F(" ************************  ************[main::loop"));
+    Serial.flush();
     Serial.print(fsm_context.stateFlow);
+    Serial.flush();
     Serial.println(F("]************  ************************ "));
     Serial.flush();
     fsm_context.printFreeMemory("[main::loop]");
@@ -57,9 +72,9 @@ void loop() {
         case 1:
         fsm_context.change_state(communicationStatePtr);
         fsm_context.report_signature_request();
-        fsm_context.session_new();                      // !! [HTTPClientState::session_new] Free Memory: 55�
-        // fsm_context.report_config();                 // !! [HTTPClientState::report_conf�
-        // fsm_context.report_health_check();           // !! [HTTPClientState::report_health_check]�
+        fsm_context.session_new();
+        fsm_context.report_config();                 // !! [HTTPClientState::report_conf�
+        fsm_context.report_health_check();           // !! [HTTPClientState::report_health_check]�
         break;
         case 2:
         // this block is commented

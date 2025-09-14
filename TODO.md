@@ -96,4 +96,5 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
     - [x] Hopefully get the same Serial.println error
   - [x] feat(flush): add flush() after println()
   - [x] Share the branch on your Arduino docs topic
+  - [x] perf(flush): every Serial Print gets a Flush
 
