@@ -6,15 +6,15 @@
 // used by context.changeState
 void SimulationState::enter(FiniteStateMachine *cyclobot) {
     if (!cyclobot) {
-        Serial.println(F("[SimulationState::enter] cyclobot pointer is null in SimulationState"));
+        cyclobot->commPtr->visualCommPtr->print_line(F("[SimulationState::enter] cyclobot pointer is null in SimulationState"));
         return; // ou transição para um estado de erro seguro
     }
     
-    Serial.println(F(" *************************  ******[SimulationState::enter]******  ************************* "));
+    cyclobot->commPtr->visualCommPtr->print_line(F(" *************************  ******[SimulationState::enter]******  ************************* "));
 };
 
 void SimulationState::exit(FiniteStateMachine *cyclobot) {
-    Serial.println(F(" *************************  ******[SimulationState::exit]*******  ************************* "));
+    cyclobot->commPtr->visualCommPtr->print_line(F(" *************************  ******[SimulationState::exit]*******  ************************* "));
 };
 
 // error
@@ -60,7 +60,7 @@ void SimulationState::session_stop(FiniteStateMachine *cyclobot) {
 
 // sim
 void SimulationState::run_simulation(FiniteStateMachine *cyclobot) {
-    Serial.println(F("[SimulationState::run_simulation] running..."));    
+    cyclobot->commPtr->visualCommPtr->print_line(F("[SimulationState::run_simulation] running..."));    
     if (simStrategyPtr) {
         delete simStrategyPtr;
     }
@@ -68,7 +68,7 @@ void SimulationState::run_simulation(FiniteStateMachine *cyclobot) {
     simStrategyPtr = new SimStrategy(cyclobot->simulationStrategyPtr);
     
     if (cyclobot->paramPtr->deviceParametersPtr->firstAwakening) {
-        Serial.println(F("[SimulationState::run_simulation] calling pin setup method"));
+        cyclobot->commPtr->visualCommPtr->print_line(F("[SimulationState::run_simulation] calling pin setup method"));
         simStrategyPtr->setup();
         cyclobot->paramPtr->deviceParametersPtr->firstAwakening = false;
     }
@@ -79,7 +79,7 @@ void SimulationState::run_simulation(FiniteStateMachine *cyclobot) {
                                        cyclobot->actuatorPtr);   
     cyclobot->paramPtr->ecosystemParametersPtr->eventEnd = cyclobot->rtc.now();
     
-    Serial.println(F("[SimulationState::run_simulation] done"));
+    cyclobot->commPtr->visualCommPtr->print_line(F("[SimulationState::run_simulation] done"));
 };
 
 // comm

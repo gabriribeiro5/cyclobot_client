@@ -7,15 +7,15 @@
 // used by context.changeState
 void ConfigUpdateState::enter(FiniteStateMachine *cyclobot) {
     if (!cyclobot) {
-        Serial.println(F("(enter): cyclobot pointer is null in ConfigUpdateState"));
+        cyclobot->commPtr->visualCommPtr->print_line(F("(enter): cyclobot pointer is null in ConfigUpdateState"));
         return;
     }
     
-    Serial.println(F(" *************************  *****[ConfigUpdateState::enter]*****  ************************* "));
+    cyclobot->commPtr->visualCommPtr->print_line(F(" *************************  *****[ConfigUpdateState::enter]*****  ************************* "));
 };
 
 void ConfigUpdateState::exit(FiniteStateMachine *cyclobot) {
-    Serial.println(F(" *************************  *****[ConfigUpdateState::exit]******  ************************* "));
+    cyclobot->commPtr->visualCommPtr->print_line(F(" *************************  *****[ConfigUpdateState::exit]******  ************************* "));
 };
 
 // error
@@ -47,19 +47,19 @@ void ConfigUpdateState::report_health_check(FiniteStateMachine *cyclobot) {
 
 // update
 void ConfigUpdateState::update_config(FiniteStateMachine *cyclobot) {
-    Serial.println(F("(update_config): running..."));
+    cyclobot->commPtr->visualCommPtr->print_line(F("(update_config): running..."));
     // Ask server if update is required
     // Get new config data
     // Validate data types and size
     // if `new key` exists, update value
     // if `new key` does NOT exist, add `key & value`
     // Keys MUST NOT be excluded in this method
-    Serial.println(F("(update_config): done"));
+    cyclobot->commPtr->visualCommPtr->print_line(F("(update_config): done"));
 };
 
 void ConfigUpdateState::update_simulation_code(FiniteStateMachine *cyclobot) {
-    Serial.println(F("(update_simulation_code): running..."));
-    Serial.println(F("(update_simulation_code): done"));
+    cyclobot->commPtr->visualCommPtr->print_line(F("(update_simulation_code): running..."));
+    cyclobot->commPtr->visualCommPtr->print_line(F("(update_simulation_code): done"));
 };
 
 // comm

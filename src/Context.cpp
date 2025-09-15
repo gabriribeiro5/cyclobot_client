@@ -11,29 +11,6 @@ FiniteStateMachine::FiniteStateMachine(BaseState *initialStatePtr) {
     currentStatePtr = initialStatePtr;
 }
 
-void FiniteStateMachine::printFreeMemory(char *currentMethodPtr) {
-  int free_memory;
-  
-  // If the heap hasn't been used (__brkval == 0)
-  if ((int)__brkval == 0) {
-    // free space = (address of local var / stack pointer) - (end of bss section)
-    free_memory = ((int)&free_memory) - ((int)&__bss_end);
-  } else {
-    // Otherwise, heap is in use
-    // free space = (address of local var / stack pointer) - (current end of heap)
-    free_memory = ((int)&free_memory) - ((int)__brkval);
-  }
-
-  Serial.print(currentMethodPtr);  
-  Serial.flush();
-  Serial.print(" Free Memory: ");
-  Serial.flush();
-  Serial.print(free_memory);
-  Serial.flush();
-  Serial.println(" bytes");
-  Serial.flush();
-}
-
 void FiniteStateMachine::change_state(BaseState *newStatePtr) {
     // get milliseconds + log start
     currentStatePtr->exit(this);
@@ -50,8 +27,7 @@ void FiniteStateMachine::handle_error() {
 
 void FiniteStateMachine::run_health_check() {
     // get milliseconds + log start
-    Serial.println(F("[FiniteStateMachine::run_health_check] running..."));
-    Serial.flush();
+    commPtr->visualCommPtr->print_line(F("[FiniteStateMachine::run_health_check] running..."));
     currentStatePtr->run_health_check(this);
     // log end + execution time
 }

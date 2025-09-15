@@ -4,6 +4,7 @@
 #include "../../comm/ButtonComm.h"
 #include "../../comm/SoundComm.h"
 #include "../../comm/VisualComm.h"
+#include "../../comm/VisualComm.h"
 
 class CommunicationInstances {
     public:
@@ -14,5 +15,6 @@ class CommunicationInstances {
         ClientComm *clientCommPtr;
         ButtonComm *buttonCommPtr;
         SoundComm *soundCommPtr;
+        VisualComm *visualCommPtr;
         VisualComm *visualCommPtr;
 };

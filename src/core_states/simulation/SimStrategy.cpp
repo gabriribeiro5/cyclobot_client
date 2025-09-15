@@ -5,18 +5,19 @@
 #include "../../../include/config/DeviceParameters.h"
 #include "../../../include/actuator/EcosystemActuator.h"
 #include "../../../include/sensor/EcosystemScanner.h"
+#include "../../../include/comm/VisualComm.h"
 
 SimStrategy::SimStrategy(BaseStrategy *initialStrategyPtr) {
     currentStrategyPtr = initialStrategyPtr;
     currentStrategyPtr->enter(); // complete this line
 }
 
-void SimStrategy::setup() {
-    Serial.println(F("[SimStrategy::setup] running..."));
+void SimStrategy::setup(VisualComm *visualCommPtr) {
+    visualCommPtr->print_line(F("[SimStrategy::setup] running..."));
     currentStrategyPtr->setup();
 }
 
-void SimStrategy::simulate_ecosystem(EcosystemParameters *ecosystemParametersPtr, EcosystemScanner *environmentScanPtr, EcosystemActuator *environmentActuatorPtr) {
+void SimStrategy::simulate_ecosystem(EcosystemParameters *ecosystemParametersPtr, EcosystemScanner *environmentScanPtr, EcosystemActuator *environmentActuatorPtr, VisualComm *visualCommPtr) {
     currentStrategyPtr->simulate_ecosystem(ecosystemParametersPtr, environmentScanPtr, environmentActuatorPtr);
 }
 

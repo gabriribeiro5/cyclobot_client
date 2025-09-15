@@ -24,68 +24,46 @@ SoftwareSerial esp8266(cyclobot.paramPtr->peripheralMappingPtr->wifiEspRX,
 void setup() {
     Serial.begin(9600); // Enable communication over the USB serial port console 9600 Bps
     
-    cyclobot.say(F(" *************************  **                                **  ************************* "));
-    cyclobot.say(F(" *************************  **     **********************     **  ************************* "));
-    cyclobot.say(F(" ***********************  **     **************************     **  *********************** "));
-    cyclobot.say(F(" *********************  **     ******************************    **  ********************** "));
-    cyclobot.say(F(" *******************  **     **********************************    **  ******************** "));
-    cyclobot.say(F(" *****************  **     **************************************    **  ****************** "));
-    cyclobot.say(F(" ***************  **     ******************************************     **  *************** "));
-    cyclobot.say(F("                 **    **********************************************     **                "));
-    cyclobot.say(F(" ************** **     **********************************************     ** ************** "));
-    cyclobot.say(F(" ************** **     **********************************************     ** ************** "));
-    cyclobot.say(F(" ************** **     ****  C Y C L O B O T   O L U S O G B A  *****     ** ************** "));
-    cyclobot.say(F(" ************** **     **********************************************     ** ************** "));
-    cyclobot.say(F(" ************** **     **********************************************     ** ************** "));
-    cyclobot.say(F("                **     **********************************************     **                "));
-    cyclobot.say(F(" ***************  **     ******************************************     **  *************** "));
-    cyclobot.say(F(" *****************  **     **************************************     **  ***************** "));
-    cyclobot.say(F(" *******************  **     **********************************     **  ******************* "));
-    cyclobot.say(F(" *********************  **     ******************************     **  ********************* "));
-    cyclobot.say(F(" ***********************  **     **************************     **  *********************** "));
-    cyclobot.say(F(" *************************  **     **********************     **  ************************* "));
-    cyclobot.say(F(" *************************  **                                **  ************************* "));
-    cyclobot.say(F(" *************************  *********[IdleState::enter]*********  ************************* "));
+    cyclobot.commPtr->visualCommPtr->print_terminal_logo();
+    cyclobot.commPtr->visualCommPtr->print_line(F(" *************************  *********[IdleState::enter]*********  ************************* "));
 
-    cyclobot.printFreeMemory("[main::setup]");
+    cyclobot.commPtr->visualCommPtr->print_free_memory("[main::setup]");
 
-    Serial.println(F("[main::setup] starting clock (rtc)"));
+    cyclobot.commPtr->visualCommPtr->print_line(F("[main::setup] starting clock (rtc)"));
     cyclobot.rtc.begin();
     cyclobot.now = cyclobot.rtc.now();
     
-    Serial.print(F("[main::setup] date: "));
-    Serial.print(cyclobot.now.day());
-    Serial.print(F("/"));
-    Serial.print(cyclobot.now.month());
-    Serial.print(F("/"));
-    Serial.println(cyclobot.now.year());
+    cyclobot.commPtr->visualCommPtr->print(F("[main::setup] date: "));
+    cyclobot.commPtr->visualCommPtr->print(cyclobot.now.day());
+    cyclobot.commPtr->visualCommPtr->print(F("/"));
+    cyclobot.commPtr->visualCommPtr->print(cyclobot.now.month());
+    cyclobot.commPtr->visualCommPtr->print(F("/"));
+    cyclobot.commPtr->visualCommPtr->print_line(cyclobot.now.year());
     
-    Serial.print(F("[main::setup] time: "));
-    Serial.print(cyclobot.now.hour());
-    Serial.print(F(":"));
-    Serial.print(cyclobot.now.minute());
-    Serial.print(F(":"));
-    Serial.println(cyclobot.now.second());
+    cyclobot.commPtr->visualCommPtr->print(F("[main::setup] time: "));
+    cyclobot.commPtr->visualCommPtr->print(cyclobot.now.hour());
+    cyclobot.commPtr->visualCommPtr->print(F(":"));
+    cyclobot.commPtr->visualCommPtr->print(cyclobot.now.minute());
+    cyclobot.commPtr->visualCommPtr->print(F(":"));
+    cyclobot.commPtr->visualCommPtr->print_line(cyclobot.now.second());
     
-    Serial.println(F("[main::setup] setting simulation strategy"));
-    Serial.flush();
+    cyclobot.commPtr->visualCommPtr->print(F("[main::setup] setting simulation strategy"));
     cyclobot.simulationStrategyPtr = new TG_Water();
     
-    // Serial.println(F("[main::setup] initializing WiFi module"));
+    // cyclobot.commPtr->visualCommPtr->print_line(F("[main::setup] initializing WiFi module"));
     // WiFi.init(&esp8266);
 };
 
 void loop() {
-    Serial.print(F(" ************************  ************[main::loop"));
-    Serial.print(cyclobot.stateFlow);
-    Serial.println(F("************  ************************ "));
-    Serial.flush(); // Wait until all outgoing serial data has been transmitted
-    cyclobot.printFreeMemory("[main::loop]");
+    cyclobot.commPtr->visualCommPtr->print(F(" ************************  ************[main::loop"));
+    cyclobot.commPtr->visualCommPtr->print(cyclobot.stateFlow);
+    cyclobot.commPtr->visualCommPtr->print_line(F("************  ************************ "));
+    cyclobot.commPtr->visualCommPtr->print_free_memory("[main::loop]");
     switch (cyclobot.stateFlow) {
         case 0: // Self
         BaseState *selfDiagnosisStatePtr = new SelfDiagnosisState();
         cyclobot.change_state(selfDiagnosisStatePtr);
-        cyclobot.printFreeMemory("[main::loop1]");
+        cyclobot.commPtr->visualCommPtr->print_free_memory("[main::loop1]");
         cyclobot.run_health_check();                  // !! [FiniteStateMachine::run_health_check] �
         delete selfDiagnosisStatePtr;
         break;

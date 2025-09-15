@@ -4,6 +4,7 @@
 #include "../../../../../config/DeviceParameters.h"
 #include "../../../../../sensor/EcosystemScanner.h"
 #include "../../../../../actuator/EcosystemActuator.h"
+#include "../../../../../comm/VisualComm.h"
 
 /* TRADITIONAL GARDEN */
 class TG_WaterFanLightNutrientThermo : public BaseStrategy {
@@ -11,8 +12,8 @@ class TG_WaterFanLightNutrientThermo : public BaseStrategy {
         TG_WaterFanLightNutrientThermo();
 
         void enter() override;
-        void setup() override;
-        void simulate_ecosystem(EcosystemParameters *ecosystemParamPtr, EcosystemScanner *scannerPtr, EcosystemActuator *actuatorPtr) override;
+        void setup(VisualComm *visualCommPtr) override;
+        void simulate_ecosystem(EcosystemParameters *ecosystemParamPtr, EcosystemScanner *scannerPtr, EcosystemActuator *actuatorPtr, VisualComm *visualCommPtr) override;
         void exit() override;    
     private:
         uint8_t soilMoistureSensor;

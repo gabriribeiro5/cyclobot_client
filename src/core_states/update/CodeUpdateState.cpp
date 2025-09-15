@@ -7,15 +7,15 @@
 // used by context.changeState
 void CodeUpdateState::enter(FiniteStateMachine *cyclobot) {
     if (!cyclobot) {
-        Serial.println(F("(enter): cyclobot pointer is null in CodeUpdateState"));
+        cyclobot->commPtr->visualCommPtr->print_line(F("(enter): cyclobot pointer is null in CodeUpdateState"));
         return; // ou transição para um estado de erro seguro
     }
     
-    Serial.println(F(" *************************  ******[CodeUpdateState::enter]******  ************************* "));
+    cyclobot->commPtr->visualCommPtr->print_line(F(" *************************  ******[CodeUpdateState::enter]******  ************************* "));
 };
 
 void CodeUpdateState::exit(FiniteStateMachine *cyclobot) {
-    Serial.println(F(" *************************  ******[CodeUpdateState::exit]*******  ************************* "));
+    cyclobot->commPtr->visualCommPtr->print_line(F(" *************************  ******[CodeUpdateState::exit]*******  ************************* "));
 };
 
 // error
@@ -47,17 +47,17 @@ void CodeUpdateState::report_health_check(FiniteStateMachine *cyclobot) {
 
 // update
 void CodeUpdateState::update_config(FiniteStateMachine *cyclobot) {
-    Serial.println(F("(update_config) running..."));
-    Serial.println(F("(update_config) done"));
+    cyclobot->commPtr->visualCommPtr->print_line(F("(update_config) running..."));
+    cyclobot->commPtr->visualCommPtr->print_line(F("(update_config) done"));
 };
 
 void CodeUpdateState::update_simulation_code(FiniteStateMachine *cyclobot) {
-    Serial.println(F("(update_simulation_code) running..."));
+    cyclobot->commPtr->visualCommPtr->print_line(F("(update_simulation_code) running..."));
     // Ask server if update is required
     // Run paralel code
     // Get code hash
     // Update code
-    Serial.println(F("(update_simulation_code) done"));
+    cyclobot->commPtr->visualCommPtr->print_line(F("(update_simulation_code) done"));
 };
 
 // comm

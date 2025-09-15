@@ -5,6 +5,7 @@
 #include "../../../../../../include/config/DeviceParameters.h"
 #include "../../../../../../include/sensor/EcosystemScanner.h"
 #include "../../../../../../include/actuator/EcosystemActuator.h"
+#include "../../../../../../include/comm/VisualComm.h"
 
 /* TRADITIONAL GARDEN */
 TG_Water::TG_Water() {}
@@ -17,8 +18,8 @@ void TG_Water::enter() {
 }
 
 /* TRADITIONAL GARDEN */
-void TG_Water::setup() {
-	Serial.println(F("[TG_Water::setup] running"));
+void TG_Water::setup(VisualComm *VisualCommPtr) {
+	visualCommPtr->print_line(F("[TG_Water::setup] running"));
 	pinMode(soilMoistureSensor, INPUT);     // Sensor de umidade do solo - porta A0 é entrada 
 	pinMode(irrigationSystem, INPUT);       // Sensor de chuva - porta A1 é entrada 
 	pinMode(relePort, OUTPUT);              // Porta de controle do Relé - D4 é saída 
@@ -27,16 +28,17 @@ void TG_Water::setup() {
 
 /* TRADITIONAL GARDEN */
 void TG_Water::simulate_ecosystem(EcosystemParameters *parametersPtr,
-                                                   EcosystemScanner *scannerPtr,
-                                                   EcosystemActuator *actuatorPtr)
+								  EcosystemScanner *scannerPtr,
+								  EcosystemActuator *actuatorPtr,
+								  VisualComm *visualCommPtr)
 {
 	// ********* Primary scann *********
-	Serial.println(F("[TG_Water::simulate_ecosystem] reading soil moisture"));
+	VisualCommPtr->print_line(F("[TG_Water::simulate_ecosystem] reading soil moisture"));
 	scannerPtr->read_soil_moisture(parametersPtr, soilMoistureSensor);
 	
 	// ********* Irrigation strategy *********
 	if (!parametersPtr->soilIsWet) {
-		Serial.println(F("[TG_Water::simulate_ecosystem] initiating irrigation strategy"));
+		VisualCommPtr->print_line(F("[TG_Water::simulate_ecosystem] initiating irrigation strategy"));
 		actuatorPtr->irrigation_system_on(parametersPtr, irrigationSystem);
 		while (!parametersPtr->soilIsWet)
 		{
@@ -44,7 +46,7 @@ void TG_Water::simulate_ecosystem(EcosystemParameters *parametersPtr,
 		}
 		actuatorPtr->irrigation_system_off(parametersPtr, irrigationSystem);
 	}
-	Serial.println(F("[TG_Water::simulate_ecosystem] no irrigation is required"));
+	VisualCommPtr->print_line(F("[TG_Water::simulate_ecosystem] no irrigation is required"));
 }
 
 /* TRADITIONAL GARDEN */

@@ -1,15 +1,16 @@
 #pragma once
 #include "..\..\include\config\EcosystemParameters.h"
 #include "..\..\include\config\PeripheralMapping.h"
+#include "..\..\include\comm\VisualComm.h"
 
 class EcosystemActuator {
     public:
-        void increase_water_nutrients(EcosystemParameters *ecosystemParametersPtr);
-        void dilute_water_nutrients(EcosystemParameters *ecosystemParametersPtr);
-        void fan_system_on(EcosystemParameters *ecosystemParametersPtr);
-        void fan_system_off(EcosystemParameters *ecosystemParametersPtr);
-        void irrigation_system_on(EcosystemParameters *ecosystemParametersPtr, uint8_t relePort);
-        void irrigation_system_off(EcosystemParameters *ecosystemParametersPtr, uint8_t relePort);
-        void trim_system_on(EcosystemParameters *ecosystemParametersPtr);
-        void trim_system_off(EcosystemParameters *ecosystemParametersPtr);
+        void increase_water_nutrients(EcosystemParameters *ecosystemParametersPtr, VisualComm *visualCommPtr);
+        void dilute_water_nutrients(EcosystemParameters *ecosystemParametersPtr, VisualComm *visualCommPtr);
+        void fan_system_on(EcosystemParameters *ecosystemParametersPtr, VisualComm *visualCommPtr);
+        void fan_system_off(EcosystemParameters *ecosystemParametersPtr, VisualComm *visualCommPtr);
+        void irrigation_system_on(EcosystemParameters *ecosystemParametersPtr, VisualComm *visualCommPtr, uint8_t relayPort);
+        void irrigation_system_off(EcosystemParameters *ecosystemParametersPtr, VisualComm *visualCommPtr, uint8_t relayPort);
+        void trim_system_on(EcosystemParameters *ecosystemParametersPtr, VisualComm *visualCommPtr);
+        void trim_system_off(EcosystemParameters *ecosystemParametersPtr, VisualComm *visualCommPtr);
 };

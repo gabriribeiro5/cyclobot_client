@@ -11,13 +11,14 @@
 #include "../../../config/DeviceParameters.h"
 #include "../../../sensor/EcosystemScanner.h"
 #include "../../../actuator/EcosystemActuator.h"
+#include "../../../comm/VisualComm.h"
 
 class BaseStrategy {
     public:
         virtual ~BaseStrategy() {}
         
         virtual void enter();
-        virtual void setup();
-        virtual void simulate_ecosystem(EcosystemParameters *ecosystemParamPtr, EcosystemScanner *scannerPtr, EcosystemActuator *actuatorPtr);
+        virtual void setup(VisualComm *visualCommPtr);
+        virtual void simulate_ecosystem(EcosystemParameters *ecosystemParamPtr, EcosystemScanner *scannerPtr, EcosystemActuator *actuatorPtr, VisualComm *visualCommPtr);
         virtual void exit();
 };

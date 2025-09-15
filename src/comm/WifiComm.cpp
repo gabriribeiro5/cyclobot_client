@@ -3,81 +3,83 @@
 #include "Arduino.h"
 #include <WiFiEsp.h>
 #include "../../include/comm/WifiComm.h"
+#include "../../include/comm/VisualComm.h"
 #include "../../include/config/WifiParameters.h"
 #include "../../include/Context.h"
 
-void WifiComm::print_wifi_status() {
+void WifiComm::print_wifi_status(VisualComm *visualCommPtr) {
   if (WiFi.status() != WL_CONNECTED) {
     Serial.println(F("[WifiComm::print_wifi_status] WiFi not connected."));
+    Serial.flush();
     return;
   }
   
   // print the SSID of the network you're attached to:
-  Serial.print("[WifiComm::print_wifi_status] SSID: ");
-  Serial.println(WiFi.SSID());
+  visualCommPtr->print("[WifiComm::print_wifi_status] SSID: ");
+  visualCommPtr->print_line(WiFi.SSID());
 
   // print your WiFi shield's IP address:
   IPAddress ip = WiFi.localIP();
-  Serial.print("[WifiComm::print_wifi_status] IP Address: ");
-  Serial.println(ip);
+  visualCommPtr->print("[WifiComm::print_wifi_status] IP Address: ");
+  visualCommPtr->print_line(ip);
 
   // print the received signal strength:
   long rssi = WiFi.RSSI();
-  Serial.print("[WifiComm::print_wifi_status] Signal strength (RSSI):");
-  Serial.print(rssi);
-  Serial.println(F(" dBm"));
+  visualCommPtr->print("[WifiComm::print_wifi_status] Signal strength (RSSI):");
+  visualCommPtr->print(rssi);
+  visualCommPtr->print_line(F(" dBm"));
 }
 
-void WifiComm::print_encryption_type(int thisType) {
+void WifiComm::print_encryption_type(int thisType, VisualComm *visualCommPtr) {
   // read the encryption type and print out the name:
   switch (thisType) {
   case ENC_TYPE_NONE:
-    Serial.println(F("[WifiComm::print_encryption_type] None"));
+    visualCommPtr->print_line(F("[WifiComm::print_encryption_type] None"));
     break;
   case ENC_TYPE_WEP:
-    Serial.println(F("[WifiComm::print_encryption_type] WEP"));
+    visualCommPtr->print_line(F("[WifiComm::print_encryption_type] WEP"));
     break;
   // case ENC_TYPE_TKIP:
-  //   Serial.println(F("[WifiComm::print_encryption_type] WPA"));
+  //   visualCommPtr->print_line(F("[WifiComm::print_encryption_type] WPA"));
   //   break;
   // case ENC_TYPE_CCMP:
-  //   Serial.println(F("[WifiComm::print_encryption_type] WPA2"));
+  //   visualCommPtr->print_line(F("[WifiComm::print_encryption_type] WPA2"));
   //   break;
   // case ENC_TYPE_AUTO:
-  //   Serial.println(F("[WifiComm::print_encryption_type] Auto"));
+  //   visualCommPtr->print_line(F("[WifiComm::print_encryption_type] Auto"));
   //   break;
   default:
-    Serial.println(F("[WifiComm::print_encryption_type] Unknown"));
+    visualCommPtr->print_line(F("[WifiComm::print_encryption_type] Unknown"));
     break;
   }
 }
 
-void WifiComm::print_available_networks(WifiParameters *wifiParametersPtr) {
+void WifiComm::print_available_networks(WifiParameters *wifiParametersPtr, VisualComm *visualCommPtr) {
   for (int i = 0; i < wifiParametersPtr->networkSsidIndex; i++) {
-    Serial.print("[WifiComm::print_available_networks] (");
-    Serial.print(i);
-    Serial.print(") ");
-    Serial.println(WiFi.SSID(i));
-    Serial.print("[WifiComm::print_available_networks] ");
-    Serial.print("\tSignal: ");
-    Serial.println(WiFi.RSSI(i));
-    Serial.print("[WifiComm::print_available_networks] dBm\tEncryption: ");
+    visualCommPtr->print("[WifiComm::print_available_networks] (");
+    visualCommPtr->print(i);
+    visualCommPtr->print(") ");
+    visualCommPtr->print_line(WiFi.SSID(i));
+    visualCommPtr->print("[WifiComm::print_available_networks] ");
+    visualCommPtr->print("\tSignal: ");
+    visualCommPtr->print_line(WiFi.RSSI(i));
+    visualCommPtr->print("[WifiComm::print_available_networks] dBm\tEncryption: ");
     print_encryption_type(WiFi.encryptionType(i));
   }
 }
 
-void WifiComm::scan_wifi(WifiParameters *wifiParametersPtr) {
-  Serial.println(F("[WifiComm::scan_wifi] Running..."));
+void WifiComm::scan_wifi(WifiParameters *wifiParametersPtr, VisualComm *VisualCommPtr) {
+  visualCommPtr->print_line(F("[WifiComm::scan_wifi] Running..."));
   // Print WiFi MAC address:
   // printMacAddress();
 
   // scan for nearby networks:
-  Serial.println(F("[WifiComm::scan_wifi] ** Scan Networks **"));
+  visualCommPtr->print_line(F("[WifiComm::scan_wifi] ** Scan Networks **"));
   while (wifiParametersPtr->scanCount < wifiParametersPtr->wifiMaxScanAttempt) {
     wifiParametersPtr->networkSsidIndex = WiFi.scanNetworks();
     if (wifiParametersPtr->networkSsidIndex == -1) {
-        Serial.print("[WifiComm::scan_wifi] failed attempt -> ");
-        Serial.print(wifiParametersPtr->scanCount);
+        visualCommPtr->print("[WifiComm::scan_wifi] failed attempt -> ");
+        visualCommPtr->print(wifiParametersPtr->scanCount);
         delay(wifiParametersPtr->waitTimePerScanAttempt);
         wifiParametersPtr->scanCount++;
     } else {
@@ -88,18 +90,16 @@ void WifiComm::scan_wifi(WifiParameters *wifiParametersPtr) {
   print_available_networks(wifiParametersPtr);
 }
 
-void WifiComm::connect_wifi(WifiParameters *wifiParametersPtr) {
-  Serial.println(F("[WifiComm::connect_wifi] Running..."));
-  Serial.flush(); // Wait until all outgoing serial data has been transmitted
+void WifiComm::connect_wifi(WifiParameters *wifiParametersPtr, VisualComm *visualCommPtr) {
+  visualCommPtr->print_line(F("[WifiComm::connect_wifi] Running..."));
   
   // Initialize the Ethernet client library
   // with the IP address and port of the server
   // that you want to connect to (port 80 is default for HTTP):
   while (wifiParametersPtr->wifiStatus != WL_IDLE_STATUS) {
-    Serial.println(F("[WifiComm::connect_wifi] Attempting to connect to SSID: "));
-    Serial.flush(); // Wait until all outgoing serial data has been transmitted
-    Serial.println(wifiParametersPtr->wifiSsid);
-    
+    visualCommPtr->print_line(F("[WifiComm::connect_wifi] Attempting to connect to SSID: "));
+    visualCommPtr->print_line(wifiParametersPtr->wifiSsid);
+
     // WPA/WPA2 connection
     wifiParametersPtr->connAttemptCount++;
     wifiParametersPtr->wifiStatus = WiFi.begin(wifiParametersPtr->wifiSsid, wifiParametersPtr->wifiSecret);
@@ -113,8 +113,8 @@ void WifiComm::connect_wifi(WifiParameters *wifiParametersPtr) {
   }
 }
 
-void WifiComm::disconnect_wifi() {
-  Serial.println(F("[WifiComm::disconnect_wifi] Running..."));
+void WifiComm::disconnect_wifi(VisualComm *visualCommPtr) {
+  visualCommPtr->print_line(F("[WifiComm::disconnect_wifi] Running..."));
   WiFi.disconnect();
-  Serial.println(F("[WifiComm::disconnect_wifi] done"));
+  visualCommPtr->print_line(F("[WifiComm::disconnect_wifi] done"));
 }

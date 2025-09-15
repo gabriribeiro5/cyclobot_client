@@ -10,16 +10,16 @@
 // used by context.changeState
 void SelfDiagnosisState::enter(FiniteStateMachine *cyclobot) {
     if (!cyclobot) {
-        Serial.println(F("SelfDiagnosisState::enter cyclobot pointer is null in SelfDiagnosisState"));
+        cyclobot->commPtr->visualCommPtr->print_line(F("SelfDiagnosisState::enter cyclobot pointer is null in SelfDiagnosisState"));
         return; // ou transição para um estado de erro seguro
     }
     
-    Serial.println(F(" *************************  *****[SelfDiagnosisState::enter]****  ************************* "));
+    cyclobot->commPtr->visualCommPtr->print_line(F(" *************************  *****[SelfDiagnosisState::enter]****  ************************* "));
 };
 
 void SelfDiagnosisState::exit(FiniteStateMachine *cyclobot) {
     cyclobot->selfPtr->checkMyHealthPtr->clear_runtime_data();
-    Serial.println(F(" *************************  *****[SelfDiagnosisState::exit]*****  ************************* "));
+    cyclobot->commPtr->visualCommPtr->print_line(F(" *************************  *****[SelfDiagnosisState::exit]*****  ************************* "));
 };
 
 // error
@@ -29,12 +29,12 @@ void SelfDiagnosisState::handle_error(FiniteStateMachine *cyclobot) {
 
 // self
 void SelfDiagnosisState::run_health_check(FiniteStateMachine *cyclobot) {
-    Serial.println(F("[SelfDiagnosisState::run_health_check] Running..."));
+    cyclobot->commPtr->visualCommPtr->print_line(F("[SelfDiagnosisState::run_health_check] Running..."));
     Serial.flush();
     cyclobot->dataPtr->selfDiagnosisDataPtr->diagnosisDateTime = ""; // TODO: apply current date and time
     // *** SENSORS ***
     
-    Serial.println(F("[SelfDiagnosisState::run_health_check] sensors..."));
+    cyclobot->commPtr->visualCommPtr->print_line(F("[SelfDiagnosisState::run_health_check] sensors..."));
     Serial.flush();
     // Wifi sensor
     if (cyclobot->selfPtr->checkMyHealthPtr->wifi_shield_is_on(cyclobot->paramPtr->wifiParametersPtr)) { // check for the presence of the shield
@@ -47,7 +47,7 @@ void SelfDiagnosisState::run_health_check(FiniteStateMachine *cyclobot) {
             cyclobot->selfPtr->checkMyHealthPtr->clear_runtime_data();
         }
         
-    Serial.println(F("[SelfDiagnosisState::run_health_check] actuators..."));
+    cyclobot->commPtr->visualCommPtr->print_line(F("[SelfDiagnosisState::run_health_check] actuators..."));
     Serial.flush();
     // *** ACTUATORS ***
     cyclobot->selfPtr->checkMyHealthPtr->check_watering_system(cyclobot->dataPtr->selfDiagnosisDataPtr);
@@ -55,7 +55,7 @@ void SelfDiagnosisState::run_health_check(FiniteStateMachine *cyclobot) {
     cyclobot->selfPtr->checkMyHealthPtr->check_wind_system(cyclobot->dataPtr->selfDiagnosisDataPtr);
     cyclobot->selfPtr->checkMyHealthPtr->check_lighting_system(cyclobot->dataPtr->selfDiagnosisDataPtr);
     cyclobot->selfPtr->checkMyHealthPtr->check_components_list(cyclobot->dataPtr->selfDiagnosisDataPtr);
-    Serial.println(F("[SelfDiagnosisState::run_health_check] done..."));
+    cyclobot->commPtr->visualCommPtr->print_line(F("[SelfDiagnosisState::run_health_check] done..."));
     Serial.flush();
 };
 

@@ -13,8 +13,8 @@ class SimStrategy {
     public:
         SimStrategy(BaseStrategy *initialStrategyPtr);
         void change_strategy(BaseStrategy *newStrategyPtr);
-        void setup();
-        void simulate_ecosystem(EcosystemParameters *ecosystemParametersPtr, EcosystemScanner *scannerPtr, EcosystemActuator *actuatorPtr);
+        void setup(VisualComm *visualCommPtr);
+        void simulate_ecosystem(EcosystemParameters *ecosystemParametersPtr, EcosystemScanner *scannerPtr, EcosystemActuator *actuatorPtr, VisualComm *visualCommPtr);
     private:
         BaseStrategy *currentStrategyPtr;
 };
