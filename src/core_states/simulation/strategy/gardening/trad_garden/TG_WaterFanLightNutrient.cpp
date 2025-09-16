@@ -5,6 +5,7 @@
 #include "../../../../../../include/config/DeviceParameters.h"
 #include "../../../../../../include/sensor/EcosystemScanner.h"
 #include "../../../../../../include/actuator/EcosystemActuator.h"
+#include "../../../../../../include/comm/VisualComm.h"
 
 /* TRADITIONAL GARDEN */
 void TG_WaterFanLightNutrient::enter() {
@@ -14,7 +15,7 @@ void TG_WaterFanLightNutrient::enter() {
 }
 
 /* TRADITIONAL GARDEN */
-void TG_WaterFanLightNutrient::setup() {
+void TG_WaterFanLightNutrient::setup(VisualComm *visualCommPtr) {
     pinMode(soilMoistureSensor, INPUT);     // Sensor de umidade do solo - porta A0 é entrada 
     pinMode(irrigationSystem, INPUT);       // Sensor de chuva - porta A1 é entrada 
     pinMode(relePort, OUTPUT);              // Porta de controle do Relé - D4 é saída 
@@ -24,19 +25,20 @@ void TG_WaterFanLightNutrient::setup() {
 /* TRADITIONAL GARDEN */
 void TG_WaterFanLightNutrient::simulate_ecosystem(EcosystemParameters *parametersPtr,
                                                    EcosystemScanner *scannerPtr,
-                                                   EcosystemActuator *actuatorPtr)
+                                                   EcosystemActuator *actuatorPtr,
+                                                   VisualComm *visualCommPtr)
 {
     // ********* Primary scann *********
-    scannerPtr->read_soil_moisture(parametersPtr, soilMoistureSensor);
+    scannerPtr->read_soil_moisture(parametersPtr, visualCommPtr, soilMoistureSensor);
 
     // ********* Irrigation strategy *********
     if (!parametersPtr->soilIsWet) {
-        actuatorPtr->irrigation_system_on(parametersPtr, irrigationSystem);
+        actuatorPtr->irrigation_system_on(parametersPtr, visualCommPtr, irrigationSystem);
         while (!parametersPtr->soilIsWet)
         {
-            scannerPtr->read_soil_moisture(parametersPtr, soilMoistureSensor);
+            scannerPtr->read_soil_moisture(parametersPtr, visualCommPtr, soilMoistureSensor);
         }
-        actuatorPtr->irrigation_system_off(parametersPtr, irrigationSystem);
+        actuatorPtr->irrigation_system_off(parametersPtr, visualCommPtr, irrigationSystem);
     }
 }
 

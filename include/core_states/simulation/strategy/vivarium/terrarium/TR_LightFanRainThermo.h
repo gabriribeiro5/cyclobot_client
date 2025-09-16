@@ -12,7 +12,7 @@ class TR_LightFanRainThermo : public BaseStrategy {
 
         void enter() override;
         void setup(VisualComm *visualCommPtr) override;
-        void simulate_ecosystem(EcosystemParameters *ecosystemParamPtr, EcosystemScanner *scannerPtr, EcosystemActuator *actuatorPtrVisualComm *visualCommPtr) override;
+        void simulate_ecosystem(EcosystemParameters *ecosystemParamPtr, EcosystemScanner *scannerPtr, EcosystemActuator *actuatorPtr, VisualComm *visualCommPtr) override;
         void exit() override;    
     private:
         uint8_t soilMoistureSensor;       // Sensor de umidade do solo pino A0 conectado no A0 do Arduino

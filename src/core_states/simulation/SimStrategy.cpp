@@ -14,11 +14,11 @@ SimStrategy::SimStrategy(BaseStrategy *initialStrategyPtr) {
 
 void SimStrategy::setup(VisualComm *visualCommPtr) {
     visualCommPtr->print_line(F("[SimStrategy::setup] running..."));
-    currentStrategyPtr->setup();
+    currentStrategyPtr->setup(visualCommPtr);
 }
 
 void SimStrategy::simulate_ecosystem(EcosystemParameters *ecosystemParametersPtr, EcosystemScanner *environmentScanPtr, EcosystemActuator *environmentActuatorPtr, VisualComm *visualCommPtr) {
-    currentStrategyPtr->simulate_ecosystem(ecosystemParametersPtr, environmentScanPtr, environmentActuatorPtr);
+    currentStrategyPtr->simulate_ecosystem(ecosystemParametersPtr, environmentScanPtr, environmentActuatorPtr, visualCommPtr);
 }
 
 void SimStrategy::change_strategy(BaseStrategy *newStrategyPtr) {

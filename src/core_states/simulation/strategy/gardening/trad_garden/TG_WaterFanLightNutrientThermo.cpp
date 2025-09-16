@@ -5,6 +5,7 @@
 #include "../../../../../../include/config/DeviceParameters.h"
 #include "../../../../../../include/sensor/EcosystemScanner.h"
 #include "../../../../../../include/actuator/EcosystemActuator.h"
+#include "../../../../../../include/comm/VisualComm.h"
 
 /* TRADITIONAL GARDEN */
 void TG_WaterFanLightNutrientThermo::enter() {
@@ -25,7 +26,7 @@ void TG_WaterFanLightNutrientThermo::enter() {
 }
 
 /* TRADITIONAL GARDEN */
-void TG_WaterFanLightNutrientThermo::setup() {
+void TG_WaterFanLightNutrientThermo::setup(VisualComm *visualCommPtr) {
 	pinMode(soilMoistureSensor, INPUT);
 	pinMode(brightnessSensor, INPUT);
 	pinMode(nutrientSensor, INPUT);
@@ -49,20 +50,21 @@ void TG_WaterFanLightNutrientThermo::setup() {
 
 /* TRADITIONAL GARDEN */
 void TG_WaterFanLightNutrientThermo::simulate_ecosystem(EcosystemParameters *parametersPtr,
-                                                   EcosystemScanner *scannerPtr,
-                                                   EcosystemActuator *actuatorPtr)
+														EcosystemScanner *scannerPtr,
+														EcosystemActuator *actuatorPtr,
+														VisualComm *visualCommPtr)
 {
 	// ********* Primary scann *********
-	scannerPtr->read_soil_moisture(parametersPtr, soilMoistureSensor);
+	scannerPtr->read_soil_moisture(parametersPtr, visualCommPtr, soilMoistureSensor);
 
 	// ********* Irrigation strategy *********
 	if (!parametersPtr->soilIsWet) {
-		actuatorPtr->irrigation_system_on(parametersPtr, irrigationSystem);
+		actuatorPtr->irrigation_system_on(parametersPtr, visualCommPtr, irrigationSystem);
 		while (!parametersPtr->soilIsWet)
 		{
-			scannerPtr->read_soil_moisture(parametersPtr, soilMoistureSensor);
+			scannerPtr->read_soil_moisture(parametersPtr, visualCommPtr, soilMoistureSensor);
 		}
-		actuatorPtr->irrigation_system_off(parametersPtr, irrigationSystem);
+		actuatorPtr->irrigation_system_off(parametersPtr, visualCommPtr, irrigationSystem);
 	}
 }
 

@@ -104,6 +104,7 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
     - [x] Replace Serial.println with cyclobot.VisualComm.print_line()
     - [x] Replace Serial.print with cyclobot.VisualComm.print()
     - [x] Update methods to get visualCommPtr as parameter
+    - [x] Update strategies to get visualCommPtr as parameter
 
 - [ ] fix(include paths): replace "\" with "/" or vice-versa
 
