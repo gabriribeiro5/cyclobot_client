@@ -2,6 +2,7 @@
 //  https://docs.arduino.cc/libraries/wifi/#Wifi%20Class
 #include "Arduino.h"
 #include <WiFiEsp.h>
+#include <SoftwareSerial.h>
 #include "../../include/comm/WifiComm.h"
 #include "../../include/comm/VisualComm.h"
 #include "../../include/config/WifiParameters.h"
@@ -64,11 +65,11 @@ void WifiComm::print_available_networks(WifiParameters *wifiParametersPtr, Visua
     visualCommPtr->print("\tSignal: ");
     visualCommPtr->print_line(WiFi.RSSI(i));
     visualCommPtr->print("[WifiComm::print_available_networks] dBm\tEncryption: ");
-    print_encryption_type(WiFi.encryptionType(i));
+    print_encryption_type(WiFi.encryptionType(i), visualCommPtr);
   }
 }
 
-void WifiComm::scan_wifi(WifiParameters *wifiParametersPtr, VisualComm *VisualCommPtr) {
+void WifiComm::scan_wifi(WifiParameters *wifiParametersPtr, VisualComm *visualCommPtr) {
   visualCommPtr->print_line(F("[WifiComm::scan_wifi] Running..."));
   // Print WiFi MAC address:
   // printMacAddress();
@@ -87,7 +88,7 @@ void WifiComm::scan_wifi(WifiParameters *wifiParametersPtr, VisualComm *VisualCo
     }
   }
 
-  print_available_networks(wifiParametersPtr);
+  print_available_networks(wifiParametersPtr, visualCommPtr);
 }
 
 void WifiComm::connect_wifi(WifiParameters *wifiParametersPtr, VisualComm *visualCommPtr) {

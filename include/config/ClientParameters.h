@@ -1,5 +1,6 @@
 #pragma once
 #include <ArduinoJson.h>
+#include <avr/pgmspace.h>
 
 class ClientParameters {
     public:

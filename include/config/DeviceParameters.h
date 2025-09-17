@@ -14,7 +14,7 @@ public:
     String cyclobotId;
     String cyclobotToken;
     bool firstAwakening = true;
-    const int sleepLength = 3600000; // 1h
+    unsigned long sleepLength = 3600000; // 1h
 
     DeviceParameters() {
         cyclobotId = getUniqueId();

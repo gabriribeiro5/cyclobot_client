@@ -29,15 +29,15 @@ void CheckMyHealth::check_wifi_firmware_version(WifiParameters *wifiParametersPt
 }
 
 void CheckMyHealth::check_wifi_networks(WifiComm *wifiCommPtr, WifiParameters *wifiParametersPtr, SelfDiagnosisData *selfDiagnosisDataPtr, VisualComm *visualCommPtr) {
-  wifiCommPtr->scan_wifi(wifiParametersPtr);
+  wifiCommPtr->scan_wifi(wifiParametersPtr, visualCommPtr);
 
   // update selfDiagnosisData
   if (wifiParametersPtr->networkSsidIndex > -1) {
     selfDiagnosisDataPtr->wifiNetworkAvailable = 1; // 1 = true
-    VisualCommPtr->print("[CheckMyHealth::check_wifi_networks] number of available networks: ");
-    VisualCommPtr->print(wifiParametersPtr->networkSsidIndex);
+    visualCommPtr->print("[CheckMyHealth::check_wifi_networks] number of available networks: ");
+    visualCommPtr->print(wifiParametersPtr->networkSsidIndex);
     visualCommPtr->print_line(F("[CheckMyHealth::check_wifi_networks] *** AVAILABLE NETWORKS ***"));
-    wifiCommPtr->scan_wifi(wifiParametersPtr);
+    wifiCommPtr->scan_wifi(wifiParametersPtr, visualCommPtr);
   } else {
     visualCommPtr->print_line(F("[[CheckMyHealth::check_wifi_networks] Couldn't find network"));
     selfDiagnosisDataPtr->wifiNetworkAvailable = 0; // 1 = true
@@ -45,7 +45,7 @@ void CheckMyHealth::check_wifi_networks(WifiComm *wifiCommPtr, WifiParameters *w
 }
 
 void CheckMyHealth::check_wifi_connection(WifiComm *wifiCommPtr, WifiParameters *wifiParametersPtr, SelfDiagnosisData *selfDiagnosisDataPtr, VisualComm *visualCommPtr) {
-  wifiCommPtr->connect_wifi(wifiParametersPtr);
+  wifiCommPtr->connect_wifi(wifiParametersPtr, visualCommPtr);
 
   // update selfDiagnosisData
   if (wifiParametersPtr->wifiStatus == WL_IDLE_STATUS) {
@@ -61,7 +61,7 @@ void CheckMyHealth::check_client_communication(ClientComm *clientCommPtr,
                                                ClientParameters *clientParametersPtr,
                                                SelfDiagnosisData *selfDiagnosisDataPtr,
                                                VisualComm *visualCommPtr) {
-  clientCommPtr->trace_server(clientParametersPtr, wifiParametersPtr);
+  clientCommPtr->trace_server(clientParametersPtr, wifiParametersPtr, visualCommPtr);
 
   // update selfDiagnosisData
   if (clientParametersPtr->serverIsUp) {

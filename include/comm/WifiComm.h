@@ -1,7 +1,9 @@
 #pragma once
+#include "Arduino.h"
 #include <WiFiEsp.h>
 #include <SoftwareSerial.h>
 #include "../config/WifiParameters.h"
+#include "../comm/VisualComm.h"
 
 class WifiComm {
     public:

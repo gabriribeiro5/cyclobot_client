@@ -20,29 +20,29 @@ void CodeUpdateState::exit(FiniteStateMachine *cyclobot) {
 
 // error
 void CodeUpdateState::handle_error(FiniteStateMachine *cyclobot) {
-    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, "CodeUpdateState", "handle_error", 0, "wrong state");
+    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, cyclobot->commPtr->visualCommPtr, "CodeUpdateState", "handle_error", 0, "wrong state");
 };
 
 // self
 void CodeUpdateState::run_health_check(FiniteStateMachine *cyclobot) {
-    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, "CodeUpdateState", "run_health_check", 0, "wrong state");
+    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, cyclobot->commPtr->visualCommPtr, "CodeUpdateState", "run_health_check", 0, "wrong state");
 };
 
 // comm
 void CodeUpdateState::report_signature_request(FiniteStateMachine *cyclobot) {
-    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, "CodeUpdateState", "report_signature_request", 0, "wrong state");
+    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, cyclobot->commPtr->visualCommPtr, "CodeUpdateState", "report_signature_request", 0, "wrong state");
 };
 
 void CodeUpdateState::session_new(FiniteStateMachine *cyclobot) {
-    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, "CodeUpdateState", "session_new", 0, "wrong state");
+    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, cyclobot->commPtr->visualCommPtr, "CodeUpdateState", "session_new", 0, "wrong state");
 };
 
 void CodeUpdateState::report_config(FiniteStateMachine *cyclobot) {
-    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, "CodeUpdateState", "report_config", 0, "wrong state");
+    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, cyclobot->commPtr->visualCommPtr, "CodeUpdateState", "report_config", 0, "wrong state");
 };
 
 void CodeUpdateState::report_health_check(FiniteStateMachine *cyclobot) {
-    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, "CodeUpdateState", "report_health_check", 0, "wrong state");
+    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, cyclobot->commPtr->visualCommPtr, "CodeUpdateState", "report_health_check", 0, "wrong state");
 };
 
 // update
@@ -62,22 +62,22 @@ void CodeUpdateState::update_simulation_code(FiniteStateMachine *cyclobot) {
 
 // comm
 void CodeUpdateState::session_stop(FiniteStateMachine *cyclobot) {
-    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, "CodeUpdateState", "session_stop", 0, "wrong state");
+    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, cyclobot->commPtr->visualCommPtr, "CodeUpdateState", "session_stop", 0, "wrong state");
 };
 
 // sim
 void CodeUpdateState::run_simulation(FiniteStateMachine *cyclobot) {
-    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, "CodeUpdateState", "run_simulation", 0, "wrong state");
+    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, cyclobot->commPtr->visualCommPtr, "CodeUpdateState", "run_simulation", 0, "wrong state");
 };
 
 // comm
 void CodeUpdateState::report_simulation_data(FiniteStateMachine *cyclobot) {
-    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, "CodeUpdateState", "report_simulation_data", 0, "wrong state");
+    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, cyclobot->commPtr->visualCommPtr, "CodeUpdateState", "report_simulation_data", 0, "wrong state");
 };
 
 // self
 void CodeUpdateState::take_a_nap(FiniteStateMachine *cyclobot) {
-    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, "CodeUpdateState", "take_a_nap", 0, "wrong state");
+    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, cyclobot->commPtr->visualCommPtr, "CodeUpdateState", "take_a_nap", 0, "wrong state");
 };
 
 // constructor

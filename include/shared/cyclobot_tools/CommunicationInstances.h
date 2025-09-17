@@ -16,5 +16,4 @@ class CommunicationInstances {
         ButtonComm *buttonCommPtr;
         SoundComm *soundCommPtr;
         VisualComm *visualCommPtr;
-        VisualComm *visualCommPtr;
 };

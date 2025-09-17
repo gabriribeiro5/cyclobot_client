@@ -1,6 +1,7 @@
 #pragma once
 #include <SoftwareSerial.h>
 #include <WiFiEsp.h>
+#include <avr/pgmspace.h>
 
 class WifiParameters {
     public:
