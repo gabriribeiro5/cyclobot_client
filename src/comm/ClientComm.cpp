@@ -60,12 +60,13 @@ void ClientComm::trace_server(ClientParameters *clientParametersPtr, WifiParamet
 
 void ClientComm::post_signature_request(ClientParameters *clientParametersPtr, WifiParameters *wifiParametersPtr, DeviceParameters *deviceParametersPtr, VisualComm *visualCommPtr) {
   visualCommPtr->print_line(F("[ClientComm::post_signature_request] running..."));
-
+  
   // Construct JSON payload
   clientParametersPtr->signatureRequest_Json["cyclobotId"] = deviceParametersPtr->cyclobotId; // get uuid
   clientParametersPtr->signatureRequest_Json["cyclobotToken"] = deviceParametersPtr->cyclobotToken; // get other uuid
   serializeJson(clientParametersPtr->signatureRequest_Json, clientParametersPtr->signatureRequest_Char);  // convert JSON to Char
-
+  
+  visualCommPtr->print_line(F("[ClientComm::post_signature_request] credentials ready..."));
   // Send HTTP request
   if (wifiParametersPtr->client.connected()) {
     // Client action
@@ -82,7 +83,7 @@ void ClientComm::post_signature_request(ClientParameters *clientParametersPtr, W
     visualCommPtr->print_line(F("[ClientComm::post_signature_request] Request sent"));
   }
   else {
-    visualCommPtr->print_line(F("[ClientComm::post_signature_request] ATENTION! Server NOT responding"));
+    visualCommPtr->print_line(F("[ClientComm::post_signature_request] ATENTION! Client could'nt connect to server"));
   }
 }
 
@@ -178,7 +179,7 @@ void ClientComm::post_cyclobot_config(ClientParameters *clientParametersPtr, Wif
   configDataPtr->config_Json["wifi_firmware_latest_version"] = wifiParametersPtr->wifiFirmwareLatestVersion;
   configDataPtr->config_Json["network_ssid_index"] = wifiParametersPtr->networkSsidIndex;
   configDataPtr->config_Json["wait_time_per_connection_attempt"] = wifiParametersPtr->waitTimePerConnectionAttempt;
-  configDataPtr->config_Json["max_connectoin_attempt"] = wifiParametersPtr->maxConnectoinAttempt;
+  configDataPtr->config_Json["max_connectoin_attempt"] = wifiParametersPtr->maxConnectionAttempt;
   configDataPtr->config_Json["conn_attempt_count"] = wifiParametersPtr->connAttemptCount;
   configDataPtr->config_Json["wait_time_per_scan_attempt"] = wifiParametersPtr->waitTimePerScanAttempt;
   configDataPtr->config_Json["wifi_max_scan_attempt"] = wifiParametersPtr->wifiMaxScanAttempt;
@@ -220,7 +221,7 @@ void ClientComm::post_cyclobot_config(ClientParameters *clientParametersPtr, Wif
     visualCommPtr->print_line(F("[ClientComm::post_cyclobot_config] Config sent"));
   }
   else {
-    visualCommPtr->print_line(F("[ClientComm::post_cyclobot_config] ATENTION! server NOT responding"));
+    visualCommPtr->print_line(F("[ClientComm::post_cyclobot_config] ATENTION! Client could'nt connect to server"));
   }
 }
 
@@ -254,7 +255,7 @@ void ClientComm::post_cyclobot_diagnosis(ClientParameters *clientParametersPtr, 
     visualCommPtr->print_line(F("[ClientComm::post_cyclobot_diagnosis] Request sent"));
   }
   else {
-    visualCommPtr->print_line(F("[ClientComm::post_cyclobot_diagnosis] [ATENTION] server NOT responding"));
+    visualCommPtr->print_line(F("[ClientComm::post_cyclobot_diagnosis] [ATENTION] Client could'nt connect to server"));
   }
 }
 

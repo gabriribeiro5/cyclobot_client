@@ -1,8 +1,8 @@
 #include <Arduino.h>
-#include "..\include\Context.h"
-#include "..\include\core_states\BaseState.h"
-#include "..\include\self\ErrorHandler.h"
-#include "..\include\util\TimeSync.h"
+#include "../include/Context.h"
+#include "../include/core_states/BaseState.h"
+#include "../include/self/ErrorHandler.h"
+#include "../include/util/TimeSync.h"
 
 extern unsigned int __bss_end;   // Symbol marking the end of the .bss section (static & global variables in RAM).
 extern void *__brkval;           // Current end of the heap. NULL (0) if no malloc() has been used yet.

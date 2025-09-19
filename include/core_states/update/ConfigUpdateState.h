@@ -1,8 +1,8 @@
 #pragma once
-#include "..\BaseState.h"
-#include "..\..\Context.h"
-#include "..\..\self\ErrorHandler.h"
-class FiniteStateMachine; // Forward declaration
+#include "../BaseState.h"
+#include "../../Context.h"
+#include "../../self/ErrorHandler.h"
+class FiniteStateMacine; // Forward declaration
 
 class ConfigUpdateState : public BaseState {
 public:

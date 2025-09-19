@@ -47,75 +47,90 @@ void setup() {
     cyclobot.commPtr->visualCommPtr->print(F(":"));
     cyclobot.commPtr->visualCommPtr->print_line(cyclobot.now.second());
     
-    cyclobot.commPtr->visualCommPtr->print(F("[main::setup] setting simulation strategy"));
+    cyclobot.commPtr->visualCommPtr->print_line(F("[main::setup] setting simulation strategy"));
     cyclobot.simulationStrategyPtr = new TG_Water();
     
     // cyclobot.commPtr->visualCommPtr->print_line(F("[main::setup] initializing WiFi module"));
-    // WiFi.init(&esp8266);
+    WiFi.init(&esp8266);
 };
 
 void loop() {
     cyclobot.commPtr->visualCommPtr->print(F(" ************************  ************[main::loop"));
     cyclobot.commPtr->visualCommPtr->print(cyclobot.stateFlow);
-    cyclobot.commPtr->visualCommPtr->print_line(F("************  ************************ "));
+    cyclobot.commPtr->visualCommPtr->print_line(F("]************  ************************ "));
     cyclobot.commPtr->visualCommPtr->print_free_memory("[main::loop]");
     switch (cyclobot.stateFlow) {
-        case 0: // Self
-        BaseState *selfDiagnosisStatePtr = new SelfDiagnosisState();
-        cyclobot.change_state(selfDiagnosisStatePtr);
-        cyclobot.commPtr->visualCommPtr->print_free_memory("[main::loop1]");
-        cyclobot.run_health_check();                  // !! [FiniteStateMachine::run_health_check] �
-        delete selfDiagnosisStatePtr;
-        break;
-        case 1: // Comm
-        BaseState *communicationStatePtr = new HTTPClientState();
-        cyclobot.change_state(communicationStatePtr);
-        cyclobot.report_signature_request();
-        cyclobot.session_new();                      // !! [HTTPClientState::session_new] Free Memory: 55�
-        // cyclobot.report_config();                 // !! [HTTPClientState::report_conf�
-        // cyclobot.report_health_check();           // !! [HTTPClientState::report_health_check]�
-        break;
-        case 2: // Config update
-        BaseState *configUpdateStatePtr = new ConfigUpdateState();
-        cyclobot.change_state(configUpdateStatePtr);
-        cyclobot.update_config();
-        delete configUpdateStatePtr;
-        break;
-        case 3: // Code update
-        BaseState *codeUpdateStatePtr = new CodeUpdateState();
-        cyclobot.change_state(codeUpdateStatePtr);
-        cyclobot.update_simulation_code();
-        delete codeUpdateStatePtr;
-        break;
-        case 4: // Comm
-        cyclobot.change_state(communicationStatePtr);
-        // cyclobot.session_stop();                  // !! [ClientComm::put_invalid_cyclobo�
-        break;
-        case 5: // Simulation
-        BaseState *simulationStatePtr = new SimulationState();
-        cyclobot.change_state(simulationStatePtr);
-        // cyclobot.run_simulation();                // !! [SimulationState::enter]******  ***********�
-        delete simulationStatePtr;
-        break;
-        case 6: // Comm
-        cyclobot.change_state(communicationStatePtr);
-        // cyclobot.report_simulation_data();           // !! [WifiComm::connect_wifi] Ru�
-        break;
-        case 7: // Self
-        cyclobot.change_state(idleStatePtr);
-        cyclobot.take_a_nap();
-        cyclobot.stateFlow = -1; // Reset
-        break;
-        case 99: // Error
-        BaseState *errorHandlingStatePtr = new ErrorHandlingState();
-        cyclobot.change_state(errorHandlingStatePtr);
-        cyclobot.handle_error();
-        delete errorHandlingStatePtr;
-        cyclobot.stateFlow = -1; // Reset
-        break;
-        default: // Reset
-        cyclobot.stateFlow = -1; // Reset
-        break;
+        case 0: { // Self
+            BaseState *selfDiagnosisStatePtr = new SelfDiagnosisState();
+            cyclobot.change_state(selfDiagnosisStatePtr);
+            cyclobot.run_health_check();
+            delete selfDiagnosisStatePtr;
+            break;
+        }
+        case 1: { // Comm
+            cyclobot.commPtr->visualCommPtr->print_line(F(" [main::loop 1] Setting up communication state"));
+            BaseState *communicationStatePtr = new HTTPClientState();
+            cyclobot.change_state(communicationStatePtr);
+            cyclobot.report_signature_request();
+            cyclobot.session_new();
+            cyclobot.report_config(); 
+            cyclobot.report_health_check();
+            break;
+        }
+        case 2: { // Config update
+            BaseState *configUpdateStatePtr = new ConfigUpdateState();
+            cyclobot.change_state(configUpdateStatePtr);
+            cyclobot.update_config();
+            delete configUpdateStatePtr;
+            break;
+        }
+        case 3: { // Code update
+            BaseState *codeUpdateStatePtr = new CodeUpdateState();
+            cyclobot.change_state(codeUpdateStatePtr);
+            cyclobot.update_simulation_code();
+            delete codeUpdateStatePtr;
+            break;
+        }
+        case 4: { // Comm
+            BaseState *communicationStatePtr = new HTTPClientState();
+            cyclobot.change_state(communicationStatePtr);
+            cyclobot.session_stop();
+            delete communicationStatePtr;
+            break;
+        }
+        case 5: { // Simulation
+            BaseState *simulationStatePtr = new SimulationState();
+            cyclobot.change_state(simulationStatePtr);
+            cyclobot.run_simulation();
+            delete simulationStatePtr;
+            break;
+        }
+        case 6: { // Comm
+            BaseState *communicationStatePtr = new HTTPClientState();
+            cyclobot.change_state(communicationStatePtr);
+            cyclobot.report_simulation_data();
+            delete communicationStatePtr;
+            break;
+        }
+        case 7: { // Self
+            BaseState *idleStatePtr = new IdleState();
+            cyclobot.change_state(idleStatePtr);
+            cyclobot.take_a_nap();
+            cyclobot.stateFlow = -1; // Reset
+            break;
+        }
+        case 99: { // Error
+            BaseState *errorHandlingStatePtr = new ErrorHandlingState();
+            cyclobot.change_state(errorHandlingStatePtr);
+            cyclobot.handle_error();
+            delete errorHandlingStatePtr;
+            cyclobot.stateFlow = -1; // Reset
+            break;
+        }
+        default: { // Reset
+            cyclobot.stateFlow = -1; // Reset
+            break;
+        }
     }
     cyclobot.stateFlow++;
 };

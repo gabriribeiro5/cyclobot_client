@@ -1,4 +1,3 @@
-
 #include "Arduino.h"
 #include "../../../include/core_states/update/CodeUpdateState.h"
 #include "../../../include/util/StateTransitionException.h"

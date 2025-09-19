@@ -97,8 +97,12 @@ void WifiComm::connect_wifi(WifiParameters *wifiParametersPtr, VisualComm *visua
   // Initialize the Ethernet client library
   // with the IP address and port of the server
   // that you want to connect to (port 80 is default for HTTP):
-  while (wifiParametersPtr->wifiStatus != WL_IDLE_STATUS) {
-    visualCommPtr->print_line(F("[WifiComm::connect_wifi] Attempting to connect to SSID: "));
+  while (wifiParametersPtr->wifiStatus != WL_IDLE_STATUS && wifiParametersPtr->connAttemptCount < wifiParametersPtr->maxConnectionAttempt) {
+    visualCommPtr->print_line(F("[WifiComm::connect_wifi] Connecting to SSID: "));
+    visualCommPtr->print(F("[WifiComm::connect_wifi] Attempt: "));
+    visualCommPtr->print(wifiParametersPtr->connAttemptCount);
+    visualCommPtr->print(F(" of  "));
+    visualCommPtr->print_line(wifiParametersPtr->maxConnectionAttempt);
     visualCommPtr->print_line(wifiParametersPtr->wifiSsid);
 
     // WPA/WPA2 connection
@@ -107,10 +111,6 @@ void WifiComm::connect_wifi(WifiParameters *wifiParametersPtr, VisualComm *visua
 
     // wait connection
     delay(wifiParametersPtr->waitTimePerConnectionAttempt);
-
-    if (wifiParametersPtr->connAttemptCount >= wifiParametersPtr->maxConnectoinAttempt) {
-      break;
-    }
   }
 }
 

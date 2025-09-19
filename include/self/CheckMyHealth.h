@@ -1,7 +1,7 @@
 #pragma once
-#include "..\comm\ClientComm.h"
-#include "..\comm\WifiComm.h"
-#include "..\comm\VisualComm.h"
+#include "../comm/ClientComm.h"
+#include "../comm/WifiComm.h"
+#include "../comm/VisualComm.h"
 #include "WiFiEsp.h"
 
 // CycloBot Finite State Machine

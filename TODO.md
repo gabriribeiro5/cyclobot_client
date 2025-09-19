@@ -108,7 +108,7 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 
 - [x] fix(multiple methods): update call signature (including visualCommptr)
 - [x] fix(warning -Woverflow): update const int sleepLenght to unsigned long
-- [ ] fix(include paths): replace "\" with "/" or vice-versa
+- [x] fix(include paths): replace "\" with "/" or vice-versa
 - [ ] fix(warning -Wattributes): __progmem__
 - [ ] fix(warning -Wwrite-strings):
 - [ ] fix(warning -Wunused-parameter):
