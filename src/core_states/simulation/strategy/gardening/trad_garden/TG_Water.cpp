@@ -21,9 +21,13 @@ void TG_Water::enter() {
 void TG_Water::setup(VisualComm *visualCommPtr) {
 	visualCommPtr->print_line(F("[TG_Water::setup] running"));
 	pinMode(soilMoistureSensor, INPUT);     // Sensor de umidade do solo - porta A0 é entrada 
+	visualCommPtr->print_line(F("[TG_Water::setup] soilMoistureSensor set to INPUT"));
 	pinMode(irrigationSystem, INPUT);       // Sensor de chuva - porta A1 é entrada 
+	visualCommPtr->print_line(F("[TG_Water::setup] irrigationSystem set to INPUT"));
 	pinMode(relePort, OUTPUT);              // Porta de controle do Relé - D4 é saída 
+	visualCommPtr->print_line(F("[TG_Water::setup] relePort set to OUTPUT"));
 	digitalWrite(relePort, HIGH);           // Mantém relé desligado  
+	visualCommPtr->print_line(F("[TG_Water::setup] relePort set to OUTPUT HIGH"));
 }
 
 /* TRADITIONAL GARDEN */

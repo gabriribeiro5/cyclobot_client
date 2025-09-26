@@ -6,7 +6,8 @@
 // used by context.changeState
 void SimulationState::enter(FiniteStateMachine *cyclobot) {
     if (!cyclobot) {
-        cyclobot->commPtr->visualCommPtr->print_line(F("[SimulationState::enter] cyclobot pointer is null in SimulationState"));
+        Serial.println(F("[SimulationState::enter] cyclobot pointer is null in SimulationState"));
+        Serial.flush();
         return; // ou transição para um estado de erro seguro
     }
     
@@ -60,27 +61,41 @@ void SimulationState::session_stop(FiniteStateMachine *cyclobot) {
 
 // sim
 void SimulationState::run_simulation(FiniteStateMachine *cyclobot) {
-    cyclobot->commPtr->visualCommPtr->print_line(F("[SimulationState::run_simulation] running..."));    
+    cyclobot->commPtr->visualCommPtr->print_free_memory("[SimulationState::run_simulation]");
+    cyclobot->commPtr->visualCommPtr->print_line(F("[SimulationState::run_simulation] running..."));
     if (simStrategyPtr) {
+        cyclobot->commPtr->visualCommPtr->print_line(F("[SimulationState::run_simulation] deleting simStrategyPtr"));
         delete simStrategyPtr;
     }
     
+    cyclobot->commPtr->visualCommPtr->print_line(F("[SimulationState::run_simulation] creating new simStrategyPtr"));
     simStrategyPtr = new SimStrategy(cyclobot->simulationStrategyPtr);
     
     if (cyclobot->paramPtr->deviceParametersPtr->firstAwakening) {
         cyclobot->commPtr->visualCommPtr->print_line(F("[SimulationState::run_simulation] calling pin setup method"));
         simStrategyPtr->setup(cyclobot->commPtr->visualCommPtr);
+        cyclobot->commPtr->visualCommPtr->print_line(F("[SimulationState::run_simulation] pin setup method completed"));
         cyclobot->paramPtr->deviceParametersPtr->firstAwakening = false;
+        cyclobot->commPtr->visualCommPtr->print_line(F("[SimulationState::run_simulation] firstAwakening set to false"));
     }
     
-    cyclobot->paramPtr->ecosystemParametersPtr->eventStart = cyclobot->rtc.now();
+    cyclobot->commPtr->visualCommPtr->print_line(F("[SimulationState::run_simulation] unset eventStart: "));
+    cyclobot->commPtr->visualCommPtr->print_line(cyclobot->paramPtr->ecosystemParametersPtr->eventStart.timestamp());
+    cyclobot->commPtr->visualCommPtr->print_free_memory("[SimulationState::run_simulation]");
+    cyclobot->commPtr->visualCommPtr->print_line(F("[SimulationState::run_simulation] capturing simulation start time"));
+    // cyclobot->paramPtr->ecosystemParametersPtr->eventStart = cyclobot->rtc.now();
+    cyclobot->commPtr->visualCommPtr->print_line(F("[SimulationState::run_simulation] starting simulation at "));
+    cyclobot->commPtr->visualCommPtr->print_line(cyclobot->paramPtr->ecosystemParametersPtr->eventStart.timestamp());
     simStrategyPtr->simulate_ecosystem(cyclobot->paramPtr->ecosystemParametersPtr,
-                                       cyclobot->scannerPtr,
-                                       cyclobot->actuatorPtr,
-                                       cyclobot->commPtr->visualCommPtr);
-    cyclobot->paramPtr->ecosystemParametersPtr->eventEnd = cyclobot->rtc.now();
+                                        cyclobot->scannerPtr,
+                                        cyclobot->actuatorPtr,
+                                        cyclobot->commPtr->visualCommPtr);
+    cyclobot->commPtr->visualCommPtr->print(F("[SimulationState::run_simulation] simulation finished at "));
+    cyclobot->commPtr->visualCommPtr->print_free_memory("[SimulationState::run_simulation]");
+    // cyclobot->paramPtr->ecosystemParametersPtr->eventEnd = cyclobot->rtc.now();
+    cyclobot->commPtr->visualCommPtr->print_line(cyclobot->paramPtr->ecosystemParametersPtr->eventEnd.timestamp());    
     
-    cyclobot->commPtr->visualCommPtr->print_line(F("[SimulationState::run_simulation] done"));
+    cyclobot->commPtr->visualCommPtr->print_line(F("[SimulationState::run_simulation] -- done --"));
 };
 
 // comm

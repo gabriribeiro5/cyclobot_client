@@ -7,7 +7,8 @@
 // used by context.changeState
 void ConfigUpdateState::enter(FiniteStateMachine *cyclobot) {
     if (!cyclobot) {
-        cyclobot->commPtr->visualCommPtr->print_line(F("(enter): cyclobot pointer is null in ConfigUpdateState"));
+        Serial.println(F("[ConfigUpdateState::enter]: cyclobot pointer is null"));
+        Serial.flush();
         return;
     }
     
@@ -54,12 +55,12 @@ void ConfigUpdateState::update_config(FiniteStateMachine *cyclobot) {
     // if `new key` exists, update value
     // if `new key` does NOT exist, add `key & value`
     // Keys MUST NOT be excluded in this method
-    cyclobot->commPtr->visualCommPtr->print_line(F("(update_config): done"));
+    cyclobot->commPtr->visualCommPtr->print_line(F("(update_config): -- done --"));
 };
 
 void ConfigUpdateState::update_simulation_code(FiniteStateMachine *cyclobot) {
     cyclobot->commPtr->visualCommPtr->print_line(F("(update_simulation_code): running..."));
-    cyclobot->commPtr->visualCommPtr->print_line(F("(update_simulation_code): done"));
+    cyclobot->commPtr->visualCommPtr->print_line(F("(update_simulation_code): -- done --"));
 };
 
 // comm

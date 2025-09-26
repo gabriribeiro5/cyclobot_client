@@ -3,6 +3,8 @@
 
 class ErrorHandlingParameters {
     public:
+        ErrorHandlingParameters();
+        ~ErrorHandlingParameters();
         // 0 = Wrong state
         int errorType;
         const char *errorClass;

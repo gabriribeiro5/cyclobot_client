@@ -3,6 +3,7 @@
 
 class PeripheralMapping {
     public:
+    PeripheralMapping();
     #ifdef USE_MEGAAVR_ID
         int wifiEspRX = 0;                   // receive input from ESP8266 TX
         int wifiEspTX = 1;                   // send data to ESP8266 RX

@@ -9,7 +9,8 @@
 // used by context.changeState
 void SelfDiagnosisState::enter(FiniteStateMachine *cyclobot) {
     if (!cyclobot) {
-        cyclobot->commPtr->visualCommPtr->print_line(F("SelfDiagnosisState::enter cyclobot pointer is null in SelfDiagnosisState"));
+        Serial.println(F("[SelfDiagnosisState::enter] cyclobot pointer is null in SelfDiagnosisState"));
+        Serial.flush();
         return; // ou transição para um estado de erro seguro
     }
     

@@ -4,7 +4,8 @@
 // used by context.changeState
 void IdleState::enter(FiniteStateMachine *cyclobot) {
     if (!cyclobot) {
-        cyclobot->commPtr->visualCommPtr->print_line(F("[IdleState::enter] cyclobot pointer is null in IdleState"));
+        Serial.println(F("[IdleState::enter] cyclobot pointer is null in IdleState"));
+        Serial.flush();
         return; // ou transição para um estado de erro seguro
     }
     
@@ -69,12 +70,18 @@ void IdleState::report_simulation_data(FiniteStateMachine *cyclobot) {
 
 // self
 void IdleState::take_a_nap(FiniteStateMachine *cyclobot) {
-    cyclobot->commPtr->visualCommPtr->print_line(F("[IdleState::take_a_nap] running..."));
+    cyclobot->commPtr->visualCommPtr->print_line(F("[IdleState::take_a_nap] zzz..."));
     // reset parameters
     cyclobot->paramPtr->wifiParametersPtr->scanCount = 0;
+    
+    // print empty line
+    cyclobot->commPtr->visualCommPtr->print_line(F("..."));
+    cyclobot->commPtr->visualCommPtr->print_line(F(""));
+    cyclobot->commPtr->visualCommPtr->print_line(F("..."));
+    cyclobot->commPtr->visualCommPtr->print_line(F(""));
     // sleep
     delay(cyclobot->paramPtr->deviceParametersPtr->sleepLength);
-    cyclobot->commPtr->visualCommPtr->print_line(F("[IdleState::take_a_nap] done"));
+    cyclobot->commPtr->visualCommPtr->print_line(F("[IdleState::take_a_nap] -- done --"));
 };
 
 // constructor

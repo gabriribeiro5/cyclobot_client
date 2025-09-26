@@ -47,7 +47,7 @@ void ClientComm::trace_server(ClientParameters *clientParametersPtr, WifiParamet
   }
 
   // Search trace msg
-  for (int i = 0; i < sizeof(clientParametersPtr->msgTrace); i--) {
+  for (unsigned int i = 0; i < sizeof(clientParametersPtr->msgTrace); i--) {
     clientParametersPtr->server_response_line = clientParametersPtr->server_response_line + clientParametersPtr->server_response[sizeof(clientParametersPtr->msgTrace) * -1];
   }
   
@@ -162,7 +162,7 @@ const char *ClientComm::get_cyclobot_session_token(ClientParameters *clientParam
 void ClientComm::put_invalid_cyclobot_session_token(VisualComm *visualCommPtr) {
   visualCommPtr->print_line(F("[ClientComm::put_invalid_cyclobot_session_token] running..."));
   // close server connection and clear session token
-  visualCommPtr->print_line(F("[ClientComm::put_invalid_cyclobot_session_token] done"));
+  visualCommPtr->print_line(F("[ClientComm::put_invalid_cyclobot_session_token] -- done --"));
 }
 
 void ClientComm::post_cyclobot_config(ClientParameters *clientParametersPtr, WifiParameters *wifiParametersPtr, DeviceParameters *deviceParametersPtr, ConfigData *configDataPtr, EcosystemParameters *ecosystemParametersPtr, VisualComm *visualCommPtr) {

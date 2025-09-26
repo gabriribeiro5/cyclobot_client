@@ -32,7 +32,7 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 ### ▶️ Code features and data
 - [x] feat(RainforestSimulation - incomplete): into new design
   - [x] Distribute single file methods across .h modules
-  - [ ] Write .cpp code based on .h files
+  - [x] Write .cpp code based on .h files
     - [x] Cyclobot's base cycle
     - [x] Context (Finite State Machine)
     - [x] Parameter classes
@@ -59,7 +59,7 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 
 ### ▶️ Mega 2560 Rev3 full version (256kb)
 - [x] style(modules): remove unused files
-- [ ] feat (Simulation): finally!
+- [x] feat (Simulation): finally!
   - [x] State
   - [x] Config params
   - [x] Data
@@ -109,11 +109,24 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 - [x] fix(multiple methods): update call signature (including visualCommptr)
 - [x] fix(warning -Woverflow): update const int sleepLenght to unsigned long
 - [x] fix(include paths): replace "\" with "/" or vice-versa
-- [ ] fix(warning -Wattributes): __progmem__
-- [ ] fix(warning -Wwrite-strings):
-- [ ] fix(warning -Wunused-parameter):
+- [x] build(warning -Wattributes): suppressed
+- [x] build(warning -Wwrite-strings): suppressed
+- [x] build(warning -Wunused-parameter): suppressed
+- [x] build(warning -Wimplicit-fallthrough): suppressed
 
+- [x] fix(context): tools initialization in cpp
+  - [x] Initialize tools in Contex.cpp
+  - [x] Initialize wifi parameters in .cpp file
+  - [x] Initialize other parameters in their .cpp files
+  - [x] Validate parameters by printing them
 - [ ] Validate TG_Water simulation
+- [ ] feat(editable parameters): Create external storage for easy parameters management
+  - [ ] Use <EEPROM.h> for byte storage or <LittleFS.h> for json storage
+
+- [ ] fix(warning -Wwrite-strings): review and try reducing occurences
+- [ ] fix(warning -Wattributes): review and try reducing occurences
+- [ ] fix(warning -Wunused-parameter): review and try reducing occurences
+
 - [ ] feat(Real Time Clock): apply to logs
   - [ ] create comm.time_update
   - [ ] call comm.time_update
@@ -126,7 +139,7 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
     - [ ] nutrient
     - [ ] thermo
 - [ ] Simulate TG_WaterFanLightNutrientThermo in ATmega2560 (256kb)
-- [ ] Draw circuits
+- [ ] Draw circuit
 - [ ] feat(comm): implement server
 - [ ] refactor(api addresses): review and update
 

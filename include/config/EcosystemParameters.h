@@ -4,6 +4,8 @@
 
 class EcosystemParameters {
     public:
+        EcosystemParameters();
+        ~EcosystemParameters();
         bool soilIsWet = 1;                              // condição de solo úmido; 1 = solo umido
         int soilMoistureLimit = 500;                     // valor da tensão de comparação do sensor / valor máximo = 1024 
         int currentTemperature = 20;                     // valor de tensão de comparação do sensor / valor máximo = Não sei / média esperada 20 graus

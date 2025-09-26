@@ -5,22 +5,26 @@
 
 class WifiParameters {
     public:
-        const char* wifiSsid = "yourNetwork";              //  your network SSID (name)
-        const char* wifiSecret = "secretPassword";         // your network password (use for WPA, or use as key for WEP)
-        const char* wifiFirmwareLatestVersion = "1.1.0";
-        const int networkKeyIndex = 0;                     // your network key Index number (needed only for WEP)
+        WifiParameters();
+        ~WifiParameters();
+
+        const char* wifiSsid;                      //  your network SSID (name)
+        const char* wifiSecret;                    // your network password (use for WPA, or use as key for WEP)
+        const char* wifiFirmwareLatestVersion;
+        const int networkKeyIndex;                 // your network key Index number (needed only for WEP)
         
-        int wifiStatus = WL_IDLE_STATUS;                           // if you don't want to use DNS (and reduce your sketch size)
-        bool wifiShieldIsOn = 0;                                   // your network key Index number (needed only for WEP)
+        
+        const int waitTimePerConnectionAttempt;    // 5 segundos
+        const int maxConnectionAttempt;
+        
+        const int waitTimePerScanAttempt;          // 3 segundos
+        const int wifiMaxScanAttempt;
+        
+        int wifiStatus;                            // if you don't want to use DNS (and reduce your sketch size)
+        bool wifiShieldIsOn;                       // your network key Index number (needed only for WEP)
         int networkSsidIndex;
-        
-        const int waitTimePerConnectionAttempt = 5000;     // 5 segundos
-        const int maxConnectionAttempt = 3;
-        int connAttemptCount = 0;
-        
-        const int waitTimePerScanAttempt = 3000;           // 3 segundos
-        const int wifiMaxScanAttempt = 3;
-        int scanCount = 0;
+        int connAttemptCount;
+        int scanCount;
         
         WiFiEspClient client;
 };

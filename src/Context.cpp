@@ -1,6 +1,13 @@
 #include <Arduino.h>
 #include "../include/Context.h"
 #include "../include/core_states/BaseState.h"
+#include "../include/core_states/simulation/strategy/BaseStrategy.h"
+#include "../include/shared/cyclobot_tools/CommunicationInstances.h"
+#include "../include/shared/cyclobot_tools/DataInstances.h"
+#include "../include/shared/cyclobot_tools/ParameterInstances.h"
+#include "../include/shared/cyclobot_tools/SelfManagementInstances.h"
+#include "../include/sensor/EcosystemScanner.h"
+#include "../include/actuator/EcosystemActuator.h"
 #include "../include/self/ErrorHandler.h"
 #include "../include/util/TimeSync.h"
 
@@ -9,14 +16,32 @@ extern void *__brkval;           // Current end of the heap. NULL (0) if no mall
 
 FiniteStateMachine::FiniteStateMachine(BaseState *initialStatePtr) {
     currentStatePtr = initialStatePtr;
+    // Instance groups
+    selfPtr = new SelfManagementInstances();
+    commPtr = new CommunicationInstances();
+    paramPtr = new ParameterInstances();
+    dataPtr = new DataInstances();
+    
+    // Single instance
+    scannerPtr = new EcosystemScanner();
+    actuatorPtr = new EcosystemActuator();
+
+    // time tracking software
+    RTC_DS3231 rtc;
+
+    DateTime now;      // Track in which step we are
+    int stateFlow = 0; // Flow stablished at the Client module and updated by States to comply client rules
 }
 
 void FiniteStateMachine::change_state(BaseState *newStatePtr) {
     // get milliseconds + log start
+    commPtr->visualCommPtr->print_line(F("[FiniteStateMachine::change_state] changing state..."));
     currentStatePtr->exit(this);
+    commPtr->visualCommPtr->print_line(F("[FiniteStateMachine::change_state] exited current state"));
     currentStatePtr = newStatePtr;
-    currentStatePtr->enter(this); // complete this line
-    // log end + execution time
+    commPtr->visualCommPtr->print_line(F("[FiniteStateMachine::change_state] new state assigned"));
+    currentStatePtr->enter(this);
+    commPtr->visualCommPtr->print_line(F("[FiniteStateMachine::change_state] entered new state"));
 }
 
 void FiniteStateMachine::handle_error() {

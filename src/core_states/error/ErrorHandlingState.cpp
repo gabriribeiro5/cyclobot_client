@@ -4,7 +4,8 @@
 // used by context.changeState
 void ErrorHandlingState::enter(FiniteStateMachine *cyclobot) {
     if (!cyclobot) {
-        cyclobot->commPtr->visualCommPtr->print_line(F("[ErrorHandlingState::enter] cyclobot pointer is null in ErrorHandlingState"));
+        Serial.println(F("[ErrorHandlingState::enter] cyclobot pointer is null in ErrorHandlingState"));
+        Serial.flush();
         return; // ou transição para um estado de erro seguro
     }
     
@@ -18,7 +19,7 @@ void ErrorHandlingState::exit(FiniteStateMachine *cyclobot) {
 // error
 void ErrorHandlingState::handle_error(FiniteStateMachine *cyclobot) {
     cyclobot->commPtr->visualCommPtr->print_line(F("[ErrorHandlingState::handle_error] running..."));
-    cyclobot->commPtr->visualCommPtr->print_line(F("[ErrorHandlingState::handle_error] done"));
+    cyclobot->commPtr->visualCommPtr->print_line(F("[ErrorHandlingState::handle_error] -- done --"));
 };
 
 // self

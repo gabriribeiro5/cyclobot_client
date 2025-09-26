@@ -10,8 +10,7 @@
 
 void WifiComm::print_wifi_status(VisualComm *visualCommPtr) {
   if (WiFi.status() != WL_CONNECTED) {
-    Serial.println(F("[WifiComm::print_wifi_status] WiFi not connected."));
-    Serial.flush();
+    visualCommPtr->print_line(F("[WifiComm::print_wifi_status] WiFi not connected."));
     return;
   }
   
@@ -101,7 +100,7 @@ void WifiComm::connect_wifi(WifiParameters *wifiParametersPtr, VisualComm *visua
     visualCommPtr->print_line(F("[WifiComm::connect_wifi] Connecting to SSID: "));
     visualCommPtr->print(F("[WifiComm::connect_wifi] Attempt: "));
     visualCommPtr->print(wifiParametersPtr->connAttemptCount);
-    visualCommPtr->print(F(" of  "));
+    visualCommPtr->print(F(" of "));
     visualCommPtr->print_line(wifiParametersPtr->maxConnectionAttempt);
     visualCommPtr->print_line(wifiParametersPtr->wifiSsid);
 
@@ -117,5 +116,5 @@ void WifiComm::connect_wifi(WifiParameters *wifiParametersPtr, VisualComm *visua
 void WifiComm::disconnect_wifi(VisualComm *visualCommPtr) {
   visualCommPtr->print_line(F("[WifiComm::disconnect_wifi] Running..."));
   WiFi.disconnect();
-  visualCommPtr->print_line(F("[WifiComm::disconnect_wifi] done"));
+  visualCommPtr->print_line(F("[WifiComm::disconnect_wifi] -- done --"));
 }

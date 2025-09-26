@@ -28,24 +28,33 @@ void setup() {
     cyclobot.commPtr->visualCommPtr->print_line(F(" *************************  *********[IdleState::enter]*********  ************************* "));
 
     cyclobot.commPtr->visualCommPtr->print_free_memory("[main::setup]");
+    cyclobot.commPtr->visualCommPtr->print_line("[main::setup] cyclobot id is: " + cyclobot.paramPtr->deviceParametersPtr->cyclobotId);
+    cyclobot.commPtr->visualCommPtr->print("[main::setup] sleepLength is: ");
+    cyclobot.commPtr->visualCommPtr->print_line(cyclobot.paramPtr->deviceParametersPtr->sleepLength);
+    cyclobot.commPtr->visualCommPtr->print("[main::setup] msgTrace is: ");
+    cyclobot.commPtr->visualCommPtr->print_line(cyclobot.paramPtr->clientParametersPtr->msgTrace);
+    cyclobot.commPtr->visualCommPtr->print("[main::setup] wifiSsid is: ");
+    cyclobot.commPtr->visualCommPtr->print_line(cyclobot.paramPtr->wifiParametersPtr->wifiSsid);
 
     cyclobot.commPtr->visualCommPtr->print_line(F("[main::setup] starting clock (rtc)"));
-    cyclobot.rtc.begin();
-    cyclobot.now = cyclobot.rtc.now();
+    if (!cyclobot.rtc.begin()) {
+        cyclobot.commPtr->visualCommPtr->print_line(F("[main::setup] RTC not found"));
+    }
+    // cyclobot.now = cyclobot.rtc.now();
     
-    cyclobot.commPtr->visualCommPtr->print(F("[main::setup] date: "));
-    cyclobot.commPtr->visualCommPtr->print(cyclobot.now.day());
-    cyclobot.commPtr->visualCommPtr->print(F("/"));
-    cyclobot.commPtr->visualCommPtr->print(cyclobot.now.month());
-    cyclobot.commPtr->visualCommPtr->print(F("/"));
-    cyclobot.commPtr->visualCommPtr->print_line(cyclobot.now.year());
+    // cyclobot.commPtr->visualCommPtr->print(F("[main::setup] date: "));
+    // cyclobot.commPtr->visualCommPtr->print(cyclobot.now.day());
+    // cyclobot.commPtr->visualCommPtr->print(F("/"));
+    // cyclobot.commPtr->visualCommPtr->print(cyclobot.now.month());
+    // cyclobot.commPtr->visualCommPtr->print(F("/"));
+    // cyclobot.commPtr->visualCommPtr->print_line(cyclobot.now.year());
     
-    cyclobot.commPtr->visualCommPtr->print(F("[main::setup] time: "));
-    cyclobot.commPtr->visualCommPtr->print(cyclobot.now.hour());
-    cyclobot.commPtr->visualCommPtr->print(F(":"));
-    cyclobot.commPtr->visualCommPtr->print(cyclobot.now.minute());
-    cyclobot.commPtr->visualCommPtr->print(F(":"));
-    cyclobot.commPtr->visualCommPtr->print_line(cyclobot.now.second());
+    // cyclobot.commPtr->visualCommPtr->print(F("[main::setup] time: "));
+    // cyclobot.commPtr->visualCommPtr->print(cyclobot.now.hour());
+    // cyclobot.commPtr->visualCommPtr->print(F(":"));
+    // cyclobot.commPtr->visualCommPtr->print(cyclobot.now.minute());
+    // cyclobot.commPtr->visualCommPtr->print(F(":"));
+    // cyclobot.commPtr->visualCommPtr->print_line(cyclobot.now.second());
     
     cyclobot.commPtr->visualCommPtr->print_line(F("[main::setup] setting simulation strategy"));
     cyclobot.simulationStrategyPtr = new TG_Water();
@@ -55,7 +64,7 @@ void setup() {
 };
 
 void loop() {
-    cyclobot.commPtr->visualCommPtr->print(F(" ************************  ************[main::loop"));
+    cyclobot.commPtr->visualCommPtr->print(F(" ************************  ************[STATE FLOW "));
     cyclobot.commPtr->visualCommPtr->print(cyclobot.stateFlow);
     cyclobot.commPtr->visualCommPtr->print_line(F("]************  ************************ "));
     cyclobot.commPtr->visualCommPtr->print_free_memory("[main::loop]");
@@ -64,11 +73,10 @@ void loop() {
             BaseState *selfDiagnosisStatePtr = new SelfDiagnosisState();
             cyclobot.change_state(selfDiagnosisStatePtr);
             cyclobot.run_health_check();
-            delete selfDiagnosisStatePtr;
             break;
         }
         case 1: { // Comm
-            cyclobot.commPtr->visualCommPtr->print_line(F(" [main::loop 1] Setting up communication state"));
+            cyclobot.commPtr->visualCommPtr->print_line(F("[main::loop 1] Setting up communication state"));
             BaseState *communicationStatePtr = new HTTPClientState();
             cyclobot.change_state(communicationStatePtr);
             cyclobot.report_signature_request();
@@ -78,16 +86,25 @@ void loop() {
             break;
         }
         case 2: { // Config update
+            cyclobot.commPtr->visualCommPtr->print_line(F("[main::loop 2] Creating config update pointer"));
             BaseState *configUpdateStatePtr = new ConfigUpdateState();
+            cyclobot.commPtr->visualCommPtr->print_line(F("[main::loop 2] Changing to config update state"));
             cyclobot.change_state(configUpdateStatePtr);
+            cyclobot.commPtr->visualCommPtr->print_line(F("[main::loop 2] Starting configuration update"));
             cyclobot.update_config();
+            cyclobot.commPtr->visualCommPtr->print_line(F("[main::loop 2] Configuration update completed"));
             delete configUpdateStatePtr;
+            cyclobot.commPtr->visualCommPtr->print_line(F("[main::loop 2] Pointer deleted"));
             break;
         }
         case 3: { // Code update
+            cyclobot.commPtr->visualCommPtr->print_line(F("[main::loop 3] Preparing for code update"));
             BaseState *codeUpdateStatePtr = new CodeUpdateState();
+            cyclobot.commPtr->visualCommPtr->print_line(F("[main::loop 3] Changing to code update state"));
             cyclobot.change_state(codeUpdateStatePtr);
+            cyclobot.commPtr->visualCommPtr->print_line(F("[main::loop 3] Starting simulation code update"));
             cyclobot.update_simulation_code();
+            cyclobot.commPtr->visualCommPtr->print_line(F("[main::loop 3] Code update completed"));
             delete codeUpdateStatePtr;
             break;
         }
@@ -95,21 +112,18 @@ void loop() {
             BaseState *communicationStatePtr = new HTTPClientState();
             cyclobot.change_state(communicationStatePtr);
             cyclobot.session_stop();
-            delete communicationStatePtr;
             break;
         }
         case 5: { // Simulation
             BaseState *simulationStatePtr = new SimulationState();
             cyclobot.change_state(simulationStatePtr);
             cyclobot.run_simulation();
-            delete simulationStatePtr;
             break;
         }
         case 6: { // Comm
             BaseState *communicationStatePtr = new HTTPClientState();
             cyclobot.change_state(communicationStatePtr);
             cyclobot.report_simulation_data();
-            delete communicationStatePtr;
             break;
         }
         case 7: { // Self
@@ -123,7 +137,6 @@ void loop() {
             BaseState *errorHandlingStatePtr = new ErrorHandlingState();
             cyclobot.change_state(errorHandlingStatePtr);
             cyclobot.handle_error();
-            delete errorHandlingStatePtr;
             cyclobot.stateFlow = -1; // Reset
             break;
         }

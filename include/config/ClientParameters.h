@@ -1,19 +1,21 @@
 #pragma once
 #include <ArduinoJson.h>
 #include <avr/pgmspace.h>
+#include "IPAddress.h"
 
 class ClientParameters {
     public:
+    ClientParameters();
     // use the numeric IP instead of the name for the server:
-    // IP Address server(74,125,232,128);  // numeric IP for Google (no DNS)
-    const PROGMEM IPAddress apiServer = 1234567890;    // name address for Google (using DNS)
+    // IP Address server(74,125,232,128);                     // numeric IP for Google (no DNS)
+    const PROGMEM IPAddress apiServer = 1234567890;           // name address for Google (using DNS)
     const PROGMEM uint16_t clientPort = 80;
     
-    const PROGMEM int waitTimePerConnectionAttempt = 5000; // 5 segundos
+    const PROGMEM int waitTimePerConnectionAttempt = 5000;    // 5 segundos
     
     const PROGMEM  char* msgTrace = "Hello server";
     bool readingLines = true;
-    unsigned long timoutReference; // defined at runtime
+    unsigned long timoutReference;                            // defined at runtime
     const PROGMEM unsigned long responseTimeoutLimit = 3000;
     bool serverIsUp = false;
     char server_response_chars;

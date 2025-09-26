@@ -50,7 +50,7 @@ void HTTPClientState::session_new(FiniteStateMachine *cyclobot) {
                                                                  cyclobot->paramPtr->wifiParametersPtr,
                                                                  cyclobot->paramPtr->deviceParametersPtr,
                                                                  cyclobot->commPtr->visualCommPtr);
-    cyclobot->commPtr->visualCommPtr->print_line(F("[HTTPClientState::session_new] done"));
+    cyclobot->commPtr->visualCommPtr->print_line(F("[HTTPClientState::session_new] -- done --"));
 };
 
 void HTTPClientState::report_config(FiniteStateMachine *cyclobot) {
@@ -61,7 +61,7 @@ void HTTPClientState::report_config(FiniteStateMachine *cyclobot) {
                                                             cyclobot->dataPtr->configDataPtr,
                                                             cyclobot->paramPtr->ecosystemParametersPtr,
                                                             cyclobot->commPtr->visualCommPtr);
-    cyclobot->commPtr->visualCommPtr->print_line(F("[HTTPClientState::report_config] done"));
+    cyclobot->commPtr->visualCommPtr->print_line(F("[HTTPClientState::report_config] -- done --"));
 };
 
 void HTTPClientState::report_health_check(FiniteStateMachine *cyclobot) {
@@ -71,7 +71,7 @@ void HTTPClientState::report_health_check(FiniteStateMachine *cyclobot) {
                                                                cyclobot->paramPtr->deviceParametersPtr,
                                                                cyclobot->dataPtr->selfDiagnosisDataPtr,
                                                                cyclobot->commPtr->visualCommPtr);
-    cyclobot->commPtr->visualCommPtr->print_line(F("[HTTPClientState::report_health_check] done"));
+    cyclobot->commPtr->visualCommPtr->print_line(F("[HTTPClientState::report_health_check] -- done --"));
 };
 
 // update
@@ -89,7 +89,7 @@ void HTTPClientState::session_stop(FiniteStateMachine *cyclobot) {
     cyclobot->commPtr->visualCommPtr->print_line(F("[HTTPClientState::session_stop] running..."));
     cyclobot->commPtr->clientCommPtr->put_invalid_cyclobot_session_token(cyclobot->commPtr->visualCommPtr);
     cyclobot->commPtr->wifiCommPtr->disconnect_wifi(cyclobot->commPtr->visualCommPtr);
-    cyclobot->commPtr->visualCommPtr->print_line(F("[HTTPClientState::session_stop] done"));
+    cyclobot->commPtr->visualCommPtr->print_line(F("[HTTPClientState::session_stop] -- done --"));
 };
 
 // sim
@@ -105,7 +105,7 @@ void HTTPClientState::report_simulation_data(FiniteStateMachine *cyclobot) {
     cyclobot->commPtr->clientCommPtr->get_cyclobot_session_token(cyclobot->paramPtr->clientParametersPtr, cyclobot->paramPtr->wifiParametersPtr, cyclobot->paramPtr->deviceParametersPtr, cyclobot->commPtr->visualCommPtr);
     cyclobot->commPtr->clientCommPtr->post_cyclobot_environment_state(cyclobot->commPtr->visualCommPtr);
     session_stop(cyclobot);
-    cyclobot->commPtr->visualCommPtr->print_line(F("[HTTPClientState::report_simulation_data] done"));
+    cyclobot->commPtr->visualCommPtr->print_line(F("[HTTPClientState::report_simulation_data] -- done --"));
 };
 
 // self

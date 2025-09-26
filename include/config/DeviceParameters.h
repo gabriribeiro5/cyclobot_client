@@ -13,12 +13,16 @@ class DeviceParameters {
 public:
     String cyclobotId;
     String cyclobotToken;
-    bool firstAwakening = true;
-    unsigned long sleepLength = 3600000; // 1h
+    bool firstAwakening;
+    unsigned long sleepLength;
 
-    DeviceParameters() {
-        cyclobotId = getUniqueId();
-        cyclobotToken = getUniqueId(); // Simule token com base no ID se necessário
+    DeviceParameters() { // Constructor defined in header to allow getUniqueId() usage
+        cyclobotId = getUniqueId();    // This method is temporary until we have a proper token generation system
+        cyclobotToken = getUniqueId(); // This method is temporary until we have a proper token generation system
+        cyclobotId.toUpperCase();
+        cyclobotToken.toUpperCase();
+        firstAwakening = true;
+        sleepLength = 3;               // 1h = 3600000 ms
     }
 
 private:
