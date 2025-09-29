@@ -42,7 +42,16 @@ Foreseeable versions of this software will support human inputs, so they can int
 This application leverages from Clean Architecture principles, State and Strategy Design Pattern.
 Modules are organized as follows:
 
-- **Core States**: All possible states for the machine being controlled.
+- **Main**: Responsible for creating the base context and defining a Switch/Case rule to manage this context
+  
+- **Context**: Named by main as "cyclobot", this is a Finite State Machine. It provides the following types of objects:
+  - The **change_state** method: base method required to create a Finite State Machine;
+  - A few **general purpose methods**: defined at the context header, they sumarize this application's basic behaviours;
+  - Plenty of **specific purpose methods**: Although those methods are not defined at the Context file, they can (and must) be accessed thru the cyclobot's pointers
+  - Most of the **parameters** requiered by specific purpose methods
+*Note: if you are paying enough attention, you've probably noticed that this context has basically everything we need to build the applicaion. And that's why you'll see the "cyclobot" keyword everywhere in the core state files.
+
+- **Core States**: Using cyclobot as resource of methods and parameters, each state define it's own rule for the context's methods.
     - Finite State Machine: State management module;
     - Base State: Interface for all states;
     - Self Diagnosis: ;

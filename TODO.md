@@ -126,8 +126,11 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 - [x] style(serial.print): apply indentation
 - [x] feat(TG_Water): Validated
 
+- [ ] doc(README): describe the context objects
+
 - [ ] feat(editable parameters): Create external storage for easy parameters management
-  - [ ] Use <EEPROM.h> for byte storage or <LittleFS.h> for json storage
+  - [ ] Use <EEPROM.h> for byte storage
+
 
 - [ ] fix(warning -Wwrite-strings): review and try reducing occurences
 - [ ] fix(warning -Wattributes): review and try reducing occurences
