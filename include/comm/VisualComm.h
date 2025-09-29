@@ -1,5 +1,6 @@
 #pragma once
-#include <Arduino.h>
+#include "Arduino.h"
+#include "../include/shared/cyclobot_tools/ParameterInstances.h"
 
 class VisualComm {
     public:
@@ -11,8 +12,8 @@ class VisualComm {
         void print(T printable);
         
         void print_terminal_logo();
-        
         void print_free_memory(char *currentMethodPtr);
+        void print_parameters(ParameterInstances *paramPtr);
 
         // Led Screen
         void show_sentence(char sentence);

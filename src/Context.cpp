@@ -16,15 +16,16 @@ extern void *__brkval;           // Current end of the heap. NULL (0) if no mall
 
 FiniteStateMachine::FiniteStateMachine(BaseState *initialStatePtr) {
     currentStatePtr = initialStatePtr;
-    // Instance groups
-    selfPtr = new SelfManagementInstances();
-    commPtr = new CommunicationInstances();
-    paramPtr = new ParameterInstances();
-    dataPtr = new DataInstances();
-    
+
     // Single instance
     scannerPtr = new EcosystemScanner();
     actuatorPtr = new EcosystemActuator();
+
+    // Instance groups
+    paramPtr = new ParameterInstances();;
+    selfPtr = new SelfManagementInstances();
+    commPtr = new CommunicationInstances();
+    dataPtr = new DataInstances();
 
     // time tracking software
     RTC_DS3231 rtc;
@@ -34,14 +35,9 @@ FiniteStateMachine::FiniteStateMachine(BaseState *initialStatePtr) {
 }
 
 void FiniteStateMachine::change_state(BaseState *newStatePtr) {
-    // get milliseconds + log start
-    commPtr->visualCommPtr->print_line(F("[FiniteStateMachine::change_state] changing state..."));
     currentStatePtr->exit(this);
-    commPtr->visualCommPtr->print_line(F("[FiniteStateMachine::change_state] exited current state"));
     currentStatePtr = newStatePtr;
-    commPtr->visualCommPtr->print_line(F("[FiniteStateMachine::change_state] new state assigned"));
     currentStatePtr->enter(this);
-    commPtr->visualCommPtr->print_line(F("[FiniteStateMachine::change_state] entered new state"));
 }
 
 void FiniteStateMachine::handle_error() {
@@ -52,7 +48,6 @@ void FiniteStateMachine::handle_error() {
 
 void FiniteStateMachine::run_health_check() {
     // get milliseconds + log start
-    commPtr->visualCommPtr->print_line(F("[FiniteStateMachine::run_health_check] running..."));
     currentStatePtr->run_health_check(this);
     // log end + execution time
 }

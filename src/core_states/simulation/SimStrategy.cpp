@@ -13,9 +13,9 @@ SimStrategy::SimStrategy(BaseStrategy *initialStrategyPtr) {
 }
 
 void SimStrategy::setup(VisualComm *visualCommPtr) {
-    visualCommPtr->print_line(F("[SimStrategy::setup] running..."));
+    visualCommPtr->print_line(F("  [SimStrategy::setup] running..."));
     currentStrategyPtr->setup(visualCommPtr);
-    visualCommPtr->print_line(F("[SimStrategy::setup] -- done --"));
+    visualCommPtr->print_line(F("  [SimStrategy::setup] -- done --"));
 }
 
 void SimStrategy::simulate_ecosystem(EcosystemParameters *ecosystemParametersPtr, EcosystemScanner *environmentScanPtr, EcosystemActuator *environmentActuatorPtr, VisualComm *visualCommPtr) {

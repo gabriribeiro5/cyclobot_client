@@ -119,7 +119,13 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
   - [x] Initialize wifi parameters in .cpp file
   - [x] Initialize other parameters in their .cpp files
   - [x] Validate parameters by printing them
-- [ ] Validate TG_Water simulation
+
+- [x] feat(print_parameters): create method call
+- [x] feat(print_parameters): add and review base parameters
+- [x] style(serial.print): remove debug lines
+- [x] style(serial.print): apply indentation
+- [x] feat(TG_Water): Validated
+
 - [ ] feat(editable parameters): Create external storage for easy parameters management
   - [ ] Use <EEPROM.h> for byte storage or <LittleFS.h> for json storage
 

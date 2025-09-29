@@ -14,11 +14,11 @@
 #include "../../include/Context.h"
 
 void ClientComm::trace_server(ClientParameters *clientParametersPtr, WifiParameters *wifiParametersPtr, VisualComm *visualCommPtr) {
-  visualCommPtr->print_line(F("[ClientComm::trace_server] running..."));
+  visualCommPtr->print_line(F("    [ClientComm::trace_server] running..."));
 
   // if you get a connection, report back via serial:
   if (wifiParametersPtr->client.connect(clientParametersPtr->apiServer, clientParametersPtr->clientPort)) {
-    visualCommPtr->print_line(F("[ClientComm::trace_server] connected to server"));
+    visualCommPtr->print_line(F("    [ClientComm::trace_server] connected to server"));
 
     // Send HTTP trace request
     wifiParametersPtr->client.println("TRACE /api HTTP/1.1");
@@ -28,7 +28,7 @@ void ClientComm::trace_server(ClientParameters *clientParametersPtr, WifiParamet
     wifiParametersPtr->client.println();  // Empty server_response_line to end headers
     wifiParametersPtr->client.println(clientParametersPtr->msgTrace);
 
-    visualCommPtr->print_line(F("[ClientComm::trace_server] Request sent"));
+    visualCommPtr->print_line(F("    [ClientComm::trace_server] Request sent"));
 
     // Get response
     while (wifiParametersPtr->client.connected() && clientParametersPtr->readingLines) {
@@ -42,7 +42,7 @@ void ClientComm::trace_server(ClientParameters *clientParametersPtr, WifiParamet
     }
   }
   else {
-    visualCommPtr->print_line(F("[ClientComm::trace_server] ! CLIENT CONNECTION FAILED !"));
+    visualCommPtr->print_line(F("    [ClientComm::trace_server] ! CLIENT CONNECTION FAILED !"));
     clientParametersPtr->serverIsUp = false;
   }
 
@@ -52,21 +52,21 @@ void ClientComm::trace_server(ClientParameters *clientParametersPtr, WifiParamet
   }
   
   if (clientParametersPtr->server_response_line == clientParametersPtr->msgTrace) {
-    visualCommPtr->print_line(F("[ClientComm::trace_server] Response approved"));
+    visualCommPtr->print_line(F("    [ClientComm::trace_server] Response approved"));
     clientParametersPtr->serverIsUp = true;
     clientParametersPtr->readingLines = false;
   }
 }
 
 void ClientComm::post_signature_request(ClientParameters *clientParametersPtr, WifiParameters *wifiParametersPtr, DeviceParameters *deviceParametersPtr, VisualComm *visualCommPtr) {
-  visualCommPtr->print_line(F("[ClientComm::post_signature_request] running..."));
+  visualCommPtr->print_line(F("    [ClientComm::post_signature_request] running..."));
   
   // Construct JSON payload
   clientParametersPtr->signatureRequest_Json["cyclobotId"] = deviceParametersPtr->cyclobotId; // get uuid
   clientParametersPtr->signatureRequest_Json["cyclobotToken"] = deviceParametersPtr->cyclobotToken; // get other uuid
   serializeJson(clientParametersPtr->signatureRequest_Json, clientParametersPtr->signatureRequest_Char);  // convert JSON to Char
   
-  visualCommPtr->print_line(F("[ClientComm::post_signature_request] credentials ready..."));
+  visualCommPtr->print_line(F("    [ClientComm::post_signature_request] credentials ready..."));
   // Send HTTP request
   if (wifiParametersPtr->client.connected()) {
     // Client action
@@ -80,15 +80,15 @@ void ClientComm::post_signature_request(ClientParameters *clientParametersPtr, W
     wifiParametersPtr->client.print(clientParametersPtr->signatureRequest_Char);  // ✅ Send JSON body
 
     // Method response
-    visualCommPtr->print_line(F("[ClientComm::post_signature_request] Request sent"));
+    visualCommPtr->print_line(F("    [ClientComm::post_signature_request] Request sent"));
   }
   else {
-    visualCommPtr->print_line(F("[ClientComm::post_signature_request] ATENTION! Client could'nt connect to server"));
+    visualCommPtr->print_line(F("    [ClientComm::post_signature_request] ATENTION! Client could'nt connect to server"));
   }
 }
 
 const char *ClientComm::get_cyclobot_session_token(ClientParameters *clientParametersPtr, WifiParameters *wifiParametersPtr, DeviceParameters *deviceParametersPtr, VisualComm *visualCommPtr) {
-  visualCommPtr->print_line(F("[ClientComm::get_cyclobot_session_token] running..."));
+  visualCommPtr->print_line(F("    [ClientComm::get_cyclobot_session_token] running..."));
 
   // Construct JSON payload
   clientParametersPtr->loginParameters_Json["cyclobotId"] = deviceParametersPtr->cyclobotId;
@@ -107,9 +107,9 @@ const char *ClientComm::get_cyclobot_session_token(ClientParameters *clientParam
     wifiParametersPtr->client.println("Connection: close");
     wifiParametersPtr->client.println();  // End of headers
     wifiParametersPtr->client.print(clientParametersPtr->loginParameters_Char);  // JSON body
-    visualCommPtr->print_line(F("[ClientComm::get_cyclobot_session_token] Request sent"));
+    visualCommPtr->print_line(F("    [ClientComm::get_cyclobot_session_token] Request sent"));
   } else {
-    visualCommPtr->print_line(F("[ClientComm::get_cyclobot_session_token] [ERROR] Client not connected"));
+    visualCommPtr->print_line(F("    [ClientComm::get_cyclobot_session_token] [ERROR] Client not connected"));
     return "";
   }
 
@@ -117,7 +117,7 @@ const char *ClientComm::get_cyclobot_session_token(ClientParameters *clientParam
   clientParametersPtr->timoutReference = millis();
   while (!wifiParametersPtr->client.available()) {
     if (millis() - clientParametersPtr->timoutReference > clientParametersPtr->responseTimeoutLimit) {
-      visualCommPtr->print_line(F("[ClientComm::get_cyclobot_session_token] [ERROR] Timeout waiting for response"));
+      visualCommPtr->print_line(F("    [ClientComm::get_cyclobot_session_token] [ERROR] Timeout waiting for response"));
       wifiParametersPtr->client.stop();
       return "";
     }
@@ -130,13 +130,13 @@ const char *ClientComm::get_cyclobot_session_token(ClientParameters *clientParam
   }
 
   // Debug raw response (optional)
-  visualCommPtr->print_line(F("[ClientComm::get_cyclobot_session_token] Raw response:"));
+  visualCommPtr->print_line(F("    [ClientComm::get_cyclobot_session_token] Raw response:"));
   visualCommPtr->print_line(clientParametersPtr->serverRawResponse);
 
   // Find start of JSON (skip HTTP headers)
   clientParametersPtr->jsonPart = strchr(clientParametersPtr->serverRawResponse, '{');
   if (clientParametersPtr->jsonPart == NULL) {
-    visualCommPtr->print_line(F("[ClientComm::get_cyclobot_session_token] [ERROR] No JSON found in response (char '{' not found)"));
+    visualCommPtr->print_line(F("    [ClientComm::get_cyclobot_session_token] [ERROR] No JSON found in response (char '{' not found)"));
     return "";
   }
 
@@ -154,19 +154,19 @@ const char *ClientComm::get_cyclobot_session_token(ClientParameters *clientParam
     visualCommPtr->print("[ClientComm::get_cyclobot_session_token] Token received: ");
     visualCommPtr->print_line(clientParametersPtr->sessionToken);
   } else {
-    visualCommPtr->print_line(F("[ClientComm::get_cyclobot_session_token] [ERROR] sessionToken not found in JSON"));
+    visualCommPtr->print_line(F("    [ClientComm::get_cyclobot_session_token] [ERROR] sessionToken not found in JSON"));
     return "";
   }
 }
 
 void ClientComm::put_invalid_cyclobot_session_token(VisualComm *visualCommPtr) {
-  visualCommPtr->print_line(F("[ClientComm::put_invalid_cyclobot_session_token] running..."));
+  visualCommPtr->print_line(F("    [ClientComm::put_invalid_cyclobot_session_token] running..."));
   // close server connection and clear session token
-  visualCommPtr->print_line(F("[ClientComm::put_invalid_cyclobot_session_token] -- done --"));
+  visualCommPtr->print_line(F("    [ClientComm::put_invalid_cyclobot_session_token] -- done --"));
 }
 
 void ClientComm::post_cyclobot_config(ClientParameters *clientParametersPtr, WifiParameters *wifiParametersPtr, DeviceParameters *deviceParametersPtr, ConfigData *configDataPtr, EcosystemParameters *ecosystemParametersPtr, VisualComm *visualCommPtr) {
-  visualCommPtr->print_line(F("[ClientComm::post_cyclobot_config] running..."));
+  visualCommPtr->print_line(F("    [ClientComm::post_cyclobot_config] running..."));
 
   // *** BUILD JSON STRUCT ***
   // Device config
@@ -218,15 +218,15 @@ void ClientComm::post_cyclobot_config(ClientParameters *clientParametersPtr, Wif
     wifiParametersPtr->client.print(configDataPtr->config_Char);  // ✅ Send JSON body
 
     // Method response
-    visualCommPtr->print_line(F("[ClientComm::post_cyclobot_config] Config sent"));
+    visualCommPtr->print_line(F("    [ClientComm::post_cyclobot_config] Config sent"));
   }
   else {
-    visualCommPtr->print_line(F("[ClientComm::post_cyclobot_config] ATENTION! Client could'nt connect to server"));
+    visualCommPtr->print_line(F("    [ClientComm::post_cyclobot_config] ATENTION! Client could'nt connect to server"));
   }
 }
 
 void ClientComm::post_cyclobot_diagnosis(ClientParameters *clientParametersPtr, WifiParameters *wifiParametersPtr, DeviceParameters *deviceParametersPtr, SelfDiagnosisData *selfDiagnosisDataPtr, VisualComm *visualCommPtr) {
-  visualCommPtr->print_line(F("[ClientComm::post_cyclobot_diagnosis] running..."));
+  visualCommPtr->print_line(F("    [ClientComm::post_cyclobot_diagnosis] running..."));
 
   // Build json struct and convert to string
   selfDiagnosisDataPtr->selfDiagnosis_Json["cyclobot_id"] = deviceParametersPtr->cyclobotId; // uuid
@@ -252,21 +252,21 @@ void ClientComm::post_cyclobot_diagnosis(ClientParameters *clientParametersPtr, 
     wifiParametersPtr->client.print(selfDiagnosisDataPtr->selfDiagnosis_Char);  // ✅ Send JSON body
 
     // Method response
-    visualCommPtr->print_line(F("[ClientComm::post_cyclobot_diagnosis] Request sent"));
+    visualCommPtr->print_line(F("    [ClientComm::post_cyclobot_diagnosis] Request sent"));
   }
   else {
-    visualCommPtr->print_line(F("[ClientComm::post_cyclobot_diagnosis] [ATENTION] Client could'nt connect to server"));
+    visualCommPtr->print_line(F("    [ClientComm::post_cyclobot_diagnosis] [ATENTION] Client could'nt connect to server"));
   }
 }
 
 void ClientComm::post_cyclobot_environment_state(VisualComm *visualCommPtr) {
-  visualCommPtr->print_line(F("[ClientComm::post_cyclobot_environment_state] running..."));
+  visualCommPtr->print_line(F("    [ClientComm::post_cyclobot_environment_state] running..."));
 }
 
 void ClientComm::get_cyclobot_config_update(VisualComm *visualCommPtr) {
-  visualCommPtr->print_line(F("[ClientComm::get_cyclobot_config_update] running..."));
+  visualCommPtr->print_line(F("    [ClientComm::get_cyclobot_config_update] running..."));
 }
 
 void ClientComm::get_cyclobot_config_rollback(VisualComm *visualCommPtr) {
-  visualCommPtr->print_line(F("[ClientComm::get_cyclobot_config_rollback] running..."));
+  visualCommPtr->print_line(F("    [ClientComm::get_cyclobot_config_rollback] running..."));
 }

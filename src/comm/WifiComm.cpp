@@ -10,7 +10,7 @@
 
 void WifiComm::print_wifi_status(VisualComm *visualCommPtr) {
   if (WiFi.status() != WL_CONNECTED) {
-    visualCommPtr->print_line(F("[WifiComm::print_wifi_status] WiFi not connected."));
+    visualCommPtr->print_line(F("    [WifiComm::print_wifi_status] WiFi not connected."));
     return;
   }
   
@@ -34,22 +34,22 @@ void WifiComm::print_encryption_type(int thisType, VisualComm *visualCommPtr) {
   // read the encryption type and print out the name:
   switch (thisType) {
   case ENC_TYPE_NONE:
-    visualCommPtr->print_line(F("[WifiComm::print_encryption_type] None"));
+    visualCommPtr->print_line(F("    [WifiComm::print_encryption_type] None"));
     break;
   case ENC_TYPE_WEP:
-    visualCommPtr->print_line(F("[WifiComm::print_encryption_type] WEP"));
+    visualCommPtr->print_line(F("    [WifiComm::print_encryption_type] WEP"));
     break;
   // case ENC_TYPE_TKIP:
-  //   visualCommPtr->print_line(F("[WifiComm::print_encryption_type] WPA"));
+  //   visualCommPtr->print_line(F("    [WifiComm::print_encryption_type] WPA"));
   //   break;
   // case ENC_TYPE_CCMP:
-  //   visualCommPtr->print_line(F("[WifiComm::print_encryption_type] WPA2"));
+  //   visualCommPtr->print_line(F("    [WifiComm::print_encryption_type] WPA2"));
   //   break;
   // case ENC_TYPE_AUTO:
-  //   visualCommPtr->print_line(F("[WifiComm::print_encryption_type] Auto"));
+  //   visualCommPtr->print_line(F("    [WifiComm::print_encryption_type] Auto"));
   //   break;
   default:
-    visualCommPtr->print_line(F("[WifiComm::print_encryption_type] Unknown"));
+    visualCommPtr->print_line(F("    [WifiComm::print_encryption_type] Unknown"));
     break;
   }
 }
@@ -69,12 +69,12 @@ void WifiComm::print_available_networks(WifiParameters *wifiParametersPtr, Visua
 }
 
 void WifiComm::scan_wifi(WifiParameters *wifiParametersPtr, VisualComm *visualCommPtr) {
-  visualCommPtr->print_line(F("[WifiComm::scan_wifi] Running..."));
+  visualCommPtr->print_line(F("    [WifiComm::scan_wifi] Running..."));
   // Print WiFi MAC address:
   // printMacAddress();
 
   // scan for nearby networks:
-  visualCommPtr->print_line(F("[WifiComm::scan_wifi] ** Scan Networks **"));
+  visualCommPtr->print_line(F("    [WifiComm::scan_wifi] ** Scan Networks **"));
   while (wifiParametersPtr->scanCount < wifiParametersPtr->wifiMaxScanAttempt) {
     wifiParametersPtr->networkSsidIndex = WiFi.scanNetworks();
     if (wifiParametersPtr->networkSsidIndex == -1) {
@@ -91,13 +91,13 @@ void WifiComm::scan_wifi(WifiParameters *wifiParametersPtr, VisualComm *visualCo
 }
 
 void WifiComm::connect_wifi(WifiParameters *wifiParametersPtr, VisualComm *visualCommPtr) {
-  visualCommPtr->print_line(F("[WifiComm::connect_wifi] Running..."));
+  visualCommPtr->print_line(F("    [WifiComm::connect_wifi] Running..."));
   
   // Initialize the Ethernet client library
   // with the IP address and port of the server
   // that you want to connect to (port 80 is default for HTTP):
   while (wifiParametersPtr->wifiStatus != WL_IDLE_STATUS && wifiParametersPtr->connAttemptCount < wifiParametersPtr->maxConnectionAttempt) {
-    visualCommPtr->print_line(F("[WifiComm::connect_wifi] Connecting to SSID: "));
+    visualCommPtr->print_line(F("    [WifiComm::connect_wifi] Connecting to SSID: "));
     visualCommPtr->print(F("[WifiComm::connect_wifi] Attempt: "));
     visualCommPtr->print(wifiParametersPtr->connAttemptCount);
     visualCommPtr->print(F(" of "));
@@ -114,7 +114,7 @@ void WifiComm::connect_wifi(WifiParameters *wifiParametersPtr, VisualComm *visua
 }
 
 void WifiComm::disconnect_wifi(VisualComm *visualCommPtr) {
-  visualCommPtr->print_line(F("[WifiComm::disconnect_wifi] Running..."));
+  visualCommPtr->print_line(F("    [WifiComm::disconnect_wifi] Running..."));
   WiFi.disconnect();
-  visualCommPtr->print_line(F("[WifiComm::disconnect_wifi] -- done --"));
+  visualCommPtr->print_line(F("    [WifiComm::disconnect_wifi] -- done --"));
 }

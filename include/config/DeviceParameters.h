@@ -16,14 +16,7 @@ public:
     bool firstAwakening;
     unsigned long sleepLength;
 
-    DeviceParameters() { // Constructor defined in header to allow getUniqueId() usage
-        cyclobotId = getUniqueId();    // This method is temporary until we have a proper token generation system
-        cyclobotToken = getUniqueId(); // This method is temporary until we have a proper token generation system
-        cyclobotId.toUpperCase();
-        cyclobotToken.toUpperCase();
-        firstAwakening = true;
-        sleepLength = 3;               // 1h = 3600000 ms
-    }
+    DeviceParameters();
 
 private:
     String getUniqueId() {

@@ -9,21 +9,21 @@
 
 bool CheckMyHealth::wifi_shield_is_on(WifiParameters *wifiParametersPtr, VisualComm *visualCommPtr) {
     // check for the presence of the shield:
-    visualCommPtr->print_line(F("[CheckMyHealth::wifi_shield_is_on]..."));
+    visualCommPtr->print_line(F("    [CheckMyHealth::wifi_shield_is_on]..."));
     if (WiFi.status() == WL_NO_SHIELD) {
-      visualCommPtr->print_line(F("[CheckMyHealth::wifi_shield_is_on] WiFi shield not present"));
+      visualCommPtr->print_line(F("    [CheckMyHealth::wifi_shield_is_on] WiFi shield not present"));
       wifiParametersPtr->wifiShieldIsOn = 0;
       return false;
     }
     wifiParametersPtr->wifiShieldIsOn = 1;
-    visualCommPtr->print_line(F("[CheckMyHealth::wifi_shield_is_on] WiFi shield is ON"));
+    visualCommPtr->print_line(F("    [CheckMyHealth::wifi_shield_is_on] WiFi shield is ON"));
     return true;
   }
 
 void CheckMyHealth::check_wifi_firmware_version(WifiParameters *wifiParametersPtr, SelfDiagnosisData *selfDiagnosisDataPtr, VisualComm *visualCommPtr) {
   char *fv = WiFi.firmwareVersion();
   if (fv != wifiParametersPtr->wifiFirmwareLatestVersion) {
-    visualCommPtr->print_line(F("[CheckMyHealth::check_wifi_firmware_version] Please upgrade the firmware"));
+    visualCommPtr->print_line(F("    [CheckMyHealth::check_wifi_firmware_version] Please upgrade the firmware"));
     selfDiagnosisDataPtr->wifiFirmwareRequireUpdate = 1;
   }
 }
@@ -36,10 +36,10 @@ void CheckMyHealth::check_wifi_networks(WifiComm *wifiCommPtr, WifiParameters *w
     selfDiagnosisDataPtr->wifiNetworkAvailable = 1; // 1 = true
     visualCommPtr->print("[CheckMyHealth::check_wifi_networks] number of available networks: ");
     visualCommPtr->print(wifiParametersPtr->networkSsidIndex);
-    visualCommPtr->print_line(F("[CheckMyHealth::check_wifi_networks] *** AVAILABLE NETWORKS ***"));
+    visualCommPtr->print_line(F("    [CheckMyHealth::check_wifi_networks] *** AVAILABLE NETWORKS ***"));
     wifiCommPtr->scan_wifi(wifiParametersPtr, visualCommPtr);
   } else {
-    visualCommPtr->print_line(F("[[CheckMyHealth::check_wifi_networks] Couldn't find network"));
+    visualCommPtr->print_line(F("    [[CheckMyHealth::check_wifi_networks] Couldn't find network"));
     selfDiagnosisDataPtr->wifiNetworkAvailable = 0; // 1 = true
   }
 }
@@ -70,31 +70,32 @@ void CheckMyHealth::check_client_communication(ClientComm *clientCommPtr,
 }
 
 void CheckMyHealth::check_watering_system(SelfDiagnosisData *selfDiagnosisDataPtr, VisualComm *visualCommPtr) {
-  visualCommPtr->print_line(F("[CheckMyHealth::check_watering_system] Running..."));
+  visualCommPtr->print_line(F("    [CheckMyHealth::check_watering_system] Running..."));
   selfDiagnosisDataPtr->wateringSystemOK = 1;
 }
 
 void CheckMyHealth::check_river_system(SelfDiagnosisData *selfDiagnosisDataPtr, VisualComm *visualCommPtr) {
-  visualCommPtr->print_line(F("[CheckMyHealth::check_river_system] Running..."));
+  visualCommPtr->print_line(F("    [CheckMyHealth::check_river_system] Running..."));
   selfDiagnosisDataPtr->riverSystemOK = 1;
 }
 
 void CheckMyHealth::check_wind_system(SelfDiagnosisData *selfDiagnosisDataPtr, VisualComm *visualCommPtr) {
-  visualCommPtr->print_line(F("[CheckMyHealth::check_wind_system] Running..."));
+  visualCommPtr->print_line(F("    [CheckMyHealth::check_wind_system] Running..."));
   selfDiagnosisDataPtr->windSystemOK = 1;
 }
 
 void CheckMyHealth::check_lighting_system(SelfDiagnosisData *selfDiagnosisDataPtr, VisualComm *visualCommPtr) {
-  visualCommPtr->print_line(F("[CheckMyHealth::check_lighting_system] Running..."));
+  visualCommPtr->print_line(F("    [CheckMyHealth::check_lighting_system] Running..."));
   selfDiagnosisDataPtr->lightingSystemOK = 1;
 }
 
 void CheckMyHealth::check_components_list(SelfDiagnosisData *selfDiagnosisDataPtr, VisualComm *visualCommPtr) {
-  visualCommPtr->print_line(F("[CheckMyHealth::check_components_list] Running..."));
+  visualCommPtr->print_line(F("    [CheckMyHealth::check_components_list] Running..."));
   selfDiagnosisDataPtr->peripheralComponentsOK = 1;
 }
 
 void CheckMyHealth::clear_runtime_data(VisualComm *visualCommPtr) {
-  visualCommPtr->print_line(F("[CheckMyHealth::clear_runtime_data] running..."));
+  visualCommPtr->print_line(F("    [CheckMyHealth::clear_runtime_data] running..."));
   // TODO: clear ClientComm instance
+  visualCommPtr->print_line(F("    [CheckMyHealth::clear_runtime_data] -- done --"));
 }

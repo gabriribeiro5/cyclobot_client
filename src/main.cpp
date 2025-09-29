@@ -1,6 +1,6 @@
-#include <Arduino.h>
-#include <SoftwareSerial.h>
-#include <WiFiEsp.h>
+#include "Arduino.h"
+#include "SoftwareSerial.h"
+#include "WiFiEsp.h"
 #include "../include/core_states/BaseState.h"
 #include "../include/core_states/error/ErrorHandlingState.h"
 #include "../include/core_states/self/IdleState.h"
@@ -25,16 +25,10 @@ void setup() {
     Serial.begin(9600); // Enable communication over the USB serial port console 9600 Bps
     
     cyclobot.commPtr->visualCommPtr->print_terminal_logo();
-    cyclobot.commPtr->visualCommPtr->print_line(F(" *************************  *********[IdleState::enter]*********  ************************* "));
-
+    cyclobot.commPtr->visualCommPtr->print_parameters(cyclobot.paramPtr);
     cyclobot.commPtr->visualCommPtr->print_free_memory("[main::setup]");
-    cyclobot.commPtr->visualCommPtr->print_line("[main::setup] cyclobot id is: " + cyclobot.paramPtr->deviceParametersPtr->cyclobotId);
-    cyclobot.commPtr->visualCommPtr->print("[main::setup] sleepLength is: ");
-    cyclobot.commPtr->visualCommPtr->print_line(cyclobot.paramPtr->deviceParametersPtr->sleepLength);
-    cyclobot.commPtr->visualCommPtr->print("[main::setup] msgTrace is: ");
-    cyclobot.commPtr->visualCommPtr->print_line(cyclobot.paramPtr->clientParametersPtr->msgTrace);
-    cyclobot.commPtr->visualCommPtr->print("[main::setup] wifiSsid is: ");
-    cyclobot.commPtr->visualCommPtr->print_line(cyclobot.paramPtr->wifiParametersPtr->wifiSsid);
+
+    cyclobot.commPtr->visualCommPtr->print_line(F(" *************************  *********[IdleState::enter]*********  ************************* "));
 
     cyclobot.commPtr->visualCommPtr->print_line(F("[main::setup] starting clock (rtc)"));
     if (!cyclobot.rtc.begin()) {
@@ -76,7 +70,6 @@ void loop() {
             break;
         }
         case 1: { // Comm
-            cyclobot.commPtr->visualCommPtr->print_line(F("[main::loop 1] Setting up communication state"));
             BaseState *communicationStatePtr = new HTTPClientState();
             cyclobot.change_state(communicationStatePtr);
             cyclobot.report_signature_request();
@@ -86,25 +79,16 @@ void loop() {
             break;
         }
         case 2: { // Config update
-            cyclobot.commPtr->visualCommPtr->print_line(F("[main::loop 2] Creating config update pointer"));
             BaseState *configUpdateStatePtr = new ConfigUpdateState();
-            cyclobot.commPtr->visualCommPtr->print_line(F("[main::loop 2] Changing to config update state"));
             cyclobot.change_state(configUpdateStatePtr);
-            cyclobot.commPtr->visualCommPtr->print_line(F("[main::loop 2] Starting configuration update"));
             cyclobot.update_config();
-            cyclobot.commPtr->visualCommPtr->print_line(F("[main::loop 2] Configuration update completed"));
             delete configUpdateStatePtr;
-            cyclobot.commPtr->visualCommPtr->print_line(F("[main::loop 2] Pointer deleted"));
             break;
         }
         case 3: { // Code update
-            cyclobot.commPtr->visualCommPtr->print_line(F("[main::loop 3] Preparing for code update"));
             BaseState *codeUpdateStatePtr = new CodeUpdateState();
-            cyclobot.commPtr->visualCommPtr->print_line(F("[main::loop 3] Changing to code update state"));
             cyclobot.change_state(codeUpdateStatePtr);
-            cyclobot.commPtr->visualCommPtr->print_line(F("[main::loop 3] Starting simulation code update"));
             cyclobot.update_simulation_code();
-            cyclobot.commPtr->visualCommPtr->print_line(F("[main::loop 3] Code update completed"));
             delete codeUpdateStatePtr;
             break;
         }

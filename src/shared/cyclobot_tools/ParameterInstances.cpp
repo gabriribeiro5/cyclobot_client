@@ -5,11 +5,16 @@
 #include "../../../include/config/ClientParameters.h"
 #include "../../../include/config/EcosystemParameters.h"
 #include "../../../include/config/PeripheralMapping.h"
+#include <Arduino.h>
 
 ParameterInstances::ParameterInstances() {
+    // DEBUG
+    Serial.println(F("[ParameterInstances::ParameterInstances] creating parameter instances..."));
+    Serial.flush();
+    
     // -> Board Pins
     peripheralMappingPtr = new PeripheralMapping();
-
+    
     // -> Parameters
     deviceParametersPtr = new DeviceParameters();
     errorHandlingParametersPtr = new ErrorHandlingParameters();
@@ -24,8 +29,8 @@ ParameterInstances::~ParameterInstances() {
 
     // -> Parameters
     delete deviceParametersPtr;
-    delete errorHandlingParametersPtr;
-    delete wifiParametersPtr;
+    // delete errorHandlingParametersPtr;
+    // delete wifiParametersPtr;
     delete clientParametersPtr;
-    delete ecosystemParametersPtr;
+    // delete ecosystemParametersPtr;
 };
