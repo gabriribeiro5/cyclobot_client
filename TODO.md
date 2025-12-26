@@ -17,7 +17,7 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 ---
 
 ### 🧱 Architecture & Modularity
-- [x] feat(State Pattern - incomplete): to handle Cyclobot lifecycle
+- [x] feat(State Pattern): to handle Cyclobot lifecycle
   - [x] Learn more C++ (too rusty)
   - [x] Create a working model for State Design
   - [x] Match the model with actual file structure
@@ -30,7 +30,7 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 ---
 
 ### ▶️ Code features and data
-- [x] feat(RainforestSimulation - incomplete): into new design
+- [x] feat(RainforestSimulation): take old project and fit into new design
   - [x] Distribute single file methods across .h modules
   - [x] Write .cpp code based on .h files
     - [x] Cyclobot's base cycle
@@ -54,10 +54,17 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 - [x] fix(warning): library ArduinoUniqueID may be incompatible with your current board which runs on megaavr architecture(s).
   - [x] Add support for both ArduinoUniqueID and megaavr with conditional compilation using architecture macros
 
+---
+
+### 🧠 Design Enhancements
+- [x] style(sharedInstances): categorize pointers
+  - [x] Create shared/group
+  - [x] Create category classes (Self, Comm, Simulation, Actuator...) inside shared/group
+  - [x] Move pointers from CyclobotInstances to their categry classes
 
 ---
 
-### ▶️ Mega 2560 Rev3 full version (256kb)
+### ▶️ Mega 2560 Rev3 version 1.0 (256kb)
 - [x] style(modules): remove unused files
 - [x] feat (Simulation): finally!
   - [x] State
@@ -69,11 +76,9 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 - [x] feat(shared strategies): Detail shared instances (tools and strategies)
 - [x] feat(TraditionalGarden_Water): First detailed simulation strategy
 
-### 🔧 Bug fixes
 - [x] fix(strategies): names and #includes
 - [x] fix(multiple definitions): add prefix to strategies (TG_, AG_, AQ_, etc)
 
-### ▶️ Mega 2560 Rev3 full version (256kb)
 - [x] feat(destructors): memory cleanup for strategy classes
 - [x] feat(wokwi) complete:
   - [x] add files (wokwi.toml and diagram.json)
@@ -84,10 +89,13 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
   - [x] copy diagram.json from online tool
   - [x] Simulate TG_Water in ATmega2560 (256kb)
 
+- [x] Add sleep mode between readings (if battery-powered)
+- [x] Optimize RAM usage using `PROGMEM` for constant data
+
 - [x] style(Serial.println): define pattern
 - [x] feat(Startup logo): apply to logs
-- [ ] fix(Serial.println): board simulation stops printing at some point
-  - [x] pattern serach: take note of switchCaseNum, last2LogLines -> lastMemorySize
+- [x] fix(Serial.println): board simulation stops printing at some point
+  - [x] pattern search: take note of switchCaseNum, last2LogLines -> lastMemorySize
   - [x] Open topic at Arduino Docs (https://forum.arduino.cc/t/mega2560-stops-printing-suddenly-in-the-middle-of-a-string/1404437/9)
   - [x] branch: Isolate error traceback snippets into a coherent and sharable representation of the code
     - [x] Create branch
@@ -126,11 +134,20 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 - [x] style(serial.print): apply indentation
 - [x] feat(TG_Water): Validated
 
-- [ ] doc(README): describe the context objects
+- [x] doc(README): describe the context's objects
+- [x] doc(TODO): review and try to reduce task list
+- [x] doc(README): update features checklist
+- [x] doc(README): describe Actuators
+- [x] doc(README): describe Sensors
+- [x] doc(README): describe Communication
+- [x] doc(README): describe Configurations
+- [ ] doc(README): add setup procedure for development environment
+- [ ] doc(README): add pin layout: wiring diagrams and supported sensors/modules
 
-- [ ] feat(editable parameters): Create external storage for easy parameters management
-  - [ ] Use <EEPROM.h> for byte storage
-
+- [ ] feat(editable parameters): Create external storage <EEPROM.h> for easy parameters management
+  - [ ] Create storageManagerInstancePtr
+  - [ ] Read about EEPROM
+  - [ ] Define StorageManager methods
 
 - [ ] fix(warning -Wwrite-strings): review and try reducing occurences
 - [ ] fix(warning -Wattributes): review and try reducing occurences
@@ -152,11 +169,27 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 - [ ] feat(comm): implement server
 - [ ] refactor(api addresses): review and update
 
+- [ ] fix(update): Update constants and variables to match api configurations.
 ---
 
-### ▶️ UNO R3 limited version (32kb) - stateless design  
+### 🧪 Lifecycle test
+- [ ] Set UNO prototype
+- [ ] Rebuild paludarium with stone wall (only physics no glue)
+- [ ] Test full cycle
+
+---
+
+### 🚀 Deployment
+- [ ] Add firmware versioning and update logs
+- [ ] Support OTA updates (optional/future)
+- [ ] Track successful and failed transmissions
+
+---
+
+### ▶️ UNO R3 limited version 1.0 (32kb) - stateless design  
 - [ ] feat(PL_RiverLightFan): Detailed simulation strategy
-- [ ] Code reduction to less than 32kb (yes, it hurts...)
+- [ ] Learn about "Flyweight pattern to minimize memory usage for sensor instances"
+- [ ] Code reduction to less than 32kb (yes, it hurts...) 
   - [ ] Reduce states quantity
   - [ ] Reduce peripheral mapping if possible
   - [ ] Remove all states
@@ -166,8 +199,8 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
   
 ---
 
-### ▶️ Mega 2560 Rev3 full version (256kb)
-- [ ] feat(update strategies)
+### ▶️ Mega 2560 Rev3 version 2.0 (256kb)
+- [ ] feat(update_strategies)
   - [ ] State
   - [ ] Config
   - [ ] Update
@@ -183,85 +216,11 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
   - [ ] Reboot 3x
   - [ ] Standby for a day
 - [ ] feat(sound alarm): activated by the server
----
+- [ ] Apply Strategy Pattern for interchangeable communication protocols (Bluetooth, Wifi, etc)
 
-### 🧠 Design Enhancements
-- [x] style(sharedInstances): categorize pointers
-  - [x] Create shared/group
-  - [x] Create category classes (Self, Comm, Simulation, Actuator...) inside shared/group
-  - [x] Move pointers from CyclobotInstances to their categry classes
-
-### 📄 Rename project
-- [x] refactor(project name): `Cyclobot` replaces `Eco Units`
-- [x] fix(multiple files): apply method_name_pattern
-
----
-
-### 🧪 Lifecycle test
-- [ ] Set UNO prototype
-- [ ] Rebuild paludarium with stone wall (only physics no glue)
-- [ ] Test full cycle
-
----
-
-### 🧱 Architecture & Modularity
-- [ ] Design interface for persistent storage (EEPROM/SD/Fake)
-- [ ] Refactor sensor interface for polymorphism and code reuse
-- [ ] Abstract network communication layer
-
----
-
-### 🧠 Design Enhancements
-- [ ] Use Flyweight to minimize memory usage for sensor instances
-- [ ] Strategy Pattern for interchangeable communication protocols
-
----
-
-### 🔁 Communication State
-- [ ] Implement Wi-Fi scanning and connectivity.
-- [ ] Implement HTTP client abstraction
-- [ ] Support JSON formatting for API payloads
-- [ ] Reflect server response codes for debugging
-- [ ] Add retry strategy and timeout control
-
----
-
-### ⏫ Update State
-- [ ] Update constants and variables from server configurations.
-
----
-
-### ⚙️ Simulation States
 - [ ] Improve rainforest simulation:
   - [ ] Add methods for enhanced logic and user interaction.
   - [ ] Integrate communication features.
-- [ ] Collect self-diagnostics.
 
----
-
-### 🧪 Testing & Debugging
-- [ ] Add simulation mode for sensors
-- [ ] LED or serial logs for diagnostics (status/error)
-- [ ] Unit test critical logic using PlatformIO or Arduino mocks (searche Eclipse / Sloeber)
-- [ ] Measure memory usage and performance bottlenecks
-
----
-
-### 🔋 Power & Resource Management
-- [x] Add sleep mode between readings (if battery-powered)
-- [x] Optimize RAM usage using `PROGMEM` for constant data
 - [ ] Monitor voltage or battery levels (if applicable)
 
----
-
-### 📄 Documentation
-- [ ] Add README.md for firmware features and pin layout
-- [ ] Document setup procedure for development environment
-- [ ] Include wiring diagrams and supported sensors/modules
-
----
-
-### 🚀 Deployment
-- [ ] Add firmware versioning and update logs
-- [ ] Support OTA updates (optional/future)
-- [ ] Track successful and failed transmissions
