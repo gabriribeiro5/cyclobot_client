@@ -10,6 +10,7 @@
             "includePath": [
                 "C:/Users/gabri/codes/1_Products/cyclobot/include",
                 "C:/Users/gabri/codes/1_Products/cyclobot/src",
+                "C:/Users/gabri/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
                 "C:/Users/gabri/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
                 "C:/Users/gabri/codes/1_Products/cyclobot/.pio/libdeps/megaatmega2560/ArduinoUniqueID/src",
                 "C:/Users/gabri/codes/1_Products/cyclobot/.pio/libdeps/megaatmega2560/RTClib/src",
@@ -23,7 +24,6 @@
                 "C:/Users/gabri/.platformio/packages/framework-arduino-avr/cores/arduino",
                 "C:/Users/gabri/.platformio/packages/framework-arduino-avr/variants/mega",
                 "C:/Users/gabri/codes/1_Products/cyclobot/lib/wifi_manager",
-                "C:/Users/gabri/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
                 "C:/Users/gabri/.platformio/packages/framework-arduino-avr/libraries/HID/src",
                 ""
             ],
@@ -32,6 +32,7 @@
                 "path": [
                     "C:/Users/gabri/codes/1_Products/cyclobot/include",
                     "C:/Users/gabri/codes/1_Products/cyclobot/src",
+                    "C:/Users/gabri/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
                     "C:/Users/gabri/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
                     "C:/Users/gabri/codes/1_Products/cyclobot/.pio/libdeps/megaatmega2560/ArduinoUniqueID/src",
                     "C:/Users/gabri/codes/1_Products/cyclobot/.pio/libdeps/megaatmega2560/RTClib/src",
@@ -45,7 +46,6 @@
                     "C:/Users/gabri/.platformio/packages/framework-arduino-avr/cores/arduino",
                     "C:/Users/gabri/.platformio/packages/framework-arduino-avr/variants/mega",
                     "C:/Users/gabri/codes/1_Products/cyclobot/lib/wifi_manager",
-                    "C:/Users/gabri/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
                     "C:/Users/gabri/.platformio/packages/framework-arduino-avr/libraries/HID/src",
                     ""
                 ]
