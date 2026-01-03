@@ -1,19 +1,15 @@
 # Cyclobot Oluṣọgba
 
-Cyclobot Oluṣọgba is an scalable arduino firmware (C++) designed to keep self contained and small ecosystems alive.
+Cyclobot Oluṣọgba is an scalable arduino firmware (written in C++). It is designed to keep self contained and small ecosystems alive.
 
 Oluṣọgba means "the gardner" in Yoruba.
+By "self contained and small ecosystems" I mean a lot of possibilities, from "a simple terrarium that sits on your desk" to "an entire indoor farm".
 
-You may replace "self contained and small ecosystems" with options that might range from "a simple terrarium that sits on your desk" to "an entire living room", "a rooftop garden" or even "a section of the zoo".
+Cyclobot Oluṣọgba is designed not only to interact with the ecosystem but also to collect data from it, send this data to a server, get eventual update instructions from the server, update its own configurations and rerun the ecosystem interaction script. This cycle ensures that every microcontroler equiped with cyclobot technology can easily adapt it's behaviour when facing some environment change.
 
-Each of those places are home to some kind of life that we actualy care.
+Imagine you have a very strict watering plan for your crops and, for some reason, the temperature go higher than expected, your soil dries faster than expected, nutrients don't have enough time to get absorbed by the roots and thus your crops grow slower. With cyclobot managing this cycle, this type of oscilation can be easily detected and mitigation strategies (such as watering a little earlier or even turning on the fan system to cool down the ambiance) can be taken automatically.
 
-Some of those lifes might require a temperature control system to make them fell cozy while watching TV, other lifes might require an specific amount of light per day, others might even require an specific amount of water, depending on current temperature and soil moisture.
-
-Cyclobot Oluṣọgba is designed not only to interact with the ecosystem thru a given script but also to collect data about the ecosystem, send it to a server, get eventual update instructions from the server, update configurations and firmware, handle forseable errors, manage energy consumption and rerun the ecosystem simulation.
-
-
-Cyclobots are meant to:
+In other words, Cyclobots are basically meant to:
 1. Keep track of a given ecosystem's health leveraging from multiple sensors;
 2. Send healthcheck data to a given server;
 3. Manipulate the ecosystem through actuators (such as watering and fan systems).
@@ -26,7 +22,7 @@ Foreseeable versions of this software will support human inputs, so they can int
 1. Health Check
 3. Send diagnostics
 4. Verify and run updates
-5. Simulation
+5. Run ecosystem simulation
 6. Send sensors data
 7. Sleep
 *Error state may be raised by any other state

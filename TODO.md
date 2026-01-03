@@ -137,12 +137,14 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 - [x] doc(README): describe the context's objects
 - [x] doc(TODO): review and try to reduce task list
 - [x] doc(README): update features checklist
-- [x] doc(README): describe Actuators
-- [x] doc(README): describe Sensors
-- [x] doc(README): describe Communication
-- [x] doc(README): describe Configurations
-- [ ] doc(README): add setup procedure for development environment
-- [ ] doc(README): add pin layout: wiring diagrams and supported sensors/modules
+  - [x] Describe Actuators
+  - [x] Describe Sensors
+  - [x] Describe Communication
+  - [x] Describe Configurations
+  - [ ] Add setup procedure for development environment
+  - [ ] Add pin layout: wiring diagrams and supported sensors/modules
+
+- [x] doc(README): shorten introduction
 
 - [ ] feat(editable parameters): Create external storage <EEPROM.h> for easy parameters management
   - [ ] Create storageManagerInstancePtr
