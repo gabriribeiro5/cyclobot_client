@@ -147,7 +147,7 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 - [x] doc(README): shorten introduction
 
 - [ ] feat(editable parameters): Create external storage <EEPROM.h> for easy parameters management
-  - [ ] Create storageManagerInstancePtr
+  - [x] Create storageManagerPtr
   - [ ] Read about EEPROM
   - [ ] Define StorageManager methods
 
