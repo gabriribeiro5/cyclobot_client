@@ -1,14 +1,14 @@
 #include <Arduino.h>
-#include "../../../../../../include/core_states/simulation/strategy/vivarium/terrarium/TR_Light.h"
-#include "../../../../../../include/core_states/simulation/strategy/BaseStrategy.h"
-#include "../../../../../../include/config/EcosystemParameters.h"
-#include "../../../../../../include/config/DeviceParameters.h"
-#include "../../../../../../include/sensor/EcosystemScanner.h"
-#include "../../../../../../include/actuator/EcosystemActuator.h"
-#include "../../../../../../include/comm/VisualComm.h"
+#include "../include/strategy/vivarium/terrarium/TR_Light.h"
+#include "../include/strategy/BaseStrategy.h"
+#include "../include/config/StrategyParameters.h"
+#include "../include/config/DeviceParameters.h"
+#include "../include/sensor/EcosystemScanner.h"
+#include "../include/actuator/EcosystemActuator.h"
+#include "../include/comm/VisualComm.h"
 
 /* TERRARIUM */
-void TR_Light::enter() {
+void TR_Light::enter(StrategyParameters *strategyParameters) {
     soilMoistureSensor = A0;                // Sensor de umidade do solo pino A0 conectado no A0 do Arduino
     irrigationSystem = A1;                  // Sensor de chuva pino A1 conectado no A1 do Arduino
     relePort = 4;                           // porta de controle do relé conectada no D4 do Arduino
@@ -23,13 +23,13 @@ void TR_Light::setup(VisualComm *visualCommPtr) {
 }
 
 /* TERRARIUM */
-void TR_Light::simulate_ecosystem(EcosystemParameters *parametersPtr,
+void TR_Light::simulate_ecosystem(StrategyParameters *strategyParameters,
                                   EcosystemScanner *scannerPtr,
                                   EcosystemActuator *actuatorPtr,
                                   VisualComm *visualCommPtr)
 {
     // ********* Primary scann *********
-    scannerPtr->read_soil_moisture(parametersPtr, visualCommPtr, soilMoistureSensor);
+    scannerPtr->read_soil_moisture(strategyParameters, visualCommPtr, soilMoistureSensor);
 
     // ********* Irrigation strategy *********
     if (!parametersPtr->soilIsWet) {

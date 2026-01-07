@@ -1,7 +1,6 @@
 #pragma once
 #include <RTClib.h>
 #include "core_states/BaseState.h"
-#include "core_states/simulation/strategy/BaseStrategy.h"
 #include "shared/cyclobot_tools/CommunicationInstances.h"
 #include "shared/cyclobot_tools/DataInstances.h"
 #include "shared/cyclobot_tools/ParameterInstances.h"
@@ -20,7 +19,6 @@ class FiniteStateMachine {
         DataInstances *dataPtr;
         
         // Single instance
-        BaseStrategy *simulationStrategyPtr;
         EcosystemScanner *scannerPtr;
         EcosystemActuator *actuatorPtr;
 
@@ -29,7 +27,6 @@ class FiniteStateMachine {
 
         DateTime now;      // Track in which step we are
         int stateFlow = 0; // Flow stablished at the Client module and updated by States to comply client rules
-
         
         FiniteStateMachine(BaseState *initialStatePtr); // Constructor
         void change_state(BaseState *newStatePtr);
@@ -59,6 +56,9 @@ class FiniteStateMachine {
         
         // comm
         void report_simulation_data();
+        
+        // comm
+        void stream_sensors_data();
         
         // self
         void take_a_nap();

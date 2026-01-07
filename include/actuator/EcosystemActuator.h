@@ -1,6 +1,6 @@
 #pragma once
 #include "..\..\include\config\EcosystemParameters.h"
-#include "..\..\include\config\PeripheralMapping.h"
+#include "..\..\include\config\WifiMapping.h"
 #include "..\..\include\comm\VisualComm.h"
 
 class EcosystemActuator {

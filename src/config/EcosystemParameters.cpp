@@ -1,7 +1,7 @@
 #include "../../include/config/EcosystemParameters.h"
 
 EcosystemParameters::EcosystemParameters()
-: soilIsWet(1),
+: soilIsWet(0),
   soilMoistureLimit(500),
   currentTemperature(20),
   minTemperatureExpected(18),
@@ -13,8 +13,6 @@ EcosystemParameters::EcosystemParameters()
   climate(1),
   sunLightAvailable(1),
   standBy(0),
-  eventStart(),
-  eventEnd(),
   timeBufferMicroSec(1800000000)
 {
     // The upward initialization handles constants and non-constants.

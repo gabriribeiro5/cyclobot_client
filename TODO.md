@@ -146,6 +146,32 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 
 - [x] doc(README): shorten introduction
 
+- [ ] feat(stream_sensors_data): streaming with frequency control
+  - [x] create StrategyParameters module
+  - [x] create linked-lists
+  - [x] change PeripheralMapping to WIfiMapping leave "peripheral" for strategies
+  - [x] refactor(design): strategy is defined in main
+  - [xx] fix(inclusion errors): fix module references
+  - [x] create setup_add(type, name, value...)
+  - [ ] maybe setup_add_type(name, value...) is better
+  - [ ] create sensor_add(type, name, value...)
+  - [ ] strategies must fullfill linked-lists
+  - [ ] strategy runs setup_bool("name") to get struct pointer
+  - [ ] strategy runs setup_int("name") to get struct pointer
+  - [ ] fix(more inclusion errors): fix module references
+  - [ ] create stream_sensors_data method
+    - [ ] loops_per_sec = 20
+    - [ ] remaning_millisecs = (1sec - (now - loop_start)) / 20 #20 loops/second
+    - [ ] wait_time = remaning_millisecs / loops_per_sec
+    - [ ] if wait_time is positive, wait(stream_frames)
+    - [ ] else, raise warnig ("The streaming loop took longer than expected.")
+  - [ ] clear strategy parameters at the end of states loop
+
+
+- [ ] refactor(EcosystemParameters): move to Strategies
+  - [ ] create parameters printing method (use streaming methods)
+  - [ ] relocate EcosystemParameters printing from start to streaming stage
+
 - [ ] feat(editable parameters): Create external storage <EEPROM.h> for easy parameters management
   - [x] Create storageManagerPtr
   - [ ] Read about EEPROM

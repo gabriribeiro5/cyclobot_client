@@ -68,6 +68,11 @@ void IdleState::report_simulation_data(FiniteStateMachine *cyclobot) {
     cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, cyclobot->commPtr->visualCommPtr, "IdleState", "report_simulation_data", 0, "wrong state");
 };
 
+// comm
+void IdleState::stream_sensors_data(FiniteStateMachine *cyclobot) {
+    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, cyclobot->commPtr->visualCommPtr, "IdleState", "run_streamming", 0, "wrong state");
+};
+
 // self
 void IdleState::take_a_nap(FiniteStateMachine *cyclobot) {
     cyclobot->commPtr->visualCommPtr->print_line(F("[IdleState::take_a_nap] zzz..."));

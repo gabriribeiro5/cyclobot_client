@@ -35,6 +35,9 @@ public:
     // comm
     void report_simulation_data(FiniteStateMachine *cyclobot) override;
     
+    // comm
+    void stream_sensors_data(FiniteStateMachine *cyclobot) override;
+    
     // self
     void take_a_nap(FiniteStateMachine *cyclobot) override;
 

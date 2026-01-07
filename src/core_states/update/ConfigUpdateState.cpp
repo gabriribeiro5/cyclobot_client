@@ -78,6 +78,11 @@ void ConfigUpdateState::report_simulation_data(FiniteStateMachine *cyclobot) {
     cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, cyclobot->commPtr->visualCommPtr, "ConfigUpdateState", "report_simulation_data", 0, "wrong state");
 };
 
+// comm
+void ConfigUpdateState::stream_sensors_data(FiniteStateMachine *cyclobot) {
+    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, cyclobot->commPtr->visualCommPtr, "ConfigUpdateState", "collect_and_share_data", 0, "wrong state");
+};
+
 // self
 void ConfigUpdateState::take_a_nap(FiniteStateMachine *cyclobot) {
     cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, cyclobot->commPtr->visualCommPtr, "ConfigUpdateState", "take_a_nap", 0, "wrong state");

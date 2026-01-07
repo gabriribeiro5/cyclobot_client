@@ -1,6 +1,6 @@
 #pragma once
 #include "../config/EcosystemParameters.h"
-#include "../config/PeripheralMapping.h"
+#include "../config/WifiMapping.h"
 #include "../comm/VisualComm.h"
 
 class EcosystemScanner {

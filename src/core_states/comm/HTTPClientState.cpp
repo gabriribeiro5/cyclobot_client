@@ -108,6 +108,13 @@ void HTTPClientState::report_simulation_data(FiniteStateMachine *cyclobot) {
     cyclobot->commPtr->visualCommPtr->print_line(F("[HTTPClientState::report_simulation_data] -- done --"));
 };
 
+// comm
+void HTTPClientState::stream_sensors_data(FiniteStateMachine *cyclobot) {
+    // wait_time = (1sec - (current_timestamp - loop_start)) / 20 #20 loops/second
+    // if wait_time is positive, wait(wait_time)
+    return;
+};
+
 // self
 void HTTPClientState::take_a_nap(FiniteStateMachine *cyclobot) {
     cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, cyclobot->commPtr->visualCommPtr, "HTTPClientState", "take_a_nap", 0, "wrong state");

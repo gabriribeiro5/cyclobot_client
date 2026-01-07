@@ -10,7 +10,8 @@
 #include "../include/core_states/update/CodeUpdateState.h"
 #include "../include/core_states/simulation/SimulationState.h"
 #include "../include/core_states/simulation/strategy/gardening/trad_garden/TG_Water.h"
-#include "../include/config/PeripheralMapping.h"
+#include "../include/core_states/simulation/strategy/vivarium/terrarium/TR_Light.h"
+#include "../include/config/WifiMapping.h"
 #include "../include/Context.h"
 
 // Create state machine
@@ -18,8 +19,8 @@ BaseState *idleStatePtr = new IdleState();
 FiniteStateMachine cyclobot(idleStatePtr);
 
 // Extra serial port for wifi
-SoftwareSerial esp8266(cyclobot.paramPtr->peripheralMappingPtr->wifiEspRX,
-                       cyclobot.paramPtr->peripheralMappingPtr->wifiEspTX); // software-based serial port to communicate with wifi module
+SoftwareSerial esp8266(cyclobot.paramPtr->wifiMappingPtr->wifiEspRX,
+                       cyclobot.paramPtr->wifiMappingPtr->wifiEspTX); // software-based serial port to communicate with wifi module
                        
 void setup() {
     Serial.begin(9600); // Enable communication over the USB serial port console 9600 Bps
@@ -51,7 +52,7 @@ void setup() {
     // cyclobot.commPtr->visualCommPtr->print_line(cyclobot.now.second());
     
     cyclobot.commPtr->visualCommPtr->print_line(F("[main::setup] setting simulation strategy"));
-    cyclobot.simulationStrategyPtr = new TG_Water();
+    cyclobot.paramPtr->strategyParametersPtr->simulationStrategyPtr = new TR_Light();
     
     // cyclobot.commPtr->visualCommPtr->print_line(F("[main::setup] initializing WiFi module"));
     WiFi.init(&esp8266);
@@ -104,10 +105,11 @@ void loop() {
             cyclobot.run_simulation();
             break;
         }
-        case 6: { // Comm
+        case 6: { // Streamming
             BaseState *communicationStatePtr = new HTTPClientState();
             cyclobot.change_state(communicationStatePtr);
-            cyclobot.report_simulation_data();
+            // cyclobot.report_simulation_data();
+            cyclobot.stream_sensors_data();
             break;
         }
         case 7: { // Self
