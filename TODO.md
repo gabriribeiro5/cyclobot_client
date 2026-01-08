@@ -152,9 +152,8 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
   - [x] change PeripheralMapping to WIfiMapping leave "peripheral" for strategies
   - [x] refactor(design): strategy is defined in main
   - [xx] fix(inclusion errors): fix module references
-  - [x] create setup_add(type, name, value...)
-  - [ ] maybe setup_add_type(name, value...) is better
-  - [ ] create sensor_add(type, name, value...)
+  - [x] create add_setup_param(type, name, value...)
+  - [x] create add_sensor_param(type, name, value...)
   - [ ] strategies must fullfill linked-lists
   - [ ] strategy runs setup_bool("name") to get struct pointer
   - [ ] strategy runs setup_int("name") to get struct pointer

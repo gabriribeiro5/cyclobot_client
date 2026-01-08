@@ -63,16 +63,21 @@ class StreamableData {
         };
 
         // Create linked-lists struct
-        LinkedList<Setup_Int> setup_ints;
+        // Every list must end with an 's'
         LinkedList<Setup_Bool> setup_bools;
+        LinkedList<Setup_Int> setup_ints;
         LinkedList<Setup_Uint8_t> setup_uint8_ts;
         LinkedList<Sensor_Bool> sensor_bools;
         LinkedList<Sensor_Int> sensor_ints;
         
-        void setup_add(char* type, char *name, bool value, char *description, bool is_pin_value, bool user_can_see, bool updated_by, DateTime last_update);
-        void sensor_add(char* type, char *name, int value, char *description, int expected_frequency, bool measure_now, bool send_now, DateTime last_update);
-        void setup_bool(char *name);
-        void setup_int(char *name);
-
+        // Linked-lists SEARCH methods
+        Setup_Bool setup_bool(char *name);
+        Setup_Int setup_int(char *name);
+        Setup_Uint8_t setup_uint8_t(char *name);
+        Sensor_Bool sensor_bool(char *name);
+        Sensor_Int sensor_int(char *name);
         
+        // Linked-lists INSERTITION methods
+        void add_setup_param(char* type, char *name, bool value, char *description, bool is_pin_value, bool user_can_see, bool updated_by, DateTime last_update);
+        void add_sensor_param(char* type, char *name, int value, char *description, int expected_frequency, bool measure_now, bool send_now, DateTime last_update);        
     };
