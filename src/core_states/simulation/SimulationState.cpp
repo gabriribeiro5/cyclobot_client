@@ -67,7 +67,7 @@ void SimulationState::run_simulation(FiniteStateMachine *cyclobot) {
         delete simStrategyPtr;
     }
     
-    simStrategyPtr = new SimStrategy(cyclobot->paramPtr->strategyParametersPtr);
+    simStrategyPtr = new SimStrategy(cyclobot->simulationStrategyPtr);
 
 
     if (cyclobot->paramPtr->deviceParametersPtr->firstAwakening) {
@@ -82,7 +82,7 @@ void SimulationState::run_simulation(FiniteStateMachine *cyclobot) {
     // cyclobot->paramPtr->ecosystemParametersPtr->eventStart = cyclobot->rtc.now();
     cyclobot->commPtr->visualCommPtr->print(F("[SimulationState::run_simulation] starting simulation at "));
     cyclobot->commPtr->visualCommPtr->print_line(cyclobot->paramPtr->ecosystemParametersPtr->eventStart.timestamp());
-    simStrategyPtr->simulate_ecosystem(cyclobot->paramPtr->strategyParametersPtr,
+    simStrategyPtr->simulate_ecosystem(cyclobot->paramPtr->ecosystemParametersPtr,
                                         cyclobot->scannerPtr,
                                         cyclobot->actuatorPtr,
                                         cyclobot->commPtr->visualCommPtr);
@@ -96,11 +96,6 @@ void SimulationState::run_simulation(FiniteStateMachine *cyclobot) {
 // comm
 void SimulationState::report_simulation_data(FiniteStateMachine *cyclobot) {
     cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, cyclobot->commPtr->visualCommPtr, "SimulationState", "report_simulation_data", 0, "wrong state");
-};
-
-// comm
-void SimulationState::stream_sensors_data(FiniteStateMachine *cyclobot) {
-    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, cyclobot->commPtr->visualCommPtr, "SimulationState", "run_streamming", 0, "wrong state");
 };
 
 // self

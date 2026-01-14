@@ -1,13 +1,11 @@
 #include "Arduino.h"
-#include "LinkedList.h"
 #include "../../include/sensor/EcosystemScanner.h"
 #include "../../include/config/EcosystemParameters.h"
-#include "../../include/config/StreamableData.h"
 #include "../../include/comm/VisualComm.h"
 
-void EcosystemScanner::read_soil_moisture(StreamableData *streamsPtr, VisualComm *visualCommPtr, uint8_t soilMoistureSensor) {
-    if (streamsPtr->setup_int("soilMoistureLimit") > analogRead(soilMoistureSensor)) {
-        streamsPtr->setup_int("soilIsWet") = true;
+void EcosystemScanner::read_soil_moisture(EcosystemParameters *ecosystemParametersPtr, VisualComm *visualCommPtr, uint8_t soilMoistureSensor) {
+    if (ecosystemParametersPtr->soilMoistureLimit > analogRead(soilMoistureSensor)) {
+        ecosystemParametersPtr->soilIsWet = true;
     };
 }
 

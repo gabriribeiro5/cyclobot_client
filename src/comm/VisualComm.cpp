@@ -105,13 +105,13 @@ void VisualComm::print_parameters(ParameterInstances *paramPtr) {
   // PERIPHERAL PARAMETERS
   print_line(F("[VisualComm::print_parameters] PERIPHERAL Parameters:"));
   print(F(" - WiFi ESP RX Pin: "));
-  print_line(paramPtr->wifiMappingPtr->wifiEspRX);
+  print_line(paramPtr->peripheralMappingPtr->wifiEspRX);
   print(F(" - WiFi ESP TX Pin: "));
-  print_line(paramPtr->wifiMappingPtr->wifiEspTX);
+  print_line(paramPtr->peripheralMappingPtr->wifiEspTX);
   print(F(" - WiFi ESP RST Pin: "));
-  print_line(paramPtr->wifiMappingPtr->wifiEspRST);
+  print_line(paramPtr->peripheralMappingPtr->wifiEspRST);
   print(F(" - WiFi ESP GPIO2 Pin: "));
-  print_line(paramPtr->wifiMappingPtr->wifiEspGPIO2);
+  print_line(paramPtr->peripheralMappingPtr->wifiEspGPIO2);
 
   // WIFI PARAMETERS
   print_line(F("[VisualComm::print_parameters] WIFI Parameters:"));

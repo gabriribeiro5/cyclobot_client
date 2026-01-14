@@ -103,11 +103,6 @@ void SelfDiagnosisState::report_simulation_data(FiniteStateMachine *cyclobot) {
     cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, cyclobot->commPtr->visualCommPtr, "SelfDiagnosisState", "report_simulation_data", 0, "wrong state");
 };
 
-// comm
-void SelfDiagnosisState::stream_sensors_data(FiniteStateMachine *cyclobot) {
-    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, cyclobot->commPtr->visualCommPtr, "SelfDiagnosisState", "run_streamming", 0, "wrong state");
-};
-
 // self
 void SelfDiagnosisState::take_a_nap(FiniteStateMachine *cyclobot) {
     cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, cyclobot->commPtr->visualCommPtr, "SelfDiagnosisState", "take_a_nap", 0, "wrong state");

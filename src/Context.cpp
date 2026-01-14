@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include "../include/Context.h"
 #include "../include/core_states/BaseState.h"
+#include "../include/core_states/simulation/strategy/BaseStrategy.h"
 #include "../include/shared/cyclobot_tools/CommunicationInstances.h"
 #include "../include/shared/cyclobot_tools/DataInstances.h"
 #include "../include/shared/cyclobot_tools/ParameterInstances.h"
@@ -28,8 +29,8 @@ FiniteStateMachine::FiniteStateMachine(BaseState *initialStatePtr) {
 
     // time tracking software
     RTC_DS3231 rtc;
-    
-    DateTime now;
+
+    DateTime now;      // Track in which step we are
     int stateFlow = 0; // Flow stablished at the Client module and updated by States to comply client rules
 }
 
@@ -102,12 +103,6 @@ void FiniteStateMachine::run_simulation() {
 void FiniteStateMachine::report_simulation_data() {
     // get milliseconds + log start
     currentStatePtr->report_simulation_data(this);
-    // log end + execution time
-}
-
-void FiniteStateMachine::stream_sensors_data() {
-    // get milliseconds + log start
-    currentStatePtr->stream_sensors_data(this);
     // log end + execution time
 }
 

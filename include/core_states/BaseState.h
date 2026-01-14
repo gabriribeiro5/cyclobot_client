@@ -44,9 +44,6 @@ public:
     // comm
     virtual void report_simulation_data(FiniteStateMachine *cyclobot);
     
-    // comm
-    virtual void stream_sensors_data(FiniteStateMachine *cyclobot);
-    
     // self
     virtual void take_a_nap(FiniteStateMachine *cyclobot);
 };

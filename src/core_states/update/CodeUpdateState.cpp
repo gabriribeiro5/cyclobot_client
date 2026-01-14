@@ -75,11 +75,6 @@ void CodeUpdateState::report_simulation_data(FiniteStateMachine *cyclobot) {
     cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, cyclobot->commPtr->visualCommPtr, "CodeUpdateState", "report_simulation_data", 0, "wrong state");
 };
 
-// comm
-void CodeUpdateState::stream_sensors_data(FiniteStateMachine *cyclobot) {
-    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, cyclobot->commPtr->visualCommPtr, "CodeUpdateState", "run_streamming", 0, "wrong state");
-};
-
 // self
 void CodeUpdateState::take_a_nap(FiniteStateMachine *cyclobot) {
     cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, cyclobot->commPtr->visualCommPtr, "CodeUpdateState", "take_a_nap", 0, "wrong state");
