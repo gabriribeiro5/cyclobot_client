@@ -2,12 +2,12 @@
 #include <RTClib.h>
 #include "core_states/BaseState.h"
 #include "core_states/simulation/strategy/BaseStrategy.h"
-#include "shared/cyclobot_tools/CommunicationInstances.h"
-#include "shared/cyclobot_tools/DataInstances.h"
-#include "shared/cyclobot_tools/ParameterInstances.h"
-#include "shared/cyclobot_tools/SelfManagementInstances.h"
+#include "fsm_tools/CommunicationInstances.h"
+#include "fsm_tools/DataInstances.h"
+#include "fsm_tools/ParameterInstances.h"
+#include "fsm_tools/SelfManagementInstances.h"
 #include "sensor/EcosystemScanner.h"
-#include "actuator/EcosystemActuator.h"
+#include "fsm_tools/actuator/EcosystemActuator.h"
 #include "util/TimeSync.h"
 
 // CycloBot Finite State Machine

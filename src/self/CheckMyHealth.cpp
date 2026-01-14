@@ -1,9 +1,9 @@
 #include <Arduino.h>
 #include <WiFiEsp.h>
 #include "../../include/self/CheckMyHealth.h"
-#include "../../include/comm/ClientComm.h"
-#include "../../include/comm/WifiComm.h"
-#include "../../include/comm/VisualComm.h"
+#include "../../include/fsm_tools/comm//ClientComm.h"
+#include "../../include/fsm_tools/comm//WifiComm.h"
+#include "../../include/fsm_tools/comm//VisualComm.h"
 #include "../../include/config/WifiParameters.h"
 #include "../../include/data/SelfDiagnosisData.h"
 

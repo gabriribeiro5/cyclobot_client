@@ -147,15 +147,45 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 - [x] doc(README): shorten introduction
 - [x] doc(TODO): add a bunch of tasks
 
-- [ ] refactor(PeripheralMapping): change PeripheralMapping to BaseMapping leave "peripheral" for strategies
+- [x] refactor(PeripheralMapping): change PeripheralMapping to BaseMapping leave "peripheral" for strategies
 
 - [ ] refactor(fsm_tools):
-  - [ ] switch '/shared/cyclobot_tools' to '/fsm_tools'
-  - [ ] move tool dirs into fsm_tools
+  - [x] switch '/shared/cyclobot_tools' to '/fsm_tools'
+    - [x] copy and paste as fsm_tools
+    - [x] update 'include' addresses pointing to fsm_tools
+    - [x] update 'include' addresses at fsm_tools
+    - [x] run app
+    - [x] remove old_dir
+  - [x] remove 'shared/simmulation_strategies'
+  - [x] run app
+  - [xx] move '/actuator' into fsm_tools
+  - [xx] update 'include' addresses pointing to actuator
+  - [xx] update 'include' addresses at actuator
+  - [x] build app
+  - [x] move '/comm' into fsm_tools
+  - [x] update 'include' addresses pointing to comm
+  - [x] update 'include' addresses at comm
+  - [x] build app
+  - [ ] move '/config' into fsm_tools
+  - [ ] update 'include' addresses pointing to config
+  - [ ] update 'include' addresses at config
+  - [ ] build app
+  - [ ] move '/data' into fsm_tools
+  - [ ] update 'include' addresses pointing to data
+  - [ ] update 'include' addresses at data
+  - [ ] build app
+  - [ ] move '/self' into fsm_tools
+  - [ ] update 'include' addresses pointing to self
+  - [ ] update 'include' addresses at self
+  - [ ] build app
+  - [ ] move '/sensor' into fsm_tools
+  - [ ] update 'include' addresses pointing to sensor
+  - [ ] update 'include' addresses at sensor
+  - [ ] build app
 
 - [ ] refactor(strategies):
   - [ ] remove 'shared/simulation_strategies'
-  - [ ] switch '/core-states/simulation/strategy' to '/strategy'
+  - [ ] switch '/core-states/simulation/strategy' to '/strategies'
   - [ ] strategy is defined in main
 
 - [ ] feat(stream_sensors_data):

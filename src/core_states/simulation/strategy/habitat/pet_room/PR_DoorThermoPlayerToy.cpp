@@ -4,8 +4,8 @@
 #include "../../../../../../include/config/EcosystemParameters.h"
 #include "../../../../../../include/config/DeviceParameters.h"
 #include "../../../../../../include/sensor/EcosystemScanner.h"
-#include "../../../../../../include/actuator/EcosystemActuator.h"
-#include "../../../../../../include/comm/VisualComm.h"
+#include "../../../../../../include/fsm_tools/actuator/EcosystemActuator.h"
+#include "../../../../../../include/fsm_tools/comm//VisualComm.h"
 
 /* PET ROOM */
 void PR_DoorThermoPlayerToy::enter() {

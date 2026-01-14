@@ -1,7 +1,7 @@
 #pragma once
 #include "../../config/EcosystemParameters.h"
 #include "../../sensor/EcosystemScanner.h"
-#include "../../actuator/EcosystemActuator.h"
+#include "../../fsm_tools/actuator/EcosystemActuator.h"
 
 // Forward declarations
 class BaseStrategy;

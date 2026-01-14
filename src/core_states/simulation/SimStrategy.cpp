@@ -3,9 +3,9 @@
 #include "../../../include/core_states/simulation/strategy/BaseStrategy.h"
 #include "../../../include/config/EcosystemParameters.h"
 #include "../../../include/config/DeviceParameters.h"
-#include "../../../include/actuator/EcosystemActuator.h"
+#include "../../../include/fsm_tools/actuator/EcosystemActuator.h"
 #include "../../../include/sensor/EcosystemScanner.h"
-#include "../../../include/comm/VisualComm.h"
+#include "../../../include/fsm_tools/comm//VisualComm.h"
 
 SimStrategy::SimStrategy(BaseStrategy *initialStrategyPtr) {
     currentStrategyPtr = initialStrategyPtr;

@@ -1,7 +1,7 @@
 #pragma once
 #include "Arduino.h"
 #include "EEPROM.h"
-#include "../comm/VisualComm.h"
+#include "../fsm_tools/comm/VisualComm.h"
 
 class StorageManager {
 public:

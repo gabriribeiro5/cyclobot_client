@@ -2,8 +2,8 @@
 #include "../../../include/core_states/self/SelfDiagnosisState.h"
 #include "../../../include/util/StateTransitionException.h"
 #include "../../../include/self/CheckMyHealth.h"
-#include "../../../include/comm/WifiComm.h"
-#include "../../../include/comm/ClientComm.h"
+#include "../../../include/fsm_tools/comm//WifiComm.h"
+#include "../../../include/fsm_tools/comm//ClientComm.h"
 #include "../../../include/Context.h"
 
 // used by context.changeState

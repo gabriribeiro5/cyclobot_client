@@ -3,8 +3,8 @@
 #include "../../../../../config/EcosystemParameters.h"
 #include "../../../../../config/DeviceParameters.h"
 #include "../../../../../sensor/EcosystemScanner.h"
-#include "../../../../../actuator/EcosystemActuator.h"
-#include "../../../../../comm/VisualComm.h"
+#include "../../../../../fsm_tools/actuator/EcosystemActuator.h"
+#include "../../../../../fsm_tools/comm/VisualComm.h"
 
 /* AEROPONIC GARDEN */
 class AG_WaterFan : public BaseStrategy {
