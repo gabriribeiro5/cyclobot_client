@@ -4,7 +4,7 @@
 #include "../../../include/config/WifiParameters.h"
 #include "../../../include/config/ClientParameters.h"
 #include "../../../include/config/EcosystemParameters.h"
-#include "../../../include/config/PeripheralMapping.h"
+#include "../../../include/config/BaseMapping.h"
 #include <Arduino.h>
 
 ParameterInstances::ParameterInstances() {
@@ -13,7 +13,7 @@ ParameterInstances::ParameterInstances() {
     Serial.flush();
     
     // -> Board Pins
-    peripheralMappingPtr = new PeripheralMapping();
+    BaseMappingPtr = new BaseMapping();
     
     // -> Parameters
     deviceParametersPtr = new DeviceParameters();
@@ -25,7 +25,7 @@ ParameterInstances::ParameterInstances() {
 
 ParameterInstances::~ParameterInstances() {
     // -> Board Pins
-    delete peripheralMappingPtr;
+    delete BaseMappingPtr;
 
     // -> Parameters
     delete deviceParametersPtr;

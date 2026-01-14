@@ -1,6 +1,6 @@
-#include "../../include/config/PeripheralMapping.h"
+#include "../../include/config/BaseMapping.h"
 
-PeripheralMapping::PeripheralMapping()
+BaseMapping::BaseMapping()
 : wifiEspRX(0),
   wifiEspTX(1)
 {

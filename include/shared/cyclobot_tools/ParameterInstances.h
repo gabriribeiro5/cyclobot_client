@@ -4,7 +4,7 @@
 #include "../../config/WifiParameters.h"
 #include "../../config/ClientParameters.h"
 #include "../../config/EcosystemParameters.h"
-#include "../../config/PeripheralMapping.h"
+#include "../../config/BaseMapping.h"
 
 class ParameterInstances {
     public:
@@ -12,7 +12,7 @@ class ParameterInstances {
         ~ParameterInstances();
         
         // -> Board Pins
-        PeripheralMapping *peripheralMappingPtr;
+        BaseMapping *BaseMappingPtr;
 
         // -> Parameters
         DeviceParameters *deviceParametersPtr;

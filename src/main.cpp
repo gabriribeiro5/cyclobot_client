@@ -10,7 +10,7 @@
 #include "../include/core_states/update/CodeUpdateState.h"
 #include "../include/core_states/simulation/SimulationState.h"
 #include "../include/core_states/simulation/strategy/gardening/trad_garden/TG_Water.h"
-#include "../include/config/PeripheralMapping.h"
+#include "../include/config/BaseMapping.h"
 #include "../include/Context.h"
 
 // Create state machine
@@ -18,8 +18,8 @@ BaseState *idleStatePtr = new IdleState();
 FiniteStateMachine cyclobot(idleStatePtr);
 
 // Extra serial port for wifi
-SoftwareSerial esp8266(cyclobot.paramPtr->peripheralMappingPtr->wifiEspRX,
-                       cyclobot.paramPtr->peripheralMappingPtr->wifiEspTX); // software-based serial port to communicate with wifi module
+SoftwareSerial esp8266(cyclobot.paramPtr->BaseMappingPtr->wifiEspRX,
+                       cyclobot.paramPtr->BaseMappingPtr->wifiEspTX); // software-based serial port to communicate with wifi module
                        
 void setup() {
     Serial.begin(9600); // Enable communication over the USB serial port console 9600 Bps

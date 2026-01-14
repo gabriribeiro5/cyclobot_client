@@ -147,7 +147,7 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 - [x] doc(README): shorten introduction
 - [x] doc(TODO): add a bunch of tasks
 
-- [ ] refactor(PeripheralMapping): change PeripheralMapping to WIfiMapping leave "peripheral" for strategies
+- [ ] refactor(PeripheralMapping): change PeripheralMapping to BaseMapping leave "peripheral" for strategies
 
 - [ ] refactor(fsm_tools):
   - [ ] switch '/shared/cyclobot_tools' to '/fsm_tools'
@@ -162,10 +162,10 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
   - [ ] streaming with frequency control
 
 - [ ] feat(stream_sensors_data): streaming with frequency control
-  - [x] create linked lists and stream methods into /data/configData
-  - [x] create linked lists and stream methods into /data/EnvironmentData
-  - [x] create linked lists and stream methods into /data/LogData
-  - [x] create linked lists and stream methods into /data/SelfDiagnosisData
+  - [ ] create linked lists and stream methods into /data/configData
+  - [ ] create linked lists and stream methods into /data/EnvironmentData
+  - [ ] create linked lists and stream methods into /data/LogData
+  - [ ] create linked lists and stream methods into /data/SelfDiagnosisData
   - [ ] strategies must fullfill linked-lists
   - [ ] strategy runs setup_bool("name") to get struct pointer
   - [ ] strategy runs setup_int("name") to get struct pointer
