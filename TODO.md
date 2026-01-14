@@ -145,8 +145,45 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
   - [ ] Add pin layout: wiring diagrams and supported sensors/modules
 
 - [x] doc(README): shorten introduction
+- [x] doc(TODO): add a bunch of tasks
 
-- [ ] feat(editable parameters): Create external storage <EEPROM.h> for easy parameters management
+- [ ] refactor(PeripheralMapping): change PeripheralMapping to WIfiMapping leave "peripheral" for strategies
+
+- [ ] refactor(fsm_tools):
+  - [ ] switch '/shared/cyclobot_tools' to '/fsm_tools'
+  - [ ] move tool dirs into fsm_tools
+
+- [ ] refactor(strategies):
+  - [ ] remove 'shared/simulation_strategies'
+  - [ ] switch '/core-states/simulation/strategy' to '/strategy'
+  - [ ] strategy is defined in main
+
+- [ ] feat(stream_sensors_data):
+  - [ ] streaming with frequency control
+
+- [ ] feat(stream_sensors_data): streaming with frequency control
+  - [x] create linked lists and stream methods into /data/configData
+  - [x] create linked lists and stream methods into /data/EnvironmentData
+  - [x] create linked lists and stream methods into /data/LogData
+  - [x] create linked lists and stream methods into /data/SelfDiagnosisData
+  - [ ] strategies must fullfill linked-lists
+  - [ ] strategy runs setup_bool("name") to get struct pointer
+  - [ ] strategy runs setup_int("name") to get struct pointer
+  - [ ] fix(more inclusion errors): fix module references
+  - [ ] create stream_sensors_data method
+    - [ ] loops_per_sec = 20
+    - [ ] remaning_millisecs = (1sec - (now - loop_start)) / 20 #20 loops/second
+    - [ ] wait_time = remaning_millisecs / loops_per_sec
+    - [ ] if wait_time is positive, wait(stream_frames)
+    - [ ] else, raise warnig ("The streaming loop took longer than expected.")
+  - [ ] clear strategy parameters at the end of states loop
+
+
+- [ ] refactor(EcosystemParameters): move to Strategies
+  - [ ] create parameters printing method (use streaming methods)
+  - [ ] relocate EcosystemParameters printing from start to streaming stage
+
+- [ ] feat(storage): Create external storage <EEPROM.h> for easy parameters management
   - [x] Create storageManagerPtr
   - [ ] Read about EEPROM
   - [ ] Define StorageManager methods
