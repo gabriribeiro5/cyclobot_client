@@ -18,7 +18,7 @@ public:
     };
     struct Config_Int {
         char *name;
-        bool value;
+        int value;
         char *description;                 // data description (for final user - not admin or server)
         bool is_pin_value;                 // default = false
         bool user_can_see;                 // default = true
@@ -37,14 +37,14 @@ public:
 
     // Create linked-lists struct
     // Every list must end with an 's'
-    LinkedList<Config_Bool> setup_bools;
-    LinkedList<Config_Int> setup_ints;
-    LinkedList<Config_Uint8_t> setup_uint8_ts;
+    LinkedList<Config_Bool> config_bools;
+    LinkedList<Config_Int> config_ints;
+    LinkedList<Config_Uint8_t> config_uint8_ts;
     
     // Linked-lists SEARCH methods
-    Config_Bool setup_bool(char *name);
-    Config_Int setup_int(char *name);
-    Config_Uint8_t setup_uint8_t(char *name);
+    Config_Bool config_bool(char *name);
+    Config_Int config_int(char *name);
+    Config_Uint8_t config_uint8_t(char *name);
 
     
     DynamicJsonDocument config_Json;

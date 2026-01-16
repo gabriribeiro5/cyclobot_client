@@ -205,9 +205,9 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 - [ ] feat(stream_sensors_data): streaming with frequency control
   - [x] Add LinkedList library to project
   - [x] create linked lists and stream methods into /data/configData.h
-  - [ ] create stream methods into /data/configData.cpp
+  - [x] create stream methods into /data/configData.cpp
   - [x] create linked lists and stream methods into /data/EnvironmentData.h
-  - [ ] create stream methods into /data/EnvironmentData.cpp
+  - [X] create stream methods into /data/EnvironmentData.cpp
   - [ ] create linked lists and stream methods into /data/LogData.h
   - [ ] create stream methods into /data/LogData.cpp
   - [ ] create linked lists and stream methods into /data/SelfDiagnosisData.h

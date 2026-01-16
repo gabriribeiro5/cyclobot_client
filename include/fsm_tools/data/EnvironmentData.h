@@ -4,6 +4,7 @@
 
 class EnvironmentData {
     public:
+        EnvironmentData();
         // Create SENSOR structs
         struct Sensor_Bool {
             char *name;
