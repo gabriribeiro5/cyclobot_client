@@ -1,6 +1,6 @@
 #pragma once
 #include <RTClib.h>
-#include "sensor/EcosystemScanner.h"
+#include "fsm_tools/sensor/EcosystemScanner.h"
 #include "fsm_tools/actuator/EcosystemActuator.h"
 #include "fsm_tools/comm/VisualComm.h"
 

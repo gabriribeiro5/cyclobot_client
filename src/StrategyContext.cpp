@@ -5,7 +5,7 @@
 #include "../include/fsm_tools/config/EcosystemParameters.h"
 #include "../include/fsm_tools/config/DeviceParameters.h"
 #include "../include/fsm_tools/actuator/EcosystemActuator.h"
-#include "../include/sensor/EcosystemScanner.h"
+#include "../include/fsm_tools/sensor/EcosystemScanner.h"
 #include "../include/fsm_tools/comm/VisualComm.h"
 #include "../include/fsm_tools/data/ConfigData.h"
 

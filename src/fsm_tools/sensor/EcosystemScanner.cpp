@@ -1,7 +1,7 @@
 #include "Arduino.h"
-#include "../../include/sensor/EcosystemScanner.h"
-#include "../../include/fsm_tools/config/EcosystemParameters.h"
-#include "../../include/fsm_tools/comm/VisualComm.h"
+#include "../../../include/fsm_tools/sensor/EcosystemScanner.h"
+#include "../../../include/fsm_tools/config/EcosystemParameters.h"
+#include "../../../include/fsm_tools/comm/VisualComm.h"
 
 void EcosystemScanner::read_soil_moisture(EcosystemParameters *ecosystemParametersPtr, VisualComm *visualCommPtr, uint8_t soilMoistureSensor) {
     if (ecosystemParametersPtr->soilMoistureLimit > analogRead(soilMoistureSensor)) {

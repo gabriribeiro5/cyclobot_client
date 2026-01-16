@@ -1,7 +1,7 @@
 #pragma once
-#include "../fsm_tools/config/EcosystemParameters.h"
-#include "../fsm_tools/config/BaseMapping.h"
-#include "../fsm_tools/comm/VisualComm.h"
+#include "../config/EcosystemParameters.h"
+#include "../config/BaseMapping.h"
+#include "../comm/VisualComm.h"
 
 class EcosystemScanner {
     public:

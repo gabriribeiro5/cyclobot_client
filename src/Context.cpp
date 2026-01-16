@@ -5,7 +5,7 @@
 #include "../include/fsm_tools/DataInstances.h"
 #include "../include/fsm_tools/ParameterInstances.h"
 #include "../include/fsm_tools/SelfManagementInstances.h"
-#include "../include/sensor/EcosystemScanner.h"
+#include "../include/fsm_tools/sensor/EcosystemScanner.h"
 #include "../include/fsm_tools/actuator/EcosystemActuator.h"
 #include "../include/fsm_tools/self/ErrorHandler.h"
 #include "../include/util/TimeSync.h"

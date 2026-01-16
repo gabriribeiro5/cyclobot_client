@@ -2,7 +2,7 @@
 #include "../../BaseStrategy.h"
 #include "../../../fsm_tools/config/EcosystemParameters.h"
 #include "../../../fsm_tools/config/DeviceParameters.h"
-#include "../../../sensor/EcosystemScanner.h"
+#include "../../../fsm_tools/sensor/EcosystemScanner.h"
 #include "../../../fsm_tools/actuator/EcosystemActuator.h"
 #include "../../../fsm_tools/comm/VisualComm.h"
 

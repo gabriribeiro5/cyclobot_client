@@ -190,11 +190,11 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
   - [x] move '/self' into fsm_tools
   - [x] update 'include' addresses pointing to self
   - [x] update 'include' addresses at self
-  - [ ] build app
-  - [ ] move '/sensor' into fsm_tools
-  - [ ] update 'include' addresses pointing to sensor
-  - [ ] update 'include' addresses at sensor
-  - [ ] build app
+  - [x] build app
+  - [x] move '/sensor' into fsm_tools
+  - [x] update 'include' addresses pointing to sensor
+  - [x] update 'include' addresses at sensor
+  - [x] build app
 
 - [ ] refactor(dir name): 'core_states' to 'states'
 

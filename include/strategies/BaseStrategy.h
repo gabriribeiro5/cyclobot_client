@@ -13,7 +13,7 @@
 #include "../fsm_tools/data/EnvironmentData.h"
 #include "../fsm_tools/data/LogData.h"
 #include "../fsm_tools/data/SelfDiagnosisData.h"
-#include "../sensor/EcosystemScanner.h"
+#include "../fsm_tools/sensor/EcosystemScanner.h"
 #include "../fsm_tools/actuator/EcosystemActuator.h"
 
 class BaseStrategy {

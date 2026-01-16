@@ -2,7 +2,7 @@
 #include "../../../../include/strategies/vivarium/paludarium/PL_FogLightFan.h"
 #include "../../../../include/fsm_tools/config/EcosystemParameters.h"
 #include "../../../../include/fsm_tools/config/DeviceParameters.h"
-#include "../../../../include/sensor/EcosystemScanner.h"
+#include "../../../../include/fsm_tools/sensor/EcosystemScanner.h"
 #include "../../../../include/fsm_tools/actuator/EcosystemActuator.h"
 #include "../../../../include/fsm_tools/comm/VisualComm.h"
 
