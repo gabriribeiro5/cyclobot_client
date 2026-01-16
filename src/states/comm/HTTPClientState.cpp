@@ -1,5 +1,5 @@
 #include "Arduino.h"
-#include "../../../include/core_states/comm/HTTPClientState.h"
+#include "../../../include/states/comm/HTTPClientState.h"
 #include "../../../include/Context.h"
 
 // used by context.changeState

@@ -4,7 +4,7 @@
 
 DataInstances::DataInstances() {
     selfDiagnosisDataPtr = new SelfDiagnosisData();
-    configDataPtr = new ConfigData();
+    configDataPtr = new ConfigData(1024);
 };
 
 DataInstances::~DataInstances() {

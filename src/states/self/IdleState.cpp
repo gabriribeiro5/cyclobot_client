@@ -1,5 +1,5 @@
 #include "Arduino.h"
-#include "../../../include/core_states/self/IdleState.h"
+#include "../../../include/states/self/IdleState.h"
 #include "../../../include/Context.h"
 // used by context.changeState
 void IdleState::enter(FiniteStateMachine *cyclobot) {

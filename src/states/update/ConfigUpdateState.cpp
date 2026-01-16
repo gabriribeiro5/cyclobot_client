@@ -1,6 +1,6 @@
 
 #include "Arduino.h"
-#include "../../../include/core_states/update/configUpdateState.h"
+#include "../../../include/states/update/configUpdateState.h"
 #include "../../../include/fsm_tools/self/ErrorHandler.h"
 #include "../../../include/Context.h"
 

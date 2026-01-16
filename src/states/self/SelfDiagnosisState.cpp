@@ -1,6 +1,5 @@
 #include "Arduino.h"
-#include "../../../include/core_states/self/SelfDiagnosisState.h"
-#include "../../../include/util/StateTransitionException.h"
+#include "../../../include/states/self/SelfDiagnosisState.h"
 #include "../../../include/fsm_tools/self/CheckMyHealth.h"
 #include "../../../include/fsm_tools/comm/WifiComm.h"
 #include "../../../include/fsm_tools/comm/ClientComm.h"

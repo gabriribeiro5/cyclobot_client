@@ -1,5 +1,5 @@
 #include "Arduino.h"
-#include "../../../include/core_states/simulation/SimulationState.h"
+#include "../../../include/states/simulation/SimulationState.h"
 #include "../../../include/StrategyContext.h"
 #include "../../../include/Context.h"
 
@@ -66,8 +66,8 @@ void SimulationState::run_simulation(FiniteStateMachine *cyclobot) {
         cyclobot->commPtr->visualCommPtr->print_line(F("[SimulationState::run_simulation] deleting strategyContextPtr"));
         delete strategyContextPtr;
     }
-    
-    strategyContextPtr = new StrategyContext(cyclobot->simulationStrategyPtr, cyclobot->commPtr->visualCommPtr);
+
+    strategyContextPtr = new StrategyContext(cyclobot->simulationStrategyPtr, cyclobot->dataPtr->configDataPtr, cyclobot->commPtr->visualCommPtr, &cyclobot->rtc);
 
 
     if (cyclobot->paramPtr->deviceParametersPtr->firstAwakening) {

@@ -1,5 +1,5 @@
 #include "Arduino.h"
-#include "../../../include/core_states/error/ErrorHandlingState.h"
+#include "../../../include/states/error/ErrorHandlingState.h"
 #include "../../../include/Context.h"
 // used by context.changeState
 void ErrorHandlingState::enter(FiniteStateMachine *cyclobot) {

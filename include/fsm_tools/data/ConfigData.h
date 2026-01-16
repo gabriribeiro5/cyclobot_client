@@ -1,8 +1,57 @@
 #pragma once
 #include <ArduinoJson.h>
+#include <LinkedList.h>
+#include <RTCLib.h>
 
 class ConfigData {
-    public:
-        StaticJsonDocument<384> config_Json;
-        char config_Char[384];
+public:
+    explicit ConfigData(size_t capacity);
+    // Create SETUP structs
+    struct Config_Bool {
+        char *name;
+        bool value;
+        char *description;                 // data description (for final user - not admin or server)
+        bool is_pin_value;                 // default = false
+        bool user_can_see;                 // default = true
+        bool updated_by;                   // default = 0 (server communication); 1 = (user communication)
+        DateTime last_update;
+    };
+    struct Config_Int {
+        char *name;
+        bool value;
+        char *description;                 // data description (for final user - not admin or server)
+        bool is_pin_value;                 // default = false
+        bool user_can_see;                 // default = true
+        bool updated_by;                   // default = 0 (server communication); 1 = (user communication)
+        DateTime last_update;
+    };
+    struct Config_Uint8_t {
+        char *name;
+        uint8_t value;
+        char *description;                 // data description (for final user - not admin or server)
+        bool is_pin_value;                 // default = false
+        bool user_can_see;                 // default = true
+        bool updated_by;                   // default = 0 (server communication); 1 = (user communication)
+        DateTime last_update;
+    };
+
+    // Create linked-lists struct
+    // Every list must end with an 's'
+    LinkedList<Config_Bool> setup_bools;
+    LinkedList<Config_Int> setup_ints;
+    LinkedList<Config_Uint8_t> setup_uint8_ts;
+    
+    // Linked-lists SEARCH methods
+    Config_Bool setup_bool(char *name);
+    Config_Int setup_int(char *name);
+    Config_Uint8_t setup_uint8_t(char *name);
+
+    
+    DynamicJsonDocument config_Json;
+    char config_Char[sizeof(config_Json)];  // char array to hold serialized JSON
+    
+    void add_pin(char* type, char *name, bool value, char *description, bool updated_by, DateTime last_update);
+    void add_parameter(char* type, char *name, bool value, char *description, bool user_can_see, bool updated_by, DateTime last_update);
+    DynamicJsonDocument load_json();
+
 };

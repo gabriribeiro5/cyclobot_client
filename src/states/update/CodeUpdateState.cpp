@@ -1,6 +1,5 @@
 #include "Arduino.h"
-#include "../../../include/core_states/update/CodeUpdateState.h"
-#include "../../../include/util/StateTransitionException.h"
+#include "../../../include/states/update/CodeUpdateState.h"
 #include "../../../include/Context.h"
 
 // used by context.changeState

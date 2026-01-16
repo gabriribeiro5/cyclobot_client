@@ -10,55 +10,55 @@
 void PL_FogLightFan::enter(ConfigData *configDataPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtc) {
     configDataLocalPtr = configDataPtr;
     visualCommLocalPtr = visualCommPtr;
-    // configDataPtr->add_pin("uint8_t", "soilMoistureSensor", A0,
-    //                         "Sensor de umidade do solo pino A0 conectado no A0 do Arduino",
-    //                         0, rtc.now()
-    //                     );
-    // configDataPtr->add_pin("uint8_t", "irrigationSystem", A1,
-    //                         "Sensor de chuva pino A1 conectado no A1 do Arduino",
-    //                         0, rtc.now()
-    //                     );
-    // configDataPtr->add_pin("int", "relePort", 4,
-    //                         "Porta de controle do relé conectada no D4 do Arduino",
-    //                         0, rtc.now()
-    //                     );
-    // configDataPtr->add_pin("int", "soilIsWet", 0,
-    //                         "condição de solo úmido; 1 = solo umido",
-    //                         0, rtc.now()
-    //                     );
-    // configDataPtr->add_parameter("bool", "soilIsWet", 0,
-    //                             "condição de solo úmido; 1 = solo umido",
-    //                             0, 0, rtc.now());
-    // configDataPtr->add_parameter("int", "soilMoistureLimit", 500,
-    //                             "valor da tensão de comparação do sensor / valor máximo = 1024",
-    //                             0, 0, rtc.now());
-    // configDataPtr->add_parameter("int", "currentTemperature", 20,
-    //                             "valor de tensão de comparação do sensor / valor máximo = Não sei / média esperada 20 graus",
-    //                             0, 0, rtc.now());
-    // configDataPtr->add_parameter("int", "minTemperatureExpected", 18,
-    //                             "abaixo de 18 graus já é frio",
-    //                             0, 0, rtc.now());
-    // configDataPtr->add_parameter("int", "maxTemperatureExpected", 22,
-    //                             "abaixo de 22 graus já é frio",
-    //                             0, 0, rtc.now());
-    // configDataPtr->add_parameter("int", "initialWateringTimeLimit", 2000,
-    //                             "em milisegundos",
-    //                             0, 0, rtc.now());
-    // configDataPtr->add_parameter("int", "growthRate", 0,
-    //                             "em milisegundos",
-    //                             0, 0, rtc.now());
-    // configDataPtr->add_parameter("int", "decreaseRate", 0,
-    //                             "em milisegundos",
-    //                             0, 0, rtc.now());
-    // configDataPtr->add_parameter("int", "wateringTimeLimit", 3000,
-    //                             "em milisegundos",
-    //                             0, 0, rtc.now());
-    // configDataPtr->add_parameter("int", "climate", 1,
-    //                             "0 = abaixo de 18 graus; 1 = entre 18 e 22 graus; 2 = mais de 22 graus",
-    //                             0, 0, rtc.now());
-    // configDataPtr->add_parameter("bool", "sunLightAvailable", 1,
-    //                             "condição de iluminação; 1 = dia; 0 = noite",
-    //                             0, 0, rtc.now());
+    configDataPtr->add_pin("uint8_t", "soilMoistureSensor", A0,
+                            "Sensor de umidade do solo pino A0 conectado no A0 do Arduino",
+                            0, rtc->now()
+                        );
+    configDataPtr->add_pin("uint8_t", "irrigationSystem", A1,
+                            "Sensor de chuva pino A1 conectado no A1 do Arduino",
+                            0, rtc->now()
+                        );
+    configDataPtr->add_pin("int", "relePort", 4,
+                            "Porta de controle do relé conectada no D4 do Arduino",
+                            0, rtc->now()
+                        );
+    configDataPtr->add_pin("int", "soilIsWet", 0,
+                            "condição de solo úmido; 1 = solo umido",
+                            0, rtc->now()
+                        );
+    configDataPtr->add_parameter("bool", "soilIsWet", 0,
+                                "condição de solo úmido; 1 = solo umido",
+                                0, 0, rtc->now());
+    configDataPtr->add_parameter("int", "soilMoistureLimit", 500,
+                                "valor da tensão de comparação do sensor / valor máximo = 1024",
+                                0, 0, rtc->now());
+    configDataPtr->add_parameter("int", "currentTemperature", 20,
+                                "valor de tensão de comparação do sensor / valor máximo = Não sei / média esperada 20 graus",
+                                0, 0, rtc->now());
+    configDataPtr->add_parameter("int", "minTemperatureExpected", 18,
+                                "abaixo de 18 graus já é frio",
+                                0, 0, rtc->now());
+    configDataPtr->add_parameter("int", "maxTemperatureExpected", 22,
+                                "abaixo de 22 graus já é frio",
+                                0, 0, rtc->now());
+    configDataPtr->add_parameter("int", "initialWateringTimeLimit", 2000,
+                                "em milisegundos",
+                                0, 0, rtc->now());
+    configDataPtr->add_parameter("int", "growthRate", 0,
+                                "em milisegundos",
+                                0, 0, rtc->now());
+    configDataPtr->add_parameter("int", "decreaseRate", 0,
+                                "em milisegundos",
+                                0, 0, rtc->now());
+    configDataPtr->add_parameter("int", "wateringTimeLimit", 3000,
+                                "em milisegundos",
+                                0, 0, rtc->now());
+    configDataPtr->add_parameter("int", "climate", 1,
+                                "0 = abaixo de 18 graus; 1 = entre 18 e 22 graus; 2 = mais de 22 graus",
+                                0, 0, rtc->now());
+    configDataPtr->add_parameter("bool", "sunLightAvailable", 1,
+                                "condição de iluminação; 1 = dia; 0 = noite",
+                                0, 0, rtc->now());
      
     // standBy(0),
     // timeBufferMicroSec(1800000000)

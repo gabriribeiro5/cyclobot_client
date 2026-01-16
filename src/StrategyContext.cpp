@@ -9,10 +9,10 @@
 #include "../include/fsm_tools/comm/VisualComm.h"
 #include "../include/fsm_tools/data/ConfigData.h"
 
-StrategyContext::StrategyContext(BaseStrategy *simulationStrategyPtr, VisualComm *visualCommPtr) {
+StrategyContext::StrategyContext(BaseStrategy *simulationStrategyPtr, ConfigData *configDataPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtc) {
     visualCommLocalPtr = visualCommPtr;
     simulationStrategyLocalPtr = simulationStrategyPtr;
-    // simulationStrategyLocalPtr->enter(ConfigData *configDataPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtc);
+    simulationStrategyLocalPtr->enter(configDataPtr, visualCommLocalPtr, rtc);
 }
 
 void StrategyContext::setup() {

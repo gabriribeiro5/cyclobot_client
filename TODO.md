@@ -169,7 +169,7 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
   - [x] move '/config' into fsm_tools
   - [x] update 'include' addresses pointing to config
   - [x] update 'include' addresses at config (nothing to change)
-  - [ ] ...
+  - [x] ...
 
 - [x] refactor(strategies):
   - [x] backup and remove 'shared/simulation_strategies'
@@ -180,8 +180,8 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
   - [x] fix(include errors): in SimulationState
   - [x] strategy is defined in main
 
-- [ ] refactor(fsm_tools):
-  - [ ] ...
+- [x] refactor(fsm_tools):
+  - [x] ...
   - [x] build app
   - [x] move '/data' into fsm_tools
   - [x] update 'include' addresses pointing to data
@@ -195,17 +195,23 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
   - [x] update 'include' addresses pointing to sensor
   - [x] update 'include' addresses at sensor
   - [x] build app
+  - [x] move '/util' into fsm_tools
+  - [x] update 'include' addresses pointing to util
+  - [x] update 'include' addresses at util
+  - [x] build app
 
-- [ ] refactor(dir name): 'core_states' to 'states'
-
-- [ ] feat(stream_sensors_data):
-  - [ ] streaming with frequency control
+- [x] refactor(dir name): 'core_states' to 'states'
 
 - [ ] feat(stream_sensors_data): streaming with frequency control
-  - [ ] create linked lists and stream methods into /data/configData
-  - [ ] create linked lists and stream methods into /data/EnvironmentData
-  - [ ] create linked lists and stream methods into /data/LogData
-  - [ ] create linked lists and stream methods into /data/SelfDiagnosisData
+  - [x] Add LinkedList library to project
+  - [x] create linked lists and stream methods into /data/configData.h
+  - [ ] create stream methods into /data/configData.cpp
+  - [x] create linked lists and stream methods into /data/EnvironmentData.h
+  - [ ] create stream methods into /data/EnvironmentData.cpp
+  - [ ] create linked lists and stream methods into /data/LogData.h
+  - [ ] create stream methods into /data/LogData.cpp
+  - [ ] create linked lists and stream methods into /data/SelfDiagnosisData.h
+  - [ ] create stream methods into /data/SelfDiagnosisData.cpp
   - [ ] strategies must fullfill linked-lists
   - [ ] strategy runs setup_bool("name") to get struct pointer
   - [ ] strategy runs setup_int("name") to get struct pointer
