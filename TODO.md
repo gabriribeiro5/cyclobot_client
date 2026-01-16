@@ -183,18 +183,20 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 - [ ] refactor(fsm_tools):
   - [ ] ...
   - [x] build app
-  - [ ] move '/data' into fsm_tools
-  - [ ] update 'include' addresses pointing to data
-  - [ ] update 'include' addresses at data
-  - [ ] build app
-  - [ ] move '/self' into fsm_tools
-  - [ ] update 'include' addresses pointing to self
-  - [ ] update 'include' addresses at self
+  - [x] move '/data' into fsm_tools
+  - [x] update 'include' addresses pointing to data
+  - [x] update 'include' addresses at data
+  - [x] build app
+  - [x] move '/self' into fsm_tools
+  - [x] update 'include' addresses pointing to self
+  - [x] update 'include' addresses at self
   - [ ] build app
   - [ ] move '/sensor' into fsm_tools
   - [ ] update 'include' addresses pointing to sensor
   - [ ] update 'include' addresses at sensor
   - [ ] build app
+
+- [ ] refactor(dir name): 'core_states' to 'states'
 
 - [ ] feat(stream_sensors_data):
   - [ ] streaming with frequency control

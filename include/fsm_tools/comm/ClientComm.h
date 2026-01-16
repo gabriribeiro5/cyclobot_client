@@ -5,8 +5,8 @@
 #include "../../fsm_tools/config/WifiParameters.h"
 #include "../../fsm_tools/config/DeviceParameters.h"
 #include "../../fsm_tools/config/EcosystemParameters.h"
-#include "../../data/SelfDiagnosisData.h"
-#include "../../data/ConfigData.h"
+#include "../../fsm_tools/data/SelfDiagnosisData.h"
+#include "../../fsm_tools/data/ConfigData.h"
 #include "./VisualComm.h"
 
 class ClientComm {

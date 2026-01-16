@@ -1,7 +1,7 @@
 
 #include "Arduino.h"
 #include "../../../include/core_states/update/configUpdateState.h"
-#include "../../../include/self/ErrorHandler.h"
+#include "../../../include/fsm_tools/self/ErrorHandler.h"
 #include "../../../include/Context.h"
 
 // used by context.changeState

@@ -1,6 +1,6 @@
 #pragma once
-#include "../fsm_tools/config/ErrorHandlingParameters.h"
-#include "../fsm_tools/comm/VisualComm.h"
+#include "../config/ErrorHandlingParameters.h"
+#include "../comm/VisualComm.h"
 
 class ErrorHandler {
     public:

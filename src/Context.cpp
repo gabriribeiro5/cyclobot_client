@@ -7,7 +7,7 @@
 #include "../include/fsm_tools/SelfManagementInstances.h"
 #include "../include/sensor/EcosystemScanner.h"
 #include "../include/fsm_tools/actuator/EcosystemActuator.h"
-#include "../include/self/ErrorHandler.h"
+#include "../include/fsm_tools/self/ErrorHandler.h"
 #include "../include/util/TimeSync.h"
 
 extern unsigned int __bss_end;   // Symbol marking the end of the .bss section (static & global variables in RAM).

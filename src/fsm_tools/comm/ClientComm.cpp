@@ -9,8 +9,8 @@
 #include "../../../include/fsm_tools/config/WifiParameters.h"
 #include "../../../../include/fsm_tools/config/DeviceParameters.h"
 #include "../../../../include/fsm_tools/config/EcosystemParameters.h"
-#include "../../../include/data/SelfDiagnosisData.h"
-#include "../../../include/data/ConfigData.h"
+#include "../../../include/fsm_tools/data/SelfDiagnosisData.h"
+#include "../../../include/fsm_tools/data/ConfigData.h"
 #include "../../../include/Context.h"
 
 void ClientComm::trace_server(ClientParameters *clientParametersPtr, WifiParameters *wifiParametersPtr, VisualComm *visualCommPtr) {

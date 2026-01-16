@@ -1,7 +1,7 @@
 #pragma once
 #include "../BaseState.h"
 #include "../../Context.h"
-#include "../../self/ErrorHandler.h"
+#include "../../fsm_tools/self/ErrorHandler.h"
 class FiniteStateMacine; // Forward declaration
 
 class ConfigUpdateState : public BaseState {

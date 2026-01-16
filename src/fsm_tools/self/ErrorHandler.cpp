@@ -1,7 +1,7 @@
 #include "Arduino.h"
-#include "../../include/self/ErrorHandler.h"
-#include "../../include/fsm_tools/config/ErrorHandlingParameters.h"
-#include "../../include/fsm_tools/comm/VisualComm.h"
+#include "../../../include/fsm_tools/self/ErrorHandler.h"
+#include "../../../include/fsm_tools/config/ErrorHandlingParameters.h"
+#include "../../../include/fsm_tools/comm/VisualComm.h"
 
 void ErrorHandler::log_error_msg(ErrorHandlingParameters *errorHandlingParametersPtr, VisualComm *visualCommPtr, const char *className, const char *methodName, int errorType, const char *errorMsg) {
     errorHandlingParametersPtr->errorClass = className;

@@ -1,7 +1,7 @@
 #pragma once
-#include "../self/ErrorHandler.h"
-#include "../self/CheckMyHealth.h"
-#include "../self/StorageManager.h"
+#include "../fsm_tools/self/ErrorHandler.h"
+#include "../fsm_tools/self/CheckMyHealth.h"
+#include "../fsm_tools/self/StorageManager.h"
 
 class SelfManagementInstances {
     public:

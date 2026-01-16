@@ -1,6 +1,6 @@
 #pragma once
-#include "../data/SelfDiagnosisData.h"
-#include "../data/ConfigData.h"
+#include "../fsm_tools/data/SelfDiagnosisData.h"
+#include "../fsm_tools/data/ConfigData.h"
 
 class DataInstances {
     public:

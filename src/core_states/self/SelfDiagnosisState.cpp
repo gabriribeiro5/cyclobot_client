@@ -1,9 +1,9 @@
 #include "Arduino.h"
 #include "../../../include/core_states/self/SelfDiagnosisState.h"
 #include "../../../include/util/StateTransitionException.h"
-#include "../../../include/self/CheckMyHealth.h"
-#include "../../../include/fsm_tools/comm//WifiComm.h"
-#include "../../../include/fsm_tools/comm//ClientComm.h"
+#include "../../../include/fsm_tools/self/CheckMyHealth.h"
+#include "../../../include/fsm_tools/comm/WifiComm.h"
+#include "../../../include/fsm_tools/comm/ClientComm.h"
 #include "../../../include/Context.h"
 
 // used by context.changeState

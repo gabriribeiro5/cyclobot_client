@@ -7,7 +7,7 @@
 #include "../include/fsm_tools/actuator/EcosystemActuator.h"
 #include "../include/sensor/EcosystemScanner.h"
 #include "../include/fsm_tools/comm/VisualComm.h"
-#include "../include/data/ConfigData.h"
+#include "../include/fsm_tools/data/ConfigData.h"
 
 StrategyContext::StrategyContext(BaseStrategy *simulationStrategyPtr, VisualComm *visualCommPtr) {
     visualCommLocalPtr = visualCommPtr;

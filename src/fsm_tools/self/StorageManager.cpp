@@ -1,7 +1,7 @@
 #include "Arduino.h"
 #include "EEPROM.h"
-#include "../../include/self/StorageManager.h"
-#include "../../include/fsm_tools/comm//VisualComm.h"
+#include "../../../include/fsm_tools/self/StorageManager.h"
+#include "../../../include/fsm_tools/comm/VisualComm.h"
 
 StorageManager::StorageManager() {};
 StorageManager::~StorageManager() {};
