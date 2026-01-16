@@ -1,7 +1,6 @@
 #include <Arduino.h>
 #include "../include/Context.h"
 #include "../include/core_states/BaseState.h"
-#include "../include/core_states/simulation/strategy/BaseStrategy.h"
 #include "../include/fsm_tools/CommunicationInstances.h"
 #include "../include/fsm_tools/DataInstances.h"
 #include "../include/fsm_tools/ParameterInstances.h"

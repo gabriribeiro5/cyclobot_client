@@ -1,7 +1,7 @@
 #pragma once
 #include <RTClib.h>
 #include "core_states/BaseState.h"
-#include "core_states/simulation/strategy/BaseStrategy.h"
+#include "strategies/BaseStrategy.h"
 #include "fsm_tools/CommunicationInstances.h"
 #include "fsm_tools/DataInstances.h"
 #include "fsm_tools/ParameterInstances.h"

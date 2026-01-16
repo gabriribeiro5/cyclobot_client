@@ -6,11 +6,11 @@
 #include "../include/core_states/self/IdleState.h"
 #include "../include/core_states/self/SelfDiagnosisState.h"
 #include "../include/core_states/comm/HTTPClientState.h"
-#include "../include/core_states/update/ConfigUpdateState.h"
+#include "../include/core_states/update/configUpdateState.h"
 #include "../include/core_states/update/CodeUpdateState.h"
 #include "../include/core_states/simulation/SimulationState.h"
-#include "../include/core_states/simulation/strategy/gardening/trad_garden/TG_Water.h"
-#include "../include/config/BaseMapping.h"
+#include "../include/strategies/vivarium/paludarium/PL_FogLightFan.h"
+#include "../include/fsm_tools/config/BaseMapping.h"
 #include "../include/Context.h"
 
 // Create state machine
@@ -51,7 +51,7 @@ void setup() {
     // cyclobot.commPtr->visualCommPtr->print_line(cyclobot.now.second());
     
     cyclobot.commPtr->visualCommPtr->print_line(F("[main::setup] setting simulation strategy"));
-    cyclobot.simulationStrategyPtr = new TG_Water();
+    cyclobot.simulationStrategyPtr = new PL_FogLightFan();
     
     // cyclobot.commPtr->visualCommPtr->print_line(F("[main::setup] initializing WiFi module"));
     WiFi.init(&esp8266);

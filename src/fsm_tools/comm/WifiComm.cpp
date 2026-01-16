@@ -5,7 +5,7 @@
 #include <SoftwareSerial.h>
 #include "../../../include/fsm_tools/comm/WifiComm.h"
 #include "../../../include/fsm_tools/comm/VisualComm.h"
-#include "../../../include/config/WifiParameters.h"
+#include "../../../include/fsm_tools/config/WifiParameters.h"
 #include "../../../include/Context.h"
 
 void WifiComm::print_wifi_status(VisualComm *visualCommPtr) {

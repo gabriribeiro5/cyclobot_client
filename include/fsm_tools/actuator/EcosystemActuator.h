@@ -1,6 +1,6 @@
 #pragma once
-#include "../../config/EcosystemParameters.h"
-#include "../../config/BaseMapping.h"
+#include "../../fsm_tools/config/EcosystemParameters.h"
+#include "../../fsm_tools/config/BaseMapping.h"
 #include "../../fsm_tools/comm/VisualComm.h"
 
 class EcosystemActuator {

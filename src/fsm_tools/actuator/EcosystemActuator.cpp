@@ -1,6 +1,6 @@
 #include "../../../include/fsm_tools/actuator/EcosystemActuator.h"
-#include "../../../include/config/EcosystemParameters.h"
-#include "../../../include/config/BaseMapping.h"
+#include "../../../../include/fsm_tools/config/EcosystemParameters.h"
+#include "../../../../include/fsm_tools/config/BaseMapping.h"
 #include "../../../include/fsm_tools/comm/VisualComm.h"
 
 void EcosystemActuator::increase_water_nutrients(EcosystemParameters *ecosystemParametersPtr, VisualComm *visualCommPtr) {

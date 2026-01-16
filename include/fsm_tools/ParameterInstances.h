@@ -1,10 +1,10 @@
 #pragma once
-#include "../config/DeviceParameters.h"
-#include "../config/ErrorHandlingParameters.h"
-#include "../config/WifiParameters.h"
-#include "../config/ClientParameters.h"
-#include "../config/EcosystemParameters.h"
-#include "../config/BaseMapping.h"
+#include "../fsm_tools/config/DeviceParameters.h"
+#include "../fsm_tools/config/ErrorHandlingParameters.h"
+#include "../fsm_tools/config/WifiParameters.h"
+#include "../fsm_tools/config/ClientParameters.h"
+#include "../fsm_tools/config/EcosystemParameters.h"
+#include "../fsm_tools/config/BaseMapping.h"
 
 class ParameterInstances {
     public:

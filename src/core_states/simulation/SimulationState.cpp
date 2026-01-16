@@ -1,6 +1,6 @@
 #include "Arduino.h"
 #include "../../../include/core_states/simulation/SimulationState.h"
-#include "../../../include/core_states/simulation/SimStrategy.h"
+#include "../../../include/StrategyContext.h"
 #include "../../../include/Context.h"
 
 // used by context.changeState
@@ -62,17 +62,17 @@ void SimulationState::session_stop(FiniteStateMachine *cyclobot) {
 // sim
 void SimulationState::run_simulation(FiniteStateMachine *cyclobot) {
     cyclobot->commPtr->visualCommPtr->print_line(F("[SimulationState::run_simulation] running..."));
-    if (simStrategyPtr) {
-        cyclobot->commPtr->visualCommPtr->print_line(F("[SimulationState::run_simulation] deleting simStrategyPtr"));
-        delete simStrategyPtr;
+    if (strategyContextPtr) {
+        cyclobot->commPtr->visualCommPtr->print_line(F("[SimulationState::run_simulation] deleting strategyContextPtr"));
+        delete strategyContextPtr;
     }
     
-    simStrategyPtr = new SimStrategy(cyclobot->simulationStrategyPtr);
+    strategyContextPtr = new StrategyContext(cyclobot->simulationStrategyPtr, cyclobot->commPtr->visualCommPtr);
 
 
     if (cyclobot->paramPtr->deviceParametersPtr->firstAwakening) {
         cyclobot->commPtr->visualCommPtr->print_line(F("[SimulationState::run_simulation] calling pin setup method"));
-        simStrategyPtr->setup(cyclobot->commPtr->visualCommPtr);
+        strategyContextPtr->setup();
         cyclobot->commPtr->visualCommPtr->print_line(F("[SimulationState::run_simulation] pin setup method completed"));
         cyclobot->paramPtr->deviceParametersPtr->firstAwakening = false;
         cyclobot->commPtr->visualCommPtr->print_line(F("[SimulationState::run_simulation] firstAwakening set to false"));
@@ -82,10 +82,9 @@ void SimulationState::run_simulation(FiniteStateMachine *cyclobot) {
     // cyclobot->paramPtr->ecosystemParametersPtr->eventStart = cyclobot->rtc.now();
     cyclobot->commPtr->visualCommPtr->print(F("[SimulationState::run_simulation] starting simulation at "));
     cyclobot->commPtr->visualCommPtr->print_line(cyclobot->paramPtr->ecosystemParametersPtr->eventStart.timestamp());
-    simStrategyPtr->simulate_ecosystem(cyclobot->paramPtr->ecosystemParametersPtr,
-                                        cyclobot->scannerPtr,
-                                        cyclobot->actuatorPtr,
-                                        cyclobot->commPtr->visualCommPtr);
+    strategyContextPtr->simulate_ecosystem(cyclobot->scannerPtr,
+                                            cyclobot->actuatorPtr,
+                                            &cyclobot->rtc);
     cyclobot->commPtr->visualCommPtr->print(F("[SimulationState::run_simulation] simulation finished at "));
     // cyclobot->paramPtr->ecosystemParametersPtr->eventEnd = cyclobot->rtc.now();
     cyclobot->commPtr->visualCommPtr->print_line(cyclobot->paramPtr->ecosystemParametersPtr->eventEnd.timestamp());    
@@ -105,13 +104,13 @@ void SimulationState::take_a_nap(FiniteStateMachine *cyclobot) {
 
 // constructor
 SimulationState::SimulationState() {
-    simStrategyPtr = nullptr;
+    strategyContextPtr = nullptr;
 };
 
 // destructor
 SimulationState::~SimulationState() {
-    if (simStrategyPtr) {
-        delete simStrategyPtr;
-        simStrategyPtr = nullptr;
+    if (strategyContextPtr) {
+        delete strategyContextPtr;
+        strategyContextPtr = nullptr;
     }
 };

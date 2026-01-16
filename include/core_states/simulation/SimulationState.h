@@ -1,7 +1,7 @@
 #pragma once
 #include "../BaseState.h"
 #include "../../Context.h"
-#include "../../core_states/simulation/SimStrategy.h"
+#include "../../StrategyContext.h"
 class FiniteStateMachine; // Forward declaration
 
 class SimulationState : public BaseState {
@@ -45,5 +45,5 @@ public:
     ~SimulationState();
 
 private:
-    SimStrategy *simStrategyPtr;
+    StrategyContext *strategyContextPtr;
 };

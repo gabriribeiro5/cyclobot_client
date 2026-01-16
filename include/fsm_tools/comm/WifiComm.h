@@ -2,7 +2,7 @@
 #include "Arduino.h"
 #include <WiFiEsp.h>
 #include <SoftwareSerial.h>
-#include "../../config/WifiParameters.h"
+#include "../../fsm_tools/config/WifiParameters.h"
 #include "VisualComm.h"
 
 class WifiComm {

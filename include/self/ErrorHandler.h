@@ -1,5 +1,5 @@
 #pragma once
-#include "../config/ErrorHandlingParameters.h"
+#include "../fsm_tools/config/ErrorHandlingParameters.h"
 #include "../fsm_tools/comm/VisualComm.h"
 
 class ErrorHandler {

@@ -1,10 +1,10 @@
 #include "../include/fsm_tools/ParameterInstances.h"
-#include "../include/config/DeviceParameters.h"
-#include "../include/config/ErrorHandlingParameters.h"
-#include "../include/config/WifiParameters.h"
-#include "../include/config/ClientParameters.h"
-#include "../include/config/EcosystemParameters.h"
-#include "../include/config/BaseMapping.h"
+#include "../include/fsm_tools/config/DeviceParameters.h"
+#include "../include/fsm_tools/config/ErrorHandlingParameters.h"
+#include "../include/fsm_tools/config/WifiParameters.h"
+#include "../include/fsm_tools/config/ClientParameters.h"
+#include "../include/fsm_tools/config/EcosystemParameters.h"
+#include "../include/fsm_tools/config/BaseMapping.h"
 #include <Arduino.h>
 
 ParameterInstances::ParameterInstances() {

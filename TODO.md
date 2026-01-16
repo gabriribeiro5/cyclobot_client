@@ -166,10 +166,23 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
   - [x] update 'include' addresses pointing to comm
   - [x] update 'include' addresses at comm
   - [x] build app
-  - [ ] move '/config' into fsm_tools
-  - [ ] update 'include' addresses pointing to config
-  - [ ] update 'include' addresses at config
-  - [ ] build app
+  - [x] move '/config' into fsm_tools
+  - [x] update 'include' addresses pointing to config
+  - [x] update 'include' addresses at config (nothing to change)
+  - [ ] ...
+
+- [x] refactor(strategies):
+  - [x] backup and remove 'shared/simulation_strategies'
+  - [x] remove '/core-states/simulation/strategy'
+  - [x] create 'StrategyContext'
+  - [x] create 'BaseStrategy'
+  - [x] create '/strategies'
+  - [x] fix(include errors): in SimulationState
+  - [x] strategy is defined in main
+
+- [ ] refactor(fsm_tools):
+  - [ ] ...
+  - [x] build app
   - [ ] move '/data' into fsm_tools
   - [ ] update 'include' addresses pointing to data
   - [ ] update 'include' addresses at data
@@ -182,11 +195,6 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
   - [ ] update 'include' addresses pointing to sensor
   - [ ] update 'include' addresses at sensor
   - [ ] build app
-
-- [ ] refactor(strategies):
-  - [ ] remove 'shared/simulation_strategies'
-  - [ ] switch '/core-states/simulation/strategy' to '/strategies'
-  - [ ] strategy is defined in main
 
 - [ ] feat(stream_sensors_data):
   - [ ] streaming with frequency control

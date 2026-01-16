@@ -4,7 +4,7 @@
 #include "../../include/fsm_tools/comm//ClientComm.h"
 #include "../../include/fsm_tools/comm//WifiComm.h"
 #include "../../include/fsm_tools/comm//VisualComm.h"
-#include "../../include/config/WifiParameters.h"
+#include "../../include/fsm_tools/config/WifiParameters.h"
 #include "../../include/data/SelfDiagnosisData.h"
 
 bool CheckMyHealth::wifi_shield_is_on(WifiParameters *wifiParametersPtr, VisualComm *visualCommPtr) {

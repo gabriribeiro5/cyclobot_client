@@ -1,10 +1,10 @@
 #pragma once
 #include <Arduino.h>
 #include <WiFiEsp.h>
-#include "../../config/ClientParameters.h"
-#include "../../config/WifiParameters.h"
-#include "../../config/DeviceParameters.h"
-#include "../../config/EcosystemParameters.h"
+#include "../../fsm_tools/config/ClientParameters.h"
+#include "../../fsm_tools/config/WifiParameters.h"
+#include "../../fsm_tools/config/DeviceParameters.h"
+#include "../../fsm_tools/config/EcosystemParameters.h"
 #include "../../data/SelfDiagnosisData.h"
 #include "../../data/ConfigData.h"
 #include "./VisualComm.h"
