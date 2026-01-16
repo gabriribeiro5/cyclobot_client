@@ -208,14 +208,13 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
   - [x] create stream methods into /data/configData.cpp
   - [x] create linked lists and stream methods into /data/EnvironmentData.h
   - [X] create stream methods into /data/EnvironmentData.cpp
-  - [ ] create linked lists and stream methods into /data/LogData.h
-  - [ ] create stream methods into /data/LogData.cpp
+  - [x] create linked lists and stream methods into /data/LogData.h
+  - [x] create stream methods into /data/LogData.cpp
   - [ ] create linked lists and stream methods into /data/SelfDiagnosisData.h
   - [ ] create stream methods into /data/SelfDiagnosisData.cpp
   - [ ] strategies must fullfill linked-lists
   - [ ] strategy runs setup_bool("name") to get struct pointer
   - [ ] strategy runs setup_int("name") to get struct pointer
-  - [ ] fix(more inclusion errors): fix module references
   - [ ] create stream_sensors_data method
     - [ ] loops_per_sec = 20
     - [ ] remaning_millisecs = (1sec - (now - loop_start)) / 20 #20 loops/second
