@@ -13,39 +13,45 @@ ConfigData::ConfigData(size_t capacity)
 // SETUP
 ConfigData::Config_Bool ConfigData::config_bool(char *name)
 {
-    for (int i = 0; i < sizeof(config_bool); i++)
+    for (int i = 0; i < config_bools.size(); i++)
     {
         Config_Bool item = config_bools.get(i);
-        if (item.name == name)
+        if (strcmp(item.name, name) == 0)   // compare string contents
         {
             return item;
         };
     };
-    return;
+    // Return a "null" object if not found
+    Config_Bool empty = { nullptr, false, nullptr, false, false, false, DateTime() };
+    return empty;
 };
 ConfigData::Config_Int ConfigData::config_int(char *name)
 {
-    for (int i = 0; i < sizeof(config_int); i++)
+    for (int i = 0; i < config_ints.size(); i++)
     {
         Config_Int item = config_ints.get(i);
-        if (item.name == name)
+        if (strcmp(item.name, name) == 0)   // compare string contents
         {
             return item;
         }
     }
-    return;
+    // Return a "null" object if not found
+    Config_Int empty = { nullptr, false, nullptr, false, false, false, DateTime() };
+    return empty;
 };
 ConfigData::Config_Uint8_t ConfigData::config_uint8_t(char *name)
 {
-    for (int i = 0; i < sizeof(config_uint8_t); i++)
+    for (int i = 0; i < config_uint8_ts.size(); i++)
     {
         Config_Uint8_t item = config_uint8_ts.get(i);
-        if (item.name == name)
+        if (strcmp(item.name, name) == 0)   // compare string contents
         {
             return item;
         }
     }
-    return;
+    // Return a "null" object if not found
+    Config_Uint8_t empty = { nullptr, false, nullptr, false, false, false, DateTime() };
+    return empty;
 };
 
 /************************ INSERT METHODS ************************/

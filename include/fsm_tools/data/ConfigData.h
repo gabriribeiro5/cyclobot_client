@@ -5,7 +5,7 @@
 
 class ConfigData {
 public:
-    explicit ConfigData(size_t capacity);
+    ConfigData(size_t capacity);
     // Create SETUP structs
     struct Config_Bool {
         char *name;

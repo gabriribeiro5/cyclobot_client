@@ -11,27 +11,47 @@ EnvironmentData::EnvironmentData()
 // SETUP
 EnvironmentData::Sensor_Bool EnvironmentData::sensor_bool(char *name)
 {
-    for (int i = 0; i < sizeof(sensor_bool); i++)
+    for (int i = 0; i < sensor_bools.size(); i++)
     {
         Sensor_Bool item = sensor_bools.get(i);
-        if (item.name == name)
+        if (strcmp(item.name, name) == 0)   // compare string contents
         {
             return item;
         };
     };
-    return;
+    // Return a safe "empty" object if not found
+    Sensor_Bool empty = {
+        nullptr,        // name
+        false,          // value
+        nullptr,        // description
+        false,          // is_pin_value (or whatever fields you have)
+        false,          // user_can_see
+        false,          // updated_by
+        DateTime()      // last_update
+    };
+    return empty;
 };
 EnvironmentData::Sensor_Int EnvironmentData::sensor_int(char *name)
 {
-    for (int i = 0; i < sizeof(sensor_int); i++)
+    for (int i = 0; i < sensor_ints.size(); i++)
     {
         Sensor_Int item = sensor_ints.get(i);
-        if (item.name == name)
+        if (strcmp(item.name, name) == 0)   // compare string contents
         {
             return item;
         }
     }
-    return;
+    // Return a safe "empty" object if not found
+    Sensor_Int   empty = {
+        nullptr,        // name
+        false,          // value
+        nullptr,        // description
+        false,          // is_pin_value (or whatever fields you have)
+        false,          // user_can_see
+        false,          // updated_by
+        DateTime()      // last_update
+    };
+    return empty;
 };
 
 /************************ INSERT METHODS ************************/

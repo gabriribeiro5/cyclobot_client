@@ -210,9 +210,10 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
   - [X] create stream methods into /data/EnvironmentData.cpp
   - [x] create linked lists and stream methods into /data/LogData.h
   - [x] create stream methods into /data/LogData.cpp
-  - [ ] create linked lists and stream methods into /data/SelfDiagnosisData.h
-  - [ ] create stream methods into /data/SelfDiagnosisData.cpp
-  - [ ] strategies must fullfill linked-lists
+  - [x] create linked lists and stream methods into /data/SelfDiagnosisData.h
+  - [x] create stream methods into /data/SelfDiagnosisData.cpp
+  - [x] fix(DynamicJsonDocument): new reference
+  - [x] strategies must fullfill linked-lists
   - [ ] strategy runs setup_bool("name") to get struct pointer
   - [ ] strategy runs setup_int("name") to get struct pointer
   - [ ] create stream_sensors_data method
@@ -223,6 +224,11 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
     - [ ] else, raise warnig ("The streaming loop took longer than expected.")
   - [ ] clear strategy parameters at the end of states loop
 
+- [ ] feat(modular strategy): split functions
+  - [ ] Create json structures to simplify data definition
+  - [ ] automate LinkedLists.add() call, so strategies don't need to worry about it
+
+- [ ] refactor(SelfDiagnostic): use LinkedLists instead of single vars
 
 - [ ] refactor(EcosystemParameters): move to Strategies
   - [ ] create parameters printing method (use streaming methods)
