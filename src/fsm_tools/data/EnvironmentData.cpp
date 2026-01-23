@@ -3,17 +3,17 @@
 #include <RTCLib.h>
 EnvironmentData::EnvironmentData()
 {
-    sensor_bools = LinkedList<Sensor_Bool>();
-    sensor_ints = LinkedList<Sensor_Int>();
+    sensor_bool_list = LinkedList<Sensor_Bool>();
+    sensor_int_list = LinkedList<Sensor_Int>();
 };
 
 /************************ SEARCH METHODS ************************/
 // SETUP
 EnvironmentData::Sensor_Bool EnvironmentData::sensor_bool(char *name)
 {
-    for (int i = 0; i < sensor_bools.size(); i++)
+    for (int i = 0; i < sensor_bool_list.size(); i++)
     {
-        Sensor_Bool item = sensor_bools.get(i);
+        Sensor_Bool item = sensor_bool_list.get(i);
         if (strcmp(item.name, name) == 0)   // compare string contents
         {
             return item;
@@ -33,9 +33,9 @@ EnvironmentData::Sensor_Bool EnvironmentData::sensor_bool(char *name)
 };
 EnvironmentData::Sensor_Int EnvironmentData::sensor_int(char *name)
 {
-    for (int i = 0; i < sensor_ints.size(); i++)
+    for (int i = 0; i < sensor_int_list.size(); i++)
     {
-        Sensor_Int item = sensor_ints.get(i);
+        Sensor_Int item = sensor_int_list.get(i);
         if (strcmp(item.name, name) == 0)   // compare string contents
         {
             return item;
@@ -75,7 +75,7 @@ void EnvironmentData::add(char* type,
             send_now,
             last_update
         };
-        sensor_bools.add(new_bool);
+        sensor_bool_list.add(new_bool);
     };
     if (type == "int") {
         Sensor_Int new_int = {
@@ -87,7 +87,7 @@ void EnvironmentData::add(char* type,
             send_now,
             last_update
         };
-        sensor_ints.add(new_int);
+        sensor_int_list.add(new_int);
     };
 };
 

@@ -5,7 +5,7 @@
 
 class EcosystemScanner {
     public:
-        void read_soil_moisture(EcosystemParameters *ecosystemParametersPtr, VisualComm *visualCommPtr, uint8_t soilMoistureSensor);
+        void read_soil_moisture(VisualComm *visualCommPtr, uint8_t soilMoistureSensor);
         void read_water_pressure(EcosystemParameters *ecosystemParametersPtr, VisualComm *visualCommPtr);
         void read_temperature(EcosystemParameters *ecosystemParametersPtr, VisualComm *visualCommPtr, uint8_t temperatureSensor);
         void read_brightness(EcosystemParameters *ecosystemParametersPtr, VisualComm *visualCommPtr);

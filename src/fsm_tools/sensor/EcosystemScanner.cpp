@@ -3,10 +3,11 @@
 #include "../../../include/fsm_tools/config/EcosystemParameters.h"
 #include "../../../include/fsm_tools/comm/VisualComm.h"
 
-void EcosystemScanner::read_soil_moisture(EcosystemParameters *ecosystemParametersPtr, VisualComm *visualCommPtr, uint8_t soilMoistureSensor) {
-    if (ecosystemParametersPtr->soilMoistureLimit > analogRead(soilMoistureSensor)) {
-        ecosystemParametersPtr->soilIsWet = true;
-    };
+void EcosystemScanner::read_soil_moisture(VisualComm *visualCommPtr, uint8_t soilMoistureSensor) {
+    // if (ecosystemParametersPtr->soilMoistureLimit > analogRead(soilMoistureSensor)) {
+    //     ecosystemParametersPtr->soilIsWet = true;
+    // };
+    return;
 }
 
 void EcosystemScanner::read_water_pressure(EcosystemParameters *ecosystemParametersPtr, VisualComm *visualCommPtr) {

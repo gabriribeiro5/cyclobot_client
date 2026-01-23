@@ -214,8 +214,10 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
   - [x] create stream methods into /data/SelfDiagnosisData.cpp
   - [x] fix(DynamicJsonDocument): new reference
   - [x] strategies must fullfill linked-lists
-  - [ ] strategy runs setup_bool("name") to get struct pointer
-  - [ ] strategy runs setup_int("name") to get struct pointer
+  - [x] fix(warning): address of local variable 'item' returned [-Wreturn-local-addr] 
+  - [ ] refactor(*LocalPtr): remove local pointers
+  - [ ] strategy runs setup_bool_list("name") to get struct pointer
+  - [ ] strategy runs setup_int_list("name") to get struct pointer
   - [ ] create stream_sensors_data method
     - [ ] loops_per_sec = 20
     - [ ] remaning_millisecs = (1sec - (now - loop_start)) / 20 #20 loops/second
@@ -224,6 +226,10 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
     - [ ] else, raise warnig ("The streaming loop took longer than expected.")
   - [ ] clear strategy parameters at the end of states loop
 
+- [ ] refactor(config): clear directory
+  - [ ] remove EcosystemParameters
+  - [ ] remove EEPROMStruct
+  
 - [ ] feat(modular strategy): split functions
   - [ ] Create json structures to simplify data definition
   - [ ] automate LinkedLists.add() call, so strategies don't need to worry about it

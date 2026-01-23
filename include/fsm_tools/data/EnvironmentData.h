@@ -27,8 +27,8 @@ class EnvironmentData {
 
         // Create linked-lists struct
         // Every list must end with an 's'
-        LinkedList<Sensor_Bool> sensor_bools;
-        LinkedList<Sensor_Int> sensor_ints;
+        LinkedList<Sensor_Bool> sensor_bool_list;
+        LinkedList<Sensor_Int> sensor_int_list;
         
         // Linked-lists SEARCH methods
         Sensor_Bool sensor_bool(char *name);

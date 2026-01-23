@@ -4,18 +4,18 @@
 ConfigData::ConfigData(size_t capacity)
     : config_Json(capacity)
 {
-    config_bools = LinkedList<Config_Bool>();
-    config_ints = LinkedList<Config_Int>();
-    config_uint8_ts = LinkedList<Config_Uint8_t>();
+    config_bool_list = LinkedList<Config_Bool>();
+    config_int_list = LinkedList<Config_Int>();
+    config_uint8_t_list = LinkedList<Config_Uint8_t>();
 };
 
 /************************ SEARCH METHODS ************************/
 // SETUP
 ConfigData::Config_Bool ConfigData::config_bool(char *name)
 {
-    for (int i = 0; i < config_bools.size(); i++)
+    for (int i = 0; i < config_bool_list.size(); i++)
     {
-        Config_Bool item = config_bools.get(i);
+        Config_Bool item = config_bool_list.get(i);
         if (strcmp(item.name, name) == 0)   // compare string contents
         {
             return item;
@@ -27,9 +27,9 @@ ConfigData::Config_Bool ConfigData::config_bool(char *name)
 };
 ConfigData::Config_Int ConfigData::config_int(char *name)
 {
-    for (int i = 0; i < config_ints.size(); i++)
+    for (int i = 0; i < config_int_list.size(); i++)
     {
-        Config_Int item = config_ints.get(i);
+        Config_Int item = config_int_list.get(i);
         if (strcmp(item.name, name) == 0)   // compare string contents
         {
             return item;
@@ -41,9 +41,9 @@ ConfigData::Config_Int ConfigData::config_int(char *name)
 };
 ConfigData::Config_Uint8_t ConfigData::config_uint8_t(char *name)
 {
-    for (int i = 0; i < config_uint8_ts.size(); i++)
+    for (int i = 0; i < config_uint8_t_list.size(); i++)
     {
-        Config_Uint8_t item = config_uint8_ts.get(i);
+        Config_Uint8_t item = config_uint8_t_list.get(i);
         if (strcmp(item.name, name) == 0)   // compare string contents
         {
             return item;
@@ -74,7 +74,7 @@ void ConfigData::add_pin(char* type,
             false,                                    // default = true
             last_update
         };
-        config_bools.add(new_bool);
+        config_bool_list.add(new_bool);
     };
     if (type == "int") {
         Config_Int new_int = {
@@ -86,7 +86,7 @@ void ConfigData::add_pin(char* type,
             updated_by,                         // default = 0 (server communication); 1 = (user communication)
             last_update
         };
-        config_ints.add(new_int);
+        config_int_list.add(new_int);
     };
     if (type == "uint8_t") {
         Config_Uint8_t new_uint8_t = {
@@ -98,7 +98,7 @@ void ConfigData::add_pin(char* type,
             updated_by,                         // default = 0 (server communication); 1 = (user communication)
             last_update
         };
-        config_uint8_ts.add(new_uint8_t);
+        config_uint8_t_list.add(new_uint8_t);
     };
 };
 
@@ -123,7 +123,7 @@ void ConfigData::add_parameter(char* type,
             true,                               // default = true
             last_update
         };
-        config_bools.add(new_bool);
+        config_bool_list.add(new_bool);
     };
     if (type == "int") {
         Config_Int new_int = {
@@ -135,7 +135,7 @@ void ConfigData::add_parameter(char* type,
             updated_by,                         // default = 0 (server communication); 1 = (user communication)
             last_update
         };
-        config_ints.add(new_int);
+        config_int_list.add(new_int);
     };
     if (type == "uint8_t") {
         Config_Uint8_t new_uint8_t = {
@@ -147,6 +147,6 @@ void ConfigData::add_parameter(char* type,
             updated_by,                         // default = 0 (server communication); 1 = (user communication)
             last_update
         };
-        config_uint8_ts.add(new_uint8_t);
+        config_uint8_t_list.add(new_uint8_t);
     };
 };
