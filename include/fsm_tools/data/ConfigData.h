@@ -36,13 +36,12 @@ public:
     };
 
     // Create linked-lists struct
-    // Every list must end with an 's'
     LinkedList<Config_Bool> config_bool_list;
     LinkedList<Config_Int> config_int_list;
     LinkedList<Config_Uint8_t> config_uint8_t_list;
     
     // Linked-lists SEARCH methods
-    Config_Bool config_bool(char *name);
+    Config_Bool *config_bool(char *name);
     Config_Int config_int(char *name);
     Config_Uint8_t config_uint8_t(char *name);
 

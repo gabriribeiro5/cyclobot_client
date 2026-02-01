@@ -5,6 +5,8 @@
 class DataInstances {
     public:
         DataInstances();
+        DataInstances(const DataInstances&) = delete;                // forbid copy constructor
+        DataInstances& operator=(const DataInstances&) = delete;     // forbid copy assignment
         ~DataInstances();
         
         SelfDiagnosisData *selfDiagnosisDataPtr;

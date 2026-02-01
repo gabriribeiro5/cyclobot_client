@@ -14,11 +14,8 @@ class EcosystemActuator;
 
 class StrategyContext {
     public:
-        StrategyContext(BaseStrategy *simulationStrategyPtr, ConfigData *configDataPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtc);
-        void change_strategy(BaseStrategy *newStrategyPtr);
-        void setup();
-        void simulate_ecosystem(EcosystemScanner *scannerPtr, EcosystemActuator *actuatorPtr, RTC_DS3231 *rtc);
-    private:
-        BaseStrategy *simulationStrategyLocalPtr;
-        VisualComm *visualCommLocalPtr;
+        StrategyContext(ConfigData *configDataPtr, BaseStrategy *simulationStrategyPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtcPtr);
+        void change_strategy(BaseStrategy *newStrategyPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtcPtr);
+        void setup(BaseStrategy *simulationStrategyPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtcPtr);
+        void simulate_ecosystem(EcosystemScanner *scannerPtr, EcosystemActuator *actuatorPtr, BaseStrategy *simulationStrategyPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtcPtr);
 };

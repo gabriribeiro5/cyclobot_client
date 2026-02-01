@@ -8,5 +8,5 @@ DeviceParameters::DeviceParameters()
     cyclobotId.toUpperCase();
     cyclobotToken.toUpperCase();
     firstAwakening = 0;             // 0 = true
-    sleepLength = 3600000;          // 1h = 3600000 ms
+    sleepLength = 2000;          // 1h = 3600000 ms
 }

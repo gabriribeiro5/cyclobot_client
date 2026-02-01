@@ -9,26 +9,25 @@
 #include "../include/fsm_tools/comm/VisualComm.h"
 #include "../include/fsm_tools/data/ConfigData.h"
 
-StrategyContext::StrategyContext(BaseStrategy *simulationStrategyPtr, ConfigData *configDataPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtc) {
-    visualCommLocalPtr = visualCommPtr;
-    simulationStrategyLocalPtr = simulationStrategyPtr;
-    simulationStrategyLocalPtr->enter(configDataPtr, visualCommLocalPtr, rtc);
+StrategyContext::StrategyContext(ConfigData *configDataPtr, BaseStrategy *simulationStrategyPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtcPtr) {
+    visualCommPtr->print_line(F("  [StrategyContext::StrategyContext] entering StrategyContext..."));
+    simulationStrategyPtr->enter(configDataPtr, visualCommPtr, rtcPtr);
 }
 
-void StrategyContext::setup() {
-    visualCommLocalPtr->print_line(F("  [StrategyContext::setup] running..."));
+void StrategyContext::setup(BaseStrategy *simulationStrategyPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtcPtr) {
+    visualCommPtr->print_line(F("  [StrategyContext::setup] running..."));
     // parametersPtr->simulationStrategyPtr->setup();
-    visualCommLocalPtr->print_line(F("  [StrategyContext::setup] -- done --"));
+    visualCommPtr->print_line(F("  [StrategyContext::setup] -- done --"));
 }
 
-void StrategyContext::simulate_ecosystem(EcosystemScanner *environmentScanPtr, EcosystemActuator *environmentActuatorPtr, RTC_DS3231 *rtc) {
+void StrategyContext::simulate_ecosystem(EcosystemScanner *scannerPtr, EcosystemActuator *actuatorPtr, BaseStrategy *simulationStrategyPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtcPtr) {
     // parametersPtr->simulationStrategyPtr->simulate_ecosystem(environmentScanPtr, environmentActuatorPtr, rtc);
 }
 
-void StrategyContext::change_strategy(BaseStrategy *newStrategyPtr) {
+void StrategyContext::change_strategy(BaseStrategy *newStrategyPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtcPtr) {
     // get milliseconds + log start
     // parametersPtr->simulationStrategyPtr->exit();
     // parametersPtr->simulationStrategyPtr = newStrategyPtr;
-    // parametersPtr->simulationStrategyPtr->enter(parametersPtr, visualCommLocalPtr);
+    // parametersPtr->simulationStrategyPtr->enter(parametersPtr, visualCommPtr);
     // log end + execution time
 }

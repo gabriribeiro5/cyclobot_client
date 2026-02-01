@@ -32,7 +32,7 @@ class ClientParameters {
     // get_cyclobot_session_token
     StaticJsonDocument<200> loginParameters_Json;
     char loginParameters_Char[200];
-    char sessionToken;
+    const char *sessionToken;
     char *serverRawResponse;
     char *jsonStart;
     char *jsonPart;

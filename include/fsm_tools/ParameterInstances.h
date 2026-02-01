@@ -9,6 +9,8 @@
 class ParameterInstances {
     public:
         ParameterInstances();
+        ParameterInstances(const ParameterInstances&) = delete;                // forbid copy constructor
+        ParameterInstances& operator=(const ParameterInstances&) = delete;     // forbid copy assignment
         ~ParameterInstances();
         
         // -> Board Pins

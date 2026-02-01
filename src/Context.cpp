@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include "../include/Context.h"
+#include "../include/strategies/BaseStrategy.h"
 #include "../include/states/BaseState.h"
 #include "../include/fsm_tools/CommunicationInstances.h"
 #include "../include/fsm_tools/DataInstances.h"
@@ -13,24 +14,50 @@
 extern unsigned int __bss_end;   // Symbol marking the end of the .bss section (static & global variables in RAM).
 extern void *__brkval;           // Current end of the heap. NULL (0) if no malloc() has been used yet.
 
-FiniteStateMachine::FiniteStateMachine(BaseState *initialStatePtr) {
+FiniteStateMachine::FiniteStateMachine(BaseState *initialStatePtr, BaseStrategy *simStrategyPtr) {
     currentStatePtr = initialStatePtr;
-
-    // Single instance
-    scannerPtr = new EcosystemScanner();
-    actuatorPtr = new EcosystemActuator();
-
-    // Instance groups
-    paramPtr = new ParameterInstances();;
-    selfPtr = new SelfManagementInstances();
-    commPtr = new CommunicationInstances();
-    dataPtr = new DataInstances();
+    simulationStrategyPtr = simStrategyPtr;
 
     // time tracking software
     RTC_DS3231 rtc;
+    RTC_DS3231 *rtcPtr = &rtc;
+    Serial.println("RTC_DS3231 instance created");
+    Serial.flush();
 
     DateTime now;      // Track in which step we are
+    Serial.println("DateTime instance created");
+    Serial.flush();
+    
     int stateFlow = 0; // Flow stablished at the Client module and updated by States to comply client rules
+    Serial.println("stateFlow variable created");
+    Serial.flush();
+
+    // Single instance
+    scannerPtr = new EcosystemScanner();
+    Serial.println("EcosystemScanner instance created");
+    Serial.flush();
+    actuatorPtr = new EcosystemActuator();
+    Serial.println("EcosystemActuator instance created");
+    Serial.flush();
+    
+    // Instance groups
+    paramPtr = new ParameterInstances();
+    Serial.println("ParameterInstances instance created");
+    Serial.flush();
+    selfPtr = new SelfManagementInstances();
+    Serial.println("SelfManagementInstances instance created");
+    Serial.flush();
+    commPtr = new CommunicationInstances();
+    Serial.println("CommunicationInstances instance created");
+    Serial.flush();
+    dataPtr = new DataInstances();
+    Serial.println("DataInstances instance created");
+    Serial.flush();
+
+    simStrategyContextPtr = new StrategyContext(dataPtr->configDataPtr, simulationStrategyPtr, commPtr->visualCommPtr, rtcPtr);
+    Serial.println("StrategyContext instance created");
+    Serial.flush();
+
 }
 
 void FiniteStateMachine::change_state(BaseState *newStatePtr) {
@@ -109,4 +136,16 @@ void FiniteStateMachine::take_a_nap() {
     // get milliseconds + log start
     currentStatePtr->take_a_nap(this);
     // log end + execution time
+}
+
+FiniteStateMachine::~FiniteStateMachine() {
+    delete scannerPtr;
+    delete actuatorPtr;
+    delete paramPtr;
+    delete selfPtr;
+    delete commPtr;
+    delete dataPtr;
+    delete simStrategyContextPtr;
+    // only delete simulationStrategyPtr if the FSM is the *owner* and it's non-null
+    if (simulationStrategyPtr) { delete simulationStrategyPtr; }
 }

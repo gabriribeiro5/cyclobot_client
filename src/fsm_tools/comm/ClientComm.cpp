@@ -35,7 +35,7 @@ void ClientComm::trace_server(ClientParameters *clientParametersPtr, WifiParamet
       while (wifiParametersPtr->client.available() && clientParametersPtr->readingLines) {
         // get response
         clientParametersPtr->server_response_chars = wifiParametersPtr->client.read();
-        if (clientParametersPtr->server_response_chars =! "\n") {
+        if (clientParametersPtr->server_response_chars != '\n') {
           clientParametersPtr->server_response = clientParametersPtr->server_response + clientParametersPtr->server_response_chars;
         }
       }
@@ -46,15 +46,15 @@ void ClientComm::trace_server(ClientParameters *clientParametersPtr, WifiParamet
     clientParametersPtr->serverIsUp = false;
   }
 
-  // Search trace msg
-  for (unsigned int i = 0; i < sizeof(clientParametersPtr->msgTrace); i--) {
-    clientParametersPtr->server_response_line = clientParametersPtr->server_response_line + clientParametersPtr->server_response[sizeof(clientParametersPtr->msgTrace) * -1];
-  }
-  
-  if (clientParametersPtr->server_response_line == clientParametersPtr->msgTrace) {
+  // Search trace msg in response
+  if (strstr(clientParametersPtr->server_response, clientParametersPtr->msgTrace) != NULL) {
     visualCommPtr->print_line(F("    [ClientComm::trace_server] Response approved"));
     clientParametersPtr->serverIsUp = true;
-    clientParametersPtr->readingLines = false;
+  } else {
+    visualCommPtr->print_line(F("    [ClientComm::trace_server] Response does not match"));
+    visualCommPtr->print_line(F("    [ClientComm::trace_server] Response: "));
+    clientParametersPtr->serverIsUp = false;
+    visualCommPtr->print_line(clientParametersPtr->server_response);
   }
 }
 
@@ -83,7 +83,7 @@ void ClientComm::post_signature_request(ClientParameters *clientParametersPtr, W
     visualCommPtr->print_line(F("    [ClientComm::post_signature_request] Request sent"));
   }
   else {
-    visualCommPtr->print_line(F("    [ClientComm::post_signature_request] ATENTION! Client could'nt connect to server"));
+    visualCommPtr->print_line(F("    [ClientComm::post_signature_request] ATENTION! Client couldn't connect to server"));
   }
 }
 
@@ -150,7 +150,7 @@ const char *ClientComm::get_cyclobot_session_token(ClientParameters *clientParam
 
   // Extract token
   if (clientParametersPtr->responseJson.containsKey("sessionToken")) {
-    clientParametersPtr->sessionToken = clientParametersPtr->responseJson["sessionToken"].as<char>();
+    clientParametersPtr->sessionToken = clientParametersPtr->responseJson["sessionToken"].as<const char*>();
     visualCommPtr->print("[ClientComm::get_cyclobot_session_token] Token received: ");
     visualCommPtr->print_line(clientParametersPtr->sessionToken);
   } else {
@@ -221,7 +221,7 @@ void ClientComm::post_cyclobot_config(ClientParameters *clientParametersPtr, Wif
     visualCommPtr->print_line(F("    [ClientComm::post_cyclobot_config] Config sent"));
   }
   else {
-    visualCommPtr->print_line(F("    [ClientComm::post_cyclobot_config] ATENTION! Client could'nt connect to server"));
+    visualCommPtr->print_line(F("    [ClientComm::post_cyclobot_config] ATENTION! Client couldn't connect to server"));
   }
 }
 
@@ -255,7 +255,7 @@ void ClientComm::post_cyclobot_diagnosis(ClientParameters *clientParametersPtr, 
     visualCommPtr->print_line(F("    [ClientComm::post_cyclobot_diagnosis] Request sent"));
   }
   else {
-    visualCommPtr->print_line(F("    [ClientComm::post_cyclobot_diagnosis] [ATENTION] Client could'nt connect to server"));
+    visualCommPtr->print_line(F("    [ClientComm::post_cyclobot_diagnosis] [ATENTION] Client couldn't connect to server"));
   }
 }
 

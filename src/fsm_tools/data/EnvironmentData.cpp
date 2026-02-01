@@ -65,7 +65,7 @@ void EnvironmentData::add(char* type,
                             DateTime last_update
                         )
 {
-    if (type == "bool") {
+    if (strcmp(type, "bool") == 0) {
         Sensor_Bool new_bool = {
             name,
             value,
@@ -77,7 +77,7 @@ void EnvironmentData::add(char* type,
         };
         sensor_bool_list.add(new_bool);
     };
-    if (type == "int") {
+    if (strcmp(type, "int") == 0) {
         Sensor_Int new_int = {
             name,
             value,

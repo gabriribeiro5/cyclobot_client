@@ -40,10 +40,4 @@ public:
 
     // constructor
     SimulationState();
-    
-    // destructor
-    ~SimulationState();
-
-private:
-    StrategyContext *strategyContextPtr;
 };

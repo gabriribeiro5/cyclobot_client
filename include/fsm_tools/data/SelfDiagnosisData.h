@@ -74,7 +74,7 @@ public:
      * at runtime based on the actual diagnostic data requirements.
      */
     DynamicJsonDocument selfdiag_Json;
-    // char selfdiag_Char[sizeof(selfdiag_Json)];  // char array to hold serialized JSON
+    char selfdiag_Char[sizeof(selfdiag_Json)];  // char array to hold serialized JSON
     
     void add_parameter(char* type, char *name, bool value, char *description, bool user_can_see, bool updated_by, DateTime last_update);
     DynamicJsonDocument load_json();

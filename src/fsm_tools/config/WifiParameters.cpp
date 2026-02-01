@@ -7,7 +7,7 @@ WifiParameters::WifiParameters()
   networkKeyIndex(0),
 
   waitTimePerConnectionAttempt(5000),
-  maxConnectionAttempt(2),
+  maxConnectionAttempt(1),
 
   waitTimePerScanAttempt(3000),
   wifiMaxScanAttempt(2),

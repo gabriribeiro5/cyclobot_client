@@ -9,6 +9,8 @@
 class CommunicationInstances {
     public:
         CommunicationInstances();
+        CommunicationInstances(const CommunicationInstances&) = delete;                // forbid copy constructor
+        CommunicationInstances& operator=(const CommunicationInstances&) = delete;     // forbid copy assignment
         ~CommunicationInstances();
         
         WifiComm *wifiCommPtr;

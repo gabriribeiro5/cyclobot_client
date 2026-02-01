@@ -9,11 +9,7 @@
 class PL_FogLightFan : public BaseStrategy {
     public:
         void enter(ConfigData *configDataPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtc) override;
-        void setup() override;
-        void simulate_ecosystem(EcosystemScanner *scannerPtr, EcosystemActuator *actuatorPtr) override;
-        void exit() override;    
-    private:
-        VisualComm *visualCommLocalPtr;
-        ConfigData *configDataLocalPtr;
-        RTC_DS3231 *rtc;
+        void setup(ConfigData *configDataPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtc) override;
+        void simulate_ecosystem(EcosystemScanner *scannerPtr, EcosystemActuator *actuatorPtr, ConfigData *configDataPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtc) override;
+        void exit(ConfigData *configDataPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtc) override;
 };

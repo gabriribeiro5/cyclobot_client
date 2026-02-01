@@ -1,6 +1,7 @@
 #include "Arduino.h"
 #include "SoftwareSerial.h"
 #include "WiFiEsp.h"
+#include "../include/strategies/BaseStrategy.h"
 #include "../include/states/BaseState.h"
 #include "../include/states/error/ErrorHandlingState.h"
 #include "../include/states/self/IdleState.h"
@@ -13,10 +14,13 @@
 #include "../include/fsm_tools/config/BaseMapping.h"
 #include "../include/Context.h"
 
+// Define strategy
+BaseStrategy *simStrategyPtr = new PL_FogLightFan();
+
 // Create state machine
 BaseState *idleStatePtr = new IdleState();
-FiniteStateMachine cyclobot(idleStatePtr);
 
+FiniteStateMachine cyclobot(idleStatePtr, simStrategyPtr);
 // Extra serial port for wifi
 SoftwareSerial esp8266(cyclobot.paramPtr->BaseMappingPtr->wifiEspRX,
                        cyclobot.paramPtr->BaseMappingPtr->wifiEspTX); // software-based serial port to communicate with wifi module
@@ -51,7 +55,7 @@ void setup() {
     // cyclobot.commPtr->visualCommPtr->print_line(cyclobot.now.second());
     
     cyclobot.commPtr->visualCommPtr->print_line(F("[main::setup] setting simulation strategy"));
-    cyclobot.simulationStrategyPtr = new PL_FogLightFan();
+    cyclobot.simStrategyContextPtr->setup(simStrategyPtr, cyclobot.commPtr->visualCommPtr, cyclobot.rtcPtr);
     
     // cyclobot.commPtr->visualCommPtr->print_line(F("[main::setup] initializing WiFi module"));
     WiFi.init(&esp8266);

@@ -26,12 +26,8 @@ class BaseStrategy {
 
         
         virtual void enter(ConfigData *configDataPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtc) = 0;
-        virtual void setup() = 0;
-        virtual void simulate_ecosystem(EcosystemScanner *scannerPtr, EcosystemActuator *actuatorPtr) = 0;
-        virtual void exit() = 0;
-  
-    private:
-        ConfigData *configDataLocalPtr;
-        VisualComm *visualCommLocalPtr;
-        RTC_DS3231 *rtc;
+        virtual void setup(ConfigData *configDataPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtc) = 0;
+        virtual void simulate_ecosystem(EcosystemScanner *scannerPtr, EcosystemActuator *actuatorPtr, ConfigData *configDataPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtc) = 0;
+        virtual void exit(ConfigData *configDataPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtc) = 0;
+
 };

@@ -13,6 +13,13 @@
 // CycloBot Finite State Machine
 class FiniteStateMachine {
     public:
+        // time tracking software
+        RTC_DS3231 rtc;
+        RTC_DS3231 *rtcPtr = &rtc;
+
+        DateTime now;                                   // Track in which step we are
+        int stateFlow = 0;                              // Flow stablished at the Client module and updated by States to comply client rules
+
         // Instance groups
         SelfManagementInstances *selfPtr;
         CommunicationInstances *commPtr;
@@ -20,18 +27,15 @@ class FiniteStateMachine {
         DataInstances *dataPtr;
         
         // Single instance
-        BaseStrategy *simulationStrategyPtr;
         EcosystemScanner *scannerPtr;
         EcosystemActuator *actuatorPtr;
+        BaseStrategy *simulationStrategyPtr;
+        StrategyContext *simStrategyContextPtr;
 
-        // time tracking software
-        RTC_DS3231 rtc;
+        FiniteStateMachine(BaseState *initialStatePtr, BaseStrategy *simStrategyPtr); // Constructor
+        FiniteStateMachine(const FiniteStateMachine&) = delete;                      // forbid copy constructor
+        FiniteStateMachine& operator=(const FiniteStateMachine&) = delete;           // forbid copy assignment
 
-        DateTime now;      // Track in which step we are
-        int stateFlow = 0; // Flow stablished at the Client module and updated by States to comply client rules
-
-        
-        FiniteStateMachine(BaseState *initialStatePtr); // Constructor
         void change_state(BaseState *newStatePtr);
         void update_current_time();
         
@@ -62,6 +66,8 @@ class FiniteStateMachine {
         
         // self
         void take_a_nap();
+
+        ~FiniteStateMachine();
         
     private:
         BaseState *currentStatePtr;

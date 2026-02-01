@@ -3,8 +3,8 @@
 #include "../include/fsm_tools/data/ConfigData.h"
 
 DataInstances::DataInstances() {
-    selfDiagnosisDataPtr = new SelfDiagnosisData(1024);
-    configDataPtr = new ConfigData(1024);
+    selfDiagnosisDataPtr = new SelfDiagnosisData(524);
+    configDataPtr = new ConfigData(524);
 };
 
 DataInstances::~DataInstances() {

@@ -214,8 +214,28 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
   - [x] create stream methods into /data/SelfDiagnosisData.cpp
   - [x] fix(DynamicJsonDocument): new reference
   - [x] strategies must fullfill linked-lists
-  - [x] fix(warning): address of local variable 'item' returned [-Wreturn-local-addr] 
-  - [ ] refactor(*LocalPtr): remove local pointers
+  - [x] fix(warning): address of local variable 'item' returned [-Wreturn-local-addr]
+  - [x] fix(*LocalPtr): remove local pointers to get non-temporary/editable values
+  - [x] feat(LinkedList::getPtr()): add special method in third-party lib
+  - [ ] fix(memory leak): logs are breaking
+    - [ ] comment *ConfigData::config_bool(char *name)
+    - [x] find and run some code scanner (PlatformIO inspect)
+    - [x] fix(warning): Class 'FiniteStateMachine' does not have a copy constructor which is recommended since it has dynamic memory/resource allocation(s).
+      - [x] add FSM destructor
+      - [x] add 'FiniteStateMachine(const FiniteStateMachine&) = delete' (forbid copy constructor)
+      - [x] add 'FiniteStateMachine& operator=(const FiniteStateMachine&) = delete' (forbid copy assignment)
+    - [x] fix(ClientComm): use 'strstr()' to check server response
+    - [x] fix(calls to strategy methods): move strategy initialization and setup away from main loop
+      - [x] create cyclobot->simStrategyContextPtr
+      - [x] instantiate strategy context at FSM initialization (create linked lists only once)
+      - [x] run cyclobot.simStrategyContextPtr->setup in main::setup
+      - [x] run code
+      - [x] remove simulationState::strategyContextPtr
+      - [x] simState calls cyclobot->simStrategyContextPtr
+      - [x] run code
+    - [x] fix(string comparison): use strcmp() instead of '='
+    - [ ] ...
+  - [ ] feat(LinkedList::getPtr()): send pull request for third-party lib
   - [ ] strategy runs setup_bool_list("name") to get struct pointer
   - [ ] strategy runs setup_int_list("name") to get struct pointer
   - [ ] create stream_sensors_data method
@@ -225,6 +245,9 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
     - [ ] if wait_time is positive, wait(stream_frames)
     - [ ] else, raise warnig ("The streaming loop took longer than expected.")
   - [ ] clear strategy parameters at the end of states loop
+
+- [ ] refactor(ClientComm): improve 'Get response' snippet
+  - [ ] Make sure there's no infinite loop
 
 - [ ] refactor(config): clear directory
   - [ ] remove EcosystemParameters

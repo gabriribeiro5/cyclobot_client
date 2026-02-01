@@ -4,6 +4,7 @@
 SelfDiagnosisData::SelfDiagnosisData(size_t capacity)
     : selfdiag_Json(capacity)
 {   
+    char selfDiagnosis_Char[384]; // char array to hold serialized JSON
     char selfdiag_Char[capacity]; // char array to hold serialized JSON
     selfdiag_bool_list = LinkedList<SelfDiag_Bool>();
     selfdiag_int_list = LinkedList<SelfDiag_Int>();
