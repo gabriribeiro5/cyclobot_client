@@ -71,10 +71,10 @@ void PL_FogLightFan::enter(ConfigData *configDataPtr, VisualComm *visualCommPtr,
 
 /* PALUDARIUM */
 void PL_FogLightFan::setup(ConfigData *configDataPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtc) {
-    pinMode(configDataPtr->config_uint8_t("soilMoistureSensor").value, INPUT);     // Sensor de umidade do solo - porta A0 é entrada 
-    pinMode(configDataPtr->config_uint8_t("irrigationSystem").value, INPUT);       // Sensor de chuva - porta A1 é entrada 
-    pinMode(configDataPtr->config_uint8_t("relePort").value, OUTPUT);              // Porta de controle do Relé - D4 é saída 
-    digitalWrite(configDataPtr->config_uint8_t("relePort").value, HIGH);           // Mantém relé desligado  
+    // pinMode(configDataPtr->config_uint8_t("soilMoistureSensor").value, INPUT);     // Sensor de umidade do solo - porta A0 é entrada 
+    // pinMode(configDataPtr->config_uint8_t("irrigationSystem").value, INPUT);       // Sensor de chuva - porta A1 é entrada 
+    // pinMode(configDataPtr->config_uint8_t("relePort").value, OUTPUT);              // Porta de controle do Relé - D4 é saída 
+    // digitalWrite(configDataPtr->config_uint8_t("relePort").value, HIGH);           // Mantém relé desligado  
 }
 
 /* PALUDARIUM */
@@ -86,13 +86,13 @@ void PL_FogLightFan::simulate_ecosystem(EcosystemScanner *scannerPtr,
                                         )
 {
     // // ********* Primary scann *********
-    if (configDataPtr->config_int("soilMoistureLimit").value >
-        analogRead(configDataPtr->config_uint8_t("soilMoistureSensor").value))
-    {
-        configDataPtr->config_bool("soilIsWet")->value = true;
-        // ConfigData::Config_Bool soilIsWetPtr = configDataPtr->config_bool("soilIsWet");
-        // soilIsWetPtr.value = true;
-    };
+    // if (configDataPtr->config_int("soilMoistureLimit").value >
+    //     analogRead(configDataPtr->config_uint8_t("soilMoistureSensor").value) && configDataPtr->config_bool("soilIsWet") != nullptr)
+    // {
+    //     configDataPtr->config_bool("soilIsWet")->value = true;
+    //     // ConfigData::Config_Bool soilIsWetPtr = configDataPtr->config_bool("soilIsWet");
+    //     // soilIsWetPtr.value = true;
+    // };
     // scannerPtr->read_soil_moisture(visualCommPtr, configDataPtr->config_uint8_t("soilMoistureSensor").value);
 
     // ********* Irrigation strategy *********

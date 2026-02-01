@@ -14,18 +14,18 @@ ConfigData::ConfigData(size_t capacity)
 // SETUP
 ConfigData::Config_Bool *ConfigData::config_bool(char *name)
 {
-    // Config_Bool *item;
-    // for (int i = 0; i < config_bool_list.size(); i++)
-    // {
-    //     item = config_bool_list.getPtr(i);
-    //     if (item == nullptr) {
-    //         break;
-    //     };
-    //     if (strcmp(item->name, name) == 0)   // compare string contents
-    //     {
-    //         return item;
-    //     };
-    // };
+    Config_Bool *item;
+    for (int i = 0; i < config_bool_list.size(); i++)
+    {
+        item = config_bool_list.getPtr(i);
+        if (item == nullptr) {
+            break;
+        };
+        if (strcmp(item->name, name) == 0)   // compare string contents
+        {
+            return item;
+        };
+    };
     // Return a "null" object if not found
     return nullptr;
 };

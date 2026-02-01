@@ -21,3 +21,6 @@ WifiParameters::WifiParameters()
     // The upward initialization handles constants and non-constants.
     // No need to assign variables again in the body!
 }
+WifiParameters::~WifiParameters() {
+    // Nothing to delete since there are no dynamic allocations.
+}

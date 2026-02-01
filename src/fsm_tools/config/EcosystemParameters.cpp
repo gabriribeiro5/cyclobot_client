@@ -20,3 +20,7 @@ EcosystemParameters::EcosystemParameters()
     // The upward initialization handles constants and non-constants.
     // No need to assign variables again in the body!
 }
+
+EcosystemParameters::~EcosystemParameters() {
+    // Nothing to delete since there are no dynamic allocations.
+}

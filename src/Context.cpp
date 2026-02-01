@@ -61,9 +61,12 @@ FiniteStateMachine::FiniteStateMachine(BaseState *initialStatePtr, BaseStrategy 
 }
 
 void FiniteStateMachine::change_state(BaseState *newStatePtr) {
-    currentStatePtr->exit(this);
+    if (currentStatePtr) {
+        currentStatePtr->exit(this);
+        delete currentStatePtr;          // free the previous state
+    }
     currentStatePtr = newStatePtr;
-    currentStatePtr->enter(this);
+    if (currentStatePtr) currentStatePtr->enter(this);
 }
 
 void FiniteStateMachine::handle_error() {
@@ -139,6 +142,7 @@ void FiniteStateMachine::take_a_nap() {
 }
 
 FiniteStateMachine::~FiniteStateMachine() {
+    delete currentStatePtr;
     delete scannerPtr;
     delete actuatorPtr;
     delete paramPtr;

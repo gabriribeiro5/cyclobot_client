@@ -86,14 +86,12 @@ void loop() {
             BaseState *configUpdateStatePtr = new ConfigUpdateState();
             cyclobot.change_state(configUpdateStatePtr);
             cyclobot.update_config();
-            delete configUpdateStatePtr;
             break;
         }
         case 3: { // Code update
             BaseState *codeUpdateStatePtr = new CodeUpdateState();
             cyclobot.change_state(codeUpdateStatePtr);
             cyclobot.update_simulation_code();
-            delete codeUpdateStatePtr;
             break;
         }
         case 4: { // Comm

@@ -3,11 +3,6 @@
 #include "../../../include/Context.h"
 // used by context.changeState
 void ErrorHandlingState::enter(FiniteStateMachine *cyclobot) {
-    if (!cyclobot) {
-        Serial.println(F("[ErrorHandlingState::enter] cyclobot pointer is null in ErrorHandlingState"));
-        Serial.flush();
-        return; // ou transição para um estado de erro seguro
-    }
     
     cyclobot->commPtr->visualCommPtr->print_line(F(" *************************  ****[ErrorHandlingState::enter]*****  ************************* "));
 };

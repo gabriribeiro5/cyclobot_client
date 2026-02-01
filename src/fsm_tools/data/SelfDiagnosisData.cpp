@@ -68,7 +68,7 @@ void SelfDiagnosisData::add_parameter(char* type,
                                 DateTime last_update
                             )
 {
-    if (type == "bool") {
+    if (strcmp(type, "bool") == 0) {
         SelfDiag_Bool new_bool = {
             name,
             value,
@@ -81,7 +81,7 @@ void SelfDiagnosisData::add_parameter(char* type,
         };
         selfdiag_bool_list.add(new_bool);
     };
-    if (type == "int") {
+    if (strcmp(type, "int") == 0) {
         SelfDiag_Int new_int = {
             name,
             value,
@@ -94,7 +94,7 @@ void SelfDiagnosisData::add_parameter(char* type,
         };
         selfdiag_int_list.add(new_int);
     };
-    if (type == "char") {
+    if (strcmp(type, "char") == 0) {
         SelfDiag_Char new_char = {
             name,
             value,

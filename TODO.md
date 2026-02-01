@@ -203,22 +203,10 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 - [x] refactor(dir name): 'core_states' to 'states'
 
 - [ ] feat(stream_sensors_data): streaming with frequency control
-  - [x] Add LinkedList library to project
-  - [x] create linked lists and stream methods into /data/configData.h
-  - [x] create stream methods into /data/configData.cpp
-  - [x] create linked lists and stream methods into /data/EnvironmentData.h
-  - [X] create stream methods into /data/EnvironmentData.cpp
-  - [x] create linked lists and stream methods into /data/LogData.h
-  - [x] create stream methods into /data/LogData.cpp
-  - [x] create linked lists and stream methods into /data/SelfDiagnosisData.h
-  - [x] create stream methods into /data/SelfDiagnosisData.cpp
-  - [x] fix(DynamicJsonDocument): new reference
-  - [x] strategies must fullfill linked-lists
-  - [x] fix(warning): address of local variable 'item' returned [-Wreturn-local-addr]
-  - [x] fix(*LocalPtr): remove local pointers to get non-temporary/editable values
-  - [x] feat(LinkedList::getPtr()): add special method in third-party lib
+  - [ ] ...
   - [ ] fix(memory leak): logs are breaking
-    - [ ] comment *ConfigData::config_bool(char *name)
+    - [x] comment *ConfigData::config_bool(char *name)
+      - [x] also remove LinkedList::getPtr()
     - [x] find and run some code scanner (PlatformIO inspect)
     - [x] fix(warning): Class 'FiniteStateMachine' does not have a copy constructor which is recommended since it has dynamic memory/resource allocation(s).
       - [x] add FSM destructor
@@ -234,8 +222,13 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
       - [x] simState calls cyclobot->simStrategyContextPtr
       - [x] run code
     - [x] fix(string comparison): use strcmp() instead of '='
+    - [x] refactor(LinkedList volume): reduce amount of data and check behaviour
+    - [x] feat(LinkedList::getPtr()): readd method into third-party lib
+    - [x] uncomment *ConfigData::config_bool(char *name)
+    - [x] rerun code
     - [ ] ...
   - [ ] feat(LinkedList::getPtr()): send pull request for third-party lib
+  - [ ] ...
   - [ ] strategy runs setup_bool_list("name") to get struct pointer
   - [ ] strategy runs setup_int_list("name") to get struct pointer
   - [ ] create stream_sensors_data method

@@ -5,13 +5,7 @@
 #include "../../../include/Context.h"
 
 // used by context.changeState
-void ConfigUpdateState::enter(FiniteStateMachine *cyclobot) {
-    if (!cyclobot) {
-        Serial.println(F("[ConfigUpdateState::enter]: cyclobot pointer is null"));
-        Serial.flush();
-        return;
-    }
-    
+void ConfigUpdateState::enter(FiniteStateMachine *cyclobot) {    
     cyclobot->commPtr->visualCommPtr->print_line(F(" *************************  *****[ConfigUpdateState::enter]*****  ************************* "));
 };
 

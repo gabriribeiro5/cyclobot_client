@@ -4,13 +4,7 @@
 #include "../../../include/Context.h"
 
 // used by context.changeState
-void SimulationState::enter(FiniteStateMachine *cyclobot) {
-    if (!cyclobot) {
-        Serial.println(F("[SimulationState::enter] cyclobot pointer is null in SimulationState"));
-        Serial.flush();
-        return; // ou transição para um estado de erro seguro
-    }
-    
+void SimulationState::enter(FiniteStateMachine *cyclobot) {    
     cyclobot->commPtr->visualCommPtr->print_line(F(" *************************  ******[SimulationState::enter]******  ************************* "));
 };
 

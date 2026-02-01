@@ -29,8 +29,8 @@ ParameterInstances::~ParameterInstances() {
 
     // -> Parameters
     delete deviceParametersPtr;
-    // delete errorHandlingParametersPtr;
-    // delete wifiParametersPtr;
+    delete errorHandlingParametersPtr;
+    delete wifiParametersPtr;
     delete clientParametersPtr;
-    // delete ecosystemParametersPtr;
+    delete ecosystemParametersPtr;
 };

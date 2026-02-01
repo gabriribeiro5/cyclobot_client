@@ -4,11 +4,6 @@
 
 // used by context.changeState
 void HTTPClientState::enter(FiniteStateMachine *cyclobot) {
-    if (!cyclobot) {
-        cyclobot->commPtr->visualCommPtr->print_line(F("[HTTPClientState::enter] cyclobot pointer is null in HTTPClientState"));
-        Serial.flush();
-        return;
-    }
     cyclobot->commPtr->visualCommPtr->print_line(F(" *************************  ******[HTTPClientState::enter]******  ************************* "));
 };
 
