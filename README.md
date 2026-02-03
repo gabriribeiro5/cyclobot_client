@@ -63,6 +63,13 @@ Modules are organized as follows:
 
 - **Utilities**: Utilities that enhance flexibility and control over the application.
 
+
+## Supported systems:
+Althought the authors of this code are commited to comply with 32 bits system requirements like Arduino Due's and ESP32's,
+this application is primarily developed to run on Arduino Mega (ATmega2560).
+
+Once it takes a considerable ammount of memory, this application DOES NOT fit in entry level boards such as Arduino UNO (ATMega328p).
+
 ## Running the Application
 
 As an embedded software, this application is meant to run as "plug and play".
