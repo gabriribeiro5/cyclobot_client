@@ -203,7 +203,20 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 - [x] refactor(dir name): 'core_states' to 'states'
 
 - [ ] feat(stream_sensors_data): streaming with frequency control
-  - [ ] ...
+  - [x] Add LinkedList library to project
+  - [x] create linked lists and stream methods into /data/configData.h
+  - [x] create stream methods into /data/configData.cpp
+  - [x] create linked lists and stream methods into /data/EnvironmentData.h
+  - [X] create stream methods into /data/EnvironmentData.cpp
+  - [x] create linked lists and stream methods into /data/LogData.h
+  - [x] create stream methods into /data/LogData.cpp
+  - [x] create linked lists and stream methods into /data/SelfDiagnosisData.h
+  - [x] create stream methods into /data/SelfDiagnosisData.cpp
+  - [x] fix(DynamicJsonDocument): new reference
+  - [x] strategies must fullfill linked-lists
+  - [x] fix(warning): address of local variable 'item' returned [-Wreturn-local-addr]
+  - [x] fix(*LocalPtr): remove local pointers to get non-temporary/editable values
+  - [x] feat(LinkedList::getPtr()): add special method in third-party lib
   - [ ] fix(memory leak): logs are breaking
     - [x] comment *ConfigData::config_bool(char *name)
       - [x] also remove LinkedList::getPtr()
@@ -218,7 +231,7 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
       - [x] instantiate strategy context at FSM initialization (create linked lists only once)
       - [x] run cyclobot.simStrategyContextPtr->setup in main::setup
       - [x] run code
-      - [x] remove simulationState::strategyContextPtr
+      - [x] remove simulationState::strategyContextPtr 
       - [x] simState calls cyclobot->simStrategyContextPtr
       - [x] run code
     - [x] fix(string comparison): use strcmp() instead of '='
@@ -226,7 +239,14 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
     - [x] feat(LinkedList::getPtr()): readd method into third-party lib
     - [x] uncomment *ConfigData::config_bool(char *name)
     - [x] rerun code
-    - [ ] ...
+    - [x] doc(CONTRIBUTING): Supported systems
+    - [x] doc(README): Supported systems
+    - [x] comment calls to LinkedList->get(index)
+    - [x] comment unused LinkedList
+    - [x] refactor(ConfigData): implemented in EEPROM (4 KB)
+    - [ ] refactor(EnvironmentData): implemented in standard SRAM (8 KB)
+    - [ ] refactor(LogData): implemented in standard SRAM (8 KB)
+    - [ ] refactor(SelfDiagnosisData): implemented in standard SRAM (8 KB)
   - [ ] feat(LinkedList::getPtr()): send pull request for third-party lib
   - [ ] ...
   - [ ] strategy runs setup_bool_list("name") to get struct pointer

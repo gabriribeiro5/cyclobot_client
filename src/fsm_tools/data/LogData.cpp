@@ -3,7 +3,7 @@
 #include <RTCLib.h>
 LogData::LogData()
 {
-    log_messages = LinkedList<Log_Message>();
+    // log_messages = LinkedList<Log_Message>();
 };
 
 /************************ INSERT METHODS ************************/
@@ -21,5 +21,5 @@ void LogData::add(DateTime date_and_time,
         user_can_see,
         send_now
     };
-    log_messages.add(new_msg);
+    // log_messages.add(new_msg);
 };

@@ -57,7 +57,6 @@ FiniteStateMachine::FiniteStateMachine(BaseState *initialStatePtr, BaseStrategy 
     simStrategyContextPtr = new StrategyContext(dataPtr->configDataPtr, simulationStrategyPtr, commPtr->visualCommPtr, rtcPtr);
     Serial.println("StrategyContext instance created");
     Serial.flush();
-
 }
 
 void FiniteStateMachine::change_state(BaseState *newStatePtr) {

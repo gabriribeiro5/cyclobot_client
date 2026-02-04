@@ -3,22 +3,22 @@
 #include <RTCLib.h>
 EnvironmentData::EnvironmentData()
 {
-    sensor_bool_list = LinkedList<Sensor_Bool>();
-    sensor_int_list = LinkedList<Sensor_Int>();
+    // sensor_bool_list = LinkedList<Sensor_Bool>();
+    // sensor_int_list = LinkedList<Sensor_Int>();
 };
 
 /************************ SEARCH METHODS ************************/
 // SETUP
 EnvironmentData::Sensor_Bool EnvironmentData::sensor_bool(char *name)
 {
-    for (int i = 0; i < sensor_bool_list.size(); i++)
-    {
-        Sensor_Bool item = sensor_bool_list.get(i);
-        if (strcmp(item.name, name) == 0)   // compare string contents
-        {
-            return item;
-        };
-    };
+    // for (int i = 0; i < sensor_bool_list.size(); i++)
+    // {
+    //     Sensor_Bool item = sensor_bool_list.get(i);
+    //     if (strcmp(item.name, name) == 0)   // compare string contents
+    //     {
+    //         return item;
+    //     };
+    // };
     // Return a safe "empty" object if not found
     Sensor_Bool empty = {
         nullptr,        // name
@@ -33,14 +33,14 @@ EnvironmentData::Sensor_Bool EnvironmentData::sensor_bool(char *name)
 };
 EnvironmentData::Sensor_Int EnvironmentData::sensor_int(char *name)
 {
-    for (int i = 0; i < sensor_int_list.size(); i++)
-    {
-        Sensor_Int item = sensor_int_list.get(i);
-        if (strcmp(item.name, name) == 0)   // compare string contents
-        {
-            return item;
-        }
-    }
+    // for (int i = 0; i < sensor_int_list.size(); i++)
+    // {
+    //     Sensor_Int item = sensor_int_list.get(i);
+    //     if (strcmp(item.name, name) == 0)   // compare string contents
+    //     {
+    //         return item;
+    //     }
+    // }
     // Return a safe "empty" object if not found
     Sensor_Int   empty = {
         nullptr,        // name
@@ -75,7 +75,7 @@ void EnvironmentData::add(char* type,
             send_now,
             last_update
         };
-        sensor_bool_list.add(new_bool);
+        // sensor_bool_list.add(new_bool);
     };
     if (strcmp(type, "int") == 0) {
         Sensor_Int new_int = {
@@ -87,7 +87,7 @@ void EnvironmentData::add(char* type,
             send_now,
             last_update
         };
-        sensor_int_list.add(new_int);
+        // sensor_int_list.add(new_int);
     };
 };
 

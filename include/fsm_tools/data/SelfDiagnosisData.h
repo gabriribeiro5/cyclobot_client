@@ -57,14 +57,14 @@ public:
 
     // Create linked-lists struct
     // Every list must end with an 's'
-    LinkedList<SelfDiag_Bool> selfdiag_bool_list;
-    LinkedList<SelfDiag_Int> selfdiag_int_list;
-    LinkedList<SelfDiag_Char> selfdiag_char_list;
+    // LinkedList<SelfDiag_Bool> selfdiag_bool_list;
+    // LinkedList<SelfDiag_Int> selfdiag_int_list;
+    // LinkedList<SelfDiag_Char> selfdiag_char_list;
     
     // Linked-lists SEARCH methods
     SelfDiag_Bool selfdiag_bool(char *name);
-    SelfDiag_Int selfdiag_int(char *name);
-    SelfDiag_Char selfdiag_char(char *name);
+    // SelfDiag_Int selfdiag_int(char *name);
+    // SelfDiag_Char selfdiag_char(char *name);
 
     
     /**

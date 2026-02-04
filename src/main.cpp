@@ -16,10 +16,8 @@
 
 // Define strategy
 BaseStrategy *simStrategyPtr = new PL_FogLightFan();
-
 // Create state machine
 BaseState *idleStatePtr = new IdleState();
-
 FiniteStateMachine cyclobot(idleStatePtr, simStrategyPtr);
 // Extra serial port for wifi
 SoftwareSerial esp8266(cyclobot.paramPtr->BaseMappingPtr->wifiEspRX,

@@ -15,7 +15,7 @@ class LogData {
 
         // Create linked-lists struct
         // Every list must end with an 's'
-        LinkedList<Log_Message> log_messages;
+        // LinkedList<Log_Message> log_messages;
         
         // Linked-lists INSERTITION methods
         void add(DateTime date_and_time,

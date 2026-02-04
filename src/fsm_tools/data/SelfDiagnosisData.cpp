@@ -6,57 +6,57 @@ SelfDiagnosisData::SelfDiagnosisData(size_t capacity)
 {   
     char selfDiagnosis_Char[384]; // char array to hold serialized JSON
     char selfdiag_Char[capacity]; // char array to hold serialized JSON
-    selfdiag_bool_list = LinkedList<SelfDiag_Bool>();
-    selfdiag_int_list = LinkedList<SelfDiag_Int>();
-    selfdiag_char_list = LinkedList<SelfDiag_Char>();
+    // selfdiag_bool_list = LinkedList<SelfDiag_Bool>();
+    // selfdiag_int_list = LinkedList<SelfDiag_Int>();
+    // selfdiag_char_list = LinkedList<SelfDiag_Char>();
 };
 
 /************************ SEARCH METHODS ************************/
 SelfDiagnosisData::SelfDiag_Bool SelfDiagnosisData::selfdiag_bool(char *name)
 {
-    for (int i = 0; i < selfdiag_bool_list.size(); i++)
-    {
-        SelfDiag_Bool item = selfdiag_bool_list.get(i);
+    // for (int i = 0; i < selfdiag_bool_list.size(); i++)
+    // {
+    //     SelfDiag_Bool item = selfdiag_bool_list.get(i);
 
-        if (strcmp(item.name, name) == 0)   // compare string contents
-        {
-            return item;
-        }
-    }
+    //     if (strcmp(item.name, name) == 0)   // compare string contents
+    //     {
+    //         return item;
+    //     }
+    // }
 
     // Return a "null" object if not found
     SelfDiag_Bool empty = { nullptr, false, nullptr, false, 0, false, false, DateTime() };
     return empty;
 }
 
-SelfDiagnosisData::SelfDiag_Int SelfDiagnosisData::selfdiag_int(char *name)
-{
-    for (int i = 0; i < selfdiag_int_list.size(); i++)
-    {
-        SelfDiag_Int item = selfdiag_int_list.get(i);
-        if (strcmp(item.name, name) == 0)   // compare string contents
-        {
-            return item;
-        }
-    }
-    // Return a "null" object if not found
-    SelfDiag_Int empty = { nullptr, false, nullptr, false, 0, false, false, DateTime() };
-    return empty;
-};
-SelfDiagnosisData::SelfDiag_Char SelfDiagnosisData::selfdiag_char(char *name)
-{
-    for (int i = 0; i < selfdiag_char_list.size(); i++)
-    {
-        SelfDiag_Char item = selfdiag_char_list.get(i);
-        if (strcmp(item.name, name) == 0)   // compare string contents
-        {
-            return item;
-        }
-    }
-    // Return a "null" object if not found
-    SelfDiag_Char empty = { nullptr, false, nullptr, false, 0, false, false, DateTime() };
-    return empty;
-};
+// SelfDiagnosisData::SelfDiag_Int SelfDiagnosisData::selfdiag_int(char *name)
+// {
+//     for (int i = 0; i < selfdiag_int_list.size(); i++)
+//     {
+//         SelfDiag_Int item = selfdiag_int_list.get(i);
+//         if (strcmp(item.name, name) == 0)   // compare string contents
+//         {
+//             return item;
+//         }
+//     }
+//     // Return a "null" object if not found
+//     SelfDiag_Int empty = { nullptr, false, nullptr, false, 0, false, false, DateTime() };
+//     return empty;
+// };
+// SelfDiagnosisData::SelfDiag_Char SelfDiagnosisData::selfdiag_char(char *name)
+// {
+//     for (int i = 0; i < selfdiag_char_list.size(); i++)
+//     {
+//         SelfDiag_Char item = selfdiag_char_list.get(i);
+//         if (strcmp(item.name, name) == 0)   // compare string contents
+//         {
+//             return item;
+//         }
+//     }
+//     // Return a "null" object if not found
+//     SelfDiag_Char empty = { nullptr, false, nullptr, false, 0, false, false, DateTime() };
+//     return empty;
+// };
 
 /************************ INSERT METHODS ************************/
 void SelfDiagnosisData::add_parameter(char* type,
@@ -79,7 +79,7 @@ void SelfDiagnosisData::add_parameter(char* type,
             true,                               // default = true
             last_update
         };
-        selfdiag_bool_list.add(new_bool);
+        // selfdiag_bool_list.add(new_bool);
     };
     if (strcmp(type, "int") == 0) {
         SelfDiag_Int new_int = {
@@ -92,7 +92,7 @@ void SelfDiagnosisData::add_parameter(char* type,
             true,                               // default = true
             last_update
         };
-        selfdiag_int_list.add(new_int);
+        // selfdiag_int_list.add(new_int);
     };
     if (strcmp(type, "char") == 0) {
         SelfDiag_Char new_char = {
@@ -105,6 +105,6 @@ void SelfDiagnosisData::add_parameter(char* type,
             true,                               // default = true
             last_update
         };
-        selfdiag_char_list.add(new_char);
+        // selfdiag_char_list.add(new_char);
     };
 };
