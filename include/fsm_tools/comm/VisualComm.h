@@ -4,6 +4,8 @@
 
 class VisualComm {
     public:
+        static const uint16_t EEPROM_TOTAL_SIZE = 4096;  // ATmega2560 EEPROM size
+
         // Serial Terminal
         template<typename T>
         void print_line(T printable);
@@ -12,6 +14,8 @@ class VisualComm {
         void print(T printable);
         
         void print_terminal_logo();
+        void print_eeprom_usage(char *currentMethodPtr);
+        void print_eeprom_hex_dump(char *currentMethodPtr, uint16_t start_addr, uint16_t length);
         void print_free_memory(char *currentMethodPtr);
         void print_parameters(ParameterInstances *paramPtr);
 

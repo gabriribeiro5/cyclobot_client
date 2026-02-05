@@ -20,17 +20,17 @@ class FiniteStateMachine {
         DateTime now;                                   // Track in which step we are
         int stateFlow = 0;                              // Flow stablished at the Client module and updated by States to comply client rules
 
-        // Instance groups
-        SelfManagementInstances *selfPtr;
-        CommunicationInstances *commPtr;
-        ParameterInstances *paramPtr;
-        DataInstances *dataPtr;
+        // Static long-lived instance groups (allocated once at static initialization)
+        static SelfManagementInstances *selfPtr;
+        static CommunicationInstances *commPtr;
+        static ParameterInstances *paramPtr;
+        static DataInstances *dataPtr;
         
-        // Single instance
-        EcosystemScanner *scannerPtr;
-        EcosystemActuator *actuatorPtr;
-        BaseStrategy *simulationStrategyPtr;
-        StrategyContext *simStrategyContextPtr;
+        // Static single instances
+        static EcosystemScanner *scannerPtr;
+        static EcosystemActuator *actuatorPtr;
+        static BaseStrategy *simulationStrategyPtr;
+        static StrategyContext *simStrategyContextPtr;
 
         FiniteStateMachine(BaseState *initialStatePtr, BaseStrategy *simStrategyPtr); // Constructor
         FiniteStateMachine(const FiniteStateMachine&) = delete;                      // forbid copy constructor

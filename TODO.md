@@ -244,9 +244,14 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
     - [x] comment calls to LinkedList->get(index)
     - [x] comment unused LinkedList
     - [x] refactor(ConfigData): implemented in EEPROM (4 KB)
-    - [ ] refactor(EnvironmentData): implemented in standard SRAM (8 KB)
-    - [ ] refactor(LogData): implemented in standard SRAM (8 KB)
-    - [ ] refactor(SelfDiagnosisData): implemented in standard SRAM (8 KB)
+    - [x] feat(EEPROM Monitor): create visualComm methods to check EEPROM status
+    - [ ] perf(SRAM usage): use Claude Haiku 4.5 to look for oportunities to optimize SRAM usage
+      - [x] search main SRAM consumers
+      - [x] refactor(context): convert long-lived instances to static storage
+      - [x] refactor(context): apply lazy pattern in main
+    - [ ] refactor(EnvironmentData): implement in standard SRAM (8 KB)
+    - [ ] refactor(LogData): implement in standard SRAM (8 KB)
+    - [ ] refactor(SelfDiagnosisData): implement in standard SRAM (8 KB)
   - [ ] feat(LinkedList::getPtr()): send pull request for third-party lib
   - [ ] ...
   - [ ] strategy runs setup_bool_list("name") to get struct pointer

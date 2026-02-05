@@ -14,27 +14,30 @@
 #include "../include/fsm_tools/config/BaseMapping.h"
 #include "../include/Context.h"
 
-// Define strategy
+// Define strategy (allocated once at startup via static init)
 BaseStrategy *simStrategyPtr = new PL_FogLightFan();
-// Create state machine
+// Create state machine (FiniteStateMachine is global; its static members initialize on first FSM construction)
 BaseState *idleStatePtr = new IdleState();
 FiniteStateMachine cyclobot(idleStatePtr, simStrategyPtr);
-// Extra serial port for wifi
-SoftwareSerial esp8266(cyclobot.paramPtr->BaseMappingPtr->wifiEspRX,
-                       cyclobot.paramPtr->BaseMappingPtr->wifiEspTX); // software-based serial port to communicate with wifi module
+// Extra serial port for wifi (access static members after FSM initialization)
+SoftwareSerial esp8266(FiniteStateMachine::paramPtr->BaseMappingPtr->wifiEspRX,
+                       FiniteStateMachine::paramPtr->BaseMappingPtr->wifiEspTX); // software-based serial port to communicate with wifi module
                        
 void setup() {
     Serial.begin(9600); // Enable communication over the USB serial port console 9600 Bps
     
-    cyclobot.commPtr->visualCommPtr->print_terminal_logo();
-    cyclobot.commPtr->visualCommPtr->print_parameters(cyclobot.paramPtr);
-    cyclobot.commPtr->visualCommPtr->print_free_memory("[main::setup]");
+    // Print EEPROM usage at startup
+    
+    FiniteStateMachine::commPtr->visualCommPtr->print_terminal_logo();
+    FiniteStateMachine::commPtr->visualCommPtr->print_parameters(FiniteStateMachine::paramPtr);
+    FiniteStateMachine::commPtr->visualCommPtr->print_eeprom_usage("[main::setup]");
+    FiniteStateMachine::commPtr->visualCommPtr->print_free_memory("[main::setup]");
 
-    cyclobot.commPtr->visualCommPtr->print_line(F(" *************************  *********[IdleState::enter]*********  ************************* "));
+    FiniteStateMachine::commPtr->visualCommPtr->print_line(F(" *************************  *********[IdleState::enter]*********  ************************* "));
 
-    cyclobot.commPtr->visualCommPtr->print_line(F("[main::setup] starting clock (rtc)"));
+    FiniteStateMachine::commPtr->visualCommPtr->print_line(F("[main::setup] starting clock (rtc)"));
     if (!cyclobot.rtc.begin()) {
-        cyclobot.commPtr->visualCommPtr->print_line(F("[main::setup] RTC not found"));
+        FiniteStateMachine::commPtr->visualCommPtr->print_line(F("[main::setup] RTC not found"));
     }
     // cyclobot.now = cyclobot.rtc.now();
     

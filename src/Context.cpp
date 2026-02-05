@@ -14,49 +14,59 @@
 extern unsigned int __bss_end;   // Symbol marking the end of the .bss section (static & global variables in RAM).
 extern void *__brkval;           // Current end of the heap. NULL (0) if no malloc() has been used yet.
 
+// Static member initialization (allocated once at startup, reused across FSM lifetime)
+SelfManagementInstances *FiniteStateMachine::selfPtr = nullptr;
+CommunicationInstances *FiniteStateMachine::commPtr = nullptr;
+ParameterInstances *FiniteStateMachine::paramPtr = nullptr;
+DataInstances *FiniteStateMachine::dataPtr = nullptr;
+EcosystemScanner *FiniteStateMachine::scannerPtr = nullptr;
+EcosystemActuator *FiniteStateMachine::actuatorPtr = nullptr;
+BaseStrategy *FiniteStateMachine::simulationStrategyPtr = nullptr;
+StrategyContext *FiniteStateMachine::simStrategyContextPtr = nullptr;
+
 FiniteStateMachine::FiniteStateMachine(BaseState *initialStatePtr, BaseStrategy *simStrategyPtr) {
     currentStatePtr = initialStatePtr;
-    simulationStrategyPtr = simStrategyPtr;
+    FiniteStateMachine::simulationStrategyPtr = simStrategyPtr;
 
     // time tracking software
-    RTC_DS3231 rtc;
-    RTC_DS3231 *rtcPtr = &rtc;
     Serial.println("RTC_DS3231 instance created");
     Serial.flush();
 
-    DateTime now;      // Track in which step we are
     Serial.println("DateTime instance created");
     Serial.flush();
     
-    int stateFlow = 0; // Flow stablished at the Client module and updated by States to comply client rules
     Serial.println("stateFlow variable created");
     Serial.flush();
 
-    // Single instance
-    scannerPtr = new EcosystemScanner();
-    Serial.println("EcosystemScanner instance created");
-    Serial.flush();
-    actuatorPtr = new EcosystemActuator();
-    Serial.println("EcosystemActuator instance created");
-    Serial.flush();
-    
-    // Instance groups
-    paramPtr = new ParameterInstances();
-    Serial.println("ParameterInstances instance created");
-    Serial.flush();
-    selfPtr = new SelfManagementInstances();
-    Serial.println("SelfManagementInstances instance created");
-    Serial.flush();
-    commPtr = new CommunicationInstances();
-    Serial.println("CommunicationInstances instance created");
-    Serial.flush();
-    dataPtr = new DataInstances();
-    Serial.println("DataInstances instance created");
-    Serial.flush();
+    // Initialize static long-lived instances only once (on first FSM creation)
+    if (scannerPtr == nullptr) {
+        scannerPtr = new EcosystemScanner();
+        Serial.println("EcosystemScanner instance created");
+        Serial.flush();
+        actuatorPtr = new EcosystemActuator();
+        Serial.println("EcosystemActuator instance created");
+        Serial.flush();
+        
+        paramPtr = new ParameterInstances();
+        Serial.println("ParameterInstances instance created");
+        Serial.flush();
+        selfPtr = new SelfManagementInstances();
+        Serial.println("SelfManagementInstances instance created");
+        Serial.flush();
+        commPtr = new CommunicationInstances();
+        Serial.println("CommunicationInstances instance created");
+        Serial.flush();
+        dataPtr = new DataInstances();
+        Serial.println("DataInstances instance created");
+        Serial.flush();
 
-    simStrategyContextPtr = new StrategyContext(dataPtr->configDataPtr, simulationStrategyPtr, commPtr->visualCommPtr, rtcPtr);
-    Serial.println("StrategyContext instance created");
-    Serial.flush();
+        simStrategyContextPtr = new StrategyContext(dataPtr->configDataPtr, FiniteStateMachine::simulationStrategyPtr, commPtr->visualCommPtr, rtcPtr);
+        Serial.println("StrategyContext instance created");
+        Serial.flush();
+    } else {
+        Serial.println("Static instances already initialized (reusing from previous FSM)");
+        Serial.flush();
+    }
 }
 
 void FiniteStateMachine::change_state(BaseState *newStatePtr) {
@@ -141,14 +151,8 @@ void FiniteStateMachine::take_a_nap() {
 }
 
 FiniteStateMachine::~FiniteStateMachine() {
+    // Only delete the transient current state
     delete currentStatePtr;
-    delete scannerPtr;
-    delete actuatorPtr;
-    delete paramPtr;
-    delete selfPtr;
-    delete commPtr;
-    delete dataPtr;
-    delete simStrategyContextPtr;
-    // only delete simulationStrategyPtr if the FSM is the *owner* and it's non-null
-    if (simulationStrategyPtr) { delete simulationStrategyPtr; }
+    // Static long-lived instances are NOT deleted here; they persist for the FSM lifetime
+    // This reduces repeated allocation/deallocation cycles and heap fragmentation
 }
