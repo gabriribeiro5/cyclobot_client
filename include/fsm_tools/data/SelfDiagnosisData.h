@@ -5,7 +5,7 @@
 
 class SelfDiagnosisData {
 public:
-    SelfDiagnosisData(size_t capacity);
+    SelfDiagnosisData();
     // bools in c++: 1 = true
     const PROGMEM bool testPhysicalComponents = 1;             // condição para testes de inicialização; 1 = executar testes
     
@@ -23,6 +23,14 @@ public:
 
     StaticJsonDocument<384> selfDiagnosis_Json;
     char selfDiagnosis_Char[384];
+    
+    /**
+     * @brief JSON serialization buffer
+     * @details Transient JSON documents are allocated on-demand when needed,
+     * then freed after use to optimize SRAM usage.
+     */
+    static const size_t SELFDIAG_JSON_CAPACITY = 384;
+    char selfdiag_Char[SELFDIAG_JSON_CAPACITY];  // char array to hold serialized JSON
 
     struct SelfDiag_Bool {
         char *name;
@@ -67,15 +75,5 @@ public:
     // SelfDiag_Char selfdiag_char(char *name);
 
     
-    /**
-     * @brief JSON document for storing self-diagnosis data
-     * @details This DynamicJsonDocument is used to dynamically manage and store
-     * self-diagnosis information in JSON format. The document size can be allocated
-     * at runtime based on the actual diagnostic data requirements.
-     */
-    DynamicJsonDocument selfdiag_Json;
-    char selfdiag_Char[sizeof(selfdiag_Json)];  // char array to hold serialized JSON
-    
     void add_parameter(char* type, char *name, bool value, char *description, bool user_can_see, bool updated_by, DateTime last_update);
-    DynamicJsonDocument load_json();
 };

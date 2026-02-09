@@ -1,14 +1,10 @@
 #include "../../../include/fsm_tools/data/SelfDiagnosisData.h"
 #include <LinkedList.h>
 #include <RTCLib.h>
-SelfDiagnosisData::SelfDiagnosisData(size_t capacity)
-    : selfdiag_Json(capacity)
+SelfDiagnosisData::SelfDiagnosisData()
 {   
-    char selfDiagnosis_Char[384]; // char array to hold serialized JSON
-    char selfdiag_Char[capacity]; // char array to hold serialized JSON
-    // selfdiag_bool_list = LinkedList<SelfDiag_Bool>();
-    // selfdiag_int_list = LinkedList<SelfDiag_Int>();
-    // selfdiag_char_list = LinkedList<SelfDiag_Char>();
+    // Initialize static storage for serialized JSON
+    // The actual DynamicJsonDocument is allocated on-demand in ClientComm
 };
 
 /************************ SEARCH METHODS ************************/

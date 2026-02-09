@@ -8,12 +8,9 @@ static inline int _uint8_region_start();
 static inline int _int_record_addr(int index);
 static inline int _uint8_record_addr(int index);
 
-ConfigData::ConfigData(size_t capacity)
-    : config_Json(capacity)
+ConfigData::ConfigData()
 {
-    char config_Char[capacity]; // char array to hold serialized JSON
-
-    // Ensure EEPROM headers for each region exist; if not, initialize header (magic/version/count)
+    // Initialize EEPROM headers for each region (magic/version/count)
     int addr = ConfigData::CONFIG_EEPROM_START;
     uint16_t magic = 0;
     EEPROM.get(addr, magic);

@@ -16,44 +16,31 @@
 
 // Define strategy (allocated once at startup via static init)
 BaseStrategy *simStrategyPtr = new PL_FogLightFan();
+
 // Create state machine (FiniteStateMachine is global; its static members initialize on first FSM construction)
 BaseState *idleStatePtr = new IdleState();
 FiniteStateMachine cyclobot(idleStatePtr, simStrategyPtr);
+
 // Extra serial port for wifi (access static members after FSM initialization)
-SoftwareSerial esp8266(FiniteStateMachine::paramPtr->BaseMappingPtr->wifiEspRX,
-                       FiniteStateMachine::paramPtr->BaseMappingPtr->wifiEspTX); // software-based serial port to communicate with wifi module
+SoftwareSerial esp8266(cyclobot.paramPtr->BaseMappingPtr->wifiEspRX,
+                       cyclobot.paramPtr->BaseMappingPtr->wifiEspTX); // software-based serial port to communicate with wifi module
                        
 void setup() {
     Serial.begin(9600); // Enable communication over the USB serial port console 9600 Bps
     
     // Print EEPROM usage at startup
     
-    FiniteStateMachine::commPtr->visualCommPtr->print_terminal_logo();
-    FiniteStateMachine::commPtr->visualCommPtr->print_parameters(FiniteStateMachine::paramPtr);
-    FiniteStateMachine::commPtr->visualCommPtr->print_eeprom_usage("[main::setup]");
-    FiniteStateMachine::commPtr->visualCommPtr->print_free_memory("[main::setup]");
+    cyclobot.commPtr->visualCommPtr->print_terminal_logo();
+    cyclobot.commPtr->visualCommPtr->print_parameters(cyclobot.paramPtr);
+    cyclobot.commPtr->visualCommPtr->print_eeprom_usage("[main::setup]");
+    cyclobot.commPtr->visualCommPtr->print_free_memory("[main::setup]");
 
-    FiniteStateMachine::commPtr->visualCommPtr->print_line(F(" *************************  *********[IdleState::enter]*********  ************************* "));
+    cyclobot.commPtr->visualCommPtr->print_line(F(" *************************  *********[IdleState::enter]*********  ************************* "));
 
-    FiniteStateMachine::commPtr->visualCommPtr->print_line(F("[main::setup] starting clock (rtc)"));
+    cyclobot.commPtr->visualCommPtr->print_line(F("[main::setup] starting clock (rtc)"));
     if (!cyclobot.rtc.begin()) {
-        FiniteStateMachine::commPtr->visualCommPtr->print_line(F("[main::setup] RTC not found"));
+        cyclobot.commPtr->visualCommPtr->print_line(F("[main::setup] RTC not found"));
     }
-    // cyclobot.now = cyclobot.rtc.now();
-    
-    // cyclobot.commPtr->visualCommPtr->print(F("[main::setup] date: "));
-    // cyclobot.commPtr->visualCommPtr->print(cyclobot.now.day());
-    // cyclobot.commPtr->visualCommPtr->print(F("/"));
-    // cyclobot.commPtr->visualCommPtr->print(cyclobot.now.month());
-    // cyclobot.commPtr->visualCommPtr->print(F("/"));
-    // cyclobot.commPtr->visualCommPtr->print_line(cyclobot.now.year());
-    
-    // cyclobot.commPtr->visualCommPtr->print(F("[main::setup] time: "));
-    // cyclobot.commPtr->visualCommPtr->print(cyclobot.now.hour());
-    // cyclobot.commPtr->visualCommPtr->print(F(":"));
-    // cyclobot.commPtr->visualCommPtr->print(cyclobot.now.minute());
-    // cyclobot.commPtr->visualCommPtr->print(F(":"));
-    // cyclobot.commPtr->visualCommPtr->print_line(cyclobot.now.second());
     
     cyclobot.commPtr->visualCommPtr->print_line(F("[main::setup] setting simulation strategy"));
     cyclobot.simStrategyContextPtr->setup(simStrategyPtr, cyclobot.commPtr->visualCommPtr, cyclobot.rtcPtr);

@@ -248,7 +248,10 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
     - [ ] perf(SRAM usage): use Claude Haiku 4.5 to look for oportunities to optimize SRAM usage
       - [x] search main SRAM consumers
       - [x] refactor(context): convert long-lived instances to static storage
-      - [x] refactor(context): apply lazy pattern in main
+      - [x] refactor(context): apply lazy pattern in main (no effect - rolled back)
+      - [x] refactor(DynamicJsonDocument): alocate config_json and selfDiagnosis_Json only when needed (in ClientComm) and free right after use
+      - [x] refactor(capacity): remove 'capacity' on ConfigData and SelfDiagnosisData initialization
+      - [ ] ...
     - [ ] refactor(EnvironmentData): implement in standard SRAM (8 KB)
     - [ ] refactor(LogData): implement in standard SRAM (8 KB)
     - [ ] refactor(SelfDiagnosisData): implement in standard SRAM (8 KB)

@@ -168,42 +168,47 @@ void ClientComm::put_invalid_cyclobot_session_token(VisualComm *visualCommPtr) {
 void ClientComm::post_cyclobot_config(ClientParameters *clientParametersPtr, WifiParameters *wifiParametersPtr, DeviceParameters *deviceParametersPtr, ConfigData *configDataPtr, EcosystemParameters *ecosystemParametersPtr, VisualComm *visualCommPtr) {
   visualCommPtr->print_line(F("    [ClientComm::post_cyclobot_config] running..."));
 
+  // Allocate TEMPORARY JSON document
+  DynamicJsonDocument config_Json(ConfigData::CONFIG_JSON_CAPACITY);
+
   // *** BUILD JSON STRUCT ***
   // Device config
-  configDataPtr->config_Json["cyclobot_id"] = deviceParametersPtr->cyclobotId; // uuid
-  configDataPtr->config_Json["session_token"] = clientParametersPtr->sessionToken; // uuid
-  configDataPtr->config_Json["device_sleep_lenght"] = deviceParametersPtr->sleepLength;
+  config_Json["cyclobot_id"] = deviceParametersPtr->cyclobotId; // uuid
+  config_Json["session_token"] = clientParametersPtr->sessionToken; // uuid
+  config_Json["device_sleep_lenght"] = deviceParametersPtr->sleepLength;
   
   // Wifi config
-  configDataPtr->config_Json["wifi_status"] = wifiParametersPtr->wifiStatus;
-  configDataPtr->config_Json["wifi_firmware_latest_version"] = wifiParametersPtr->wifiFirmwareLatestVersion;
-  configDataPtr->config_Json["network_ssid_index"] = wifiParametersPtr->networkSsidIndex;
-  configDataPtr->config_Json["wait_time_per_connection_attempt"] = wifiParametersPtr->waitTimePerConnectionAttempt;
-  configDataPtr->config_Json["max_connectoin_attempt"] = wifiParametersPtr->maxConnectionAttempt;
-  configDataPtr->config_Json["conn_attempt_count"] = wifiParametersPtr->connAttemptCount;
-  configDataPtr->config_Json["wait_time_per_scan_attempt"] = wifiParametersPtr->waitTimePerScanAttempt;
-  configDataPtr->config_Json["wifi_max_scan_attempt"] = wifiParametersPtr->wifiMaxScanAttempt;
-  configDataPtr->config_Json["scan_count"] = wifiParametersPtr->scanCount;
+  config_Json["wifi_status"] = wifiParametersPtr->wifiStatus;
+  config_Json["wifi_firmware_latest_version"] = wifiParametersPtr->wifiFirmwareLatestVersion;
+  config_Json["network_ssid_index"] = wifiParametersPtr->networkSsidIndex;
+  config_Json["wait_time_per_connection_attempt"] = wifiParametersPtr->waitTimePerConnectionAttempt;
+  config_Json["max_connectoin_attempt"] = wifiParametersPtr->maxConnectionAttempt;
+  config_Json["conn_attempt_count"] = wifiParametersPtr->connAttemptCount;
+  config_Json["wait_time_per_scan_attempt"] = wifiParametersPtr->waitTimePerScanAttempt;
+  config_Json["wifi_max_scan_attempt"] = wifiParametersPtr->wifiMaxScanAttempt;
+  config_Json["scan_count"] = wifiParametersPtr->scanCount;
   
   // Client config
-  configDataPtr->config_Json["wait_time_per_connection_attempt"] = clientParametersPtr->waitTimePerConnectionAttempt;
-  configDataPtr->config_Json["response_timeout_limit"] = clientParametersPtr->responseTimeoutLimit;
+  config_Json["wait_time_per_connection_attempt"] = clientParametersPtr->waitTimePerConnectionAttempt;
+  config_Json["response_timeout_limit"] = clientParametersPtr->responseTimeoutLimit;
 
   // Ecosystem config
-  configDataPtr->config_Json["soil_moisture_limit"] = ecosystemParametersPtr->soilMoistureLimit;
-  configDataPtr->config_Json["current_temperature"] = ecosystemParametersPtr->currentTemperature;
-  configDataPtr->config_Json["max_temperature_expected"] = ecosystemParametersPtr->maxTemperatureExpected;
-  configDataPtr->config_Json["initial_watering_time_limit"] = ecosystemParametersPtr->initialWateringTimeLimit;
-  configDataPtr->config_Json["growth_rate"] = ecosystemParametersPtr->growthRate;
-  configDataPtr->config_Json["decrease_rate"] = ecosystemParametersPtr->decreaseRate;
-  configDataPtr->config_Json["watering_time_limit"] = ecosystemParametersPtr->wateringTimeLimit;
-  configDataPtr->config_Json["climate"] = ecosystemParametersPtr->climate;
-  configDataPtr->config_Json["soil_is_wet"] = ecosystemParametersPtr->soilIsWet;
-  configDataPtr->config_Json["sun_light_available"] = ecosystemParametersPtr->sunLightAvailable;
-  configDataPtr->config_Json["standBy"] = ecosystemParametersPtr->standBy;
+  config_Json["soil_moisture_limit"] = ecosystemParametersPtr->soilMoistureLimit;
+  config_Json["current_temperature"] = ecosystemParametersPtr->currentTemperature;
+  config_Json["max_temperature_expected"] = ecosystemParametersPtr->maxTemperatureExpected;
+  config_Json["initial_watering_time_limit"] = ecosystemParametersPtr->initialWateringTimeLimit;
+  config_Json["growth_rate"] = ecosystemParametersPtr->growthRate;
+  config_Json["decrease_rate"] = ecosystemParametersPtr->decreaseRate;
+  config_Json["watering_time_limit"] = ecosystemParametersPtr->wateringTimeLimit;
+  config_Json["climate"] = ecosystemParametersPtr->climate;
+  config_Json["soil_is_wet"] = ecosystemParametersPtr->soilIsWet;
+  config_Json["sun_light_available"] = ecosystemParametersPtr->sunLightAvailable;
+  config_Json["standBy"] = ecosystemParametersPtr->standBy;
 
   // *** CONVERT JSON TO STRING ***
-  serializeJson(configDataPtr->config_Json, configDataPtr->config_Char);
+  serializeJson(config_Json, configDataPtr->config_Char);
+
+  // *** JSON OBJECT AUTOMATICALLY FREED (goes out of scope) ***
 
   // Send HTTP request
   if (wifiParametersPtr->client.connected()) {
@@ -228,16 +233,21 @@ void ClientComm::post_cyclobot_config(ClientParameters *clientParametersPtr, Wif
 void ClientComm::post_cyclobot_diagnosis(ClientParameters *clientParametersPtr, WifiParameters *wifiParametersPtr, DeviceParameters *deviceParametersPtr, SelfDiagnosisData *selfDiagnosisDataPtr, VisualComm *visualCommPtr) {
   visualCommPtr->print_line(F("    [ClientComm::post_cyclobot_diagnosis] running..."));
 
+  // Allocate TEMPORARY JSON document
+  DynamicJsonDocument selfDiagnosis_Json(SelfDiagnosisData::SELFDIAG_JSON_CAPACITY);
+
   // Build json struct and convert to string
-  selfDiagnosisDataPtr->selfDiagnosis_Json["cyclobot_id"] = deviceParametersPtr->cyclobotId; // uuid
-  selfDiagnosisDataPtr->selfDiagnosis_Json["session_token"] = clientParametersPtr->sessionToken; // uuid
-  selfDiagnosisDataPtr->selfDiagnosis_Json["diagnosis_date_time"] = selfDiagnosisDataPtr->diagnosisDateTime; // date and time
-  selfDiagnosisDataPtr->selfDiagnosis_Json["wifi_connected"] = selfDiagnosisDataPtr->wifiIsConnected; // int
-  selfDiagnosisDataPtr->selfDiagnosis_Json["watering_system"] = selfDiagnosisDataPtr->wateringSystemOK; // int
-  selfDiagnosisDataPtr->selfDiagnosis_Json["river_system"] = selfDiagnosisDataPtr->riverSystemOK; // int
-  selfDiagnosisDataPtr->selfDiagnosis_Json["wind_system"] = selfDiagnosisDataPtr->windSystemOK; // int
-  selfDiagnosisDataPtr->selfDiagnosis_Json["lighting_system"] = selfDiagnosisDataPtr->lightingSystemOK; // int
-  serializeJson(selfDiagnosisDataPtr->selfDiagnosis_Json, selfDiagnosisDataPtr->selfDiagnosis_Char);  // convert JSON to Char
+  selfDiagnosis_Json["cyclobot_id"] = deviceParametersPtr->cyclobotId; // uuid
+  selfDiagnosis_Json["session_token"] = clientParametersPtr->sessionToken; // uuid
+  selfDiagnosis_Json["diagnosis_date_time"] = selfDiagnosisDataPtr->diagnosisDateTime; // date and time
+  selfDiagnosis_Json["wifi_connected"] = selfDiagnosisDataPtr->wifiIsConnected; // int
+  selfDiagnosis_Json["watering_system"] = selfDiagnosisDataPtr->wateringSystemOK; // int
+  selfDiagnosis_Json["river_system"] = selfDiagnosisDataPtr->riverSystemOK; // int
+  selfDiagnosis_Json["wind_system"] = selfDiagnosisDataPtr->windSystemOK; // int
+  selfDiagnosis_Json["lighting_system"] = selfDiagnosisDataPtr->lightingSystemOK; // int
+  serializeJson(selfDiagnosis_Json, selfDiagnosisDataPtr->selfdiag_Char);  // convert JSON to Char
+
+  // *** JSON OBJECT AUTOMATICALLY FREED (goes out of scope) ***
 
   // Send HTTP request
   if (wifiParametersPtr->client.connected()) {
@@ -247,9 +257,9 @@ void ClientComm::post_cyclobot_diagnosis(ClientParameters *clientParametersPtr, 
     wifiParametersPtr->client.println(clientParametersPtr->apiServer);
     wifiParametersPtr->client.println("Content-Type: application/json");
     wifiParametersPtr->client.print("Content-Length: ");
-    wifiParametersPtr->client.println(strlen(selfDiagnosisDataPtr->selfDiagnosis_Char));
+    wifiParametersPtr->client.println(strlen(selfDiagnosisDataPtr->selfdiag_Char));
     wifiParametersPtr->client.println(); // Empty server_response_line to end headers
-    wifiParametersPtr->client.print(selfDiagnosisDataPtr->selfDiagnosis_Char);  // ✅ Send JSON body
+    wifiParametersPtr->client.print(selfDiagnosisDataPtr->selfdiag_Char);  // ✅ Send JSON body
 
     // Method response
     visualCommPtr->print_line(F("    [ClientComm::post_cyclobot_diagnosis] Request sent"));

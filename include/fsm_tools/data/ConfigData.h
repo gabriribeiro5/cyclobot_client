@@ -16,10 +16,14 @@ Pragma pack usage:
 
 class ConfigData {
 public:
-    ConfigData(size_t capacity);
+    ConfigData();
     // Create SETUP structs — use fixed-size arrays so data can be stored/read directly in EEPROM
     static const size_t CONFIG_NAME_LEN = 24;
     static const size_t CONFIG_DESC_LEN = 48;
+
+    // JSON serialization buffer (transient JSON documents allocated on-demand in ClientComm, SelfDiagnosisData, etc.)
+    static const size_t CONFIG_JSON_CAPACITY = 524;
+    char config_Char[CONFIG_JSON_CAPACITY];  // char array to hold serialized JSON (allocated at construction)
 
     struct Config_Bool {
         char name[CONFIG_NAME_LEN];
@@ -131,13 +135,8 @@ public:
     // Helpers for uint8 entries
     bool set_config_uint8_value(char *name, uint8_t value);
     bool update_config_uint8(char *name, const Config_Uint8_t &updated);
-
-
-    DynamicJsonDocument config_Json;
-    char config_Char[sizeof(config_Json)];  // char array to hold serialized JSON
     
     void add_pin(char* type, char *name, bool value, char *description, bool updated_by, DateTime last_update);
     void add_parameter(char* type, char *name, bool value, char *description, bool user_can_see, bool updated_by, DateTime last_update);
-    DynamicJsonDocument load_json();
 
 };

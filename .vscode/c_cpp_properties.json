@@ -10,8 +10,8 @@
             "includePath": [
                 "C:/Users/gabri/codes/1_Products/cyclobot/include",
                 "C:/Users/gabri/codes/1_Products/cyclobot/src",
-                "C:/Users/gabri/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
                 "C:/Users/gabri/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
+                "C:/Users/gabri/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
                 "C:/Users/gabri/codes/1_Products/cyclobot/.pio/libdeps/megaatmega2560/LinkedList",
                 "C:/Users/gabri/codes/1_Products/cyclobot/.pio/libdeps/megaatmega2560/ArduinoUniqueID/src",
                 "C:/Users/gabri/codes/1_Products/cyclobot/.pio/libdeps/megaatmega2560/RTClib/src",
@@ -33,8 +33,8 @@
                 "path": [
                     "C:/Users/gabri/codes/1_Products/cyclobot/include",
                     "C:/Users/gabri/codes/1_Products/cyclobot/src",
-                    "C:/Users/gabri/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
                     "C:/Users/gabri/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
+                    "C:/Users/gabri/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
                     "C:/Users/gabri/codes/1_Products/cyclobot/.pio/libdeps/megaatmega2560/LinkedList",
                     "C:/Users/gabri/codes/1_Products/cyclobot/.pio/libdeps/megaatmega2560/ArduinoUniqueID/src",
                     "C:/Users/gabri/codes/1_Products/cyclobot/.pio/libdeps/megaatmega2560/RTClib/src",
@@ -53,7 +53,7 @@
                 ]
             },
             "defines": [
-                "PLATFORMIO=60118",
+                "PLATFORMIO=60119",
                 "ARDUINO_AVR_MEGA2560",
                 "DEBUG",
                 "F_CPU=16000000L",
