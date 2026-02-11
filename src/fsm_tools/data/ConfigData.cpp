@@ -448,35 +448,21 @@ ConfigData::Config_Bool ConfigData::config_bool(char *name)
 }
 ConfigData::Config_Int ConfigData::config_int(char *name)
 {
-    // for (int i = 0; i < config_int_list.size(); i++)
-    // {
-    //     Config_Int item = config_int_list.get(i);
-    //     if (strcmp(item.name, name) == 0)   // compare string contents
-    //     {
-    //         return item;
-    //     }
-    // }
-    // Return a "null" object if not found
-    Config_Int empty;
-    memset(&empty, 0, sizeof(empty));
-    empty.last_update = DateTime();
-    return empty;
+    Config_Int empty = {"", 0, "", false, false, false, DateTime() };
+    int idx = find_int_index(name);
+    if (idx < 0) return empty;
+    Config_Int out;
+    if (!read_int_at_index(idx, out)) return empty;
+    return out;
 };
 ConfigData::Config_Uint8_t ConfigData::config_uint8_t(char *name)
 {
-    // for (int i = 0; i < config_uint8_t_list.size(); i++)
-    // {
-    //     Config_Uint8_t item = config_uint8_t_list.get(i);
-    //     if (strcmp(item.name, name) == 0)   // compare string contents
-    //     {
-    //         return item;
-    //     }
-    // }
-    // Return a "null" object if not found
-    Config_Uint8_t empty;
-    memset(&empty, 0, sizeof(empty));
-    empty.last_update = DateTime();
-    return empty;
+    Config_Uint8_t empty = {"", 0, "", false, false, false, DateTime() };
+    int idx = find_uint8_index(name);
+    if (idx < 0) return empty;
+    Config_Uint8_t out;
+    if (!read_uint8_at_index(idx, out)) return empty;
+    return out;
 };
 
 /************************ INSERT METHODS ************************/

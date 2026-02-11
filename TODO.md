@@ -244,8 +244,9 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
     - [x] comment calls to LinkedList->get(index)
     - [x] comment unused LinkedList
     - [x] refactor(ConfigData): implemented in EEPROM (4 KB)
+    - [x] feat(ConfigData): implement data getters
     - [x] feat(EEPROM Monitor): create visualComm methods to check EEPROM status
-    - [ ] perf(SRAM usage): use Claude Haiku 4.5 to look for oportunities to optimize SRAM usage
+    - [x] perf(SRAM usage): use Claude Haiku 4.5 to look for oportunities to optimize SRAM usage
       - [x] search main SRAM consumers
       - [x] refactor(context): convert long-lived instances to static storage
       - [x] refactor(context): apply lazy pattern in main (no effect - rolled back)
@@ -253,6 +254,10 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
       - [x] refactor(capacity): remove 'capacity' from ConfigData and SelfDiagnosisData initialization
       - [x] perf(Json and String): reduce object's size
     - [ ] refactor(EnvironmentData): implement in standard SRAM (8 KB)
+      - [ ] refactor(LinkedList::getNodeData): a descriptive name for the old getPtr() method
+      - [ ] refactor(LinkedList::getNodeData): try using method 
+      - [ ] 
+    - [ ] refactor(remove EcosystemParameters): Use fsm_tools/data/* instead
     - [ ] refactor(LogData): implement in standard SRAM (8 KB)
     - [ ] refactor(SelfDiagnosisData): implement in standard SRAM (8 KB)
   - [ ] feat(LinkedList::getPtr()): send pull request for third-party lib
@@ -266,6 +271,8 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
     - [ ] if wait_time is positive, wait(stream_frames)
     - [ ] else, raise warnig ("The streaming loop took longer than expected.")
   - [ ] clear strategy parameters at the end of states loop
+
+- [x] feat(PL_FogLightFan::setup and simulate_ecosystem): finish flow
 
 - [ ] refactor(ClientComm): improve 'Get response' snippet
   - [ ] Make sure there's no infinite loop

@@ -39,6 +39,7 @@ void setup() {
 
     cyclobot.commPtr->visualCommPtr->print_line(F("[main::setup] starting clock (rtc)"));
     if (!cyclobot.rtc.begin()) {
+        cyclobot.commPtr->visualCommPtr->print_free_memory("[main::setup]");
         cyclobot.commPtr->visualCommPtr->print_line(F("[main::setup] RTC not found"));
     }
     

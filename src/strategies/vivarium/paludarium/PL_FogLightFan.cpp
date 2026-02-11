@@ -14,22 +14,18 @@ void PL_FogLightFan::enter(ConfigData *configDataPtr, VisualComm *visualCommPtr,
         "Sensor de umidade do solo pino A0 conectado no A0 do Arduino",
         0, rtc->now()
     );
-    visualCommPtr->print_line(F("  [PL_FogLightFan::enter] A done."));
     configDataPtr->add_pin("uint8_t", "irrigationSystem", A1,
         "Sensor de chuva pino A1 conectado no A1 do Arduino",
         0, rtc->now()
     );
-    visualCommPtr->print_line(F("  [PL_FogLightFan::enter] B done."));
     configDataPtr->add_pin("int", "relePort", 4,
         "Porta de controle do relé conectada no D4 do Arduino",
         0, rtc->now()
     );
-    visualCommPtr->print_line(F("  [PL_FogLightFan::enter] C done."));
     configDataPtr->add_pin("int", "soilIsWet", 0,
         "condição de solo úmido; 1 = solo umido",
         0, rtc->now()
     );
-    visualCommPtr->print_line(F("  [PL_FogLightFan::enter] D done."));
     configDataPtr->add_parameter("bool", "soilIsWet", 0,
                                 "condição de solo úmido; 1 = solo umido",
                                 0, 0, rtc->now());
@@ -65,16 +61,14 @@ void PL_FogLightFan::enter(ConfigData *configDataPtr, VisualComm *visualCommPtr,
                                 0, 0, rtc->now());
      
     visualCommPtr->print_line(F("  [PL_FogLightFan::enter] creating configuration parameters... done."));
-    // standBy(0),
-    // timeBufferMicroSec(1800000000)
 }
 
 /* PALUDARIUM */
 void PL_FogLightFan::setup(ConfigData *configDataPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtc) {
-    // pinMode(configDataPtr->config_uint8_t("soilMoistureSensor").value, INPUT);     // Sensor de umidade do solo - porta A0 é entrada 
-    // pinMode(configDataPtr->config_uint8_t("irrigationSystem").value, INPUT);       // Sensor de chuva - porta A1 é entrada 
-    // pinMode(configDataPtr->config_uint8_t("relePort").value, OUTPUT);              // Porta de controle do Relé - D4 é saída 
-    // digitalWrite(configDataPtr->config_uint8_t("relePort").value, HIGH);           // Mantém relé desligado  
+    pinMode(configDataPtr->config_uint8_t("soilMoistureSensor").value, INPUT);     // Sensor de umidade do solo - porta A0 é entrada 
+    pinMode(configDataPtr->config_uint8_t("irrigationSystem").value, INPUT);       // Sensor de chuva - porta A1 é entrada 
+    pinMode(configDataPtr->config_uint8_t("relePort").value, OUTPUT);              // Porta de controle do Relé - D4 é saída 
+    digitalWrite(configDataPtr->config_uint8_t("relePort").value, HIGH);           // Mantém relé desligado  
 }
 
 /* PALUDARIUM */
@@ -86,24 +80,18 @@ void PL_FogLightFan::simulate_ecosystem(EcosystemScanner *scannerPtr,
                                         )
 {
     // // ********* Primary scann *********
-    // if (configDataPtr->config_int("soilMoistureLimit").value >
-    //     analogRead(configDataPtr->config_uint8_t("soilMoistureSensor").value) && configDataPtr->config_bool("soilIsWet") != nullptr)
-    // {
-    //     configDataPtr->config_bool("soilIsWet")->value = true;
-    //     // ConfigData::Config_Bool soilIsWetPtr = configDataPtr->config_bool("soilIsWet");
-    //     // soilIsWetPtr.value = true;
-    // };
-    // scannerPtr->read_soil_moisture(visualCommPtr, configDataPtr->config_uint8_t("soilMoistureSensor").value);
-
+    scannerPtr->read_soil_moisture(configDataPtr, visualCommPtr);
+    
     // ********* Irrigation strategy *********
-    // if (!configDataPtr->config_bool("soilIsWet").value) {
-    //     actuatorPtr->irrigation_system_on(configDataPtr, visualCommPtr, configDataPtr->config_uint8_t("irrigationSystem").value);
-    //     while (!configDataPtr->config_bool("soilIsWet").value)
-    //     {
-    //         scannerPtr->read_soil_moisture(visualCommPtr, configDataPtr->config_uint8_t("soilMoistureSensor").value);
-    //     }
-    //     actuatorPtr->irrigation_system_off(configDataPtr, visualCommPtr, configDataPtr->config_uint8_t("irrigationSystem").value);
-    // }
+    visualCommPtr->print_line(F("  [PL_FogLightFan::simulate_ecosystem] Irrigation strategy..."));
+    if (!configDataPtr->config_bool("soilIsWet").value) {
+        actuatorPtr->irrigation_system_on(configDataPtr, visualCommPtr);
+        while (!configDataPtr->config_bool("soilIsWet").value)
+        {
+            scannerPtr->read_soil_moisture(configDataPtr, visualCommPtr);
+        }
+        actuatorPtr->irrigation_system_off(configDataPtr, visualCommPtr);
+    }
 }
 
 /* PALUDARIUM */

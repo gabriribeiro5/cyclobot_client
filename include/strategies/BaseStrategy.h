@@ -10,7 +10,7 @@
 #include "../fsm_tools/config/DeviceParameters.h"
 #include "../fsm_tools/comm/VisualComm.h"
 #include "../fsm_tools/data/ConfigData.h"
-#include "../fsm_tools/data/EnvironmentData.h"
+#include "../fsm_tools/data/EcosystemData.h"
 #include "../fsm_tools/data/LogData.h"
 #include "../fsm_tools/data/SelfDiagnosisData.h"
 #include "../fsm_tools/sensor/EcosystemScanner.h"
