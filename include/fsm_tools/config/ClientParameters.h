@@ -23,20 +23,22 @@ class ClientParameters {
     char *server_response_line;
 
     // sizes
-    const PROGMEM size_t signatureRequestSize = 200;
+    static const size_t SIGNATURE_REQUESTS_CAPACITY = 80;
+    static const size_t LOGIN_PARAMETERS_CAPACITY = 80;
+    static const size_t RESPONSE_JSON_CAPACITY = 80;
 
     // post_signature_request
-    StaticJsonDocument<200> signatureRequest_Json;
-    char signatureRequest_Char[200];
+    StaticJsonDocument<SIGNATURE_REQUESTS_CAPACITY> signatureRequest_Json;
+    char signatureRequest_Char[SIGNATURE_REQUESTS_CAPACITY];
     
     // get_cyclobot_session_token
-    StaticJsonDocument<200> loginParameters_Json;
-    char loginParameters_Char[200];
+    StaticJsonDocument<LOGIN_PARAMETERS_CAPACITY> loginParameters_Json;
+    char loginParameters_Char[LOGIN_PARAMETERS_CAPACITY];
     const char *sessionToken;
     char *serverRawResponse;
     char *jsonStart;
     char *jsonPart;
 
-    StaticJsonDocument<512> responseJson;
+    StaticJsonDocument<RESPONSE_JSON_CAPACITY> responseJson;
     DeserializationError deserializationError;
 };

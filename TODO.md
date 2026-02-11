@@ -250,8 +250,8 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
       - [x] refactor(context): convert long-lived instances to static storage
       - [x] refactor(context): apply lazy pattern in main (no effect - rolled back)
       - [x] refactor(DynamicJsonDocument): alocate config_json and selfDiagnosis_Json only when needed (in ClientComm) and free right after use
-      - [x] refactor(capacity): remove 'capacity' on ConfigData and SelfDiagnosisData initialization
-      - [ ] ...
+      - [x] refactor(capacity): remove 'capacity' from ConfigData and SelfDiagnosisData initialization
+      - [x] perf(Json and String): reduce object's size
     - [ ] refactor(EnvironmentData): implement in standard SRAM (8 KB)
     - [ ] refactor(LogData): implement in standard SRAM (8 KB)
     - [ ] refactor(SelfDiagnosisData): implement in standard SRAM (8 KB)

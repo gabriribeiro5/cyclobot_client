@@ -195,7 +195,7 @@ void VisualComm::print_parameters(ParameterInstances *paramPtr) {
   
   // sizes
   print(F(" - Signature Request Size: "));
-  print_line(paramPtr->clientParametersPtr->signatureRequestSize);
+  print_line(paramPtr->clientParametersPtr->SIGNATURE_REQUESTS_CAPACITY);
   
 
   // UPDATE PARAMETERS

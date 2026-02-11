@@ -15,8 +15,6 @@ ClientParameters::ClientParameters()
   server_response(nullptr),
   server_response_line(nullptr),
 
-  signatureRequestSize(200),
-
   signatureRequest_Json(),
   signatureRequest_Char(),
 

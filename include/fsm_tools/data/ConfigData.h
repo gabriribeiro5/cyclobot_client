@@ -22,7 +22,7 @@ public:
     static const size_t CONFIG_DESC_LEN = 48;
 
     // JSON serialization buffer (transient JSON documents allocated on-demand in ClientComm, SelfDiagnosisData, etc.)
-    static const size_t CONFIG_JSON_CAPACITY = 524;
+    static const size_t CONFIG_JSON_CAPACITY = 124;
     char config_Char[CONFIG_JSON_CAPACITY];  // char array to hold serialized JSON (allocated at construction)
 
     struct Config_Bool {
