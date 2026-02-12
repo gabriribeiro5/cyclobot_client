@@ -30,8 +30,8 @@ class EcosystemData {
         LinkedList<Sensor_Int> sensor_int_list;
         
         // Linked-lists SEARCH methods
-        Sensor_Bool *sensor_bool(char *name);
-        Sensor_Int *sensor_int(char *name);
+        Sensor_Bool sensor_bool(char *name);
+        Sensor_Int sensor_int(char *name);
         
         // Linked-lists INSERTITION methods
         void add(char* type, char *name, int value, char *description, int expected_frequency, bool measure_now, bool send_now, DateTime last_update);

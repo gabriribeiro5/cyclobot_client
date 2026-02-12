@@ -9,29 +9,31 @@ EcosystemData::EcosystemData()
 
 /************************ SEARCH METHODS ************************/
 // SETUP
-EcosystemData::Sensor_Bool *EcosystemData::sensor_bool(char *name)
+EcosystemData::Sensor_Bool EcosystemData::sensor_bool(char *name)
 {
     for (int i = 0; i < sensor_bool_list.size(); i++)
     {
-        Sensor_Bool *item = sensor_bool_list.getNodeData(i);
-        if (item && strcmp(item->name, name) == 0)   // compare string contents
+        EcosystemData::Sensor_Bool item = sensor_bool_list.get(i);
+        if (strcmp(item.name, name) == 0)   // compare string contents
         {
             return item;
         };
     };
-    return nullptr;
+    EcosystemData::Sensor_Bool empty = { nullptr, false, nullptr, 0, false, false, DateTime() };
+    return empty;
 };
-EcosystemData::Sensor_Int *EcosystemData::sensor_int(char *name)
+EcosystemData::Sensor_Int EcosystemData::sensor_int(char *name)
 {
     for (int i = 0; i < sensor_int_list.size(); i++)
     {
-        Sensor_Int *item = sensor_int_list.getNodeData(i);
-        if (item && strcmp(item->name, name) == 0)   // compare string contents
+        EcosystemData::Sensor_Int item = sensor_int_list.get(i);
+        if (strcmp(item.name, name) == 0)   // compare string contents
         {
             return item;
         };
     };
-    return nullptr;
+    EcosystemData::Sensor_Int empty = { nullptr, 0, nullptr, 0, false, false, DateTime() };
+    return empty;
 };
 
 /************************ INSERT METHODS ************************/
