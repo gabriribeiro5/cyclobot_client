@@ -8,6 +8,29 @@
 #include "../../../include/fsm_tools/config/WifiParameters.h"
 #include "../../../include/Context.h"
 
+void WifiComm::begin(WifiParameters *wifiParametersPtr, VisualComm *visualCommPtr) {
+  // Use HardwareSerial when available (Combo Board with wifi integrated)
+  #if defined(__AVR_ATmega2560__)
+
+      Serial3.begin(115200);
+      wifiParametersPtr->wifiStream = &Serial3;
+      
+
+  #else
+
+      static SoftwareSerial espSerial(
+          BaseMapping::wifiEspRX,
+          BaseMapping::wifiEspTX
+      );
+
+      espSerial.begin(9600);
+      wifiParametersPtr->wifiStream = &espSerial;
+
+  #endif
+}
+
+
+
 void WifiComm::print_wifi_status(VisualComm *visualCommPtr) {
   if (WiFi.status() != WL_CONNECTED) {
     visualCommPtr->print_line(F("    [WifiComm::print_wifi_status] WiFi not connected."));

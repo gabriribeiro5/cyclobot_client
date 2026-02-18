@@ -7,6 +7,22 @@
 #include "../../../include/fsm_tools/config/WifiParameters.h"
 #include "../../../include/fsm_tools/data/SelfDiagnosisData.h"
 
+bool CheckMyHealth::is_esp_present(WifiParameters *wifiParametersPtr, VisualComm *visualCommPtr) {
+  wifiParametersPtr->wifiStream->println("AT");
+  unsigned long start = millis();
+  
+  while (millis() - start < 1000) {
+    visualCommPtr->print_line(F("    [CheckMyHealth::is_esp_present] Checking for ESP module..."));
+    if (wifiParametersPtr->wifiStream->find("OK")) {
+        return true;
+        visualCommPtr->print_line(F("    [CheckMyHealth::is_esp_present] ESP module is present"));
+      }
+    }
+    visualCommPtr->print_line(F("    [CheckMyHealth::is_esp_present] ESP module is NOT present"));
+    return false;
+}
+
+
 bool CheckMyHealth::wifi_shield_is_on(WifiParameters *wifiParametersPtr, VisualComm *visualCommPtr) {
     // check for the presence of the shield:
     visualCommPtr->print_line(F("    [CheckMyHealth::wifi_shield_is_on]..."));

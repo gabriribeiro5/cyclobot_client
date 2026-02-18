@@ -274,6 +274,21 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 
 - [x] feat(PL_FogLightFan::setup and simulate_ecosystem): finish flow
 
+- [x] refactor(Upload to ATMega2566): make it happen
+  - [x] fix(wifi tool): implement hardware verification to use correct wifi tools
+    - [x] Abstract the Serial Interface
+    - [x] create get_stream method
+    - [x] update main
+    - [x] create is_esp_present method
+    - [x] call is_esp_present method on SelfDiagnosis
+    - [x] remove SoftwareSerial call in main.cpp
+  - [x] debug(code reduction): drasticaly reduce Context's scope until code runs
+    - [ ] reinclude component: A
+    - [ ] reinclude component: B
+    - [ ] reinclude component: ...
+
+- [ ] feat(print_strategy_parameters method): to replace print_parameters()
+
 - [ ] refactor(ClientComm): improve 'Get response' snippet
   - [ ] Make sure there's no infinite loop
 

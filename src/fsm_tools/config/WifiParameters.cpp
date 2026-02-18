@@ -1,4 +1,6 @@
 #include "../../../include/fsm_tools/config/WifiParameters.h"
+#include "../../../include/fsm_tools/config/BaseMapping.h"
+#include <SoftwareSerial.h>
 
 WifiParameters::WifiParameters()
 : wifiSsid("yourNetwork"),
@@ -16,7 +18,8 @@ WifiParameters::WifiParameters()
   connAttemptCount(0),
   scanCount(0),
   wifiStatus(WL_IDLE_STATUS),
-  wifiShieldIsOn(0)
+  wifiShieldIsOn(0),
+  wifiStream(nullptr)
 {
     // The upward initialization handles constants and non-constants.
     // No need to assign variables again in the body!

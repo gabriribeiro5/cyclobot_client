@@ -7,6 +7,8 @@ class WifiParameters {
     public:
         WifiParameters();
         ~WifiParameters();
+        
+        Stream* wifiStream;
 
         const char* wifiSsid;                      //  your network SSID (name)
         const char* wifiSecret;                    // your network password (use for WPA, or use as key for WEP)

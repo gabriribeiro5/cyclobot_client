@@ -29,7 +29,7 @@ void SelfDiagnosisState::run_health_check(FiniteStateMachine *cyclobot) {
     
     cyclobot->commPtr->visualCommPtr->print_line(F("[SelfDiagnosisState::run_health_check] sensors..."));
     // Wifi sensor
-    if (cyclobot->selfPtr->checkMyHealthPtr->wifi_shield_is_on(cyclobot->paramPtr->wifiParametersPtr, cyclobot->commPtr->visualCommPtr)) { // check for the presence of the shield
+    if (cyclobot->selfPtr->checkMyHealthPtr->is_esp_present(cyclobot->paramPtr->wifiParametersPtr, cyclobot->commPtr->visualCommPtr)) {
         cyclobot->selfPtr->checkMyHealthPtr->check_wifi_firmware_version(cyclobot->paramPtr->wifiParametersPtr,
                                                                             cyclobot->dataPtr->selfDiagnosisDataPtr,
                                                                             cyclobot->commPtr->visualCommPtr);
@@ -42,8 +42,23 @@ void SelfDiagnosisState::run_health_check(FiniteStateMachine *cyclobot) {
                                                                         cyclobot->paramPtr->clientParametersPtr,
                                                                         cyclobot->dataPtr->selfDiagnosisDataPtr,
                                                                         cyclobot->commPtr->visualCommPtr);
-            cyclobot->selfPtr->checkMyHealthPtr->clear_runtime_data(cyclobot->commPtr->visualCommPtr);
-        }
+        cyclobot->selfPtr->checkMyHealthPtr->clear_runtime_data(cyclobot->commPtr->visualCommPtr);
+    };
+    // if (cyclobot->selfPtr->checkMyHealthPtr->wifi_shield_is_on(cyclobot->paramPtr->wifiParametersPtr, cyclobot->commPtr->visualCommPtr)) {
+    //     cyclobot->selfPtr->checkMyHealthPtr->check_wifi_firmware_version(cyclobot->paramPtr->wifiParametersPtr,
+    //                                                                         cyclobot->dataPtr->selfDiagnosisDataPtr,
+    //                                                                         cyclobot->commPtr->visualCommPtr);
+    //     cyclobot->selfPtr->checkMyHealthPtr->check_wifi_connection(cyclobot->commPtr->wifiCommPtr,
+    //                                                                 cyclobot->paramPtr->wifiParametersPtr,
+    //                                                                 cyclobot->dataPtr->selfDiagnosisDataPtr,
+    //                                                                 cyclobot->commPtr->visualCommPtr);
+    //     cyclobot->selfPtr->checkMyHealthPtr->check_client_communication(cyclobot->commPtr->clientCommPtr,
+    //                                                                     cyclobot->paramPtr->wifiParametersPtr,
+    //                                                                     cyclobot->paramPtr->clientParametersPtr,
+    //                                                                     cyclobot->dataPtr->selfDiagnosisDataPtr,
+    //                                                                     cyclobot->commPtr->visualCommPtr);
+    //     cyclobot->selfPtr->checkMyHealthPtr->clear_runtime_data(cyclobot->commPtr->visualCommPtr);
+    //     }
         
     cyclobot->commPtr->visualCommPtr->print_line(F("[SelfDiagnosisState::run_health_check] actuators..."));
     // *** ACTUATORS ***

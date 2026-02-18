@@ -10,7 +10,7 @@
 */
 class FiniteStateMachine; // Forward declaration
 
-class BaseState {
+class  BaseState {
 public:
     // constructor
     virtual ~BaseState() {}

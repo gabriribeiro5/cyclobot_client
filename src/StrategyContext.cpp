@@ -14,9 +14,9 @@ StrategyContext::StrategyContext(ConfigData *configDataPtr, BaseStrategy *simula
     simulationStrategyPtr->enter(configDataPtr, visualCommPtr, rtcPtr);
 }
 
-void StrategyContext::setup(BaseStrategy *simulationStrategyPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtcPtr) {
+void StrategyContext::setup(BaseStrategy *simulationStrategyPtr, ConfigData *configDataPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtcPtr) {
     visualCommPtr->print_line(F("  [StrategyContext::setup] running..."));
-    // parametersPtr->simulationStrategyPtr->setup();
+    simulationStrategyPtr->setup(configDataPtr, visualCommPtr, rtcPtr);
     visualCommPtr->print_line(F("  [StrategyContext::setup] -- done --"));
 }
 

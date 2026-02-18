@@ -32,40 +32,39 @@ class FiniteStateMachine {
         static BaseStrategy *simulationStrategyPtr;
         static StrategyContext *simStrategyContextPtr;
 
-        FiniteStateMachine(BaseState *initialStatePtr, BaseStrategy *simStrategyPtr); // Constructor
-        FiniteStateMachine(const FiniteStateMachine&) = delete;                      // forbid copy constructor
-        FiniteStateMachine& operator=(const FiniteStateMachine&) = delete;           // forbid copy assignment
+        FiniteStateMachine(BaseState *initialStatePtr, BaseStrategy *simStrategyPtr);   // Constructor
+        // FiniteStateMachine(const FiniteStateMachine&) = delete;                      // forbid copy constructor
+        // FiniteStateMachine& operator=(const FiniteStateMachine&) = delete;           // forbid copy assignment
 
         void change_state(BaseState *newStatePtr);
-        void update_current_time();
-        
-        // error
-        void handle_error();
-        
-        // self
-        void run_health_check();
 
-        // comm
-        void report_signature_request();
-        void session_new();
-        void report_config();
-        void report_health_check();
+        // // error
+        // void handle_error();
         
-        // update
-        void update_simulation_code();
-        void update_config();
-        
-        // comm
-        void session_stop();
+        // // self
+        // void run_health_check();
 
-        // sim
-        void run_simulation();
+        // // comm
+        // void report_signature_request();
+        // void session_new();
+        // void report_config();
+        // void report_health_check();
         
-        // comm
-        void report_simulation_data();
+        // // update
+        // void update_simulation_code();
+        // void update_config();
         
-        // self
-        void take_a_nap();
+        // // comm
+        // void session_stop();
+
+        // // sim
+        // void run_simulation();
+        
+        // // comm
+        // void report_simulation_data();
+        
+        // // self
+        // void take_a_nap();
 
         ~FiniteStateMachine();
         

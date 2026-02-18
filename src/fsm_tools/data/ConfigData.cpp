@@ -475,9 +475,19 @@ void ConfigData::add_pin(char* type,
                             DateTime last_update
                         )
 {   
-    Serial.println("   [ConfigData::add_pin] if 1 ");
+    Serial.println("   [ConfigData::add_pin] Adding pin with name: " + String(name) + ", type: " + String(type) + ", value: " + String(value ? "true" : "false") + ", description: " + String(description) + ", updated_by: " + String(updated_by ? "true" : "false") + ", last_update: " + String(last_update.unixtime()));
     Serial.flush();
-    if (strcmp(type, "bool") == 0) {
+    bool is_bool = strcmp(type, "bool") == 0;
+    bool is_int = strcmp(type, "int") == 0;
+    bool is_uint8 = strcmp(type, "uint8_t") == 0;
+
+    if (!is_bool && !is_int && !is_uint8) {
+        Serial.println("   [ConfigData::add_pin] WARNING: pin type '" + String(type) + "' not supported for pin '" + String(name) + "'. Supported types are: bool, int, uint8_t.");
+        Serial.flush();
+        return;
+    }
+
+    if (is_bool) {
         Config_Bool new_bool;
         memset(&new_bool, 0, sizeof(new_bool));
         strncpy(new_bool.name, name, ConfigData::CONFIG_NAME_LEN - 1);
@@ -493,9 +503,7 @@ void ConfigData::add_pin(char* type,
         Serial.flush();
         add_bool(new_bool);
     };
-    Serial.println("   [ConfigData::add_pin] if 2 ");
-    Serial.flush();
-    if (strcmp(type, "int") == 0) {
+    if (is_int) {
         Config_Int new_int;
         memset(&new_int, 0, sizeof(new_int));
         strncpy(new_int.name, name, ConfigData::CONFIG_NAME_LEN - 1);
@@ -511,9 +519,7 @@ void ConfigData::add_pin(char* type,
         Serial.flush();
         add_int(new_int);
     };
-    Serial.println("   [ConfigData::add_pin] if 3 ");
-    Serial.flush();
-    if (strcmp(type, "uint8_t") == 0) {
+    if (is_uint8) {
         Config_Uint8_t new_uint8_t;
         memset(&new_uint8_t, 0, sizeof(new_uint8_t));
         strncpy(new_uint8_t.name, name, ConfigData::CONFIG_NAME_LEN - 1);

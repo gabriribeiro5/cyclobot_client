@@ -7,6 +7,7 @@
 // CycloBot Finite State Machine
 class CheckMyHealth {
     public:
+        bool is_esp_present(WifiParameters *wifiParametersPtr, VisualComm *visualCommPtr);
         bool wifi_shield_is_on(WifiParameters *wifiParametersPtr, VisualComm *visualCommPtr);
         void check_wifi_firmware_version(WifiParameters *wifiParametersPtr, SelfDiagnosisData *selfDiagnosisDataPtr, VisualComm *visualCommPtr);
         void check_wifi_networks(WifiComm *wifiCommPtr, WifiParameters *wifiParametersPtr, SelfDiagnosisData *selfDiagnosisDataPtr, VisualComm *visualCommPtr);
