@@ -7,11 +7,7 @@
 #include "../include/fsm_tools/config/BaseMapping.h"
 #include <Arduino.h>
 
-ParameterInstances::ParameterInstances() {
-    // DEBUG
-    Serial.println(F("[ParameterInstances::ParameterInstances] creating parameter instances..."));
-    Serial.flush();
-    
+ParameterInstances::ParameterInstances() {    
     // -> Board Pins
     BaseMappingPtr = new BaseMapping();
     

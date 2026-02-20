@@ -25,8 +25,8 @@ void SelfDiagnosisState::run_health_check(FiniteStateMachine *cyclobot) {
     cyclobot->commPtr->visualCommPtr->print_line(F("[SelfDiagnosisState::run_health_check] Running..."));
     Serial.flush();
     cyclobot->dataPtr->selfDiagnosisDataPtr->diagnosisDateTime = ""; // TODO: apply current date and time
-    // *** SENSORS ***
     
+    // *** SENSORS ***
     cyclobot->commPtr->visualCommPtr->print_line(F("[SelfDiagnosisState::run_health_check] sensors..."));
     // Wifi sensor
     if (cyclobot->selfPtr->checkMyHealthPtr->is_esp_present(cyclobot->paramPtr->wifiParametersPtr, cyclobot->commPtr->visualCommPtr)) {

@@ -24,12 +24,8 @@ public:
 
 private:
     String getUniqueId() {
-        Serial.println(F("[DeviceParameters::getUniqueId] Generating unique ID..."));
-        Serial.flush();
         #ifdef USE_MEGAAVR_ID
             // For ATmega4809: read from SIGROW
-            Serial.println(F("[DeviceParameters::getUniqueId] Using SIGROW unique ID"));
-            Serial.flush();
             const uint16_t sigRowAddr = 0x1100;
             String id = "";
             for (uint8_t i = 0; i < 10; i++) {
@@ -40,8 +36,6 @@ private:
             return id;
         #else
             // Use ArduinoUniqueID library
-            Serial.println(F("[DeviceParameters::getUniqueId] Using ArduinoUniqueID library"));
-            Serial.flush();
             String id = "";
             for (size_t i = 0; i < UniqueIDsize; i++) {
                 if (UniqueID[i] < 0x10) id += '0';

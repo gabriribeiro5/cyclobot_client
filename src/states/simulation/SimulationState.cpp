@@ -54,9 +54,7 @@ void SimulationState::session_stop(FiniteStateMachine *cyclobot) {
 };
 
 // sim
-void SimulationState::run_simulation(FiniteStateMachine *cyclobot) {
-    cyclobot->commPtr->visualCommPtr->print_line(F("[SimulationState::run_simulation] running..."));
-    
+void SimulationState::run_simulation(FiniteStateMachine *cyclobot) {    
     cyclobot->commPtr->visualCommPtr->print_line(F("[SimulationState::run_simulation] capturing simulation start time"));
     cyclobot->paramPtr->ecosystemParametersPtr->eventStart = cyclobot->rtc.now();
     
@@ -64,14 +62,13 @@ void SimulationState::run_simulation(FiniteStateMachine *cyclobot) {
     cyclobot->commPtr->visualCommPtr->print_line(cyclobot->paramPtr->ecosystemParametersPtr->eventStart.timestamp());
     cyclobot->simStrategyContextPtr->simulate_ecosystem(cyclobot->scannerPtr,
                                             cyclobot->actuatorPtr,
+                                            cyclobot->dataPtr->configDataPtr,
                                             cyclobot->simulationStrategyPtr,
                                             cyclobot->commPtr->visualCommPtr,
                                             cyclobot->rtcPtr);
     cyclobot->commPtr->visualCommPtr->print(F("[SimulationState::run_simulation] simulation finished at "));
-    // cyclobot->paramPtr->ecosystemParametersPtr->eventEnd = cyclobot->rtc.now();
-    cyclobot->commPtr->visualCommPtr->print_line(cyclobot->paramPtr->ecosystemParametersPtr->eventEnd.timestamp());    
-    
-    cyclobot->commPtr->visualCommPtr->print_line(F("[SimulationState::run_simulation] -- done --"));
+    cyclobot->paramPtr->ecosystemParametersPtr->eventEnd = cyclobot->rtc.now();
+    cyclobot->commPtr->visualCommPtr->print_line(cyclobot->paramPtr->ecosystemParametersPtr->eventEnd.timestamp());
 };
 
 // comm

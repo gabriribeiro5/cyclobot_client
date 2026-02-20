@@ -5,11 +5,7 @@
 DeviceParameters::DeviceParameters()
 {
     // Build unique ID hex string and copy to fixed-size arrays
-    Serial.println(F("[DeviceParameters::DeviceParameters] Initializing device parameters..."));
-    Serial.flush();
     String uniqueId = getUniqueId();
-    Serial.println(("[DeviceParameters::DeviceParameters] Unique ID generated: " + uniqueId));
-    Serial.flush();
     
     // Copy to char arrays using strncpy to avoid overflow
     strncpy(cyclobotId, uniqueId.c_str(), sizeof(cyclobotId) - 1);

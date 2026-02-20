@@ -283,9 +283,21 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
     - [x] call is_esp_present method on SelfDiagnosis
     - [x] remove SoftwareSerial call in main.cpp
   - [x] debug(code reduction): drasticaly reduce Context's scope until code runs
-    - [ ] reinclude component: A
-    - [ ] reinclude component: B
-    - [ ] reinclude component: ...
+    - [x] rearange main's structure
+    - [x] reinclude and run: change_state method
+    - [x] reinclude and run: error
+    - [x] reinclude and run: self
+    - [x] reinclude and run: comm
+    - [x] reinclude and run: all Context methods
+    - [x] reinclude and run: call to change_state()
+    - [x] fix(stateFlow): should start by 0 but shows 4 (only on physical board)
+      - [x] refactor(main): remove object creations on loop() to avoid heap fragmentation
+        - [x] state instances must be created only once
+        - [x] remove 'delete currentState' on change_state()
+      - [x] refactor(main): fsm must be created outside setup() so loop() can use it too
+  - [x] fix(serial not printed): code runs on Wokwi but not in actual board
+    - [x] refactor(StrategyContext): stop creating EEPROM data on constructor
+    - [x] refactor(StrategyContext): creating EEPROM data only when setup is called
 
 - [ ] feat(print_strategy_parameters method): to replace print_parameters()
 

@@ -8,8 +8,6 @@
 
 /* PALUDARIUM */
 void PL_FogLightFan::enter(ConfigData *configDataPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtc) {
-    visualCommPtr->print_line(F("  [PL_FogLightFan::enter] creating configuration parameters..."));
-    visualCommPtr->print_free_memory("  [PL_FogLightFan::enter]");
     configDataPtr->add_pin("uint8_t", "soilMoistureSensor", A0,
         "Sensor de umidade do solo pino A0 conectado no A0 do Arduino",
         0, rtc->now()
@@ -59,8 +57,6 @@ void PL_FogLightFan::enter(ConfigData *configDataPtr, VisualComm *visualCommPtr,
     configDataPtr->add_parameter("bool", "sunLightAvailable", 1,
                                 "condição de iluminação; 1 = dia; 0 = noite",
                                 0, 0, rtc->now());
-     
-    visualCommPtr->print_line(F("  [PL_FogLightFan::enter] creating configuration parameters... done."));
 }
 
 /* PALUDARIUM */
@@ -83,7 +79,6 @@ void PL_FogLightFan::simulate_ecosystem(EcosystemScanner *scannerPtr,
     scannerPtr->read_soil_moisture(configDataPtr, visualCommPtr);
     
     // ********* Irrigation strategy *********
-    visualCommPtr->print_line(F("  [PL_FogLightFan::simulate_ecosystem] Irrigation strategy..."));
     if (!configDataPtr->config_bool("soilIsWet").value) {
         actuatorPtr->irrigation_system_on(configDataPtr, visualCommPtr);
         while (!configDataPtr->config_bool("soilIsWet").value)

@@ -33,38 +33,38 @@ class FiniteStateMachine {
         static StrategyContext *simStrategyContextPtr;
 
         FiniteStateMachine(BaseState *initialStatePtr, BaseStrategy *simStrategyPtr);   // Constructor
-        // FiniteStateMachine(const FiniteStateMachine&) = delete;                      // forbid copy constructor
-        // FiniteStateMachine& operator=(const FiniteStateMachine&) = delete;           // forbid copy assignment
+        FiniteStateMachine(const FiniteStateMachine&) = delete;                      // forbid copy constructor
+        FiniteStateMachine& operator=(const FiniteStateMachine&) = delete;           // forbid copy assignment
 
         void change_state(BaseState *newStatePtr);
 
-        // // error
-        // void handle_error();
+        // error
+        void handle_error();
         
-        // // self
-        // void run_health_check();
+        // self
+        void run_health_check();
 
-        // // comm
-        // void report_signature_request();
-        // void session_new();
-        // void report_config();
-        // void report_health_check();
+        // comm
+        void report_signature_request();
+        void session_new();
+        void report_config();
+        void report_health_check();
         
-        // // update
-        // void update_simulation_code();
-        // void update_config();
+        // update
+        void update_simulation_code();
+        void update_config();
         
         // // comm
-        // void session_stop();
+        void session_stop();
 
         // // sim
-        // void run_simulation();
+        void run_simulation();
         
         // // comm
-        // void report_simulation_data();
+        void report_simulation_data();
         
         // // self
-        // void take_a_nap();
+        void take_a_nap();
 
         ~FiniteStateMachine();
         

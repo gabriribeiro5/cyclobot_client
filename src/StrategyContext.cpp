@@ -10,18 +10,16 @@
 #include "../include/fsm_tools/data/ConfigData.h"
 
 StrategyContext::StrategyContext(ConfigData *configDataPtr, BaseStrategy *simulationStrategyPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtcPtr) {
-    visualCommPtr->print_line(F("  [StrategyContext::StrategyContext] entering StrategyContext..."));
-    simulationStrategyPtr->enter(configDataPtr, visualCommPtr, rtcPtr);
+    return;
 }
 
 void StrategyContext::setup(BaseStrategy *simulationStrategyPtr, ConfigData *configDataPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtcPtr) {
-    visualCommPtr->print_line(F("  [StrategyContext::setup] running..."));
+    simulationStrategyPtr->enter(configDataPtr, visualCommPtr, rtcPtr);
     simulationStrategyPtr->setup(configDataPtr, visualCommPtr, rtcPtr);
-    visualCommPtr->print_line(F("  [StrategyContext::setup] -- done --"));
 }
 
-void StrategyContext::simulate_ecosystem(EcosystemScanner *scannerPtr, EcosystemActuator *actuatorPtr, BaseStrategy *simulationStrategyPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtcPtr) {
-    // parametersPtr->simulationStrategyPtr->simulate_ecosystem(environmentScanPtr, environmentActuatorPtr, rtc);
+void StrategyContext::simulate_ecosystem(EcosystemScanner *scannerPtr, EcosystemActuator *actuatorPtr, ConfigData *configDataPtr, BaseStrategy *simulationStrategyPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtcPtr) {
+    simulationStrategyPtr->simulate_ecosystem(scannerPtr, actuatorPtr, configDataPtr, visualCommPtr, rtcPtr);
 }
 
 void StrategyContext::change_strategy(BaseStrategy *newStrategyPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtcPtr) {
