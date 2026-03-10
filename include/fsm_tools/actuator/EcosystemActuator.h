@@ -5,12 +5,18 @@
 
 class EcosystemActuator {
     public:
-        void increase_water_nutrients(ConfigData *configDataPtr, VisualComm *visualCommPtr);
-        void dilute_water_nutrients(ConfigData *configDataPtr, VisualComm *visualCommPtr);
-        void fan_system_on(ConfigData *configDataPtr, VisualComm *visualCommPtr);
+        // Actuator methods for ecosystem control in alphabetical order
         void fan_system_off(ConfigData *configDataPtr, VisualComm *visualCommPtr);
-        void irrigation_system_on(ConfigData *configDataPtr, VisualComm *visualCommPtr);
+        void fan_system_on(ConfigData *configDataPtr, VisualComm *visualCommPtr);
+        void fog_system_off(ConfigData *configDataPtr, VisualComm *visualCommPtr);
+        void fog_system_on(ConfigData *configDataPtr, VisualComm *visualCommPtr);
         void irrigation_system_off(ConfigData *configDataPtr, VisualComm *visualCommPtr);
-        void trim_system_on(ConfigData *configDataPtr, VisualComm *visualCommPtr);
+        void irrigation_system_on(ConfigData *configDataPtr, VisualComm *visualCommPtr);
+        void light_system_off(ConfigData *configDataPtr, VisualComm *visualCommPtr);
+        void light_system_on(ConfigData *configDataPtr, VisualComm *visualCommPtr);
+        void light_system_pwm(ConfigData *configDataPtr, VisualComm *visualCommPtr);
         void trim_system_off(ConfigData *configDataPtr, VisualComm *visualCommPtr);
+        void trim_system_on(ConfigData *configDataPtr, VisualComm *visualCommPtr);
+        void water_nutrients_dilution(ConfigData *configDataPtr, VisualComm *visualCommPtr);
+        void water_nutrients_increase(ConfigData *configDataPtr, VisualComm *visualCommPtr);
 };

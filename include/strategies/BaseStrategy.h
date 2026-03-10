@@ -25,9 +25,10 @@ class BaseStrategy {
         DateTime eventEnd;                  // microsseconds
 
         
-        virtual void enter(ConfigData *configDataPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtc) = 0;
-        virtual void setup(ConfigData *configDataPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtc) = 0;
-        virtual void simulate_ecosystem(EcosystemScanner *scannerPtr, EcosystemActuator *actuatorPtr, ConfigData *configDataPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtc) = 0;
-        virtual void exit(ConfigData *configDataPtr, VisualComm *visualCommPtr, RTC_DS3231 *rtc) = 0;
+        virtual void create_pin_map(ConfigData *configDataPtr, VisualComm *visualCommPtr, RTC_DS1307 *rtc) = 0;
+        virtual void board_setup(ConfigData *configDataPtr, VisualComm *visualCommPtr, RTC_DS1307 *rtc) = 0;
+        virtual void create_params(ConfigData *configDataPtr, VisualComm *visualCommPtr, RTC_DS1307 *rtc) = 0;
+        virtual void simulate_ecosystem(EcosystemScanner *scannerPtr, EcosystemActuator *actuatorPtr, ConfigData *configDataPtr, VisualComm *visualCommPtr, RTC_DS1307 *rtc) = 0;
+        virtual void exit(ConfigData *configDataPtr, VisualComm *visualCommPtr, RTC_DS1307 *rtc) = 0;
 
 };

@@ -34,13 +34,13 @@ void setup() {
     delay(3000); // Wait for Serial to initialize
     
     // Print EEPROM usage at startup
-    cyclobot->commPtr->visualCommPtr->print_terminal_logo();
-    cyclobot->commPtr->visualCommPtr->print_parameters(cyclobot->paramPtr);
+    // cyclobot->commPtr->visualCommPtr->print_terminal_logo();
+    // cyclobot->commPtr->visualCommPtr->print_parameters(cyclobot->paramPtr);
     cyclobot->commPtr->visualCommPtr->print_eeprom_usage("[main::setup]");
     cyclobot->commPtr->visualCommPtr->print_free_memory("[main::setup]");
     
     cyclobot->commPtr->visualCommPtr->print_line(F("[main::setup] starting clock (rtc)"));
-    if (!cyclobot->rtc.begin()) {
+    if (!cyclobot->rtcPtr->begin()) {
         cyclobot->commPtr->visualCommPtr->print_line(F("[main::setup] RTC not found"));
     } else {
         cyclobot->commPtr->visualCommPtr->print_line(F("[main::setup] RTC clock started"));
@@ -49,9 +49,16 @@ void setup() {
     cyclobot->commPtr->visualCommPtr->print_line(F("[main::setup] setting simulation strategy"));
     cyclobot->simStrategyContextPtr->setup(simStrategyPtr, cyclobot->dataPtr->configDataPtr, cyclobot->commPtr->visualCommPtr, cyclobot->rtcPtr);
     
+    cyclobot->commPtr->visualCommPtr->print_line(F("[main::setup] initializing WiFi module"));
+    cyclobot->commPtr->wifiCommPtr->initialize_wifi_module(cyclobot->paramPtr->wifiParametersPtr, cyclobot->commPtr->visualCommPtr);
+
+    cyclobot->commPtr->visualCommPtr->print_line(F("[main::setup] scanning for WiFi networks"));
+    cyclobot->commPtr->wifiCommPtr->scan_wifi(cyclobot->paramPtr->wifiParametersPtr, cyclobot->commPtr->visualCommPtr);
     
-    cyclobot->commPtr->wifiCommPtr->begin(cyclobot->paramPtr->wifiParametersPtr, cyclobot->commPtr->visualCommPtr);
-    WiFi.init(cyclobot->paramPtr->wifiParametersPtr->wifiStream);
+    cyclobot->commPtr->visualCommPtr->print_line(F("[main::setup] connecting to WiFi network"));
+    cyclobot->commPtr->wifiCommPtr->connect_wifi(cyclobot->paramPtr->wifiParametersPtr, cyclobot->commPtr->visualCommPtr);
+    
+    cyclobot->commPtr->visualCommPtr->print_line(F("[main::setup] done"));
 };
 
 void loop() {

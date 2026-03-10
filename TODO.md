@@ -299,6 +299,15 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
     - [x] refactor(StrategyContext): stop creating EEPROM data on constructor
     - [x] refactor(StrategyContext): creating EEPROM data only when setup is called
 
+- [x] feat(PL_FogLightFan::simulate_ecosystem): add full strategy
+  - [x] refactor(pins and param names): this is art
+  - [x] refactor(method names): being more specific now
+- [x] fix(wifi not found): make it happen on Combo Board
+  - [x] Download and install ESP8266 firmware (took me days to find out the correct firmware!)
+  - [x] run wifi scaner
+  - [x] rerun cyclobot
+- [x] doc(CONTRIBUTING): board setup tutorial
+
 - [ ] feat(print_strategy_parameters method): to replace print_parameters()
 
 - [ ] refactor(ClientComm): improve 'Get response' snippet

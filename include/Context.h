@@ -14,11 +14,10 @@
 class FiniteStateMachine {
     public:
         // time tracking software
-        RTC_DS3231 rtc;
-        RTC_DS3231 *rtcPtr = &rtc;
+        RTC_DS1307 rtc;
+        RTC_DS1307 *rtcPtr = &rtc;
 
-        DateTime now;                                   // Track in which step we are
-        int stateFlow = 0;                              // Flow stablished at the Client module and updated by States to comply client rules
+        int stateFlow = 0;                              // Flow stablished at main and updated by States (if needed)
 
         // Static long-lived instance groups (allocated once at static initialization)
         static SelfManagementInstances *selfPtr;

@@ -3,13 +3,13 @@
 #include <SoftwareSerial.h>
 
 WifiParameters::WifiParameters()
-: wifiSsid("yourNetwork"),
-  wifiSecret("secretPassword"),
+: wifiSsid("ROCK JUNIOR"),
+  wifiSecret("13051305RJ"),
   wifiFirmwareLatestVersion("1.1.0"),
   networkKeyIndex(0),
 
   waitTimePerConnectionAttempt(5000),
-  maxConnectionAttempt(1),
+  maxConnectionAttempt(3),
 
   waitTimePerScanAttempt(3000),
   wifiMaxScanAttempt(2),

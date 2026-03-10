@@ -7,6 +7,8 @@
 class EcosystemScanner {
     public:
         void read_soil_moisture(ConfigData *configDataPtr, VisualComm *visualCommPtr);
+        void read_sun_light(ConfigData *configDataPtr, VisualComm *visualCommPtr);
+        void read_air_humidity(ConfigData *configDataPtr, VisualComm *visualCommPtr);
         void read_water_pressure(ConfigData *configDataPtr, VisualComm *visualCommPtr);
         void read_temperature(ConfigData *configDataPtr, VisualComm *visualCommPtr);
         void read_brightness(ConfigData *configDataPtr, VisualComm *visualCommPtr);

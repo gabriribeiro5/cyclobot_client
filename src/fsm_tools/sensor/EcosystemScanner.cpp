@@ -6,15 +6,45 @@
 
 void EcosystemScanner::read_soil_moisture(ConfigData *configDataPtr, VisualComm *visualCommPtr) {
     ConfigData::Config_Bool soilIsWet = configDataPtr->config_bool("soilIsWet");
-    if (configDataPtr->config_int("soilMoistureLimit").value >
+    ConfigData::Config_Bool soilMoistureIsOverLimit = configDataPtr->config_bool("soilMoistureIsOverLimit");
+    if (configDataPtr->config_int("soilMoistureMinimum").value >
         analogRead(configDataPtr->config_uint8_t("soilMoistureSensor").value) &&
         soilIsWet.name != "")
     {
         soilIsWet.value = true;
         configDataPtr->update_config_bool("soilIsWet", soilIsWet);        
     };
+    
+    if (configDataPtr->config_int("soilMoistureMaximum").value <
+        analogRead(configDataPtr->config_uint8_t("soilMoistureSensor").value) &&
+        soilMoistureIsOverLimit.name != "")
+    {
+        soilMoistureIsOverLimit.value = true;
+        configDataPtr->update_config_bool("soilMoistureIsOverLimit", soilMoistureIsOverLimit);        
+    };
 }
 
+void EcosystemScanner::read_sun_light(ConfigData *configDataPtr, VisualComm *visualCommPtr) {
+    ConfigData::Config_Bool sunLightAvailable = configDataPtr->config_bool("sunLightAvailable");
+    if (configDataPtr->config_int("sunLightMinimum").value <=
+        analogRead(configDataPtr->config_uint8_t("sunLightSensor").value) &&
+        sunLightAvailable.name != "")
+    {
+        sunLightAvailable.value = true;
+        configDataPtr->update_config_bool("sunLightAvailable", sunLightAvailable);        
+    };
+}
+
+void EcosystemScanner::read_air_humidity(ConfigData *configDataPtr, VisualComm *visualCommPtr) {
+    ConfigData::Config_Bool airHumidityIsOverLimit = configDataPtr->config_bool("airHumidityIsOverLimit");
+    if (configDataPtr->config_int("airHumidityMaximum").value <
+        analogRead(configDataPtr->config_uint8_t("airHumiditySensor").value) &&
+        airHumidityIsOverLimit.name != "")
+    {
+        airHumidityIsOverLimit.value = true;
+        configDataPtr->update_config_bool("airHumidityIsOverLimit", airHumidityIsOverLimit);        
+    };
+}
 void EcosystemScanner::read_water_pressure(ConfigData *configDataPtr, VisualComm *visualCommPtr) {
     return;
 }

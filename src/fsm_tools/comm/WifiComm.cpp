@@ -1,5 +1,5 @@
 // REFERÊNCIAS:
-//  https://docs.arduino.cc/libraries/wifi/#Wifi%20Class
+// https://docs.arduino.cc/libraries/wifi/#Wifi%20Class
 #include "Arduino.h"
 #include <WiFiEsp.h>
 #include <SoftwareSerial.h>
@@ -8,16 +8,12 @@
 #include "../../../include/fsm_tools/config/WifiParameters.h"
 #include "../../../include/Context.h"
 
-void WifiComm::begin(WifiParameters *wifiParametersPtr, VisualComm *visualCommPtr) {
+void WifiComm::initialize_wifi_module(WifiParameters *wifiParametersPtr, VisualComm *visualCommPtr) {
   // Use HardwareSerial when available (Combo Board with wifi integrated)
   #if defined(__AVR_ATmega2560__)
-
       Serial3.begin(115200);
       wifiParametersPtr->wifiStream = &Serial3;
-      
-
   #else
-
       static SoftwareSerial espSerial(
           BaseMapping::wifiEspRX,
           BaseMapping::wifiEspTX
@@ -25,8 +21,11 @@ void WifiComm::begin(WifiParameters *wifiParametersPtr, VisualComm *visualCommPt
 
       espSerial.begin(9600);
       wifiParametersPtr->wifiStream = &espSerial;
-
   #endif
+
+  delay(2000); // Wait serial initialization
+  WiFi.init(wifiParametersPtr->wifiStream);
+  visualCommPtr->print_line(F("    [WifiComm::initialize_wifi_module] Serial communication with WiFi module stablished."));
 }
 
 
@@ -79,14 +78,14 @@ void WifiComm::print_encryption_type(int thisType, VisualComm *visualCommPtr) {
 
 void WifiComm::print_available_networks(WifiParameters *wifiParametersPtr, VisualComm *visualCommPtr) {
   for (int i = 0; i < wifiParametersPtr->networkSsidIndex; i++) {
-    visualCommPtr->print("[WifiComm::print_available_networks] (");
+    visualCommPtr->print("    [WifiComm::print_available_networks] (");
     visualCommPtr->print(i);
     visualCommPtr->print(") ");
     visualCommPtr->print_line(WiFi.SSID(i));
-    visualCommPtr->print("[WifiComm::print_available_networks] ");
+    visualCommPtr->print("    [WifiComm::print_available_networks] ");
     visualCommPtr->print("\tSignal: ");
     visualCommPtr->print_line(WiFi.RSSI(i));
-    visualCommPtr->print("[WifiComm::print_available_networks] dBm\tEncryption: ");
+    visualCommPtr->print("    [WifiComm::print_available_networks] dBm\tEncryption: ");
     print_encryption_type(WiFi.encryptionType(i), visualCommPtr);
   }
 }
@@ -118,14 +117,14 @@ void WifiComm::connect_wifi(WifiParameters *wifiParametersPtr, VisualComm *visua
   
   // Initialize the Ethernet client library
   // with the IP address and port of the server
-  // that you want to connect to (port 80 is default for HTTP):
-  while (wifiParametersPtr->wifiStatus != WL_IDLE_STATUS && wifiParametersPtr->connAttemptCount < wifiParametersPtr->maxConnectionAttempt) {
-    visualCommPtr->print_line(F("    [WifiComm::connect_wifi] Connecting to SSID: "));
-    visualCommPtr->print(F("[WifiComm::connect_wifi] Attempt: "));
+  while (wifiParametersPtr->wifiStatus != WL_CONNECTED && wifiParametersPtr->connAttemptCount < wifiParametersPtr->maxConnectionAttempt) {
+    visualCommPtr->print(F("    [WifiComm::connect_wifi] Connecting to SSID: "));
+    visualCommPtr->print_line(wifiParametersPtr->wifiSsid);
+    
+    visualCommPtr->print(F("    [WifiComm::connect_wifi] Attempt: "));
     visualCommPtr->print(wifiParametersPtr->connAttemptCount);
     visualCommPtr->print(F(" of "));
     visualCommPtr->print_line(wifiParametersPtr->maxConnectionAttempt);
-    visualCommPtr->print_line(wifiParametersPtr->wifiSsid);
 
     // WPA/WPA2 connection
     wifiParametersPtr->connAttemptCount++;
