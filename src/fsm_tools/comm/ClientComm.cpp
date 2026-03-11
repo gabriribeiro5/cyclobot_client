@@ -8,9 +8,9 @@
 #include "../../../../include/fsm_tools/config/ClientParameters.h"
 #include "../../../include/fsm_tools/config/WifiParameters.h"
 #include "../../../../include/fsm_tools/config/DeviceParameters.h"
-#include "../../../../include/fsm_tools/config/EcosystemParameters.h"
 #include "../../../include/fsm_tools/data/SelfDiagnosisData.h"
 #include "../../../include/fsm_tools/data/ConfigData.h"
+#include "../../../include/fsm_tools/DataInstances.h"
 #include "../../../include/Context.h"
 
 void ClientComm::trace_server(ClientParameters *clientParametersPtr, WifiParameters *wifiParametersPtr, VisualComm *visualCommPtr) {
@@ -165,7 +165,7 @@ void ClientComm::put_invalid_cyclobot_session_token(VisualComm *visualCommPtr) {
   visualCommPtr->print_line(F("    [ClientComm::put_invalid_cyclobot_session_token] -- done --"));
 }
 
-void ClientComm::post_cyclobot_config(ClientParameters *clientParametersPtr, WifiParameters *wifiParametersPtr, DeviceParameters *deviceParametersPtr, ConfigData *configDataPtr, EcosystemParameters *ecosystemParametersPtr, VisualComm *visualCommPtr) {
+void ClientComm::post_cyclobot_config(ClientParameters *clientParametersPtr, WifiParameters *wifiParametersPtr, DeviceParameters *deviceParametersPtr, DataInstances *dataPtr, VisualComm *visualCommPtr) {
   visualCommPtr->print_line(F("    [ClientComm::post_cyclobot_config] running..."));
 
   // Allocate TEMPORARY JSON document
@@ -193,20 +193,20 @@ void ClientComm::post_cyclobot_config(ClientParameters *clientParametersPtr, Wif
   config_Json["response_timeout_limit"] = clientParametersPtr->responseTimeoutLimit;
 
   // Ecosystem config
-  config_Json["soil_moisture_limit"] = ecosystemParametersPtr->soilMoistureLimit;
-  config_Json["current_temperature"] = ecosystemParametersPtr->currentTemperature;
-  config_Json["max_temperature_expected"] = ecosystemParametersPtr->maxTemperatureExpected;
-  config_Json["initial_watering_time_limit"] = ecosystemParametersPtr->initialWateringTimeLimit;
-  config_Json["growth_rate"] = ecosystemParametersPtr->growthRate;
-  config_Json["decrease_rate"] = ecosystemParametersPtr->decreaseRate;
-  config_Json["watering_time_limit"] = ecosystemParametersPtr->wateringTimeLimit;
-  config_Json["climate"] = ecosystemParametersPtr->climate;
-  config_Json["soil_is_wet"] = ecosystemParametersPtr->soilIsWet;
-  config_Json["sun_light_available"] = ecosystemParametersPtr->sunLightAvailable;
-  config_Json["standBy"] = ecosystemParametersPtr->standBy;
+  // config_Json["soil_moisture_limit"] = ecosystemParametersPtr->soilMoistureLimit;
+  // config_Json["current_temperature"] = ecosystemParametersPtr->currentTemperature;
+  // config_Json["max_temperature_expected"] = ecosystemParametersPtr->maxTemperatureExpected;
+  // config_Json["initial_watering_time_limit"] = ecosystemParametersPtr->initialWateringTimeLimit;
+  // config_Json["growth_rate"] = ecosystemParametersPtr->growthRate;
+  // config_Json["decrease_rate"] = ecosystemParametersPtr->decreaseRate;
+  // config_Json["watering_time_limit"] = ecosystemParametersPtr->wateringTimeLimit;
+  // config_Json["climate"] = ecosystemParametersPtr->climate;
+  // config_Json["soil_is_wet"] = ecosystemParametersPtr->soilIsWet;
+  // config_Json["sun_light_available"] = ecosystemParametersPtr->sunLightAvailable;
+  // config_Json["standBy"] = ecosystemParametersPtr->standBy;
 
   // *** CONVERT JSON TO STRING ***
-  serializeJson(config_Json, configDataPtr->config_Char);
+  serializeJson(config_Json, dataPtr->configDataPtr->config_Char);
 
   // *** JSON OBJECT AUTOMATICALLY FREED (goes out of scope) ***
 
@@ -218,9 +218,9 @@ void ClientComm::post_cyclobot_config(ClientParameters *clientParametersPtr, Wif
     wifiParametersPtr->client.println(clientParametersPtr->apiServer);
     wifiParametersPtr->client.println("Content-Type: application/json");
     wifiParametersPtr->client.print("Content-Length: ");
-    wifiParametersPtr->client.println(strlen(configDataPtr->config_Char));
+    wifiParametersPtr->client.println(strlen(dataPtr->configDataPtr->config_Char));
     wifiParametersPtr->client.println(); // Empty server_response_line to end headers
-    wifiParametersPtr->client.print(configDataPtr->config_Char);  // ✅ Send JSON body
+    wifiParametersPtr->client.print(dataPtr->configDataPtr->config_Char);  // ✅ Send JSON body
 
     // Method response
     visualCommPtr->print_line(F("    [ClientComm::post_cyclobot_config] Config sent"));

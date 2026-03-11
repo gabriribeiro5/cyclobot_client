@@ -1,6 +1,5 @@
 #include "Arduino.h"
 #include "../../../include/fsm_tools/sensor/EcosystemScanner.h"
-#include "../../../include/fsm_tools/config/EcosystemParameters.h"
 #include "../../../include/fsm_tools/comm/VisualComm.h"
 #include "../../../include/fsm_tools/data/ConfigData.h"
 

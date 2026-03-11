@@ -1,5 +1,4 @@
 #pragma once
-#include "../config/EcosystemParameters.h"
 #include "../config/BaseMapping.h"
 #include "../comm/VisualComm.h"
 #include "../data/ConfigData.h"

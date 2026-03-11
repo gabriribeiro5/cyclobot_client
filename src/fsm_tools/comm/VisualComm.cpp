@@ -202,37 +202,6 @@ void VisualComm::print_parameters(ParameterInstances *paramPtr) {
   
   
   // ECOSYSTEM PARAMETERS
-  print_line("[VisualComm::print_parameters] ECOSYSTEM Parameters:");
-  print(F(" - Soil Is Wet: "));
-  print_line(paramPtr->ecosystemParametersPtr->soilIsWet);
-  print(F(" - Soil Moisture Limit: "));
-  print_line(paramPtr->ecosystemParametersPtr->soilMoistureLimit);
-  print(F(" - Current Temperature: "));
-  print_line(paramPtr->ecosystemParametersPtr->currentTemperature);
-  print(F(" - Min Temperature Expected: "));
-  print_line(paramPtr->ecosystemParametersPtr->minTemperatureExpected);
-  print(F(" - Max Temperature Expected: "));
-  print_line(paramPtr->ecosystemParametersPtr->maxTemperatureExpected);
-  print(F(" - Initial Watering Time Limit: "));
-  print_line(paramPtr->ecosystemParametersPtr->initialWateringTimeLimit);
-  print(F(" - Growth Rate: "));
-  print_line(paramPtr->ecosystemParametersPtr->growthRate);
-  print(F(" - Decrease Rate: "));
-  print_line(paramPtr->ecosystemParametersPtr->decreaseRate);
-  print(F(" - Watering Time Limit: "));
-  print_line(paramPtr->ecosystemParametersPtr->wateringTimeLimit);
-  print(F(" - Climate: "));
-  print_line(paramPtr->ecosystemParametersPtr->climate);
-  print(F(" - Sun Light Available: "));
-  print_line(paramPtr->ecosystemParametersPtr->sunLightAvailable);
-  print(F(" - Stand By: "));
-  print_line(paramPtr->ecosystemParametersPtr->standBy);
-  print(F(" - Event Start: "));
-  print_line(paramPtr->ecosystemParametersPtr->eventStart.timestamp());
-  print(F(" - Event End: "));
-  print_line(paramPtr->ecosystemParametersPtr->eventEnd.timestamp());
-  print(F(" - Time Buffer (ms): "));
-  print_line(paramPtr->ecosystemParametersPtr->timeBufferMicroSec);
 
   print_line(F(" *************************  **     **********************     **  ************************* "));
 }

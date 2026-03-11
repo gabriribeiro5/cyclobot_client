@@ -34,6 +34,6 @@ class EcosystemData {
         Sensor_Int sensor_int(char *name);
         
         // Linked-lists INSERTITION methods
-        void add(char* type, char *name, int value, char *description, int expected_frequency, bool measure_now, bool send_now, DateTime last_update);
-        void update(char* type, char *name, int value, char *description, int expected_frequency, bool measure_now, bool send_now, DateTime last_update);
+        void add_parameter(char* type, char *name, int value, char *description, int expected_frequency, bool measure_now, bool send_now, DateTime last_update, RTC_DS1307 *rtc);
+        void update_parameter(char* type, char *name, int value, char *description, int expected_frequency, bool measure_now, bool send_now, DateTime last_update, RTC_DS1307 *rtc);
 };

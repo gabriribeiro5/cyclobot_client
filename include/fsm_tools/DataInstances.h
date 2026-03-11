@@ -1,6 +1,7 @@
 #pragma once
 #include "../fsm_tools/data/SelfDiagnosisData.h"
 #include "../fsm_tools/data/ConfigData.h"
+#include "../fsm_tools/data/EcosystemData.h"
 
 class DataInstances {
     public:
@@ -11,4 +12,5 @@ class DataInstances {
         
         SelfDiagnosisData *selfDiagnosisDataPtr;
         ConfigData *configDataPtr;
+        EcosystemData *ecosystemDataPtr;
 };

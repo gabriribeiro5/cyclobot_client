@@ -3,7 +3,6 @@
 #include "../fsm_tools/config/ErrorHandlingParameters.h"
 #include "../fsm_tools/config/WifiParameters.h"
 #include "../fsm_tools/config/ClientParameters.h"
-#include "../fsm_tools/config/EcosystemParameters.h"
 #include "../fsm_tools/config/BaseMapping.h"
 
 class ParameterInstances {
@@ -21,5 +20,4 @@ class ParameterInstances {
         ErrorHandlingParameters *errorHandlingParametersPtr;
         WifiParameters *wifiParametersPtr;
         ClientParameters *clientParametersPtr;
-        EcosystemParameters *ecosystemParametersPtr;
 };

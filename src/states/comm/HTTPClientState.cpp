@@ -53,8 +53,7 @@ void HTTPClientState::report_config(FiniteStateMachine *cyclobot) {
     cyclobot->commPtr->clientCommPtr->post_cyclobot_config(cyclobot->paramPtr->clientParametersPtr,
                                                             cyclobot->paramPtr->wifiParametersPtr,
                                                             cyclobot->paramPtr->deviceParametersPtr,
-                                                            cyclobot->dataPtr->configDataPtr,
-                                                            cyclobot->paramPtr->ecosystemParametersPtr,
+                                                            cyclobot->dataPtr,
                                                             cyclobot->commPtr->visualCommPtr);
     cyclobot->commPtr->visualCommPtr->print_line(F("[HTTPClientState::report_config] -- done --"));
 };

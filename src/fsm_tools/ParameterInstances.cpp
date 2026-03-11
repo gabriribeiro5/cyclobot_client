@@ -3,7 +3,6 @@
 #include "../include/fsm_tools/config/ErrorHandlingParameters.h"
 #include "../include/fsm_tools/config/WifiParameters.h"
 #include "../include/fsm_tools/config/ClientParameters.h"
-#include "../include/fsm_tools/config/EcosystemParameters.h"
 #include "../include/fsm_tools/config/BaseMapping.h"
 #include <Arduino.h>
 
@@ -16,7 +15,6 @@ ParameterInstances::ParameterInstances() {
     errorHandlingParametersPtr = new ErrorHandlingParameters();
     wifiParametersPtr = new WifiParameters();
     clientParametersPtr = new ClientParameters();
-    ecosystemParametersPtr = new EcosystemParameters();
 };
 
 ParameterInstances::~ParameterInstances() {
@@ -28,5 +26,4 @@ ParameterInstances::~ParameterInstances() {
     delete errorHandlingParametersPtr;
     delete wifiParametersPtr;
     delete clientParametersPtr;
-    delete ecosystemParametersPtr;
 };

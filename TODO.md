@@ -253,8 +253,9 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
       - [x] refactor(DynamicJsonDocument): alocate config_json and selfDiagnosis_Json only when needed (in ClientComm) and free right after use
       - [x] refactor(capacity): remove 'capacity' from ConfigData and SelfDiagnosisData initialization
       - [x] perf(Json and String): reduce object's size
-    - [ ] refactor(EnvironmentData): implement in standard SRAM (8 KB)
+    - [ ] refactor(EcosystemData): implement in standard SRAM (8 KB)
       - [x] refactor(EcosystemData): LinkedList still returns copy of struct
+      - [ ] refactor(EcosystemData): fix LinkedList
       - [ ] refactor(LinkedList::getNodeData): a descriptive name for the old getPtr() method
       - [ ] refactor(LinkedList::getNodeData): try using method 
     - [ ] refactor(remove EcosystemParameters): Use fsm_tools/data/* instead
@@ -308,14 +309,19 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
   - [x] rerun cyclobot
 - [x] doc(CONTRIBUTING): board setup tutorial
 
+
+- [x] refactor(config): clear directory
+  - [x] remove EcosystemParameters
+  - [x] remove EEPROMStruct module
+
+- [ ] clear(/states): remove ErrorHandlingState
+- [ ] doc(README): update Design section
+
 - [ ] feat(print_strategy_parameters method): to replace print_parameters()
 
 - [ ] refactor(ClientComm): improve 'Get response' snippet
   - [ ] Make sure there's no infinite loop
 
-- [ ] refactor(config): clear directory
-  - [ ] remove EcosystemParameters
-  - [ ] remove EEPROMStruct
   
 - [ ] feat(modular strategy): split functions
   - [ ] Create json structures to simplify data definition

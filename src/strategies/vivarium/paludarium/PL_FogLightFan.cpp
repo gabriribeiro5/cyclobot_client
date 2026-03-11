@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <math.h>
 #include "../../../../include/strategies/vivarium/paludarium/PL_FogLightFan.h"
-#include "../../../../include/fsm_tools/config/EcosystemParameters.h"
+#include "../../../../include/fsm_tools/data/EcosystemData.h"
 #include "../../../../include/fsm_tools/config/DeviceParameters.h"
 #include "../../../../include/fsm_tools/sensor/EcosystemScanner.h"
 #include "../../../../include/fsm_tools/actuator/EcosystemActuator.h"
@@ -62,54 +62,54 @@ void PL_FogLightFan::board_setup(ConfigData *configDataPtr, VisualComm *visualCo
     pinMode(configDataPtr->config_uint8_t("fanSystem").value, OUTPUT);            // Porta de controle do sistema de ventilador - D6 é saída
 }
 
-void PL_FogLightFan::create_params(ConfigData *configDataPtr, VisualComm *visualCommPtr, RTC_DS1307 *rtc) {
+void PL_FogLightFan::create_ecosystem_params(EcosystemData *ecosystemDataPtr, VisualComm *visualCommPtr, RTC_DS1307 *rtc) {
     // FOG CONTROL
-    configDataPtr->add_parameter("int", "soilMoistureMinimum", 200,
+    ecosystemDataPtr->add_parameter("int", "soilMoistureMinimum", 200,
                                 "valor da tensão de comparação do sensor / valor máximo = 1024",
-                                0, 0, rtc->now());
-    configDataPtr->add_parameter("bool", "soilIsWet", 0,
+                                0, 0, 0, rtc->now(), rtc);
+    ecosystemDataPtr->add_parameter("bool", "soilIsWet", 0,
                                 "condição de solo úmido; 1 = solo umido",
-                                0, 0, rtc->now());
+                                0, 0, 0, rtc->now(), rtc);
     
-    configDataPtr->add_parameter("int", "soilMoistureExpected", 500,
+    ecosystemDataPtr->add_parameter("int", "soilMoistureExpected", 500,
                                 "valor da tensão de comparação do sensor / valor máximo = 1024",
-                                0, 0, rtc->now());
-    configDataPtr->add_parameter("bool", "soilMoistureIsIdeal", 0,
+                                0, 0, 0, rtc->now(), rtc);
+    ecosystemDataPtr->add_parameter("bool", "soilMoistureIsIdeal", 0,
                                 "condição de umidade ideal para o solo; 1 = solo ideal; 0 = solo não ideal",
-                                0, 0, rtc->now());
-    configDataPtr->add_parameter("bool", "soilMoistureIncreasePerSec", 0,
+                                0, 0, 0, rtc->now(), rtc);
+    ecosystemDataPtr->add_parameter("bool", "soilMoistureIncreasePerSec", 0,
                                 "condição de umidade ideal para o solo; 1 = solo ideal; 0 = solo não ideal",
-                                0, 0, rtc->now());
+                                0, 0, 0, rtc->now(), rtc);
     
     // LIGHT CONTROL
-    configDataPtr->add_parameter("bool", "sunLightMinimum", 1,
+    ecosystemDataPtr->add_parameter("bool", "sunLightMinimum", 1,
                                 "condição de iluminação; 1 = dia; 0 = noite",
-                                0, 0, rtc->now());
-    configDataPtr->add_parameter("bool", "lightsOn", false,
+                                0, 0, 0, rtc->now(), rtc);
+    ecosystemDataPtr->add_parameter("bool", "lightsOn", false,
                                 "condição de iluminação; 1 = dia (true); 0 = noite (false)",
-                                0, 0, rtc->now());
+                                0, 0, 0, rtc->now(), rtc);
     // Simulated sunlight intensity in percent (0..100)
-    configDataPtr->add_parameter("int", "intensity_pct", 0,
+    ecosystemDataPtr->add_parameter("int", "intensity_pct", 0,
                                 "Percentual de intensidade da luz solar simulada (0-100)",
-                                0, 0, rtc->now());
+                                0, 0, 0, rtc->now(), rtc);
     // RGB color spectrum control (0-100% each channel)
-    configDataPtr->add_parameter("int", "lightRed_intensity", 100,
+    ecosystemDataPtr->add_parameter("int", "lightRed_intensity", 100,
                                 "Intensidade relativa do espectro vermelho (0-100%)",
-                                0, 0, rtc->now());
-    configDataPtr->add_parameter("int", "lightGreen_intensity", 30,
+                                0, 0, 0, rtc->now(), rtc);
+    ecosystemDataPtr->add_parameter("int", "lightGreen_intensity", 30,
                                 "Intensidade relativa do espectro verde (0-100%)",
-                                0, 0, rtc->now());
-    configDataPtr->add_parameter("int", "lightBlue_intensity", 50,
+                                0, 0, 0, rtc->now(), rtc);
+    ecosystemDataPtr->add_parameter("int", "lightBlue_intensity", 50,
                                 "Intensidade relativa do espectro azul (0-100%)",
-                                0, 0, rtc->now());
+                                0, 0, 0, rtc->now(), rtc);
     
     // FAN CONTROL
-    configDataPtr->add_parameter("int", "soilMoistureMaximum", 800,
+    ecosystemDataPtr->add_parameter("int", "soilMoistureMaximum", 800,
                                 "valor da tensão de comparação do sensor / valor máximo = 1024",
-                                0, 0, rtc->now());
-    configDataPtr->add_parameter("bool", "soilMoistureIsOverLimit", false,
+                                0, 0, 0, rtc->now(), rtc);
+    ecosystemDataPtr->add_parameter("bool", "soilMoistureIsOverLimit", false,
                                 "condição de solo muito úmido; 1 = solo muito úmido (true); 0 = solo normal (false)",
-                                0, 0, rtc->now());
+                                0, 0, 0, rtc->now(), rtc);
 }
 
 /* PALUDARIUM */

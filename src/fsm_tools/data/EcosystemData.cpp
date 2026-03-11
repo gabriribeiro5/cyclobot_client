@@ -37,14 +37,15 @@ EcosystemData::Sensor_Int EcosystemData::sensor_int(char *name)
 };
 
 /************************ INSERT METHODS ************************/
-void EcosystemData::add(char* type,
+void EcosystemData::add_parameter(char* type,
                             char *name,
                             int value,
                             char *description,
                             int expected_frequency,
                             bool measure_now,
                             bool send_now,
-                            DateTime last_update
+                            DateTime last_update,
+                            RTC_DS1307 *rtc
                         )
 {
     if (strcmp(type, "bool") == 0) {
