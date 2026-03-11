@@ -309,12 +309,12 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
   - [x] rerun cyclobot
 - [x] doc(CONTRIBUTING): board setup tutorial
 
-
 - [x] refactor(config): clear directory
   - [x] remove EcosystemParameters
   - [x] remove EEPROMStruct module
 
-- [ ] clear(/states): remove ErrorHandlingState
+ 
+- [x] doc(TODO): remove duplicated tasks
 - [ ] doc(README): update Design section
 
 - [ ] feat(print_strategy_parameters method): to replace print_parameters()
@@ -322,21 +322,7 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 - [ ] refactor(ClientComm): improve 'Get response' snippet
   - [ ] Make sure there's no infinite loop
 
-  
-- [ ] feat(modular strategy): split functions
-  - [ ] Create json structures to simplify data definition
-  - [ ] automate LinkedLists.add() call, so strategies don't need to worry about it
-
-- [ ] refactor(SelfDiagnostic): use LinkedLists instead of single vars
-
-- [ ] refactor(EcosystemParameters): move to Strategies
-  - [ ] create parameters printing method (use streaming methods)
-  - [ ] relocate EcosystemParameters printing from start to streaming stage
-
-- [ ] feat(storage): Create external storage <EEPROM.h> for easy parameters management
-  - [x] Create storageManagerPtr
-  - [ ] Read about EEPROM
-  - [ ] Define StorageManager methods
+- [ ] refactor(ErrorHandlingState): becomes CodeRollbackState and ParametersRollbackState
 
 - [ ] fix(warning -Wwrite-strings): review and try reducing occurences
 - [ ] fix(warning -Wattributes): review and try reducing occurences
