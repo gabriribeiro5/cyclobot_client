@@ -125,16 +125,13 @@ public:
     bool remove_uint8(const char *name);
 
     // Helpers to update individual bool entries (will persist to EEPROM)
-    bool set_config_bool_value(char *name, bool value);
-    bool update_config_bool(char *name, const Config_Bool &updated);
+    bool set_bool_value(char *name, bool value, RTC_DS1307 *rtcPtr);
 
     // Helpers for int entries
-    bool set_config_int_value(char *name, int value);
-    bool update_config_int(char *name, const Config_Int &updated);
+    bool set_int_value(char *name, int value, RTC_DS1307 *rtcPtr);
 
     // Helpers for uint8 entries
-    bool set_config_uint8_value(char *name, uint8_t value);
-    bool update_config_uint8(char *name, const Config_Uint8_t &updated);
+    bool set_uint8_value(char *name, uint8_t value, RTC_DS1307 *rtcPtr);
     
     void add_pin(char* type, char *name, bool value, char *description, bool updated_by, DateTime last_update);
     void add_parameter(char* type, char *name, bool value, char *description, bool user_can_see, bool updated_by, DateTime last_update);

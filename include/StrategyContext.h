@@ -20,5 +20,5 @@ class StrategyContext {
         StrategyContext(ConfigData *configDataPtr, BaseStrategy *simulationStrategyPtr, VisualComm *visualCommPtr, RTC_DS1307 *rtcPtr);
         void change_strategy(BaseStrategy *newStrategyPtr, VisualComm *visualCommPtr, RTC_DS1307 *rtcPtr);
         void setup(BaseStrategy *simulationStrategyPtr, DataInstances *dataPtr, VisualComm *visualCommPtr, RTC_DS1307 *rtcPtr);
-        void simulate_ecosystem(EcosystemScanner *scannerPtr, EcosystemActuator *actuatorPtr, ConfigData *configDataPtr, BaseStrategy *simulationStrategyPtr, VisualComm *visualCommPtr, RTC_DS1307 *rtcPtr);
+        void simulate_ecosystem(EcosystemScanner *scannerPtr, EcosystemActuator *actuatorPtr, DataInstances *dataPtr, BaseStrategy *simulationStrategyPtr, VisualComm *visualCommPtr, RTC_DS1307 *rtcPtr);
 };

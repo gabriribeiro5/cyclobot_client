@@ -182,12 +182,13 @@ bool ConfigData::clear_bool_eeprom() {
     return true;
 }
 
-bool ConfigData::set_config_bool_value(char *name, bool value) {
+bool ConfigData::set_bool_value(char *name, bool value, RTC_DS1307 *rtcPtr) {
     int idx = find_bool_index(name);
     if (idx < 0) return false;
     Config_Bool cb;
     if (!read_bool_at_index(idx, cb)) return false;
     cb.value = value;
+    cb.last_update = rtcPtr->now();
     return write_bool_at_index(idx, cb);
 }
 
@@ -296,19 +297,14 @@ bool ConfigData::remove_int(const char *name) {
     return true;
 }
 
-bool ConfigData::set_config_int_value(char *name, int value) {
+bool ConfigData::set_int_value(char *name, int value, RTC_DS1307 *rtcPtr) {
     int idx = find_int_index(name);
     if (idx < 0) return false;
     Config_Int ci;
     if (!read_int_at_index(idx, ci)) return false;
     ci.value = value;
+    ci.last_update = rtcPtr->now();
     return write_int_at_index(idx, ci);
-}
-
-bool ConfigData::update_config_int(char *name, const Config_Int &updated) {
-    int idx = find_int_index(name);
-    if (idx < 0) return false;
-    return write_int_at_index(idx, updated);
 }
 
 // ----------------- UINT8 region helpers -----------------
@@ -415,28 +411,17 @@ bool ConfigData::remove_uint8(const char *name) {
     return true;
 }
 
-bool ConfigData::set_config_uint8_value(char *name, uint8_t value) {
+bool ConfigData::set_uint8_value(char *name, uint8_t value, RTC_DS1307 *rtcPtr) {
     int idx = find_uint8_index(name);
     if (idx < 0) return false;
     Config_Uint8_t cu;
     if (!read_uint8_at_index(idx, cu)) return false;
     cu.value = value;
+    cu.last_update = rtcPtr->now();
     return write_uint8_at_index(idx, cu);
 }
 
-bool ConfigData::update_config_uint8(char *name, const Config_Uint8_t &updated) {
-    int idx = find_uint8_index(name);
-    if (idx < 0) return false;
-    return write_uint8_at_index(idx, updated);
-}
-
-bool ConfigData::update_config_bool(char *name, const Config_Bool &updated) {
-    int idx = find_bool_index(name);
-    if (idx < 0) return false;
-    return write_bool_at_index(idx, updated);
-}
-
-// SETUP
+/************************ SEARCH METHODS ************************/
 ConfigData::Config_Bool ConfigData::config_bool(char *name)
 {
     Config_Bool empty = {"", false, "", false, false, false, DateTime() };

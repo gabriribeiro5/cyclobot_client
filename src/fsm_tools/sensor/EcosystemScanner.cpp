@@ -11,7 +11,7 @@ void EcosystemScanner::read_soil_moisture(ConfigData *configDataPtr, VisualComm 
         soilIsWet.name != "")
     {
         soilIsWet.value = true;
-        configDataPtr->update_config_bool("soilIsWet", soilIsWet);        
+        configDataPtr->update_bool("soilIsWet", soilIsWet);        
     };
     
     if (configDataPtr->config_int("soilMoistureMaximum").value <
@@ -19,7 +19,7 @@ void EcosystemScanner::read_soil_moisture(ConfigData *configDataPtr, VisualComm 
         soilMoistureIsOverLimit.name != "")
     {
         soilMoistureIsOverLimit.value = true;
-        configDataPtr->update_config_bool("soilMoistureIsOverLimit", soilMoistureIsOverLimit);        
+        configDataPtr->update_bool("soilMoistureIsOverLimit", soilMoistureIsOverLimit);        
     };
 }
 
@@ -30,7 +30,7 @@ void EcosystemScanner::read_sun_light(ConfigData *configDataPtr, VisualComm *vis
         sunLightAvailable.name != "")
     {
         sunLightAvailable.value = true;
-        configDataPtr->update_config_bool("sunLightAvailable", sunLightAvailable);        
+        configDataPtr->update_bool("sunLightAvailable", sunLightAvailable);        
     };
 }
 
@@ -41,7 +41,7 @@ void EcosystemScanner::read_air_humidity(ConfigData *configDataPtr, VisualComm *
         airHumidityIsOverLimit.name != "")
     {
         airHumidityIsOverLimit.value = true;
-        configDataPtr->update_config_bool("airHumidityIsOverLimit", airHumidityIsOverLimit);        
+        configDataPtr->update_bool("airHumidityIsOverLimit", airHumidityIsOverLimit);        
     };
 }
 void EcosystemScanner::read_water_pressure(ConfigData *configDataPtr, VisualComm *visualCommPtr) {

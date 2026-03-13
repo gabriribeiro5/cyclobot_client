@@ -44,8 +44,7 @@ void EcosystemData::add_parameter(char* type,
                             int expected_frequency,
                             bool measure_now,
                             bool send_now,
-                            DateTime last_update,
-                            RTC_DS1307 *rtc
+                            RTC_DS1307 *rtcPtr
                         )
 {
     if (strcmp(type, "bool") == 0) {
@@ -56,9 +55,9 @@ void EcosystemData::add_parameter(char* type,
             expected_frequency,
             measure_now,
             send_now,
-            last_update
+            rtcPtr->now()
         };
-        // sensor_bool_list.add(new_bool);
+        sensor_bool_list.add(new_bool);
     };
     if (strcmp(type, "int") == 0) {
         Sensor_Int new_int = {
@@ -68,10 +67,197 @@ void EcosystemData::add_parameter(char* type,
             expected_frequency,
             measure_now,
             send_now,
-            last_update
+            rtcPtr->now()
         };
-        // sensor_int_list.add(new_int);
+        sensor_int_list.add(new_int);
     };
 };
 
 /************************ UPDATE METHODS ************************/
+void EcosystemData::update_parameter(char* type,
+                            char *name,
+                            int value,
+                            char *description,
+                            int expected_frequency,
+                            bool measure_now,
+                            bool send_now,
+                            RTC_DS1307 *rtcPtr
+                        )
+{
+    if (strcmp(type, "bool") == 0) {
+        for (int i = 0; i < sensor_bool_list.size(); i++)
+        {
+            Sensor_Bool item = sensor_bool_list.get(i);
+            if (strcmp(item.name, name) == 0)   // compare string contents
+            {
+                item.value = value;
+                item.description = description;
+                item.expected_frequency = expected_frequency;
+                item.measure_now = measure_now;
+                item.send_now = send_now;
+                item.last_update = rtcPtr->now();
+                sensor_bool_list.set(i, item);
+                return;
+            };
+        };
+    };
+    if (strcmp(type, "int") == 0) {
+        for (int i = 0; i < sensor_int_list.size(); i++)
+        {
+            Sensor_Int item = sensor_int_list.get(i);
+            if (strcmp(item.name, name) == 0)   // compare string contents
+            {
+                item.value = value;
+                item.description = description;
+                item.expected_frequency = expected_frequency;
+                item.measure_now = measure_now;
+                item.send_now = send_now;
+                item.last_update = rtcPtr->now();
+                sensor_int_list.set(i, item);
+                return;
+            };
+        };
+    };
+};
+
+void EcosystemData::set_bool_value(char *name, int value, RTC_DS1307 *rtcPtr) {
+    for (int i = 0; i < sensor_bool_list.size(); i++)
+    {
+        Sensor_Bool item = sensor_bool_list.get(i);
+        if (strcmp(item.name, name) == 0)   // compare string contents
+        {
+            item.value = value;
+            item.last_update = rtcPtr->now();
+            sensor_bool_list.set(i, item);
+            return;
+        };
+    };
+};
+
+void EcosystemData::set_bool_description(char *name, char *description, RTC_DS1307 *rtcPtr) {
+    for (int i = 0; i < sensor_bool_list.size(); i++)
+    {
+        Sensor_Bool item = sensor_bool_list.get(i);
+        if (strcmp(item.name, name) == 0)   // compare string contents
+        {
+            item.description = description;
+            item.last_update = rtcPtr->now();
+            sensor_bool_list.set(i, item);
+            return;
+        };
+    };
+};
+
+void EcosystemData::set_bool_expected_frequency(char *name, int expected_frequency, RTC_DS1307 *rtcPtr) {
+    for (int i = 0; i < sensor_bool_list.size(); i++)
+    {
+        Sensor_Bool item = sensor_bool_list.get(i);
+        if (strcmp(item.name, name) == 0)   // compare string contents
+        {
+            item.expected_frequency = expected_frequency;
+            item.last_update = rtcPtr->now();
+            sensor_bool_list.set(i, item);
+            return;
+        };
+    };
+};
+
+void EcosystemData::set_bool_measure_now(char *name, bool measure_now, RTC_DS1307 *rtcPtr) {
+    for (int i = 0; i < sensor_bool_list.size(); i++)
+    {
+        Sensor_Bool item = sensor_bool_list.get(i);
+        if (strcmp(item.name, name) == 0)   // compare string contents
+        {
+            item.measure_now = measure_now;
+            item.last_update = rtcPtr->now();
+            sensor_bool_list.set(i, item);
+            return;
+        };
+    };
+};
+
+void EcosystemData::set_bool_send_now(char *name, bool send_now, RTC_DS1307 *rtcPtr) {
+    for (int i = 0; i < sensor_bool_list.size(); i++)
+    {
+        Sensor_Bool item = sensor_bool_list.get(i);
+        if (strcmp(item.name, name) == 0)   // compare string contents
+        {
+            item.send_now = send_now;
+            item.last_update = rtcPtr->now();
+            sensor_bool_list.set(i, item);
+            return;
+        };
+    };
+};
+
+// Linked-lists INT UPDATE methods
+void EcosystemData::set_int_value(char *name, int value, RTC_DS1307 *rtcPtr) {
+    for (int i = 0; i < sensor_int_list.size(); i++)
+    {
+        Sensor_Int item = sensor_int_list.get(i);
+        if (strcmp(item.name, name) == 0)   // compare string contents
+        {
+            item.value = value;
+            item.last_update = rtcPtr->now();
+            sensor_int_list.set(i, item);
+            return;
+        };
+    };
+};
+
+void EcosystemData::set_int_description(char *name, char *description, RTC_DS1307 *rtcPtr) {
+    for (int i = 0; i < sensor_int_list.size(); i++)
+    {
+        Sensor_Int item = sensor_int_list.get(i);
+        if (strcmp(item.name, name) == 0)   // compare string contents
+        {
+            item.description = description;
+            item.last_update = rtcPtr->now();
+            sensor_int_list.set(i, item);
+            return;
+        };
+    };
+};
+
+void EcosystemData::set_int_expected_frequency(char *name, int expected_frequency, RTC_DS1307 *rtcPtr) {
+    for (int i = 0; i < sensor_int_list.size(); i++)
+    {
+        Sensor_Int item = sensor_int_list.get(i);
+        if (strcmp(item.name, name) == 0)   // compare string contents
+        {
+            item.expected_frequency = expected_frequency;
+            item.last_update = rtcPtr->now();
+            sensor_int_list.set(i, item);
+            return;
+        };
+    };
+};
+
+void EcosystemData::set_int_measure_now(char *name, bool measure_now, RTC_DS1307 *rtcPtr) {
+    for (int i = 0; i < sensor_int_list.size(); i++)
+    {
+        Sensor_Int item = sensor_int_list.get(i);
+        if (strcmp(item.name, name) == 0)   // compare string contents
+        {
+            item.measure_now = measure_now;
+            item.last_update = rtcPtr->now();
+            sensor_int_list.set(i, item);
+            return;
+        };
+    };
+};
+
+
+void EcosystemData::set_int_send_now(char *name, bool send_now, RTC_DS1307 *rtcPtr) {
+    for (int i = 0; i < sensor_int_list.size(); i++)
+    {
+        Sensor_Int item = sensor_int_list.get(i);
+        if (strcmp(item.name, name) == 0)   // compare string contents
+        {
+            item.send_now = send_now;
+            item.last_update = rtcPtr->now();
+            sensor_int_list.set(i, item);
+            return;
+        };
+    };
+};

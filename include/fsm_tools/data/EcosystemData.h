@@ -34,6 +34,20 @@ class EcosystemData {
         Sensor_Int sensor_int(char *name);
         
         // Linked-lists INSERTITION methods
-        void add_parameter(char* type, char *name, int value, char *description, int expected_frequency, bool measure_now, bool send_now, DateTime last_update, RTC_DS1307 *rtc);
-        void update_parameter(char* type, char *name, int value, char *description, int expected_frequency, bool measure_now, bool send_now, DateTime last_update, RTC_DS1307 *rtc);
+        void add_parameter(char* type, char *name, int value, char *description, int expected_frequency, bool measure_now, bool send_now, RTC_DS1307 *rtcPtr);
+        void update_parameter(char* type, char *name, int value, char *description, int expected_frequency, bool measure_now, bool send_now, RTC_DS1307 *rtcPtr);
+        
+        // Linked-lists BOOL UPDATE methods
+        void set_bool_value(char *name, int value, RTC_DS1307 *rtcPtr);
+        void set_bool_description(char *name, char *description, RTC_DS1307 *rtcPtr);
+        void set_bool_expected_frequency(char *name, int expected_frequency, RTC_DS1307 *rtcPtr);
+        void set_bool_measure_now(char *name, bool measure_now, RTC_DS1307 *rtcPtr);
+        void set_bool_send_now(char *name, bool send_now, RTC_DS1307 *rtcPtr);
+        
+        // Linked-lists INT UPDATE methods
+        void set_int_value(char *name, int value, RTC_DS1307 *rtcPtr);
+        void set_int_description(char *name, char *description, RTC_DS1307 *rtcPtr);
+        void set_int_expected_frequency(char *name, int expected_frequency, RTC_DS1307 *rtcPtr);
+        void set_int_measure_now(char *name, bool measure_now, RTC_DS1307 *rtcPtr);
+        void set_int_send_now(char *name, bool send_now, RTC_DS1307 *rtcPtr);
 };

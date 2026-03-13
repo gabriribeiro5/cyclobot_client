@@ -253,14 +253,12 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
       - [x] refactor(DynamicJsonDocument): alocate config_json and selfDiagnosis_Json only when needed (in ClientComm) and free right after use
       - [x] refactor(capacity): remove 'capacity' from ConfigData and SelfDiagnosisData initialization
       - [x] perf(Json and String): reduce object's size
-    - [ ] refactor(EcosystemData): implement in standard SRAM (8 KB)
+    - [X] refactor(EcosystemData): implement in standard SRAM (8 KB)
       - [x] refactor(EcosystemData): LinkedList still returns copy of struct
-      - [ ] refactor(EcosystemData): fix LinkedList
-      - [ ] refactor(LinkedList::getNodeData): a descriptive name for the old getPtr() method
-      - [ ] refactor(LinkedList::getNodeData): try using method 
-    - [ ] refactor(remove EcosystemParameters): Use fsm_tools/data/* instead
-    - [ ] refactor(LogData): implement in standard SRAM (8 KB)
+      - [X] refactor(EcosystemData): create ecosystemData's update methods
+      - [X] refactor(ConfigData): remove unecessary methods
     - [ ] refactor(SelfDiagnosisData): implement in standard SRAM (8 KB)
+    - [ ] refactor(LogData): implement in standard SRAM (8 KB)
   - [ ] feat(LinkedList::getPtr()): send pull request for third-party lib
   - [ ] ...
   - [ ] strategy runs setup_bool_list("name") to get struct pointer

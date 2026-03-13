@@ -62,7 +62,7 @@ void SimulationState::run_simulation(FiniteStateMachine *cyclobot) {
     cyclobot->commPtr->visualCommPtr->print_line(cyclobot->simStrategyContextPtr->eventStart.timestamp());
     cyclobot->simStrategyContextPtr->simulate_ecosystem(cyclobot->scannerPtr,
                                             cyclobot->actuatorPtr,
-                                            cyclobot->dataPtr->configDataPtr,
+                                            cyclobot->dataPtr,
                                             cyclobot->simulationStrategyPtr,
                                             cyclobot->commPtr->visualCommPtr,
                                             cyclobot->rtcPtr);

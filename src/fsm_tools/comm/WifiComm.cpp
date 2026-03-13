@@ -25,7 +25,7 @@ void WifiComm::initialize_wifi_module(WifiParameters *wifiParametersPtr, VisualC
 
   delay(2000); // Wait serial initialization
   WiFi.init(wifiParametersPtr->wifiStream);
-  visualCommPtr->print_line(F("    [WifiComm::initialize_wifi_module] Serial communication with WiFi module stablished."));
+  visualCommPtr->print_line(F("    [WifiComm::initialize_wifi_module] Serial communication stablished."));
 }
 
 
