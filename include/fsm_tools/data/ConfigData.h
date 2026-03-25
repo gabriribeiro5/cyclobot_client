@@ -54,7 +54,6 @@ public:
     };
 
     // No in-memory linked list: records are read/written directly to EEPROM
-
     // EEPROM-backed record definitions
     static const uint16_t CONFIG_EEPROM_MAGIC = 0xC0DE;
     static const uint16_t CONFIG_EEPROM_VERSION = 1;
@@ -133,7 +132,6 @@ public:
     // Helpers for uint8 entries
     bool set_uint8_value(char *name, uint8_t value, RTC_DS1307 *rtcPtr);
     
-    void add_pin(char* type, char *name, bool value, char *description, bool updated_by, DateTime last_update);
-    void add_parameter(char* type, char *name, bool value, char *description, bool user_can_see, bool updated_by, DateTime last_update);
-
+    void add_pin(char* type, char *name, bool value, char *description, bool updated_by, RTC_DS1307 *rtcPtr);
+    void add_ecosystem_parameter(char* type, char *name, bool value, char *description, bool user_can_see, bool updated_by, DateTime last_update);
 };

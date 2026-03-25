@@ -4,7 +4,7 @@
 #include "fsm_tools/actuator/EcosystemActuator.h"
 #include "fsm_tools/comm/VisualComm.h"
 #include "fsm_tools/data/ConfigData.h"
-#include "fsm_tools/DataInstances.h"
+#include "fsm_tools/StrategyDataInstances.h"
 
 // Forward declarations
 class BaseStrategy;
@@ -19,6 +19,6 @@ class StrategyContext {
         DateTime eventEnd;                  // microsseconds
         StrategyContext(ConfigData *configDataPtr, BaseStrategy *simulationStrategyPtr, VisualComm *visualCommPtr, RTC_DS1307 *rtcPtr);
         void change_strategy(BaseStrategy *newStrategyPtr, VisualComm *visualCommPtr, RTC_DS1307 *rtcPtr);
-        void setup(BaseStrategy *simulationStrategyPtr, DataInstances *dataPtr, VisualComm *visualCommPtr, RTC_DS1307 *rtcPtr);
-        void simulate_ecosystem(EcosystemScanner *scannerPtr, EcosystemActuator *actuatorPtr, DataInstances *dataPtr, BaseStrategy *simulationStrategyPtr, VisualComm *visualCommPtr, RTC_DS1307 *rtcPtr);
+        void setup(BaseStrategy *simulationStrategyPtr, StrategyDataInstances *dataPtr, VisualComm *visualCommPtr, RTC_DS1307 *rtcPtr);
+        void simulate_ecosystem(EcosystemScanner *scannerPtr, EcosystemActuator *actuatorPtr, StrategyDataInstances *dataPtr, BaseStrategy *simulationStrategyPtr, VisualComm *visualCommPtr, RTC_DS1307 *rtcPtr);
 };

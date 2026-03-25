@@ -150,7 +150,7 @@ void VisualComm::print_parameters(ParameterInstances *paramPtr) {
   print_line(paramPtr->wifiParametersPtr->networkKeyIndex);
   
   print(F(" - Wait Time Per Connection Attempt (ms): "));
-  print_line(paramPtr->wifiParametersPtr->waitTimePerConnectionAttempt);
+  print_line(paramPtr->wifiParametersPtr->waitTimePerConnectionAttemptInMillis);
   print(F(" - Max Connection Attempt: "));
   print_line(paramPtr->wifiParametersPtr->maxConnectionAttempt);
   
@@ -177,7 +177,7 @@ void VisualComm::print_parameters(ParameterInstances *paramPtr) {
   print(F(" - Server Port: "));
   print_line(paramPtr->clientParametersPtr->clientPort);
   print(F(" - Wait Time Per Connection Attempt (ms): "));
-  print_line(paramPtr->clientParametersPtr->waitTimePerConnectionAttempt);
+  print_line(paramPtr->clientParametersPtr->waitTimePerConnectionAttemptInMillis);
   print(F(" - Message Trace: "));
   print_line(paramPtr->clientParametersPtr->msgTrace);
   print(F(" - Reading Lines: "));

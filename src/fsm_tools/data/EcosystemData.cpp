@@ -41,9 +41,7 @@ void EcosystemData::add_parameter(char* type,
                             char *name,
                             int value,
                             char *description,
-                            int expected_frequency,
-                            bool measure_now,
-                            bool send_now,
+                            double expected_frequency,
                             RTC_DS1307 *rtcPtr
                         )
 {
@@ -53,8 +51,8 @@ void EcosystemData::add_parameter(char* type,
             value,
             description,
             expected_frequency,
-            measure_now,
-            send_now,
+            true,
+            false,
             rtcPtr->now()
         };
         sensor_bool_list.add(new_bool);
@@ -65,8 +63,8 @@ void EcosystemData::add_parameter(char* type,
             value,
             description,
             expected_frequency,
-            measure_now,
-            send_now,
+            true,
+            false,
             rtcPtr->now()
         };
         sensor_int_list.add(new_int);
@@ -78,7 +76,7 @@ void EcosystemData::update_parameter(char* type,
                             char *name,
                             int value,
                             char *description,
-                            int expected_frequency,
+                            double expected_frequency,
                             bool measure_now,
                             bool send_now,
                             RTC_DS1307 *rtcPtr
@@ -128,6 +126,7 @@ void EcosystemData::set_bool_value(char *name, int value, RTC_DS1307 *rtcPtr) {
         {
             item.value = value;
             item.last_update = rtcPtr->now();
+            item.send_now = true;   // if value is updated, mark to send in next stream
             sensor_bool_list.set(i, item);
             return;
         };
@@ -148,7 +147,7 @@ void EcosystemData::set_bool_description(char *name, char *description, RTC_DS13
     };
 };
 
-void EcosystemData::set_bool_expected_frequency(char *name, int expected_frequency, RTC_DS1307 *rtcPtr) {
+void EcosystemData::set_bool_expected_frequency(char *name, double expected_frequency, RTC_DS1307 *rtcPtr) {
     for (int i = 0; i < sensor_bool_list.size(); i++)
     {
         Sensor_Bool item = sensor_bool_list.get(i);
@@ -198,6 +197,7 @@ void EcosystemData::set_int_value(char *name, int value, RTC_DS1307 *rtcPtr) {
         if (strcmp(item.name, name) == 0)   // compare string contents
         {
             item.value = value;
+            item.send_now = true;   // if value is updated, mark to send in next stream
             item.last_update = rtcPtr->now();
             sensor_int_list.set(i, item);
             return;
@@ -219,7 +219,7 @@ void EcosystemData::set_int_description(char *name, char *description, RTC_DS130
     };
 };
 
-void EcosystemData::set_int_expected_frequency(char *name, int expected_frequency, RTC_DS1307 *rtcPtr) {
+void EcosystemData::set_int_expected_frequency(char *name, double expected_frequency, RTC_DS1307 *rtcPtr) {
     for (int i = 0; i < sensor_int_list.size(); i++)
     {
         Sensor_Int item = sensor_int_list.get(i);

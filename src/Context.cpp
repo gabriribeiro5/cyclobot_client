@@ -3,7 +3,7 @@
 #include "../include/strategies/BaseStrategy.h"
 #include "../include/states/BaseState.h"
 #include "../include/fsm_tools/CommunicationInstances.h"
-#include "../include/fsm_tools/DataInstances.h"
+#include "../include/fsm_tools/StrategyDataInstances.h"
 #include "../include/fsm_tools/ParameterInstances.h"
 #include "../include/fsm_tools/SelfManagementInstances.h"
 #include "../include/fsm_tools/sensor/EcosystemScanner.h"
@@ -19,7 +19,7 @@ extern void *__brkval;           // Current end of the heap. NULL (0) if no mall
 SelfManagementInstances *FiniteStateMachine::selfPtr = nullptr;
 CommunicationInstances *FiniteStateMachine::commPtr = nullptr;
 ParameterInstances *FiniteStateMachine::paramPtr = nullptr;
-DataInstances *FiniteStateMachine::dataPtr = nullptr;
+StrategyDataInstances *FiniteStateMachine::dataPtr = nullptr;
 EcosystemScanner *FiniteStateMachine::scannerPtr = nullptr;
 EcosystemActuator *FiniteStateMachine::actuatorPtr = nullptr;
 BaseStrategy *FiniteStateMachine::simulationStrategyPtr = nullptr;
@@ -37,7 +37,7 @@ FiniteStateMachine::FiniteStateMachine(BaseState *initialStatePtr, BaseStrategy 
         paramPtr = new ParameterInstances();
         selfPtr = new SelfManagementInstances();
         commPtr = new CommunicationInstances();
-        dataPtr = new DataInstances();
+        dataPtr = new StrategyDataInstances();
 
         simStrategyContextPtr = new StrategyContext(dataPtr->configDataPtr, simulationStrategyPtr, commPtr->visualCommPtr, rtcPtr);
     }
@@ -115,9 +115,9 @@ void FiniteStateMachine::run_simulation() {
     // log end + execution time
 }
 
-void FiniteStateMachine::report_simulation_data() {
+void FiniteStateMachine::report_ecosystem_data() {
     // get milliseconds + log start
-    currentStatePtr->report_simulation_data(this);
+    currentStatePtr->report_ecosystem_data(this);
     // log end + execution time
 }
 

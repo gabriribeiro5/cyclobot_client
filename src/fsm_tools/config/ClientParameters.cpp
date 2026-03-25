@@ -4,7 +4,8 @@ ClientParameters::ClientParameters()
 : apiServer(1234567890),
   clientPort(80),
 
-  waitTimePerConnectionAttempt(5000),
+  waitTimePerConnectionAttemptInMillis(5000),
+  dataStreamLengthInSeconds(120),
 
   msgTrace("Hello server"),
   readingLines(true),

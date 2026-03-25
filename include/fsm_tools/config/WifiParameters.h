@@ -16,7 +16,7 @@ class WifiParameters {
         const int networkKeyIndex;                 // your network key Index number (needed only for WEP)
         
         
-        const int waitTimePerConnectionAttempt;    // 5 segundos
+        const int waitTimePerConnectionAttemptInMillis;    // 5 segundos
         const int maxConnectionAttempt;
         
         const int waitTimePerScanAttempt;          // 3 segundos

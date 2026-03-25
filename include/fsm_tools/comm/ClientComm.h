@@ -5,7 +5,7 @@
 #include "../../fsm_tools/config/WifiParameters.h"
 #include "../../fsm_tools/config/DeviceParameters.h"
 #include "../../fsm_tools/data/SelfDiagnosisData.h"
-#include "../../fsm_tools/DataInstances.h"
+#include "../../fsm_tools/StrategyDataInstances.h"
 #include "./VisualComm.h"
 
 class ClientComm {
@@ -14,9 +14,9 @@ class ClientComm {
         void post_signature_request(ClientParameters *clientParametersPtr, WifiParameters *wifiParametersPtr, DeviceParameters *deviceParametersPtr, VisualComm *visualCommPtr);
         const char *get_cyclobot_session_token(ClientParameters *clientParametersPtr, WifiParameters *wifiParametersPtr, DeviceParameters *deviceParametersPtr, VisualComm *visualCommPtr);
         void put_invalid_cyclobot_session_token(VisualComm *visualCommPtr);
-        void post_cyclobot_config(ClientParameters *clientParametersPtr, WifiParameters *wifiParametersPtr, DeviceParameters *deviceParametersPtr, DataInstances *dataPtr, VisualComm *visualCommPtr);
+        void post_cyclobot_config(ClientParameters *clientParametersPtr, WifiParameters *wifiParametersPtr, DeviceParameters *deviceParametersPtr, ConfigData *configDataPtr, VisualComm *visualCommPtr);
         void post_cyclobot_diagnosis(ClientParameters *clientParametersPtr, WifiParameters *wifiParametersPtr, DeviceParameters *deviceParametersPtr, SelfDiagnosisData *selfDiagnosisDataPtr, VisualComm *visualCommPtr);
-        void post_cyclobot_environment_state(VisualComm *visualCommPtr);
+        void post_ecosystem_data(ClientParameters *clientParametersPtr, WifiParameters *wifiParametersPtr, DeviceParameters *deviceParametersPtr, EcosystemData *ecosystemDataPtr, VisualComm *visualCommPtr, RTC_DS1307 *rtcPtr);
         void get_cyclobot_config_update(VisualComm *visualCommPtr);
         void get_cyclobot_config_rollback(VisualComm *visualCommPtr);
 };

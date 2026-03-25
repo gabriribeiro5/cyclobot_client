@@ -42,7 +42,7 @@ public:
     virtual void run_simulation(FiniteStateMachine *cyclobot);
     
     // comm
-    virtual void report_simulation_data(FiniteStateMachine *cyclobot);
+    virtual void report_ecosystem_data(FiniteStateMachine *cyclobot);
     
     // self
     virtual void take_a_nap(FiniteStateMachine *cyclobot);

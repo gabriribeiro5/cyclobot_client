@@ -259,17 +259,10 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
       - [X] refactor(ConfigData): remove unecessary methods
     - [ ] refactor(SelfDiagnosisData): implement in standard SRAM (8 KB)
     - [ ] refactor(LogData): implement in standard SRAM (8 KB)
-  - [ ] feat(LinkedList::getPtr()): send pull request for third-party lib
-  - [ ] ...
-  - [ ] strategy runs setup_bool_list("name") to get struct pointer
-  - [ ] strategy runs setup_int_list("name") to get struct pointer
-  - [ ] create stream_sensors_data method
-    - [ ] loops_per_sec = 20
-    - [ ] remaning_millisecs = (1sec - (now - loop_start)) / 20 #20 loops/second
-    - [ ] wait_time = remaning_millisecs / loops_per_sec
-    - [ ] if wait_time is positive, wait(stream_frames)
-    - [ ] else, raise warnig ("The streaming loop took longer than expected.")
-  - [ ] clear strategy parameters at the end of states loop
+  - [x] refactor[strategyDataInstances]: change dataInstances to strategyDataInstances
+  - [x] feat(report_ecosystem_data): create data streaming method
+    
+  
 
 - [x] feat(PL_FogLightFan::setup and simulate_ecosystem): finish flow
 

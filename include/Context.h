@@ -3,7 +3,7 @@
 #include "states/BaseState.h"
 #include "strategies/BaseStrategy.h"
 #include "fsm_tools/CommunicationInstances.h"
-#include "fsm_tools/DataInstances.h"
+#include "fsm_tools/StrategyDataInstances.h"
 #include "fsm_tools/ParameterInstances.h"
 #include "fsm_tools/SelfManagementInstances.h"
 #include "fsm_tools/sensor/EcosystemScanner.h"
@@ -23,7 +23,7 @@ class FiniteStateMachine {
         static SelfManagementInstances *selfPtr;
         static CommunicationInstances *commPtr;
         static ParameterInstances *paramPtr;
-        static DataInstances *dataPtr;
+        static StrategyDataInstances *dataPtr;
         
         // Static single instances
         static EcosystemScanner *scannerPtr;
@@ -60,7 +60,7 @@ class FiniteStateMachine {
         void run_simulation();
         
         // // comm
-        void report_simulation_data();
+        void report_ecosystem_data();
         
         // // self
         void take_a_nap();

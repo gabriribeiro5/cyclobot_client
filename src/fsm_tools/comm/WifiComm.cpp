@@ -131,7 +131,7 @@ void WifiComm::connect_wifi(WifiParameters *wifiParametersPtr, VisualComm *visua
     wifiParametersPtr->wifiStatus = WiFi.begin(wifiParametersPtr->wifiSsid, wifiParametersPtr->wifiSecret);
 
     // wait connection
-    delay(wifiParametersPtr->waitTimePerConnectionAttempt);
+    delay(wifiParametersPtr->waitTimePerConnectionAttemptInMillis);
   }
 }
 

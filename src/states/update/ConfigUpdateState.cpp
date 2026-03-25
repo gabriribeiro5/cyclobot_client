@@ -68,8 +68,8 @@ void ConfigUpdateState::run_simulation(FiniteStateMachine *cyclobot) {
 };
 
 // comm
-void ConfigUpdateState::report_simulation_data(FiniteStateMachine *cyclobot) {
-    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, cyclobot->commPtr->visualCommPtr, "ConfigUpdateState", "report_simulation_data", 0, "wrong state");
+void ConfigUpdateState::report_ecosystem_data(FiniteStateMachine *cyclobot) {
+    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, cyclobot->commPtr->visualCommPtr, "ConfigUpdateState", "report_ecosystem_data", 0, "wrong state");
 };
 
 // self

@@ -457,10 +457,9 @@ void ConfigData::add_pin(char* type,
                             bool value,
                             char *description,
                             bool updated_by,
-                            DateTime last_update
+                            RTC_DS1307 *rtcPtr
                         )
 {   
-    return;
     bool is_bool = strcmp(type, "bool") == 0;
     bool is_int = strcmp(type, "int") == 0;
     bool is_uint8 = strcmp(type, "uint8_t") == 0;
@@ -480,7 +479,7 @@ void ConfigData::add_pin(char* type,
         new_bool.updated_by = updated_by;
         new_bool.is_pin_value = true;
         new_bool.user_can_see = false;
-        new_bool.last_update = last_update;
+        new_bool.last_update = rtcPtr->now();
         add_bool(new_bool);
     };
     if (is_int) {
@@ -494,7 +493,7 @@ void ConfigData::add_pin(char* type,
         new_int.is_pin_value = true;
         new_int.user_can_see = false;
         new_int.updated_by = updated_by;
-        new_int.last_update = last_update;
+        new_int.last_update = rtcPtr->now();
         add_int(new_int);
     };
     if (is_uint8) {
@@ -508,14 +507,14 @@ void ConfigData::add_pin(char* type,
         new_uint8_t.is_pin_value = true;
         new_uint8_t.user_can_see = false;
         new_uint8_t.updated_by = updated_by;
-        new_uint8_t.last_update = last_update;
+        new_uint8_t.last_update = rtcPtr->now();
         add_uint8(new_uint8_t);
     };
 };
 
 /************************ INSERT METHODS ************************/
 // SENSOR
-void ConfigData::add_parameter(char* type,
+void ConfigData::add_ecosystem_parameter(char* type,
                                 char *name,
                                 bool value,
                                 char *description,

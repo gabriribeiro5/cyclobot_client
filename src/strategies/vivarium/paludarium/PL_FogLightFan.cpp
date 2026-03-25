@@ -6,42 +6,58 @@
 #include "../../../../include/fsm_tools/sensor/EcosystemScanner.h"
 #include "../../../../include/fsm_tools/actuator/EcosystemActuator.h"
 #include "../../../../include/fsm_tools/comm/VisualComm.h"
+#include "../../../../include/fsm_tools/StrategyDataInstances.h"
+
 
 /* PALUDARIUM */
-void PL_FogLightFan::create_pin_map(ConfigData *configDataPtr, VisualComm *visualCommPtr, RTC_DS1307 *rtc) {
-    // FOG CONTROL (Sensor + Atuator)
-    configDataPtr->add_pin("uint8_t", "soilMoistureSensor", A0,
+void PL_FogLightFan::create_pin_map(StrategyDataInstances *dataPtr, VisualComm *visualCommPtr, RTC_DS1307 *rtc) {
+    // FOG CONTROL (Sensor Data + Sensor Pin + Actuator Pin)
+    dataPtr->ecosystemDataPtr->add_parameter("int", "soilMoisture", 0,
+        "Ultimo valor medido pelo sensor de umidade do solo",
+        0.5, rtc
+    );
+    dataPtr->configDataPtr->add_pin("uint8_t", "soilMoistureSensor", A0,
         "Sensor de umidade do solo pino A0 conectado no A0 do Arduino",
-        0, rtc->now()
+        0, rtc
     );
-    configDataPtr->add_pin("int", "fogSystem", 4,
+    dataPtr->configDataPtr->add_pin("int", "fogSystem", 4,
         "Porta de controle do USB 5V",
-        0, rtc->now()
+        0, rtc
     );
     
-    // LIGHT CONTROL (Sensor + Atuator)
-    configDataPtr->add_pin("uint8_t", "sunLightSensor", A1,
+    // LIGHT CONTROL (Sensor Data + Sensor Pin + Actuator Pin)
+    dataPtr->ecosystemDataPtr->add_parameter("int", "sunLight", 0,
+        "Ultimo valor medido pelo sensor de luminosidade",
+        0.5, rtc
+    );
+    dataPtr->configDataPtr->add_pin("uint8_t", "sunLightSensor", A1,
         "Sensor de luminosidade pino A1 conectado no A1 do Arduino",
-        0, rtc->now()
+        0, rtc
     );
-    configDataPtr->add_pin("int", "lightSystem", 5,
+    dataPtr->configDataPtr->add_pin("int", "lightSystem", 5,
         "Porta de controle do sistema de iluminação conectada no D5 do Arduino",
-        0, rtc->now()
+        0, rtc
     );
+
     // WS2812 RGB LED data pin
-    configDataPtr->add_pin("int", "lightRGB_data", 7,
+    dataPtr->configDataPtr->add_pin("int", "lightRGB_data", 7,
         "Pino de dados para WS2812 RGB LED conectado no D7 do Arduino",
-        0, rtc->now()
+        0, rtc
     );
+
     
-    // FAN CONTROL (Sensor + Atuator)
-    configDataPtr->add_pin("uint8_t", "airHumiditySensor", A2,
-        "Sensor de umidade do ar pino A2 conectado no A2 do Arduino",
-        0, rtc->now()
+    // FAN CONTROL (Sensor Data + Sensor Pin + Actuator Pin)
+    dataPtr->ecosystemDataPtr->add_parameter("int", "airHumidity", 0,
+        "Ultimo valor medido pelo sensor de umidade do ar",
+        0.5, rtc
     );
-    configDataPtr->add_pin("int", "fanSystem", 6,
+    dataPtr->configDataPtr->add_pin("uint8_t", "airHumiditySensor", A2,
+        "Sensor de umidade do ar pino A2 conectado no A2 do Arduino",
+        0, rtc
+    );
+    dataPtr->configDataPtr->add_pin("int", "fanSystem", 6,
         "Porta de controle do sistema de ventilador conectada no D6 do Arduino",
-        0, rtc->now()
+        0, rtc
     );
 }
 
@@ -52,89 +68,86 @@ void PL_FogLightFan::set_self_diagnosis_parameters(SelfDiagnosisData *selfDiagno
 }
 
 void PL_FogLightFan::board_setup(ConfigData *configDataPtr, VisualComm *visualCommPtr, RTC_DS1307 *rtc) {
-    // FOG CONTROL (Sensor + Atuator)
+    // FOG CONTROL (Sensor Data + Sensor Pin + Actuator Pin)
     pinMode(configDataPtr->config_uint8_t("soilMoistureSensor").value, INPUT);     // Sensor de umidade do solo - A0 é entrada
     pinMode(configDataPtr->config_uint8_t("fogSystem").value, OUTPUT);             // Porta de controle do USB 5V - D4 é saída
     
-    // LIGHT CONTROL (Sensor + Atuator)
+    // LIGHT CONTROL (Sensor Data + Sensor Pin + Actuator Pin)
     pinMode(configDataPtr->config_uint8_t("sunLightSensor").value, INPUT);         // Sensor de luminosidade - A1 é entrada
     pinMode(configDataPtr->config_uint8_t("lightSystem").value, OUTPUT);           // Porta de controle do sistema de iluminação - D5 é saída
     // WS2812 RGB LED data pin
     pinMode(configDataPtr->config_int("lightRGB_data").value, OUTPUT);             // Pino de dados WS2812 - D7 é saída
 
-    // FAN CONTROL (Sensor + Atuator)
+    // FAN CONTROL (Sensor Data + Sensor Pin + Actuator Pin)
     pinMode(configDataPtr->config_uint8_t("airHumiditySensor").value, INPUT);     // Sensor de umidade do ar - A2 é entrada
     pinMode(configDataPtr->config_uint8_t("fanSystem").value, OUTPUT);            // Porta de controle do sistema de ventilador - D6 é saída
 }
 
-void PL_FogLightFan::create_ecosystem_params(EcosystemData *ecosystemDataPtr, VisualComm *visualCommPtr, RTC_DS1307 *rtc) {
+void PL_FogLightFan::set_ecosystem_params(ConfigData *configDataPtr, VisualComm *visualCommPtr, RTC_DS1307 *rtc) {
     // FOG CONTROL
-    ecosystemDataPtr->add_parameter("int", "soilMoistureMinimum", 200,
+    configDataPtr->add_ecosystem_parameter("int", "soilMoistureMinimum", 200,
                                 "valor da tensão de comparação do sensor / valor máximo = 1024",
-                                0, 0, 0, rtc);
-    ecosystemDataPtr->add_parameter("bool", "soilIsWet", 0,
+                                0, 0, rtc->now());
+    configDataPtr->add_ecosystem_parameter("bool", "soilIsWet", 0,
                                 "condição de solo úmido; 1 = solo umido",
-                                0, 0, 0, rtc);
+                                0, 0, rtc->now());
     
-    ecosystemDataPtr->add_parameter("int", "soilMoistureExpected", 500,
+    configDataPtr->add_ecosystem_parameter("int", "soilMoistureExpected", 500,
                                 "valor da tensão de comparação do sensor / valor máximo = 1024",
-                                0, 0, 0, rtc);
-    ecosystemDataPtr->add_parameter("bool", "soilMoistureIsIdeal", 0,
+                                0, 0, rtc->now());
+    configDataPtr->add_ecosystem_parameter("bool", "soilMoistureIsIdeal", 0,
                                 "condição de umidade ideal para o solo; 1 = solo ideal; 0 = solo não ideal",
-                                0, 0, 0, rtc);
-    ecosystemDataPtr->add_parameter("bool", "soilMoistureIncreasePerSec", 0,
+                                0, 0, rtc->now());
+    configDataPtr->add_ecosystem_parameter("bool", "soilMoistureIncreasePerSec", 0,
                                 "condição de umidade ideal para o solo; 1 = solo ideal; 0 = solo não ideal",
-                                0, 0, 0, rtc);
+                                0, 0, rtc->now());
     
     // LIGHT CONTROL
-    ecosystemDataPtr->add_parameter("bool", "sunLightMinimum", 1,
-                                "condição de iluminação; 1 = dia; 0 = noite",
-                                0, 0, 0, rtc);
-    ecosystemDataPtr->add_parameter("bool", "lightsOn", false,
+    configDataPtr->add_ecosystem_parameter("bool", "lightsOn", false,
                                 "condição de iluminação; 1 = dia (true); 0 = noite (false)",
-                                0, 0, 0, rtc);
+                                0, 0, rtc->now());
 
     // Simulated sunlight intensity in percent (0..100)
-    ecosystemDataPtr->add_parameter("int", "intensity_pct", 0,
+    configDataPtr->add_ecosystem_parameter("int", "intensity_pct", 0,
                                 "Percentual de intensidade da luz solar simulada (0-100)",
-                                0, 0, 0, rtc);
-    ecosystemDataPtr->add_parameter("int", "sunLightIntensity", 0,
+                                0, 0, rtc->now());
+    configDataPtr->add_ecosystem_parameter("int", "sunLightIntensity", 0,
                                 "Intensidade da luz solar simulada (0-100%)",
-                                0, 0, 0, rtc);
+                                0, 0, rtc->now());
 
     // RGB color spectrum control (0-100% each channel)
-    ecosystemDataPtr->add_parameter("int", "lightRed_intensity", 100,
+    configDataPtr->add_ecosystem_parameter("int", "lightRed_intensity", 100,
                                 "Intensidade relativa do espectro vermelho (0-100%)",
-                                0, 0, 0, rtc);
-    ecosystemDataPtr->add_parameter("int", "lightGreen_intensity", 30,
+                                0, 0, rtc->now());
+    configDataPtr->add_ecosystem_parameter("int", "lightGreen_intensity", 30,
                                 "Intensidade relativa do espectro verde (0-100%)",
-                                0, 0, 0, rtc);
-    ecosystemDataPtr->add_parameter("int", "lightBlue_intensity", 50,
+                                0, 0, rtc->now());
+    configDataPtr->add_ecosystem_parameter("int", "lightBlue_intensity", 50,
                                 "Intensidade relativa do espectro azul (0-100%)",
-                                0, 0, 0, rtc);
+                                0, 0, rtc->now());
     
     // FAN CONTROL
-    ecosystemDataPtr->add_parameter("int", "soilMoistureMaximum", 800,
+    configDataPtr->add_ecosystem_parameter("int", "soilMoistureMaximum", 800,
                                 "valor da tensão de comparação do sensor / valor máximo = 1024",
-                                0, 0, 0, rtc);
-    ecosystemDataPtr->add_parameter("bool", "soilMoistureIsOverLimit", false,
+                                0, 0, rtc->now());
+    configDataPtr->add_ecosystem_parameter("bool", "soilMoistureIsOverLimit", false,
                                 "condição de solo muito úmido; 1 = solo muito úmido (true); 0 = solo normal (false)",
-                                0, 0, 0, rtc);
+                                0, 0, rtc->now());
 }
 
 /* PALUDARIUM */
 void PL_FogLightFan::simulate_ecosystem(EcosystemScanner *scannerPtr,
                                             EcosystemActuator *actuatorPtr,
-                                            DataInstances *dataPtr,
+                                            StrategyDataInstances *dataPtr,
                                             VisualComm *visualCommPtr,
                                             RTC_DS1307 *rtcPtr
                                         )
 {
     // ********* Primary scann *********
     // ********* Irrigation strategy *********
-    scannerPtr->read_soil_moisture(dataPtr->configDataPtr, visualCommPtr);
+    scannerPtr->read_soil_moisture(dataPtr, visualCommPtr, rtcPtr);
     visualCommPtr->print_line(F("   [PL_FogLightFan::simulate_ecosystem] Reading soil moisture..."));
-    if (dataPtr->ecosystemDataPtr->sensor_bool("soilIsWet").value) {
+    if (dataPtr->configDataPtr->config_bool("soilIsWet").value) {
         actuatorPtr->fog_system_off(dataPtr->configDataPtr, visualCommPtr);
         visualCommPtr->print_line(F("   [PL_FogLightFan::simulate_ecosystem] Soil moisture is ideal. No irrigation needed."));
     }
@@ -170,10 +183,10 @@ void PL_FogLightFan::simulate_ecosystem(EcosystemScanner *scannerPtr,
     visualCommPtr->print_line(("   [PL_FogLightFan::simulate_ecosystem] Calculated raw sunlight intensity (0.0-1.0)"));
     // Store intensity as an integer percentage (0..100) and update light flag
     int intensity_pct = (int)round(intensity * 100.0);
-    dataPtr->ecosystemDataPtr->set_int_value((char *)"sunLightIntensity", intensity_pct, rtcPtr);
+    dataPtr->configDataPtr->set_int_value((char *)"sunLightIntensity", intensity_pct, rtcPtr);
     const double threshold = 0.05; // intensity threshold to consider 'lightsOn'
     bool lightsOn = (intensity > threshold);
-    dataPtr->ecosystemDataPtr->set_bool_value((char *)"lightsOn", lightsOn, rtcPtr);
+    dataPtr->configDataPtr->set_bool_value((char *)"lightsOn", lightsOn, rtcPtr);
 
     visualCommPtr->print_line(("   [PL_FogLightFan::simulate_ecosystem] Sunlight intensity percentage"));
     
@@ -191,19 +204,12 @@ void PL_FogLightFan::simulate_ecosystem(EcosystemScanner *scannerPtr,
     }
 
     // ********* Atmosphere strategy *********
-    scannerPtr->read_soil_moisture(dataPtr->configDataPtr, visualCommPtr);    
-    if (dataPtr->ecosystemDataPtr->sensor_bool("soilMoistureIsOverLimit").value) {
+    scannerPtr->read_soil_moisture(dataPtr, visualCommPtr, rtcPtr);
+    if (dataPtr->configDataPtr->config_bool("soilMoistureIsOverLimit").value) {
         visualCommPtr->print_line(F("   [PL_FogLightFan::simulate_ecosystem] Soil moisture is over the maximum limit. Activating fan system..."));
         actuatorPtr->fan_system_on(dataPtr->configDataPtr, visualCommPtr);
-        while (dataPtr->ecosystemDataPtr->sensor_bool("soilMoistureIsOverLimit").value)
-        {
-            scannerPtr->read_soil_moisture(dataPtr->configDataPtr, visualCommPtr);
-            delay(2000); // wait 2 seconds before next reading to avoid spamming the sensor and the serial output
-            visualCommPtr->print_line(("   [PL_FogLightFan::simulate_ecosystem] Soil moisture:") +
-                                       String(dataPtr->configDataPtr->config_uint8_t("soilMoistureSensor").value));
-        }
-        actuatorPtr->fan_system_off(dataPtr->configDataPtr, visualCommPtr);
     } else {
+        actuatorPtr->fan_system_off(dataPtr->configDataPtr, visualCommPtr);
         visualCommPtr->print_line(F("   [PL_FogLightFan::simulate_ecosystem] Soil moisture is within acceptable limits. No need to activate fan system."));
     }
 }

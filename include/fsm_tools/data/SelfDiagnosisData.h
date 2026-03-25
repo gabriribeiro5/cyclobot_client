@@ -37,7 +37,7 @@ public:
         bool value;
         char *description;                 // data description (for final user - not admin or server)
         bool user_can_see;                 // default = true
-        int expected_frequency;            // used by stream_sensors_data();
+        double expected_frequency;         // used by stream_sensors_data();
         bool measure_now;                  // used by stream_sensors_data();
         bool send_now;                     // used by stream_sensors_data();
         DateTime last_update;
@@ -47,7 +47,7 @@ public:
         bool value;
         char *description;                 // data description (for final user - not admin or server)
         bool user_can_see;                 // default = true
-        int expected_frequency;            // used by stream_sensors_data();
+        double expected_frequency;         // used by stream_sensors_data();
         bool measure_now;                  // used by stream_sensors_data();
         bool send_now;                     // used by stream_sensors_data();
         DateTime last_update;
@@ -57,7 +57,7 @@ public:
         bool value;
         char *description;                 // data description (for final user - not admin or server)
         bool user_can_see;                 // default = true
-        int expected_frequency;            // used by stream_sensors_data();
+        double expected_frequency;            // used by stream_sensors_data();
         bool measure_now;                  // used by stream_sensors_data();
         bool send_now;                     // used by stream_sensors_data();
         DateTime last_update;

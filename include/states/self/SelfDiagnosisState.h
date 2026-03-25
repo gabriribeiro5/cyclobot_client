@@ -32,7 +32,7 @@ public:
     void run_simulation(FiniteStateMachine *cyclobot) override;
     
     // comm
-    void report_simulation_data(FiniteStateMachine *cyclobot) override;
+    void report_ecosystem_data(FiniteStateMachine *cyclobot) override;
     
     // self
     void take_a_nap(FiniteStateMachine *cyclobot) override;

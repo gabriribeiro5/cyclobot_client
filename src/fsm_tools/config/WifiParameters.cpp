@@ -8,7 +8,7 @@ WifiParameters::WifiParameters()
   wifiFirmwareLatestVersion("1.1.0"),
   networkKeyIndex(0),
 
-  waitTimePerConnectionAttempt(5000),
+  waitTimePerConnectionAttemptInMillis(5000),
   maxConnectionAttempt(3),
 
   waitTimePerScanAttempt(3000),

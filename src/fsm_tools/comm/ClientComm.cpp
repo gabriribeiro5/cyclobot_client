@@ -10,7 +10,7 @@
 #include "../../../../include/fsm_tools/config/DeviceParameters.h"
 #include "../../../include/fsm_tools/data/SelfDiagnosisData.h"
 #include "../../../include/fsm_tools/data/ConfigData.h"
-#include "../../../include/fsm_tools/DataInstances.h"
+#include "../../../include/fsm_tools/StrategyDataInstances.h"
 #include "../../../include/Context.h"
 
 void ClientComm::trace_server(ClientParameters *clientParametersPtr, WifiParameters *wifiParametersPtr, VisualComm *visualCommPtr) {
@@ -165,7 +165,7 @@ void ClientComm::put_invalid_cyclobot_session_token(VisualComm *visualCommPtr) {
   visualCommPtr->print_line(F("    [ClientComm::put_invalid_cyclobot_session_token] -- done --"));
 }
 
-void ClientComm::post_cyclobot_config(ClientParameters *clientParametersPtr, WifiParameters *wifiParametersPtr, DeviceParameters *deviceParametersPtr, DataInstances *dataPtr, VisualComm *visualCommPtr) {
+void ClientComm::post_cyclobot_config(ClientParameters *clientParametersPtr, WifiParameters *wifiParametersPtr, DeviceParameters *deviceParametersPtr, ConfigData *configDataPtr, VisualComm *visualCommPtr) {
   visualCommPtr->print_line(F("    [ClientComm::post_cyclobot_config] running..."));
 
   // Allocate TEMPORARY JSON document
@@ -181,7 +181,7 @@ void ClientComm::post_cyclobot_config(ClientParameters *clientParametersPtr, Wif
   config_Json["wifi_status"] = wifiParametersPtr->wifiStatus;
   config_Json["wifi_firmware_latest_version"] = wifiParametersPtr->wifiFirmwareLatestVersion;
   config_Json["network_ssid_index"] = wifiParametersPtr->networkSsidIndex;
-  config_Json["wait_time_per_connection_attempt"] = wifiParametersPtr->waitTimePerConnectionAttempt;
+  config_Json["wait_time_per_connection_attempt"] = wifiParametersPtr->waitTimePerConnectionAttemptInMillis;
   config_Json["max_connectoin_attempt"] = wifiParametersPtr->maxConnectionAttempt;
   config_Json["conn_attempt_count"] = wifiParametersPtr->connAttemptCount;
   config_Json["wait_time_per_scan_attempt"] = wifiParametersPtr->waitTimePerScanAttempt;
@@ -189,10 +189,10 @@ void ClientComm::post_cyclobot_config(ClientParameters *clientParametersPtr, Wif
   config_Json["scan_count"] = wifiParametersPtr->scanCount;
   
   // Client config
-  config_Json["wait_time_per_connection_attempt"] = clientParametersPtr->waitTimePerConnectionAttempt;
+  config_Json["wait_time_per_connection_attempt"] = clientParametersPtr->waitTimePerConnectionAttemptInMillis;
   config_Json["response_timeout_limit"] = clientParametersPtr->responseTimeoutLimit;
 
-  // Ecosystem config
+  // Strategy config
   // config_Json["soil_moisture_limit"] = ecosystemParametersPtr->soilMoistureLimit;
   // config_Json["current_temperature"] = ecosystemParametersPtr->currentTemperature;
   // config_Json["max_temperature_expected"] = ecosystemParametersPtr->maxTemperatureExpected;
@@ -206,7 +206,7 @@ void ClientComm::post_cyclobot_config(ClientParameters *clientParametersPtr, Wif
   // config_Json["standBy"] = ecosystemParametersPtr->standBy;
 
   // *** CONVERT JSON TO STRING ***
-  serializeJson(config_Json, dataPtr->configDataPtr->config_Char);
+  serializeJson(config_Json, configDataPtr->config_Char);
 
   // *** JSON OBJECT AUTOMATICALLY FREED (goes out of scope) ***
 
@@ -218,9 +218,9 @@ void ClientComm::post_cyclobot_config(ClientParameters *clientParametersPtr, Wif
     wifiParametersPtr->client.println(clientParametersPtr->apiServer);
     wifiParametersPtr->client.println("Content-Type: application/json");
     wifiParametersPtr->client.print("Content-Length: ");
-    wifiParametersPtr->client.println(strlen(dataPtr->configDataPtr->config_Char));
+    wifiParametersPtr->client.println(strlen(configDataPtr->config_Char));
     wifiParametersPtr->client.println(); // Empty server_response_line to end headers
-    wifiParametersPtr->client.print(dataPtr->configDataPtr->config_Char);  // ✅ Send JSON body
+    wifiParametersPtr->client.print(configDataPtr->config_Char);  // ✅ Send JSON body
 
     // Method response
     visualCommPtr->print_line(F("    [ClientComm::post_cyclobot_config] Config sent"));
@@ -269,8 +269,54 @@ void ClientComm::post_cyclobot_diagnosis(ClientParameters *clientParametersPtr, 
   }
 }
 
-void ClientComm::post_cyclobot_environment_state(VisualComm *visualCommPtr) {
-  visualCommPtr->print_line(F("    [ClientComm::post_cyclobot_environment_state] running..."));
+void ClientComm::post_ecosystem_data(ClientParameters *clientParametersPtr, WifiParameters *wifiParametersPtr, DeviceParameters *deviceParametersPtr, EcosystemData *ecosystemDataPtr, VisualComm *visualCommPtr, RTC_DS1307 *rtcPtr) {
+  visualCommPtr->print_line(F("    [ClientComm::post_ecosystem_data] running..."));
+  
+  // build JSON body with sensor data
+  DynamicJsonDocument sensorData_Json(200); // adjust capacity as needed
+  sensorData_Json["cyclobot_id"] = deviceParametersPtr->cyclobotId; // uuid
+  sensorData_Json["session_token"] = clientParametersPtr->sessionToken; // uuid
+
+  // Walk thru sensor lists and get data to send to server
+  // BOOL
+  for (int i = 0; i < ecosystemDataPtr->sensor_bool_list.size(); i++) {
+    EcosystemData::Sensor_Bool sensor_bool = ecosystemDataPtr->sensor_bool_list.get(i);
+    if (sensor_bool.send_now) {
+      sensorData_Json[sensor_bool.name] = sensor_bool.value;
+      ecosystemDataPtr->set_bool_send_now(sensor_bool.name, false, rtcPtr); // reset send_now after including in JSON
+    }
+  }
+  // INT
+  for (int i = 0; i < ecosystemDataPtr->sensor_int_list.size(); i++) {
+    EcosystemData::Sensor_Int sensor_int = ecosystemDataPtr->sensor_int_list.get(i);
+    if (sensor_int.send_now) {
+      sensorData_Json[sensor_int.name] = sensor_int.value;
+      ecosystemDataPtr->set_int_send_now(sensor_int.name, false, rtcPtr); // reset send_now after including in JSON
+    }
+  }
+
+  // Convert JSON to Char
+  serializeJson(sensorData_Json, ecosystemDataPtr->sensorData_Char);
+      
+  // Send HTTP request
+  if (wifiParametersPtr->client.connected()) {
+    // Client action
+    wifiParametersPtr->client.println("POST /api/cyclobot/sensor_data HTTP/1.1");
+    wifiParametersPtr->client.print("Host: ");
+    wifiParametersPtr->client.println(clientParametersPtr->apiServer);
+    wifiParametersPtr->client.println("Content-Type: application/json");
+    
+    wifiParametersPtr->client.print("Content-Length: ");
+    wifiParametersPtr->client.println(strlen(ecosystemDataPtr->sensorData_Char));
+    wifiParametersPtr->client.println();                                 // Empty server_response_line to end headers
+    wifiParametersPtr->client.print(ecosystemDataPtr->sensorData_Char);            // ✅ Send JSON body
+
+    // Method response
+    visualCommPtr->print_line(F("    [ClientComm::post_ecosystem_data] Request sent"));
+  }
+  else {
+    visualCommPtr->print_line(F("    [ClientComm::post_ecosystem_data] [ATENTION] Client couldn't connect to server"));
+  }
 }
 
 void ClientComm::get_cyclobot_config_update(VisualComm *visualCommPtr) {

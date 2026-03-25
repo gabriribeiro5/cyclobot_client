@@ -11,7 +11,8 @@ class ClientParameters {
     const PROGMEM IPAddress apiServer = 1234567890;           // name address for Google (using DNS)
     const PROGMEM uint16_t clientPort = 80;
     
-    const PROGMEM int waitTimePerConnectionAttempt = 5000;    // 5 segundos
+    const PROGMEM int waitTimePerConnectionAttemptInMillis = 5000;    // 5 seconds
+    const PROGMEM int dataStreamLengthInSeconds = 120;    // 2 minutes
     
     const PROGMEM  char* msgTrace = "Hello server";
     bool readingLines = true;

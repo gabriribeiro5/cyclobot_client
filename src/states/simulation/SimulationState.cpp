@@ -61,19 +61,19 @@ void SimulationState::run_simulation(FiniteStateMachine *cyclobot) {
     cyclobot->commPtr->visualCommPtr->print(F("[SimulationState::run_simulation] starting simulation at "));
     cyclobot->commPtr->visualCommPtr->print_line(cyclobot->simStrategyContextPtr->eventStart.timestamp());
     cyclobot->simStrategyContextPtr->simulate_ecosystem(cyclobot->scannerPtr,
-                                            cyclobot->actuatorPtr,
-                                            cyclobot->dataPtr,
-                                            cyclobot->simulationStrategyPtr,
-                                            cyclobot->commPtr->visualCommPtr,
-                                            cyclobot->rtcPtr);
+                                                        cyclobot->actuatorPtr,
+                                                        cyclobot->dataPtr,
+                                                        cyclobot->simulationStrategyPtr,
+                                                        cyclobot->commPtr->visualCommPtr,
+                                                        cyclobot->rtcPtr);
     cyclobot->commPtr->visualCommPtr->print(F("[SimulationState::run_simulation] simulation finished at "));
     cyclobot->simStrategyContextPtr->eventEnd = cyclobot->rtc.now();
     cyclobot->commPtr->visualCommPtr->print_line(cyclobot->simStrategyContextPtr->eventEnd.timestamp());
 };
 
 // comm
-void SimulationState::report_simulation_data(FiniteStateMachine *cyclobot) {
-    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, cyclobot->commPtr->visualCommPtr, "SimulationState", "report_simulation_data", 0, "wrong state");
+void SimulationState::report_ecosystem_data(FiniteStateMachine *cyclobot) {
+    cyclobot->selfPtr->errorHandlerPtr->log_error_msg(cyclobot->paramPtr->errorHandlingParametersPtr, cyclobot->commPtr->visualCommPtr, "SimulationState", "report_ecosystem_data", 0, "wrong state");
 };
 
 // self

@@ -1,13 +1,13 @@
-#include "../include/fsm_tools/DataInstances.h"
+#include "../include/fsm_tools/StrategyDataInstances.h"
 #include "../include/fsm_tools/data/SelfDiagnosisData.h"
 #include "../include/fsm_tools/data/ConfigData.h"
 
-DataInstances::DataInstances() {
+StrategyDataInstances::StrategyDataInstances() {
     selfDiagnosisDataPtr = new SelfDiagnosisData();
     configDataPtr = new ConfigData();
 };
 
-DataInstances::~DataInstances() {
+StrategyDataInstances::~StrategyDataInstances() {
     delete selfDiagnosisDataPtr;
     delete configDataPtr;
 };

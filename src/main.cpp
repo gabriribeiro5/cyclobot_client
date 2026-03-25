@@ -78,7 +78,7 @@ void loop() {
             cyclobot->change_state(communicationStatePtr);
             cyclobot->report_signature_request();
             cyclobot->session_new();
-            cyclobot->report_config(); 
+            cyclobot->report_config();
             cyclobot->report_health_check();
             break;
         }
@@ -104,7 +104,7 @@ void loop() {
         }
         case 6: { // Comm
             cyclobot->change_state(communicationStatePtr);
-            cyclobot->report_simulation_data();
+            cyclobot->report_ecosystem_data();
             break;
         }
         case 7: { // Self
