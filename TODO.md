@@ -306,7 +306,8 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 
  
 - [x] doc(TODO): remove duplicated tasks
-- [ ] doc(README): update Design section
+- [x] doc(README): update Design section 
+  - [x] add details of strategy features
 
 - [ ] feat(print_strategy_parameters method): to replace print_parameters()
 
