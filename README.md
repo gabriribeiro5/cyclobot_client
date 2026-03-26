@@ -78,20 +78,6 @@ All strategies must inherit from `BaseStrategy` (located in `include/strategies/
 - `simulate_ecosystem()`: Implement the core simulation logic, including sensor readings, decision-making, and actuator control based on ecosystem conditions.
 - `exit()`: Perform any necessary cleanup or final actions when the strategy is exited.
 
-#### Implementing a New Strategy
-
-To implement a new strategy for a different ecosystem:
-
-1. Create a new header file (e.g., `MyNewStrategy.h`) in the appropriate subdirectory under `include/strategies/` (e.g., `vivarium/terrarium/`).
-2. Define a class inheriting from `BaseStrategy`.
-3. Implement all six required methods.
-4. In `create_pin_map`, use `dataPtr->configDataPtr->add_pin()` to register pins for sensors and actuators, and `dataPtr->ecosystemDataPtr->add_parameter()` for data tracking.
-5. In `set_ecosystem_params`, use `configDataPtr->add_ecosystem_parameter()` to add parameters with default values, descriptions, and timestamps.
-6. In `simulate_ecosystem`, leverage `scannerPtr` methods to read sensor data, evaluate conditions against parameters, and use `actuatorPtr` methods to control devices.
-7. Ensure the new strategy is instantiated and used in the SimulationState or relevant context.
-
-Example: The `PL_FogLightFan` strategy (in `strategies/vivarium/paludarium/`) manages fog irrigation, LED lighting simulation, and fan ventilation for a paludarium, using soil moisture sensors, light sensors, and humidity controls to maintain optimal conditions.
-
 This design allows developers to easily add support for new ecosystems by creating strategy classes that encapsulate specific behaviors, promoting code reusability and maintainability.
 
 
