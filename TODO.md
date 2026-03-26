@@ -202,7 +202,7 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 
 - [x] refactor(dir name): 'core_states' to 'states'
 
-- [ ] feat(stream_sensors_data): streaming with frequency control
+- [x] feat(stream_sensors_data): streaming with frequency control
   - [x] Add LinkedList library to project
   - [x] create linked lists and stream methods into /data/configData.h
   - [x] create stream methods into /data/configData.cpp
@@ -217,7 +217,7 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
   - [x] fix(warning): address of local variable 'item' returned [-Wreturn-local-addr]
   - [x] fix(*LocalPtr): remove local pointers to get non-temporary/editable values
   - [x] feat(LinkedList::getPtr()): add special method in third-party lib
-  - [ ] fix(memory leak): logs are breaking
+  - [x] fix(memory leak): logs are breaking
     - [x] comment *ConfigData::config_bool(char *name)
       - [x] also remove LinkedList::getPtr()
     - [x] find and run some code scanner (PlatformIO inspect)
@@ -264,8 +264,8 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
     
   
 
+### Full cycle Debugs and Fixes
 - [x] feat(PL_FogLightFan::setup and simulate_ecosystem): finish flow
-
 - [x] refactor(Upload to ATMega2566): make it happen
   - [x] fix(wifi tool): implement hardware verification to use correct wifi tools
     - [x] Abstract the Serial Interface
@@ -290,7 +290,6 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
   - [x] fix(serial not printed): code runs on Wokwi but not in actual board
     - [x] refactor(StrategyContext): stop creating EEPROM data on constructor
     - [x] refactor(StrategyContext): creating EEPROM data only when setup is called
-
 - [x] feat(PL_FogLightFan::simulate_ecosystem): add full strategy
   - [x] refactor(pins and param names): this is art
   - [x] refactor(method names): being more specific now
@@ -298,28 +297,29 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
   - [x] Download and install ESP8266 firmware (took me days to find out the correct firmware!)
   - [x] run wifi scaner
   - [x] rerun cyclobot
-- [x] doc(CONTRIBUTING): board setup tutorial
-
 - [x] refactor(config): clear directory
   - [x] remove EcosystemParameters
   - [x] remove EEPROMStruct module
+- [ ] fix(RTC not found): make it work
 
- 
+### Documentation
+- [x] doc(CONTRIBUTING): board setup tutorial
 - [x] doc(TODO): remove duplicated tasks
 - [x] doc(README): update Design section 
-  - [x] add details of strategy features
+- [x] doc(CONTRIBUTING): add details of strategy features
 
-- [ ] feat(print_strategy_parameters method): to replace print_parameters()
-
-- [ ] refactor(ClientComm): improve 'Get response' snippet
-  - [ ] Make sure there's no infinite loop
-
+### Improvements
+- [x] refactor(ClientComm): improve 'Get response' snippet
+  - [x] Make sure there's no infinite loop
+- [x] feat(print_strategy_parameters): add method to replace print_parameters()
 - [ ] refactor(ErrorHandlingState): becomes CodeRollbackState and ParametersRollbackState
 
+### Reduce warnings
 - [ ] fix(warning -Wwrite-strings): review and try reducing occurences
 - [ ] fix(warning -Wattributes): review and try reducing occurences
 - [ ] fix(warning -Wunused-parameter): review and try reducing occurences
 
+### Real Time Clock
 - [ ] feat(Real Time Clock): apply to logs
   - [ ] create comm.time_update
   - [ ] call comm.time_update
@@ -337,6 +337,7 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 - [ ] refactor(api addresses): review and update
 
 - [ ] fix(update): Update constants and variables to match api configurations.
+
 ---
 
 ### 🧪 Lifecycle test

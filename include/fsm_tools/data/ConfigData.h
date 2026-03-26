@@ -1,6 +1,5 @@
 #pragma once
 #include <ArduinoJson.h>
-
 #include <RTCLib.h>
 #include <avr/pgmspace.h>
 
@@ -132,6 +131,6 @@ public:
     // Helpers for uint8 entries
     bool set_uint8_value(char *name, uint8_t value, RTC_DS1307 *rtcPtr);
     
-    void add_pin(char* type, char *name, bool value, char *description, bool updated_by, RTC_DS1307 *rtcPtr);
+    void add_pin(char* type, char *name, int value, char *description, bool updated_by, RTC_DS1307 *rtcPtr);
     void add_ecosystem_parameter(char* type, char *name, bool value, char *description, bool user_can_see, bool updated_by, DateTime last_update);
 };

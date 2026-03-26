@@ -1,8 +1,11 @@
 #include "../../../include/fsm_tools/data/ConfigData.h"
 
 #include <RTCLib.h>
+#include <string.h>
 #include "EEPROM.h"
 // Forward declarations for helpers used in constructor
+static inline int _header_size_bytes();
+static inline int _record_addr(int index);
 static inline int _int_region_start();
 static inline int _uint8_region_start();
 static inline int _int_record_addr(int index);
@@ -22,6 +25,14 @@ ConfigData::ConfigData()
         EEPROM.put(addr, m); addr += sizeof(m);
         EEPROM.put(addr, v); addr += sizeof(v);
         EEPROM.put(addr, cnt);
+        
+        // Clear BOOL data region
+        for (int i = 0; i < ConfigData::CONFIG_MAX_BOOL_ENTRIES; i++) {
+            ConfigData::EEPROM_Config_Bool empty_rec;
+            memset(&empty_rec, 0, sizeof(empty_rec));
+            int data_addr = _record_addr(i);
+            EEPROM.put(data_addr, empty_rec);
+        }
     }
 
     // INT region header
@@ -34,6 +45,14 @@ ConfigData::ConfigData()
         EEPROM.put(int_haddr, m); int_haddr += sizeof(m);
         EEPROM.put(int_haddr, v); int_haddr += sizeof(v);
         EEPROM.put(int_haddr, cnt);
+        
+        // Clear INT data region
+        for (int i = 0; i < ConfigData::CONFIG_MAX_INT_ENTRIES; i++) {
+            ConfigData::EEPROM_Config_Int empty_rec;
+            memset(&empty_rec, 0, sizeof(empty_rec));
+            int data_addr = _int_record_addr(i);
+            EEPROM.put(data_addr, empty_rec);
+        }
     }
 
     // UINT8 region header
@@ -46,6 +65,14 @@ ConfigData::ConfigData()
         EEPROM.put(u_haddr, m); u_haddr += sizeof(m);
         EEPROM.put(u_haddr, v); u_haddr += sizeof(v);
         EEPROM.put(u_haddr, cnt);
+        
+        // Clear UINT8 data region
+        for (int i = 0; i < ConfigData::CONFIG_MAX_UINT8_ENTRIES; i++) {
+            ConfigData::EEPROM_Config_Uint8 empty_rec;
+            memset(&empty_rec, 0, sizeof(empty_rec));
+            int data_addr = _uint8_record_addr(i);
+            EEPROM.put(data_addr, empty_rec);
+        }
     }
 };
 
@@ -454,7 +481,7 @@ ConfigData::Config_Uint8_t ConfigData::config_uint8_t(char *name)
 // SETUP
 void ConfigData::add_pin(char* type,
                             char *name,
-                            bool value,
+                            int value,
                             char *description,
                             bool updated_by,
                             RTC_DS1307 *rtcPtr
@@ -473,7 +500,7 @@ void ConfigData::add_pin(char* type,
         memset(&new_bool, 0, sizeof(new_bool));
         strncpy(new_bool.name, name, ConfigData::CONFIG_NAME_LEN - 1);
         new_bool.name[ConfigData::CONFIG_NAME_LEN - 1] = '\0';
-        new_bool.value = value;
+        new_bool.value = (value != 0);
         strncpy(new_bool.description, description, ConfigData::CONFIG_DESC_LEN - 1);
         new_bool.description[ConfigData::CONFIG_DESC_LEN - 1] = '\0';
         new_bool.updated_by = updated_by;
@@ -487,7 +514,7 @@ void ConfigData::add_pin(char* type,
         memset(&new_int, 0, sizeof(new_int));
         strncpy(new_int.name, name, ConfigData::CONFIG_NAME_LEN - 1);
         new_int.name[ConfigData::CONFIG_NAME_LEN - 1] = '\0';
-        new_int.value = (int)value;
+        new_int.value = value;
         strncpy(new_int.description, description, ConfigData::CONFIG_DESC_LEN - 1);
         new_int.description[ConfigData::CONFIG_DESC_LEN - 1] = '\0';
         new_int.is_pin_value = true;
@@ -501,7 +528,7 @@ void ConfigData::add_pin(char* type,
         memset(&new_uint8_t, 0, sizeof(new_uint8_t));
         strncpy(new_uint8_t.name, name, ConfigData::CONFIG_NAME_LEN - 1);
         new_uint8_t.name[ConfigData::CONFIG_NAME_LEN - 1] = '\0';
-        new_uint8_t.value = (uint8_t)value;
+        new_uint8_t.value = value;
         strncpy(new_uint8_t.description, description, ConfigData::CONFIG_DESC_LEN - 1);
         new_uint8_t.description[ConfigData::CONFIG_DESC_LEN - 1] = '\0';
         new_uint8_t.is_pin_value = true;

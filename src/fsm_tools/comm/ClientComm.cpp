@@ -30,10 +30,19 @@ void ClientComm::trace_server(ClientParameters *clientParametersPtr, WifiParamet
 
     visualCommPtr->print_line(F("    [ClientComm::trace_server] Request sent"));
 
-    // Get response
-    while (wifiParametersPtr->client.connected() && clientParametersPtr->readingLines) {
-      while (wifiParametersPtr->client.available() && clientParametersPtr->readingLines) {
-        // get response
+    // Get response with timeout
+    clientParametersPtr->timoutReference = millis();
+    clientParametersPtr->server_response = "";
+    
+    while (wifiParametersPtr->client.connected()) {
+      // Check timeout
+      if (millis() - clientParametersPtr->timoutReference > clientParametersPtr->responseTimeoutLimit) {
+        visualCommPtr->print_line(F("    [ClientComm::trace_server] Response timeout"));
+        break;
+      }
+      
+      // Read available response data
+      if (wifiParametersPtr->client.available()) {
         clientParametersPtr->server_response_chars = wifiParametersPtr->client.read();
         if (clientParametersPtr->server_response_chars != '\n') {
           clientParametersPtr->server_response = clientParametersPtr->server_response + clientParametersPtr->server_response_chars;

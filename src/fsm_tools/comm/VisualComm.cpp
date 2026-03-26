@@ -114,7 +114,32 @@ void VisualComm::print_free_memory(char *currentMethodPtr) {
   print_line(F(" *************************  **     **********************     **  ************************* "));
 }
 
-void VisualComm::print_parameters(ParameterInstances *paramPtr) {
+void VisualComm::print_strategy_parameters(ConfigData *configData) {
+  print_line(F(" *************************  **     ****[STRATEGY PARAMETERS]****     **  ************************* "));
+  /// walk through configData and print parameters relevant to strategy (for now, print all parameters - can add filtering logic later if needed)
+  for (size_t i = 0; i < ConfigData::CONFIG_MAX_BOOL_ENTRIES; i++) {
+    ConfigData::Config_Bool cb;
+    if (configData->read_bool_at_index(i, cb)) {
+        print(F(" BOOL - ")); print(cb.name); print(F(": ")); print_line(cb.value);
+    }
+  }
+  for (size_t i = 0; i < ConfigData::CONFIG_MAX_INT_ENTRIES; i++) {
+    ConfigData::Config_Int ci;
+    if (configData->read_int_at_index(i, ci)) {
+        print(F(" INT - ")); print(ci.name); print(F(": ")); print_line(ci.value);
+    }
+  }
+  for (size_t i = 0; i < ConfigData::CONFIG_MAX_UINT8_ENTRIES; i++) {
+    ConfigData::Config_Uint8_t cu;
+    if (configData->read_uint8_at_index(i, cu)) {
+        print(F(" UINT8 - ")); print(cu.name); print(F(": ")); print_line(cu.value);
+    }
+  }
+
+  print_line(F(" *************************  **     **********************     **  ************************* "));
+};
+
+void VisualComm::print_state_machine_parameters(ParameterInstances *paramPtr) {
   print_line(F(" *************************  **     ***[CONFIGURATIONS]***     **  ************************* "));
   
   // DEVICE PARAMETERS

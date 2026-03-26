@@ -1,6 +1,7 @@
 #pragma once
 #include "Arduino.h"
 #include "../ParameterInstances.h"
+#include "../data/ConfigData.h"
 
 class VisualComm {
     public:
@@ -17,7 +18,8 @@ class VisualComm {
         void print_eeprom_usage(char *currentMethodPtr);
         void print_eeprom_hex_dump(char *currentMethodPtr, uint16_t start_addr, uint16_t length);
         void print_free_memory(char *currentMethodPtr);
-        void print_parameters(ParameterInstances *paramPtr);
+        void print_state_machine_parameters(ParameterInstances *paramPtr);
+        void print_strategy_parameters(ConfigData *configData);
 
         // Led Screen
         void show_sentence(char sentence);
