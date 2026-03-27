@@ -314,6 +314,9 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 - [x] feat(print_strategy_parameters): add method to replace print_parameters()
 - [ ] refactor(ErrorHandlingState): becomes CodeRollbackState and ParametersRollbackState
 
+### Unit tests
+- [ ] Create a prioritization list to cover each component
+
 ### Reduce warnings
 - [ ] fix(warning -Wwrite-strings): review and try reducing occurences
 - [ ] fix(warning -Wattributes): review and try reducing occurences
