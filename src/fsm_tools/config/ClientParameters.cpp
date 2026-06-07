@@ -1,8 +1,8 @@
 #include "../../../include/fsm_tools/config/ClientParameters.h"
 
 ClientParameters::ClientParameters()
-: apiServer(1234567890),
-  clientPort(80),
+: apiServer(IPAddress(192, 168, 15, 8)),
+  clientPort(9999),
 
   waitTimePerConnectionAttemptInMillis(5000),
   dataStreamLengthInSeconds(120),

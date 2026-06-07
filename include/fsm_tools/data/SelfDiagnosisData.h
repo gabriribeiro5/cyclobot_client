@@ -37,6 +37,7 @@ public:
         bool value;
         char *description;                 // data description (for final user - not admin or server)
         bool user_can_see;                 // default = true
+        bool updated_by;                   // default = 0 (server communication); 1 = (user communication)
         double expected_frequency;         // used by stream_sensors_data();
         bool measure_now;                  // used by stream_sensors_data();
         bool send_now;                     // used by stream_sensors_data();
@@ -44,22 +45,24 @@ public:
     };
     struct SelfDiag_Int {
         char *name;
-        bool value;
+        int value;
         char *description;                 // data description (for final user - not admin or server)
         bool user_can_see;                 // default = true
-        double expected_frequency;         // used by stream_sensors_data();
+        bool updated_by;                   // default = 0 (server communication); 1 = (user communication)
         bool measure_now;                  // used by stream_sensors_data();
         bool send_now;                     // used by stream_sensors_data();
+        double expected_frequency;         // used by stream_sensors_data();
         DateTime last_update;
     };
     struct SelfDiag_Char {
         char *name;
-        bool value;
+        char *value;
         char *description;                 // data description (for final user - not admin or server)
         bool user_can_see;                 // default = true
-        double expected_frequency;            // used by stream_sensors_data();
+        bool updated_by;                   // default = 0 (server communication); 1 = (user communication)
         bool measure_now;                  // used by stream_sensors_data();
         bool send_now;                     // used by stream_sensors_data();
+        double expected_frequency;            // used by stream_sensors_data();
         DateTime last_update;
     };
 
@@ -75,5 +78,5 @@ public:
     // SelfDiag_Char selfdiag_char(char *name);
 
     
-    void add_parameter(char* type, char *name, bool value, char *description, bool user_can_see, bool updated_by, DateTime last_update);
+    void add_parameter(char* type, char *name, char *value, char *description, bool user_can_see, bool updated_by, double expected_frequency, DateTime last_update);
 };

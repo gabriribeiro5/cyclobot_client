@@ -21,7 +21,7 @@ SelfDiagnosisData::SelfDiag_Bool SelfDiagnosisData::selfdiag_bool(char *name)
     // }
 
     // Return a "null" object if not found
-    SelfDiag_Bool empty = { nullptr, false, nullptr, false, 0, false, false, DateTime() };
+    SelfDiag_Bool empty = { nullptr, false, nullptr, false, false, 0.0, false, false, DateTime() };
     return empty;
 }
 
@@ -57,10 +57,11 @@ SelfDiagnosisData::SelfDiag_Bool SelfDiagnosisData::selfdiag_bool(char *name)
 /************************ INSERT METHODS ************************/
 void SelfDiagnosisData::add_parameter(char* type,
                                 char *name,
-                                bool value,
+                                char *value,
                                 char *description,
                                 bool user_can_see,
                                 bool updated_by,
+                                double expected_frequency,
                                 DateTime last_update
                             )
 {
@@ -73,6 +74,7 @@ void SelfDiagnosisData::add_parameter(char* type,
             updated_by,                         // default = 0 (server communication); 1 = (user communication)
             false,                              // default = false
             true,                               // default = true
+            expected_frequency,
             last_update
         };
         // selfdiag_bool_list.add(new_bool);
@@ -80,12 +82,13 @@ void SelfDiagnosisData::add_parameter(char* type,
     if (strcmp(type, "int") == 0) {
         SelfDiag_Int new_int = {
             name,
-            value,
+            atoi(value),                        // convert string to int
             description,                        // data description (for final user - not admin or server)
             user_can_see,                       // default = true
             updated_by,                         // default = 0 (server communication); 1 = (user communication)
             false,                              // default = false
             true,                               // default = true
+            expected_frequency,
             last_update
         };
         // selfdiag_int_list.add(new_int);
@@ -99,6 +102,7 @@ void SelfDiagnosisData::add_parameter(char* type,
             updated_by,                         // default = 0 (server communication); 1 = (user communication)
             false,                              // default = false
             true,                               // default = true
+            expected_frequency,
             last_update
         };
         // selfdiag_char_list.add(new_char);

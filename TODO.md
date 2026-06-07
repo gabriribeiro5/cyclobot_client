@@ -253,10 +253,10 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
       - [x] refactor(DynamicJsonDocument): alocate config_json and selfDiagnosis_Json only when needed (in ClientComm) and free right after use
       - [x] refactor(capacity): remove 'capacity' from ConfigData and SelfDiagnosisData initialization
       - [x] perf(Json and String): reduce object's size
-    - [X] refactor(EcosystemData): implement in standard SRAM (8 KB)
+    - [x] refactor(EcosystemData): implement in standard SRAM (8 KB)
       - [x] refactor(EcosystemData): LinkedList still returns copy of struct
-      - [X] refactor(EcosystemData): create ecosystemData's update methods
-      - [X] refactor(ConfigData): remove unecessary methods
+      - [x] refactor(EcosystemData): create ecosystemData's update methods
+      - [x] refactor(ConfigData): remove unecessary methods
     - [ ] refactor(SelfDiagnosisData): implement in standard SRAM (8 KB)
     - [ ] refactor(LogData): implement in standard SRAM (8 KB)
   - [x] refactor[strategyDataInstances]: change dataInstances to strategyDataInstances
@@ -300,6 +300,8 @@ This file outlines the tasks related to the development of the Cyclobot's Arduin
 - [x] refactor(config): clear directory
   - [x] remove EcosystemParameters
   - [x] remove EEPROMStruct module
+- [x] refactor(params): update to fit request with client route
+- [ ] refactor(ClientComm): complete post_signature_request
 - [ ] fix(RTC not found): make it work
 
 ### Documentation

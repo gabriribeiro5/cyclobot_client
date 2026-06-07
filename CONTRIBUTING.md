@@ -27,7 +27,7 @@ Once it takes a considerable ammount of memory, this application DOES NOT fit in
 
 [How to flash firmware to ESP8266](https://www.robocore.net/tutoriais/gravacao-firmware-esp8266?srsltid=AfmBOoq7Z2siZ1wv-m1VK9QuEQdM3FSby37vNpy6y2hfVySedJudaHWn)
 
-### Sandard mode (ATmega2560 + ESP8266 + USB Serial open) 
+### Standard mode (ATmega2560 + ESP8266 + USB Serial open) 
 **DIP Switches:**
 - 1, 2, 3 and 4: ON
 - 5, 6, 7 and 8: OFF

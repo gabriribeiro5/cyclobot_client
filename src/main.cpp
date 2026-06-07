@@ -1,8 +1,6 @@
 #include "Arduino.h"
 #include "SoftwareSerial.h"
 #include "WiFiEsp.h"
-#include "../include/strategies/BaseStrategy.h"
-#include "../include/states/BaseState.h"
 #include "../include/states/error/ErrorHandlingState.h"
 #include "../include/states/self/IdleState.h"
 #include "../include/states/self/SelfDiagnosisState.h"
@@ -14,7 +12,7 @@
 #include "../include/fsm_tools/config/BaseMapping.h"
 #include "../include/Context.h"
 
-BaseStrategy *simStrategyPtr = new PL_FogLightFan;
+PL_FogLightFan *simStrategyPtr = new PL_FogLightFan;
 
 // Define states (allocated once at startup via static init)
 IdleState *idleStatePtr = new IdleState;
@@ -25,7 +23,7 @@ CodeUpdateState *codeUpdateStatePtr = new CodeUpdateState;
 SimulationState *simulationStatePtr = new SimulationState;
 ErrorHandlingState *errorHandlingStatePtr = new ErrorHandlingState;
 
-// // Create state machine (FiniteStateMachine is global; its static members initialize on first FSM construction)
+// Create state machine (FiniteStateMachine is global; its static members initialize on first FSM construction)
 FiniteStateMachine *cyclobot = new FiniteStateMachine(idleStatePtr, simStrategyPtr);
 
 void setup() {
@@ -62,7 +60,6 @@ void setup() {
 };
 
 void loop() {
-    delay(1000); // Wait for Serial to initialize
     cyclobot->commPtr->visualCommPtr->print(F(" ************************  ************[STATE FLOW "));
     cyclobot->commPtr->visualCommPtr->print(cyclobot->stateFlow);
     cyclobot->commPtr->visualCommPtr->print_line(F("]************  ************************ "));

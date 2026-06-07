@@ -48,7 +48,7 @@ void EcosystemData::add_parameter(char* type,
     if (strcmp(type, "bool") == 0) {
         Sensor_Bool new_bool = {
             name,
-            value,
+            (bool)value,
             description,
             expected_frequency,
             true,
@@ -60,7 +60,7 @@ void EcosystemData::add_parameter(char* type,
     if (strcmp(type, "int") == 0) {
         Sensor_Int new_int = {
             name,
-            value,
+            (int)value,
             description,
             expected_frequency,
             true,

@@ -16,7 +16,7 @@ public:
     // cyclobotId: 20 hex characters (10 bytes converted to hex) + null terminator
     char cyclobotId[32];
     // cyclobotToken: 20 hex characters (device unique ID uppercase) + null terminator  
-    char cyclobotToken[32];
+    const char *cyclobotToken;
     bool firstAwakening;
     unsigned long sleepLength;
 

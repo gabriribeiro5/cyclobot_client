@@ -94,6 +94,52 @@ void ClientComm::post_signature_request(ClientParameters *clientParametersPtr, W
   else {
     visualCommPtr->print_line(F("    [ClientComm::post_signature_request] ATENTION! Client couldn't connect to server"));
   }
+
+  // Wait for server response
+  clientParametersPtr->timoutReference = millis();
+  while (!wifiParametersPtr->client.available()) {
+    if (millis() - clientParametersPtr->timoutReference > clientParametersPtr->responseTimeoutLimit) {
+      visualCommPtr->print_line(F("    [ClientComm::get_cyclobot_session_token] [ERROR] Timeout waiting for response"));
+      wifiParametersPtr->client.stop();
+      return "";
+    }
+  }
+
+  // Read and store entire response
+  clientParametersPtr->serverRawResponse = "";
+  while (wifiParametersPtr->client.available()) {
+    clientParametersPtr->serverRawResponse += wifiParametersPtr->client.read();
+  }
+
+  // Debug raw response (optional)
+  visualCommPtr->print_line(F("    [ClientComm::get_cyclobot_session_token] Raw response:"));
+  visualCommPtr->print_line(clientParametersPtr->serverRawResponse);
+
+  // Find start of JSON (skip HTTP headers)
+  clientParametersPtr->jsonPart = strchr(clientParametersPtr->serverRawResponse, '{');
+  if (clientParametersPtr->jsonPart == NULL) {
+    visualCommPtr->print_line(F("    [ClientComm::get_cyclobot_session_token] [ERROR] No JSON found in response (char '{' not found)"));
+    return "";
+  }
+
+  // Parse JSON
+  clientParametersPtr->deserializationError = deserializeJson(clientParametersPtr->responseJson, clientParametersPtr->jsonPart);
+  if (clientParametersPtr->deserializationError) {
+    visualCommPtr->print("[ClientComm::get_cyclobot_session_token] [ERROR] Failed to parse JSON: ");
+    visualCommPtr->print_line(clientParametersPtr->deserializationError.c_str());
+    return "";
+  }
+
+  // Extract token
+  if (clientParametersPtr->responseJson.containsKey("device_secret")) {
+    clientParametersPtr->sessionToken = clientParametersPtr->responseJson["device_secret"].as<const char*>();
+    deviceParametersPtr->cyclobotToken = clientParametersPtr->responseJson["device_secret"].as<const char*>();
+    visualCommPtr->print("[ClientComm::get_cyclobot_session_token] Token received: ");
+    visualCommPtr->print_line(clientParametersPtr->sessionToken);
+  } else {
+    visualCommPtr->print_line(F("    [ClientComm::get_cyclobot_session_token] [ERROR] sessionToken not found in JSON"));
+    return "";
+  }
 }
 
 const char *ClientComm::get_cyclobot_session_token(ClientParameters *clientParametersPtr, WifiParameters *wifiParametersPtr, DeviceParameters *deviceParametersPtr, VisualComm *visualCommPtr) {
