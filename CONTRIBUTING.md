@@ -23,7 +23,7 @@ Once it takes a considerable ammount of memory, this application DOES NOT fit in
 - 5, 6, 7: ON
 
 **Serial Switch:** RXD0 and TXD0
-*Press 'mode' before fash firmware
+*Press 'mode' before fash firmware.
 
 [How to flash firmware to ESP8266](https://www.robocore.net/tutoriais/gravacao-firmware-esp8266?srsltid=AfmBOoq7Z2siZ1wv-m1VK9QuEQdM3FSby37vNpy6y2hfVySedJudaHWn)
 
