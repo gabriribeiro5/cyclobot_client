@@ -1,7 +1,7 @@
 #pragma once
-#include "../fsm_tools/data/SelfDiagnosisData.h"
-#include "../fsm_tools/data/ConfigData.h"
-#include "../fsm_tools/data/EcosystemData.h"
+#include "data/SelfDiagnosisData.h"
+#include "data/ConfigData.h"
+#include "data/EcosystemData.h"
 
 class StrategyDataInstances {
     public:
